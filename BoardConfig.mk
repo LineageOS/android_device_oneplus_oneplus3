@@ -201,6 +201,10 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
+# Releasetools
+TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_op3
+TARGET_RELEASETOOLS_EXTENSIONS := $(PLATFORM_PATH)
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
