@@ -152,7 +152,6 @@ err_ret:
 /* verify_trustzone("TZ_VERSION", "TZ_VERSION", ...) */
 Value * VerifyTrustZoneFn(const char *name, State *state, int argc, Expr *argv[]) {
     char current_tz_version[TZ_VER_BUF_LEN];
-    char *tz_version;
     int i, ret;
 
     ret = get_tz_version(current_tz_version, TZ_VER_BUF_LEN);
@@ -161,21 +160,27 @@ Value * VerifyTrustZoneFn(const char *name, State *state, int argc, Expr *argv[]
                 name, ret);
     }
 
-    for (i = 1; i <= argc; i++) {
-        ret = ReadArgs(state, argv, i, &tz_version);
-        if (ret < 0) {
-            return ErrorAbort(state, "%s() error parsing arguments: %d",
-                name, ret);
-        }
+    char** tz_version = ReadVarArgs(state, argc, argv);
+    if (tz_version == NULL) {
+        return ErrorAbort(state, "%s() error parsing arguments", name);
+    }
 
+    ret = 0;
+    for (i = 0; i < argc; i++) {
         uiPrintf(state, "Comparing TZ version %s to %s",
-                tz_version, current_tz_version);
-        if (strncmp(tz_version, current_tz_version, strlen(tz_version)) == 0) {
-            return StringValue(strdup("1"));
+                tz_version[i], current_tz_version);
+        if (strncmp(tz_version[i], current_tz_version, strlen(tz_version[i])) == 0) {
+            ret = 1;
+            break;
         }
     }
 
-    return StringValue(strdup("0"));
+    for (i = 0; i < argc; i++) {
+        free(tz_version[i]);
+    }
+    free(tz_version);
+
+    return StringValue(strdup(ret ? "1" : "0"));
 }
 
 void Register_librecovery_updater_op3() {
