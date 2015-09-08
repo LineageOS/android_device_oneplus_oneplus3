@@ -32,7 +32,11 @@
 #define ALPHABET_LEN 256
 #define KB 1024
 
+#ifdef USES_BOOTDEVICE_PATH
+#define TZ_PART_PATH "/dev/block/bootdevice/by-name/tz"
+#else
 #define TZ_PART_PATH "/dev/block/platform/msm_sdcc.1/by-name/tz"
+#endif
 #define TZ_VER_STR "QC_IMAGE_VERSION_STRING="
 #define TZ_VER_STR_LEN 24
 #define TZ_VER_BUF_LEN 255
