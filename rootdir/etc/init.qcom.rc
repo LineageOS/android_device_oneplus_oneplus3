@@ -213,6 +213,8 @@ on boot
 
     mkdir /persist/drm 0770 system system
 
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
@@ -813,6 +815,7 @@ service qcom-c_main-sh /system/bin/sh /init.class_main.sh
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
+    start config_bt_addr
     start config_bluetooth
 
 on property:persist.env.fastdorm.enabled=true
@@ -855,6 +858,12 @@ service start_hci_filter /system/bin/wcnss_filter
     user bluetooth
     group bluetooth qcom_diag
     disabled
+
+service config_bt_addr /system/bin/btnvtool -O
+    class core
+    user bluetooth
+    group bluetooth radio
+    oneshot
 
 on property:wc_transport.start_root=true
     start hci_filter_root
