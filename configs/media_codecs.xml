@@ -208,6 +208,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" min="1" max="1958400" />
             <Limit name="bitrate" range="1-100000000" />
             <Limit name="frame-rate" range="1-240" />
+            <Limit name="vt-version" value="65536" />
             <Limit name="vt-low-latency" value="1" />
             <Limit name="vt-max-macroblock-processing-rate" value="972000" />
             <Limit name="vt-max-level" value="52" />
