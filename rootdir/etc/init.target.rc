@@ -532,16 +532,6 @@ on charger
     mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
     start hvdcp_opti
 
-service dhcpcd_eth0 /system/vendor/bin/dhcpcd -ABKLG
-	class late_start
-	disabled
-	oneshot
-
-service iprenew_eth0 /system/vendor/bin/dhcpcd -n
-	class late_start
-	disabled
-	oneshot
-
 service ppd /vendor/bin/mm-pp-dpps
     class late_start
     user system
