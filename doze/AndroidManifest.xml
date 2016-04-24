@@ -5,9 +5,7 @@
     android:versionName="1.0"
     android:sharedUserId="android.uid.system">
 
-    <uses-permission android:name="android.permission.DEVICE_POWER" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-sdk
@@ -25,13 +23,13 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.cyanogenmod.settings.doze.OneplusDozeService"
+        <service android:name="com.cyanogenmod.settings.doze.DozeService"
                  android:permission="OneplusDozeService">
         </service>
 
         <activity
             android:name=".DozeSettings"
-            android:label="@string/screen_gestures_panel_title"
+            android:label="@string/ambient_display_title"
             android:theme="@android:style/Theme.Material.Settings">
             <intent-filter>
                 <action android:name="com.android.settings.action.EXTRA_SETTINGS" />
