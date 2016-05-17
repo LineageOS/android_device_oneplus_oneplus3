@@ -17,5 +17,6 @@
 /dev/block/bootdevice/by-name/dsp                            /dsp              ext4    ro,nosuid,nodev,barrier=1                                                                                       wait
 /dev/block/bootdevice/by-name/modem                          /firmware         vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0                    wait
 /dev/block/bootdevice/by-name/bluetooth                      /bt_firmware      vfat    ro,shortname=lower,uid=1002,gid=3002,dmask=222,fmask=333,context=u:object_r:bt_firmware_file:s0                 wait
+/dev/block/bootdevice/by-name/misc                           /misc             emmc    defaults                                                                                                        defaults
 
 /devices/soc/6a00000.ssusb/6a00000.dwc3/xhci-hcd.0.auto/usb* auto              auto    defaults                                                                                                        voldmanaged=usbdisk:auto
