@@ -1,0 +1,109 @@
+# Audio
+ro.qc.sdk.audio.ssr=false
+ro.qc.sdk.audio.fluencetype=fluence
+persist.audio.fluence.voicecall=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=true
+tunnel.audio.encode=false
+media.aac_51_output_enabled=true
+audio.offload.buffer.size.kb=32
+audio.offload.video=true
+audio.offload.pcm.16bit.enable=false
+audio.offload.pcm.24bit.enable=true
+audio.offload.track.enable=false
+audio.deep_buffer.media=true
+use.voice.path.for.pcm.voip=true
+audio.offload.multiaac.enable=true
+audio.offload.gapless.enabled=true
+audio.parser.ip.buffer.size=262144
+audio.dolby.ds2.enabled=false
+audio.dolby.ds2.hardbypass=false
+audio.offload.multiple.enabled=true
+audio.offload.min.duration.secs=30
+af.fast_track_multiplier=2
+audio_hal.period_size=192
+persist.dirac.acs.controller=qem
+
+# Bluetooth
+qcom.bluetooth.soc=rome
+ro.bluetooth.wipower=true
+ro.bluetooth.emb_wp_mode=true
+
+# Calb
+ro.qualcomm.foss=1
+ro.qualcomm.display.paneltype=1
+config.foss.xml=1
+config.foss.path=/system/etc/FOSSConfig.xml
+config.foss.xml.print=1
+
+# Camera
+camera.disable_zsl_mode=1
+
+# Data modules
+ro.use_data_netmgrd=true
+persist.data.netmgrd.qos.enable=true
+persist.data.mode=concurrent
+
+# Fingerprint
+persist.qfp=false
+
+# GPS
+persist.gps.qc_nlp_in_use=1
+persist.loc.nlp_name=com.qualcomm.location
+ro.gps.agps_provider=1
+
+# Graphics
+debug.sf.hw=1
+debug.egl.hw=1
+debug.gralloc.enable_fb_ubwc=1
+dev.pm.dyn_samplingrate=1
+persist.demo.hdmirotationlock=false
+ro.opengles.version=196609
+ro.sf.lcd_density=480
+sdm.perf_hint_window=50
+
+# NFC
+ro.nfc.port=I2C
+
+# Perf
+ro.vendor.extension_library=libqti-perfd-client.so
+
+# RIL
+rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+persist.rild.nitz_plmn=
+persist.rild.nitz_long_ons_0=
+persist.rild.nitz_long_ons_1=
+persist.rild.nitz_long_ons_2=
+persist.rild.nitz_long_ons_3=
+persist.rild.nitz_short_ons_0=
+persist.rild.nitz_short_ons_1=
+persist.rild.nitz_short_ons_2=
+persist.rild.nitz_short_ons_3=
+ril.subscription.types=NV,RUIM
+DEVICE_PROVISIONED=1
+persist.radio.multisim.config=dsds
+persist.volte_enalbed_by_hw=1
+persist.radio.data_ltd_sys_ind=1
+persist.radio.rat_on=combine
+ro.telephony.default_network=9
+telephony.lteOnGsmDevice=1
+telephony.lteOnCdmaDevice=1
+persist.radio.apm_sim_not_pwdn=1
+persist.radio.sib16_support=1
+
+# RmNet Data
+persist.rmnet.data.enable=true
+persist.data.wda.enable=true
+persist.data.df.dl_mode=5
+persist.data.df.ul_mode=5
+persist.data.df.agg.dl_pkt=10
+persist.data.df.agg.dl_size=4096
+persist.data.df.mux_count=8
+persist.data.df.iwlan_mux=9
+persist.data.df.dev_name=rmnet_usb0
+
+# Timeservice
+persist.timed.enable=true
+
+# Wifi
+wifi.interface=wlan0
