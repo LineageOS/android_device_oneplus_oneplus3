@@ -14,6 +14,5 @@
  * limitations under the License.
  */
 
-// Some random shit OnePlus put here
 const char *_ZN7android18gClientPackageNameE;
 const char *_ZN7android16CameraParameters19CLIENT_PACKAGE_NAMEE;

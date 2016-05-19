@@ -20,6 +20,10 @@ ifeq ($(TARGET_DEVICE),oneplus3)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
+$(shell mkdir -p $(TARGET_OUT)/etc/firmware; \
+    ln -sf /dev/block/bootdevice/by-name/msadp \
+	    $(TARGET_OUT)/etc/firmware/msadp)
+
 $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wcd9320; \
     ln -sf /data/misc/audio/wcd9320_anc.bin \
 	    $(TARGET_OUT)/etc/firmware/wcd9320/wcd9320_anc.bin; \

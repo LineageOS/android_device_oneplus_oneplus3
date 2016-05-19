@@ -15,6 +15,7 @@ audio.deep_buffer.media=true
 use.voice.path.for.pcm.voip=true
 audio.offload.multiaac.enable=true
 audio.offload.gapless.enabled=true
+audio.safx.pbe.enabled=true
 audio.parser.ip.buffer.size=262144
 audio.dolby.ds2.enabled=false
 audio.dolby.ds2.hardbypass=false
@@ -60,13 +61,20 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 ro.opengles.version=196609
 ro.sf.lcd_density=480
+persist.sys.wfd.virtual=0
 sdm.perf_hint_window=50
+persist.hwc.enable_vds=1
+sdm.debug.disable_rotator_split=1
 
 # NFC
 ro.nfc.port=I2C
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+
+# Ram
+# Do we really need 6gb?
+ro.sys.fw.bg_apps_limit=20
 
 # RIL
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so

@@ -1,0 +1,41 @@
+// Copyright (c) 2015 Qualcomm Technologies, Inc.
+// All Rights Reserved.
+// Confidential and Proprietary - Qualcomm Technologies, Inc.
+
+// drc_params_nb.txt
+//
+// Parameter file for the DRC.
+// Each line initializes a tuning parameter in the following format
+//
+// PAR: <tuning_parameter> = <value>  // Comments
+//
+//
+//
+PAR:   FRAME_SIZE          = 320        // Frame Size (samples) 1 - 480
+PAR:   CHANNEL_LINK        = 1
+PAR:   MODE            = 0        // Mode:  1--DRC ENABLE, 0--DRC DISABLE
+PAR:   RESET          = 0        // 1 - do reset; 0 - no reset
+PAR:   REINIT          = 0        // 1 - do reinit; 0 - no reinit
+PAR:   DOWNSAMPLE_LEVEL    = 1
+PAR:   DELAY        = 10 //5
+PAR:   RMS_TAV        = 10
+PAR:   MAKEUP_GAIN        = 15
+PAR:   DN_EXPA_THRESHOLD     = -36
+PAR:   DN_EXPA_RATIO    = 1//0.5
+PAR:   DN_EXPA_ATTACK    = 50
+PAR:   DN_EXPA_RELEASE    = 20
+PAR:   DN_EXPA_HYSTERISIS    = 1.22
+PAR:   DN_EXPA_MIN_GAIN = -20
+PAR:   UP_COMP_THRESHOLD    = -36
+PAR:   UP_COMP_RATIO    = 1
+PAR:   UP_COMP_ATTACK    = 100
+PAR:   UP_COMP_RELEASE      = 100
+PAR:   UP_COMP_HYSTERISIS    = 1.22
+PAR:   DN_COMP_THRESHOLD    = -12
+PAR:   DN_COMP_RATIO    = 100
+PAR:   DN_COMP_ATTACK    = 10
+PAR:   DN_COMP_RELEASE     = 100
+PAR:   DN_COMP_HYSTERISIS    = 1.22
+PAR:   SAMPLE_RATE            = 48000
+PAR:   NUM_CHANNEL            = 2
+PAR:   DATA_BIT_WIDTH      = 0
