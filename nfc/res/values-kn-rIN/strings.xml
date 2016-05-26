@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Nfc ಸೇವೆ"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"NFC ಮೂಲಕ ಸಂಪರ್ಕವನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"ಈ ವ್ಯಕ್ತಿಯನ್ನು ಸಂಪರ್ಕದ ರೂಪದಲ್ಲಿ ಸೇರಿಸಿಕೊಳ್ಳಲು ಸ್ಪರ್ಶಿಸಿ."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC ಪರಸ್ಪರ ಸಂವಹನ ಪೂರ್ಣಗೊಂಡಿದೆ"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"ಈ ವ್ಯಕ್ತಿಗೆ ನಿಮ್ಮ ಸಂಪರ್ಕ ಮಾಹಿತಿಯನ್ನು ನೀಡಲು ಸ್ಪರ್ಶಿಸಿ."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC ಸಕ್ರಿಯಗೊಂಡಿದೆ."</string>
+    <string name="touch" msgid="4727218133711188355">"ಬೀಮ್ ಮಾಡಲು ಸ್ಪರ್ಶಿಸಿ"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"ಒಳಬರುತ್ತಿರುವ ಬೀಮ್..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"ಬೀಮ್ ಮಾಡಲಾಗುತ್ತಿದೆ..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"ಬೀಮ್ ಪೂರ್ಣಗೊಂಡಿದೆ"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"ಬೀಮ್ ಪೂರ್ಣಗೊಂಡಿಲ್ಲ"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"ಬೀಮ್ ರದ್ದುಗೊಂಡಿದೆ"</string>
+    <string name="cancel" msgid="61873902552555096">"ರದ್ದುಮಾಡು"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"ವೀಕ್ಷಿಸಲು ಸ್ಪರ್ಶಿಸಿ"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"ಸ್ವೀಕರಿಸುವವರ ಸಾಧನವು ಬೀಮ್ ಮೂಲಕ ಮಾಡಲಾಗುವ ವರ್ಗಾವಣೆಯನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"ಸಾಧನಗಳನ್ನು ಮತ್ತೆ ಒಟ್ಟಿಗೆ ತನ್ನಿ"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"ಬೀಮ್ ಪ್ರಸ್ತುತ ಕಾರ್ಯನಿರತವಾಗಿದೆ. ಹಿಂದಿನ ವರ್ಗಾವಣೆ ಪೂರ್ಣಗೊಂಡ ಬಳಿಕ ಮತ್ತೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ."</string>
+    <string name="device" msgid="4459621591392478151">"ಸಾಧನ"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿತಗೊಳಿಸಲಾಗುತ್ತಿದೆ"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿತಗೊಳಿಸಲಾಗಿದೆ"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಸಂಪರ್ಕಿತಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಲಾಗುತ್ತಿದೆ"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಸಂಪರ್ಕಕಡಿತಗೊಳಿಸಲಾಗಿದೆ"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಜೋಡಣೆ ಮಾಡಲಾಗುತ್ತಿದೆ"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಸಾಧನವನ್ನು ಜೋಡಣೆ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"ಬ್ಲೂಟೂತ್ ಸಕ್ರಿಯಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"ನೀವು <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಬ್ಲೂಟೂತ್ ಸಾಧನವನ್ನು ಜೋಡಿಸಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"ಹೌದು"</string>
+    <string name="pair_no" msgid="5022308368904055020">"ಇಲ್ಲ"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"<xliff:g id="APP">%1$s</xliff:g> ಮೂಲಕ ಪ್ಲೇ ಮಾಡಲು ಮತ್ತೆ ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"<xliff:g id="APP">%1$s</xliff:g> ಮೂಲಕ ಪೂರ್ಣಗೊಳಿಸಲು ಮತ್ತೆ ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"ಈ ವ್ಯವಹಾರವನ್ನು <xliff:g id="APP">%1$s</xliff:g> ಮೂಲಕ ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"<xliff:g id="APP">%1$s</xliff:g> ಬಳಸಲು ಸಾಧ್ಯವಿಲ್ಲ."</string>
+    <string name="pay_with" msgid="5531545488795798945">"ಈ ಮೂಲಕ ಪಾವತಿಸಿ"</string>
+    <string name="complete_with" msgid="6797459104103012992">"ಇದರ ಮೂಲಕ ಪೂರ್ಣಗೊಳಿಸಿ"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"ನಿಮ್ಮ ಮೆಚ್ಚಿನ ಟ್ಯಾಪ್ &amp; ಪಾವತಿ ಸೇವೆಯನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ. ಬೇರೊಂದು ಸೇವೆಯನ್ನು ಆರಿಸುವುದೇ?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"ಪೂರ್ಣಗೊಳಿಸಲು ಇನ್ನೊಂದು ಸಾಧನವನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"ಸಂಪರ್ಕಪಡಿಸು"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"ಸಂಪರ್ಕಗೊಂಡಿದೆ"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸಂಪರ್ಕಪಡಿಸಿ"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ನೆಟ್‌ವರ್ಕ್‌ಗೆ ಸಂಪರ್ಕಿಸುವುದೇ?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam ಬಳಸಲು NFC ಸಕ್ರಿಯಗೊಂಡಿರಬೇಕು. ನೀವದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಬಯಸುವಿರಾ?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android Beam"</string>
+</resources>

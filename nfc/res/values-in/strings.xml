@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Layanan Nfc"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"Kontak yang diterima lewat NFC"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"Sentuh untuk menambahkan orang ini sebagai kontak."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"Interaksi NFC lengkap"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"Sentuh untuk memberikan orang ini info kontak Anda."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC diaktifkan."</string>
+    <string name="touch" msgid="4727218133711188355">"Sentuh untuk menyorot"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"Pancaran yang masuk..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"Memancarkan..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"Beam selesai"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"Beam tidak lengkap"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"Beam dibatalkan"</string>
+    <string name="cancel" msgid="61873902552555096">"Batal"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"Sentuh untuk melihat"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"Perangkat penerima tidak mendukung transfer file besar melalui beam."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"Kumpulkan lagi perangkatnya"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Beam sedang sibuk. Coba lagi jika transfer sebelumnya telah selesai."</string>
+    <string name="device" msgid="4459621591392478151">"perangkat"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"Menghubungkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> terhubung"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"Tidak dapat menghubungkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"Memutuskan hubungan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"Hubungan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g> terputus"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"Menyandingkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"Tidak dapat menyandingkan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"Tidak dapat mengaktifkan Bluetooth"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"Yakin ingin menyandingkan perangkat Bluetooth <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"Ya"</string>
+    <string name="pair_no" msgid="5022308368904055020">"Tidak"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"Ketuk lagi untuk membayar dengan <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"Ketuk lagi untuk menyelesaikan dengan <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"Transaksi ini tidak dapat diselesaikan dengan <xliff:g id="APP">%1$s</xliff:g>."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"Tidak dapat menggunakan <xliff:g id="APP">%1$s</xliff:g>."</string>
+    <string name="pay_with" msgid="5531545488795798945">"Bayar dengan"</string>
+    <string name="complete_with" msgid="6797459104103012992">"Selesaikan dengan"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"Layanan pilihan Anda untuk ketuk &amp; bayar telah dihapus. Pilih yang lain?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"Ketuk perangkat lain untuk menyelesaikan"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"Sambungkan"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"Tidak dapat menyambung ke jaringan"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"Tersambung"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"Sambungkan ke jaringan"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"Sambungkan ke jaringan <xliff:g id="NETWORK_SSID">%1$s</xliff:g>?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam memerlukan NFC untuk diaktifkan. Ingin mengaktifkannya?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android Beam"</string>
+</resources>

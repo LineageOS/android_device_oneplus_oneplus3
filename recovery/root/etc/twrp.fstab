@@ -1,0 +1,8 @@
+/boot       emmc   /dev/block/bootdevice/by-name/boot
+/recovery   emmc   /dev/block/bootdevice/by-name/recovery
+/system     ext4   /dev/block/bootdevice/by-name/system
+/data       ext4   /dev/block/bootdevice/by-name/userdata    flags=encryptable=footer
+/cache      ext4   /dev/block/bootdevice/by-name/cache
+/firmware   vfat   /dev/block/bootdevice/by-name/modem       flags=mounttodecrypt;fsflags=context=u:object_r:firmware_file:s0
+
+/usbstorage vfat   /dev/block/sda1 /dev/block/sda            flags=display="USB Storage";storage;removable

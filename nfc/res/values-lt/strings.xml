@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"ALR paslauga"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"ALR"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"Gauta per ALR"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"Palieskite, kad pridėtumėte šį asmenį kaip kontaktą."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC sąveika baigta"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"Palieskite, kad šiam asmeniui suteiktumėte savo kontakt. inf."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"ALR įgalinta."</string>
+    <string name="touch" msgid="4727218133711188355">"Jei norite perduoti, palieskite"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"Gaunamas perdavimas..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"Perduodama..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"Perdavimas baigtas"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"Perdavimas nebuvo užbaigtas"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"Perdavimas atšauktas"</string>
+    <string name="cancel" msgid="61873902552555096">"Atšaukti"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"Jei norite peržiūrėti, palieskite"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"Gavėjo įrenginyje nepalaikomas didelio failo perdavimas naudojant perdavimo funkciją."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"Vėl susiekite įrenginius"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Perdavimo paslauga šiuo metu užimta. Bandykite dar kartą, kai bus baigtas ankstesnis perkėlimas."</string>
+    <string name="device" msgid="4459621591392478151">"įrenginys"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"Jungiamasi prie „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"Prisijungta prie „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"Nepavyko prisijungti prie „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"Atsijungiama nuo „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"Atsijungta nuo „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"Susiejama su „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"Nepavyko susieti su „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"Nepavyko įgalinti „Bluetooth“"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"Ar tikrai norite susieti „Bluetooth“ įrenginį „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"Taip"</string>
+    <string name="pair_no" msgid="5022308368904055020">"Ne"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"Palieskite dar kartą, kad mokėtumėte naudodami „<xliff:g id="APP">%1$s</xliff:g>“"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"Palieskite dar kartą, kad užbaigtumėte naudodami „<xliff:g id="APP">%1$s</xliff:g>“"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"Nepavyko užbaigti šios operacijos naudojant „<xliff:g id="APP">%1$s</xliff:g>“."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"Nepavyko naudoti „<xliff:g id="APP">%1$s</xliff:g>“."</string>
+    <string name="pay_with" msgid="5531545488795798945">"Mokėti naudojant"</string>
+    <string name="complete_with" msgid="6797459104103012992">"Užbaigti naudojant"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"Pašalinta paslauga, kurią pageidaujate naudoti pasirinkę funkciją „Paliesti ir mokėti“. Pasirinkti kitą paslaugą?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"Norėdami baigti siųsti, palieskite kitą įrenginį"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"Prisijungti"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"Nepavyksta prisijungti prie tinklo"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"Prisijungta"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"Prisijungti prie tinklo"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"Prisijungti prie tinklo „<xliff:g id="NETWORK_SSID">%1$s</xliff:g>“?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Norint naudoti „Android“ perdavimo funkciją, būtina įgalinti ALR. Ar norite įgalinti šią funkciją?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"„Android“ perdavimas"</string>
+</resources>

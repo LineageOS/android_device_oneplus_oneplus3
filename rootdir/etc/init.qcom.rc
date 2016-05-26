@@ -25,9 +25,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+import init.qcom.power.rc
 import init.qcom.usb.rc
-import init.target.rc
-import init.qcom.factory.rc
 
 on early-init
     mkdir /firmware 0771 system system
@@ -58,7 +57,6 @@ on early-boot
     write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
-    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on fs
     wait /dev/block/bootdevice
@@ -85,6 +83,39 @@ on boot
     chown system system /sys/class/leds/led:switch/brightness
     chmod 666 /sys/class/leds/led:switch/brightness
 
+    # Touchscreen
+    chown system radio /proc/touchpanel/double_tap_enable
+    chmod 0660 /proc/touchpanel/double_tap_enable
+
+    chown root system /proc/touchpanel/camera_enable
+    chmod 0660 /proc/touchpanel/camera_enable
+
+    chown root system /proc/touchpanel/music_enable
+    chmod 0660 /proc/touchpanel/music_enable
+
+    chown root system /proc/touchpanel/flashlight_enable
+    chmod 0660 /proc/touchpanel/flashlight_enable
+
+    # Buttons
+    chown root system /proc/s1302/key_rep
+    chmod 0660 /proc/s1302/key_rep
+
+    chown root system /proc/s1302/virtual_key
+    chmod 0660 /proc/s1302/virtual_key
+
+    chown root system /proc/tri-state-key/keyCode_top
+    chmod 0660 /proc/tri-state-key/keyCode_top
+
+    chown root system /proc/tri-state-key/keyCode_middle
+    chmod 0660 /proc/tri-state-key/keyCode_middle
+
+    chown root system /proc/tri-state-key/keyCode_bottom
+    chmod 0660 /proc/tri-state-key/keyCode_bottom
+
+    # Vibrator permissions
+    chown system system /sys/class/timed_output/vibrator/vmax_mv
+    chmod 0644 /sys/class/timed_output/vibrator/vmax_mv
+
     # Graphics
     chmod 666 /sys/devices/virtual/graphics/fb0/hbm
 
@@ -102,7 +133,6 @@ on boot
     chmod 0666 /dev/qseecom
 
     # NFC
-    setprop ro.nfc.port "I2C"
     chmod 0666 /dev/pn544
     chown nfc nfc /dev/pn544
     chmod 0666 /dev/p61
@@ -164,7 +194,7 @@ on boot
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
     chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
 
-    #Create QMUX deamon socket area
+    # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
@@ -176,23 +206,19 @@ on boot
 
     mkdir /persist/drm 0770 system system
 
-    #Create NETMGR daemon socket area
+    # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
-
-    setprop wifi.interface wlan0
 
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-    setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
+    setprop net.tcp.buffersize.wifi 524288,2097152,4194304,262144,524288,1048576
 
-    setprop ro.telephony.call_ring.multiple false
-
-    #Remove SUID bit for iproute2 ip tool
+    # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
-    #For bridgemgr daemon to inform the USB driver of the correct transport
+    # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
 #   Define TCP buffer sizes for various networks
@@ -215,7 +241,7 @@ on boot
     write /proc/sys/net/core/rmem_max  8388608
     write /proc/sys/net/core/wmem_max  8388608
 
-    #To allow interfaces to get v6 address when tethering is enabled
+    # To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
@@ -273,9 +299,9 @@ on post-fs-data
 
     # NFC
     mkdir /data/nfc
-    mkdir /data/oemnvitems  0771 radio radio
+    mkdir /data/oemnvitems 0771 radio radio
 
-    #Create directories for Fingerprint
+    # Create directories for Fingerprint
     mkdir /data/fpc_images 0770 system system
     mkdir /data/fpc_images/verify 0770 system system
     mkdir /data/fpc_images/enroll 0770 system system
@@ -288,7 +314,7 @@ on post-fs-data
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
 
-    #Create folder for mm-qcamera-daemon
+    # Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
 
     mkdir /data/media 0770 media_rw media_rw
@@ -305,7 +331,7 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
-    #create port-bridge log dir
+    # Create port-bridge log dir
     mkdir /data/misc/port_bridge 0770 radio radio
     chmod 0770 /data/misc/port_bridge
 
@@ -348,11 +374,11 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
-    #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
+    # Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
-    #Create directories for Location services
+    # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
@@ -360,15 +386,15 @@ on post-fs-data
     mkdir /data/misc/location/quipc 0770 gps system
     mkdir /data/misc/location/gsiff 0770 gps gps
 
-    #Create directory from IMS services
+    # Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
 
-    #Create directory for FOTA
+    # Create directory for FOTA
     mkdir /data/fota 0771
     chown system system /data/fota
 
-    #Create directory for hostapd
+    # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
     # Create /data/time folder for time-services
@@ -397,7 +423,7 @@ on post-fs-data
     mkdir /data/misc/SelfHost/Running/ 2750 system shell
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
-    #Create PERFD deamon related dirs
+    # Create PERFD deamon related dirs
     mkdir /data/misc/perfd 0755 root system
     chmod 2755 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
@@ -425,7 +451,7 @@ on post-fs-data
 
 # start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
-    class late_start
+    class main
     user camera
     group camera system inet input graphics
 
@@ -447,13 +473,13 @@ service qvop-daemon /system/bin/qvop-daemon
 
 # start up peripheral manager
 service per_mgr system/bin/pm-service
-    class core
+    class late_start
     user system
     group system net_raw
     ioprio rt 4
 
 service per_proxy /system/bin/pm-proxy
-    class core
+    class late_start
     user system
     group system
     disabled
@@ -510,7 +536,6 @@ service audiod /system/bin/audiod
    class late_start
    user system
    group system
-
 
 service usf_tester /system/bin/usf_tester
     user system
@@ -589,35 +614,35 @@ service imsdatadaemon /system/bin/imsdatadaemon
     disabled
 
 service pd_mapper /system/vendor/bin/pd-mapper
-     class core
-     disabled
+    class core
+    disabled
 
 on property:persist.sys.pd_enable=1
-     start pd_mapper
-     write /sys/class/service_locator/service_locator_status 1
+    start pd_mapper
+    write /sys/class/service_locator/service_locator_status 1
 
 on property:persist.sys.pd_enable=0
-     write /sys/class/service_locator/service_locator_status 0
+    write /sys/class/service_locator/service_locator_status 0
 
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
 service ims_rtp_daemon /system/bin/ims_rtp_daemon
-   class main
-   user system
-   socket ims_rtpd stream 0660 system radio
-   group radio net_raw diag inet log
-   disabled
+    class main
+    user system
+    socket ims_rtpd stream 0660 system radio
+    group radio net_raw diag inet log
+    disabled
 
 service imscmservice /system/bin/imscmservice
-   class main
-   user system
-   group radio net_raw diag diag log
-   disabled
+    class main
+    user system
+    group radio net_raw diag diag log
+    disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
-   start ims_rtp_daemon
-   start imscmservice
+    start ims_rtp_daemon
+    start imscmservice
 
 service dts_configurator /system/bin/dts_configurator
     class late_start
@@ -671,9 +696,9 @@ service energy-awareness /system/bin/energy-awareness
     oneshot
 
 service mdtpd /system/vendor/bin/mdtpd
-   class late_start
-   user root
-   group system radio drmrpc
+    class late_start
+    user root
+    group system radio drmrpc
 
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
@@ -715,7 +740,7 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-    #Reset the read_ahead_kb to 512
+    # Reset the read_ahead_kb to 512
     write /sys/block/dm-0/queue/read_ahead_kb 512
 
     # CPE fw_name used by sound trigger HAL
@@ -795,13 +820,13 @@ service rmt_storage /system/bin/rmt_storage
     user root
 
 service rfs_access /system/bin/rfs_access
-   class core
-   user root
-   group system net_raw
+    class core
+    user root
+    group system net_raw
 
 service tftp_server /system/bin/tftp_server
-   class main
-   user root
+    class main
+    user root
 
 on property:wc_transport.start_hci=true
     start start_hci_filter
@@ -846,11 +871,11 @@ on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
 service hciattach_ath3k /system/bin/sh /system/etc/init.ath3k.bt.sh
-     class late_start
-     user bluetooth
-     group system bluetooth net_bt_admin misc
-     disabled
-     oneshot
+    class late_start
+    user bluetooth
+    group system bluetooth net_bt_admin misc
+    disabled
+    oneshot
 
 service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
@@ -890,7 +915,6 @@ service port-bridge /system/bin/port-bridge
     class main
     user radio system
     group radio system inet
-    disabled
     oneshot
 
 service qmiproxy /system/bin/qmiproxy
@@ -905,30 +929,25 @@ service qmuxd /system/bin/qmuxd
     class main
     user radio
     group radio audio bluetooth gps nfc qcom_diag
-    disabled
 
 service netmgrd /system/bin/netmgrd
     class main
-    disabled
 
 service ipacm-diag /system/bin/ipacm-diag
     class main
     user system
     socket ipacm_log_file dgram 660 system net_admin
     group net_admin qcom_diag
-    disabled
 
 service ipacm /system/bin/ipacm
     class main
     user net_admin
     group net_admin inet
-    disabled
 
 service qti /system/vendor/bin/qti
     class main
     user radio
     group radio net_raw qcom_diag usb net_admin
-    disabled
 
 service sensors /system/bin/sensors.qcom
     class core
@@ -994,10 +1013,10 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
     -O/data/misc/wifi/sockets \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    #   we will start as root and wpa_supplicant will switch to user wifi
-    #   after setting up the capabilities required for WEXT
-    #   user wifi
-    #   group wifi inet keystore
+#   we will start as root and wpa_supplicant will switch to user wifi
+#   after setting up the capabilities required for WEXT
+#   user wifi
+#   group wifi inet keystore
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
@@ -1113,7 +1132,7 @@ service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
     oneshot
 
 service loc_launcher /system/bin/loc_launcher
-    #loc_launcher will start as root and set its uid to gps
+    # loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet net_raw qcom_diag net_admin wifi
 
@@ -1125,14 +1144,14 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     oneshot
 
 on property:crypto.driver.load=1
-     insmod /system/lib/modules/qce.ko
-     insmod /system/lib/modules/qcedev.ko
+    insmod /system/lib/modules/qce.ko
+    insmod /system/lib/modules/qcedev.ko
 
 service drmdiag /system/bin/drmdiagapp
     class late_start
-     user root
-     disabled
-     oneshot
+    user root
+    disabled
+    oneshot
 
 on property:drmdiag.load=1
     start drmdiag
@@ -1229,17 +1248,8 @@ service ril-daemon2 /system/bin/rild -c 2
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user root
-    disabled
 #VENDOR_EDIT chenzhongping add net_raw group for rild
     group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log net_raw
-
-service ril-daemon3 /system/bin/rild -c 3
-    class main
-    socket rild3 stream 660 root radio
-    socket rild-debug3 stream 660 radio system
-    user root
-    disabled
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log
 
 service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
     class late_start
@@ -1327,7 +1337,7 @@ service vm_bms /system/bin/vm_bms
     disabled
 
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
-    class core
+    class main
     user root
     group root
     disabled
@@ -1336,7 +1346,7 @@ service wfdservice /system/bin/wfdservice
     class main
     user system
     group audio camera inet net_bt_stack drmrpc media_rw media input net_admin
-    #removed these because of limit of 12 groups
+    # removed these because of limit of 12 groups
     #graphics net_bt net_bt_admin bluetooth
 
 # Coresight early boot service

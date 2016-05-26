@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Nfc Xidməti"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"Kontakt NFC üzərindən alınıb"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"Bu şəxsi kontakt kimi əlavə etmək üçün toxunun."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC qarşılıqlı əlaqə tamamlandı"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"Bu şəxsə kontakt məlumatınızı vermək üçün toxunun."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC aktivləşdirilib."</string>
+    <string name="touch" msgid="4727218133711188355">"Beam üçün toxunun"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"Gələn beam..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"Beaming..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"Beam tamamlandı"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"Beam tamamlanmadı"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"Beam ləğv edilib"</string>
+    <string name="cancel" msgid="61873902552555096">"Ləğv et"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"Görüntüləmək üçün toxunun"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"Qəbul edənin cihazı beam vasitəsilə böyük fayl ötürülməsini dəstəkləmir."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"Cihazları yenidən bir yerə gətir"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Beam hazırda məşğuldur. Əvvəlki ötürmə tamamlandıqda yenidən cəhd edin."</string>
+    <string name="device" msgid="4459621591392478151">"cihaz"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazına qoşulur"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazına qoşulub"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazına qoşula bilmədi"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazından ayrılır"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cihazından ayrıldı"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> cütləşir"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ilə cütləşə bilmir"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"Bluetooth aktiv edilə bilmədi"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> Bluetooth cihazını qoşalamaq istədiyinizdən əminsiniz?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"Bəli"</string>
+    <string name="pair_no" msgid="5022308368904055020">"Xeyr"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"<xliff:g id="APP">%1$s</xliff:g> Tətbiqi ilə ödəmək üçün yenidən tıklayın"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"<xliff:g id="APP">%1$s</xliff:g> Tətbiqi ilə tamamlamaq üçün tıklayın"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"Bu əməliyyat <xliff:g id="APP">%1$s</xliff:g> tətbiqi ilə tamamlana bilməz."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"<xliff:g id="APP">%1$s</xliff:g> Tətbiqi istifadə edə bilmədi."</string>
+    <string name="pay_with" msgid="5531545488795798945">"İlə ödə"</string>
+    <string name="complete_with" msgid="6797459104103012992">"İlə tamamla"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"Tıkla və ödə üçün tərcih etdiyiniz xidmət silindi. Digərisi seçilsin?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"Tamamlamaq üçün digər cihaza tıklayın"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"Qoşul"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"Şəbəkəyə qoşulmaq mümkün deyil"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"Qoşuldu"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"Şəbəkəyə qoşulun"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> şəbəkəsinə birləşdirilsin?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam aktivləşmək üçün NFC tələb edir. Aktivləşdirmək istəyirsiniz?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android Beam"</string>
+</resources>

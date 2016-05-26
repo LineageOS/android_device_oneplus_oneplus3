@@ -1,3 +1,8 @@
+ro.build.product=OnePlus3
+ro.product.device=OnePlus3
+ro.build.description=OnePlus3g-user 6.0.1 MMB29M 139 test-keys
+ro.build.fingerprint=OnePlus/OnePlus3/OnePlus3:6.0.1/MMB29M/213690:user/release-keys
+
 # Audio
 ro.qc.sdk.audio.ssr=false
 ro.qc.sdk.audio.fluencetype=fluence
@@ -19,6 +24,7 @@ audio.safx.pbe.enabled=true
 audio.parser.ip.buffer.size=262144
 audio.dolby.ds2.enabled=false
 audio.dolby.ds2.hardbypass=false
+audio.offload.passthrough=false
 audio.offload.multiple.enabled=true
 audio.offload.min.duration.secs=30
 af.fast_track_multiplier=2
@@ -39,6 +45,9 @@ config.foss.xml.print=1
 
 # Camera
 camera.disable_zsl_mode=1
+
+# CNE
+persist.cne.feature=1
 
 # Data modules
 ro.use_data_netmgrd=true
@@ -93,9 +102,8 @@ persist.radio.multisim.config=dsds
 persist.volte_enalbed_by_hw=1
 persist.radio.data_ltd_sys_ind=1
 persist.radio.rat_on=combine
-ro.telephony.default_network=9
+ro.telephony.call_ring.multiple=false
 telephony.lteOnGsmDevice=1
-telephony.lteOnCdmaDevice=1
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.sib16_support=1
 

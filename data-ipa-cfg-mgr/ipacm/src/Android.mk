@@ -25,6 +25,10 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 LOCAL_CFLAGS += -DDEBUG
 endif
 
+ifeq ($(TARGET_BOARD_PLATFORM),msm8998)
+LOCAL_CFLAGS += -DFEATURE_IPA_V3
+endif
+
 filetoadd = bionic/libc/kernel/arch-arm/asm/posix_types.h
 LOCAL_CFLAGS += $(shell if [ -a $(filetoadd) ] ; then echo -include $(filetoadd) ; fi ;)
 filetoadd = bionic/libc/kernel/arch-arm/asm/byteorder.h

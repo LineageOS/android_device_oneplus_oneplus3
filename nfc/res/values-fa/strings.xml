@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"‏سرویس Nfc"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"‏مخاطب از طریق NFC دریافت شد"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"برای افزودن این فرد به‌عنوان یک مخاطب، لمس کنید."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"‏تعامل NFC کامل شد"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"لمس کنید تا اطلاعات تماس خود را به این فرد بدهید."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"‏با NFC فعال شده."</string>
+    <string name="touch" msgid="4727218133711188355">"برای پخش، لمس کنید"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"در حال دریافت پرتو..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"پرتو…"</string>
+    <string name="beam_complete" msgid="477026736424637435">"پرتو ارسال شد"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"پرتو کامل نشد"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"پرتو لغو شد"</string>
+    <string name="cancel" msgid="61873902552555096">"لغو"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"برای مشاهده لمس کنید"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"دستگاه گیرنده انتقال فایل‌های بزرگ از طریق پرتو را پشتیبانی نمی‌کند."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"مرتبط‌کردن دوباره دستگاه‌ها"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"«پرتو» در حال حاضر مشغول است. هنگامی که انتقال قبلی کامل شد دوباره امتحان کنید."</string>
+    <string name="device" msgid="4459621591392478151">"دستگاه"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"در حال اتصال <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> متصل شد"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> متصل نشد"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"در حال قطع ارتباط <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"ارتباط <xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع شد"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"در حال مرتبط‌سازی <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> مرتبط نشد"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"فعال کردن بلوتوث امکانپذیر نیست"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"آیا مطمئن هستید که می‌خواهید دستگاه بلوتوث <xliff:g id="DEVICE_NAME">%1$s</xliff:g> را جفت کنید؟"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"بله"</string>
+    <string name="pair_no" msgid="5022308368904055020">"خیر"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"برای پرداخت با <xliff:g id="APP">%1$s</xliff:g>، دوباره ضربه بزنید"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"برای تکمیل از طریق <xliff:g id="APP">%1$s</xliff:g>، دوباره ضربه بزنید"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"این تراکنش با <xliff:g id="APP">%1$s</xliff:g> تکمیل نشد."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"نتوانست از <xliff:g id="APP">%1$s</xliff:g> استفاده کند."</string>
+    <string name="pay_with" msgid="5531545488795798945">"پرداخت با"</string>
+    <string name="complete_with" msgid="6797459104103012992">"تکمیل با"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"سرویس ترجیحی شما برای ضربه و پرداخت حذف شده است. سرویس دیگری را انتخاب می‌کنید؟"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"برای تکمیل، روی دستگاه دیگری ضربه بزنید"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"اتصال"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"اتصال به شبکه ممکن نیست"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"مرتبط شد"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"اتصال به شبکه"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"به شبکه <xliff:g id="NETWORK_SSID">%1$s</xliff:g> متصل می‌شوید؟"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"‏پرتوی Android برای فعال شدن به NFC نیاز دارد. می‌خواهید آن را فعال کنید؟"</string>
+    <string name="android_beam" msgid="1666446406999492763">"‏پرتو Android"</string>
+</resources>

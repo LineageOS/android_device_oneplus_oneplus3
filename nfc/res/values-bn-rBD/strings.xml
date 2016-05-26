@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Nfc পরিষেবা"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"NFC এর মাধ্যমে পরিচিতি প্রাপ্ত হয়েছে"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"এই ব্যক্তিকে একটি পরিচিতি হিসাবে জুড়তে স্পর্শ করুন।"</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC পারস্পরিক ক্রিয়া সম্পূর্ণ"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"এই ব্যক্তিকে আপনার পরিচিতি তথ্য দিতে স্পর্শ করুন।"</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC সক্ষম হয়েছে।"</string>
+    <string name="touch" msgid="4727218133711188355">"বীম করতে স্পর্শ করুন"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"আগত বীম..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"বীম হচ্ছে..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"বীম সম্পূর্ণ"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"বীম সস্পূর্ণ হয়নি"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"বীম বাতিল হয়েছে"</string>
+    <string name="cancel" msgid="61873902552555096">"বাতিল"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"দেখতে স্পর্শ করুন"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"রিসিভার এর ডিভাইস বীমের মাধ্যমে বড় ফাইল স্থানান্তর সমর্থন করে না।"</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"ডিভাইসগুলিকে আবার একত্র করুন"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"বীম বর্তমানে ব্যস্ত রয়েছে৷ পূর্ববর্তী স্থানন্তরণটি সম্পূর্ণ হলে আবার চেষ্টা করুন৷"</string>
+    <string name="device" msgid="4459621591392478151">"ডিভাইস"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> এর সাথে সংযোগ করা হচ্ছে"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> সংযুক্ত হয়েছে"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> সংযোগ করা যায়নি"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> থেকে সংযোগ বিচ্ছিন্ন করা হচ্ছে"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> থেকে সংযোগ বিচ্ছিন্ন হয়েছে"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> যুক্ত করা হচ্ছে"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> যুক্ত করা যায়নি"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"Bluetooth সক্ষম করা যায়নি"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"আপনি কি <xliff:g id="DEVICE_NAME">%1$s</xliff:g> Bluetooth ডিভাইসটি যুক্ত করার ব্যাপারে নিশ্চিত?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"হ্যাঁ"</string>
+    <string name="pair_no" msgid="5022308368904055020">"না"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"<xliff:g id="APP">%1$s</xliff:g> এর মাধ্যমে অর্থ প্রদানের জন্য আবার আলতো চাপুন"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"<xliff:g id="APP">%1$s</xliff:g> এর মাধ্যমে সম্পূর্ণ করতে আবার আলতো চাপুন"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"<xliff:g id="APP">%1$s</xliff:g> এর সঙ্গে লেনদেন সম্পন্ন করা যায়নি।"</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"<xliff:g id="APP">%1$s</xliff:g> ব্যবহার করা যায়নি।"</string>
+    <string name="pay_with" msgid="5531545488795798945">"এর মাধ্যমে অর্থ পরিশোধ করুন"</string>
+    <string name="complete_with" msgid="6797459104103012992">"এর সঙ্গে সম্পূর্ণ করুন"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"আপনার পছন্দের “আলতো চাপুন ও অর্থ প্রদান করুন” পরিষেবা সরানো হয়েছে। অন্য কিছু চয়ন করবেন?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"সম্পূর্ণ করতে অন্য ডিভাইস আলতো চাপুন"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"সংযুক্ত করুন"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"নেটওয়ার্কের সাথে সংযুক্ত হওয়া যায়নি"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"সংযুক্ত হয়েছে"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"নেটওয়ার্কের সাথে সংযোগ করুন"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> নেটওয়ার্কে সংযোগ করবেন?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam সক্ষম করতে NFC আবশ্যক। আপনি কি এটি সক্ষম করতে চান?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android বীম"</string>
+</resources>

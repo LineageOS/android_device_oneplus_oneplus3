@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Nfc ဆားဗစ်"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"NFC"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"NFCမှရသောလိပ်စာ"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"ဤပုဂ္ဂိုလ်အား လိပ်စာတွင်ထည့်ရန် တို့ထိပါ"</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC ကြားတုံ့ပြန်မှု ပြီးဆုံးပါပြီ"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"ဤပုဂ္ဂိုလ်အား သင့်လိပ်စာပေးရန် တို့ထိပါ"</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC ရရှိသည်"</string>
+    <string name="touch" msgid="4727218133711188355">"လှိုင်းလွှင့်ရန်အတွက် ထိပါ"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"အဝင် လှိုင်းလွှင့်ခြင်း..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"လှိုင်းလွှင့်နေစဥ်..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"လှိုင်းလွှင့်မှု ပြီးဆုံးပါပြီ"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"လှိုင်းလွှင့်မှု မပြီးဆုံးပါ"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"လှိုင်းလွှင့်မှု ပယ်ဖျက်မည်"</string>
+    <string name="cancel" msgid="61873902552555096">"ထားတော့"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"ကြည့်ရန် တို့ထိပါ"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"လက်ခံစက်သည် လှိုင်းလွှင့်ခြင်းမှတစ်ဆင့် ကြီးမားသောဖိုင်လွဲခြင်းများကို မထောက်ပံ့ပါ"</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"ထပ်ပြီး စက်ကို အတူထားပါ"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Beam လောလောဆယ် အလုပ်များနေ၏။ ယခင် ကူးပြောင်းမှုပြီးမှ ထပ်မံကြိုးစားပါ။"</string>
+    <string name="device" msgid="4459621591392478151">"ကိရိယာ"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> အားချိတ်ဆက်နေ၏"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> အား ချိတ်ဆက်ပြီး"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> အား မချိတ်ဆက်နိုင်ပါ"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>အားချိတ်ဆက်မှုဖြတ်တောက်နေ၏"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> နှင့်မချိတ်ဆက်ထားပါ"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>နှင့်တွဲချိတ်နေ၏"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>နှင့်မတွဲချိတ်နိုင်ပါ"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"ဘလူးတုသ်ကို မရရှိနိုင်ပါ"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"ဘလူးတုသ်စက်<xliff:g id="DEVICE_NAME">%1$s</xliff:g>နှင့် တွဲချိတ်ရန် ကျိန်းသေပါသလား?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"မှန်ပါသည်"</string>
+    <string name="pair_no" msgid="5022308368904055020">"ဟင့်အင်း"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"<xliff:g id="APP">%1$s</xliff:g>နှင့် ပေးချေရန် နောက်တစ်ခါ ခေါက်ထိပါ"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"<xliff:g id="APP">%1$s</xliff:g>နှင့် ပြီးဆုံးရန် နောက်တစ်ခါ ခေါက်ထိပါ"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"<xliff:g id="APP">%1$s</xliff:g>နှင့် လုပ်ငန်းစဥ်မပြီးဆုံးနိုင်ပါ"</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"<xliff:g id="APP">%1$s</xliff:g>ကို အသုံးပြု၍ မရပါ"</string>
+    <string name="pay_with" msgid="5531545488795798945">"ဖြင့် ငွေပေးချမေည်"</string>
+    <string name="complete_with" msgid="6797459104103012992">"ဖြင့် ပြီးဆုံးပါပြီ"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"သင့်ပိုမိုအနှစ်သက်သော tap &amp; payစနစ်အတွက် ဝန်ဆောင်မှုမှာ ဖယ်ရှားထားပါသည် နောက်ထပ်တစ်ခုကို ရွေးမည်လား?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"ပြီးဆုံးစေရန် နောက်ထပ်စက်ကို တို့ထိပါ"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"ချိတ်ဆက်ရန်"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"ကွန်ရက်ကို ချိတ်ဆက် မရခဲ့"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"ချိတ်ဆက်ထားပြီး"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"ကွန်ယက်ကို ဆက်သွယ်ရန်"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"ကွန်ရက် <xliff:g id="NETWORK_SSID">%1$s</xliff:g>ကို ချိတ်ဆက်ရမလား?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam သင် NFC ဖွင့်ရန်လိုအပ်သည်။ သင်၎င်းအားဖွင့်လိုသလား?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"အန်ဒရွိုက် အလင်းတန်း"</string>
+</resources>

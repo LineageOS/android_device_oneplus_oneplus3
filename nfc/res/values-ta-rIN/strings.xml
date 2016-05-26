@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Nfc சேவை"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"NFC வழியாக தொடர்பு பெறப்பட்டது"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"தொடர்பாக இவரைச் சேர்க்கத் தொடவும்."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC இடைவினை முழுமையடைந்தது"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"இவருக்கு உங்கள் தொடர்புத் தகவலை வழங்கத் தொடவும்."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC இயக்கப்பட்டது."</string>
+    <string name="touch" msgid="4727218133711188355">"பீம் செய்யத் தட்டவும்"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"உள்வரும் பீம்..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"பரிமாற்றுகிறது..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"பீம் முடிந்தது"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"பீம் ஐ முடிக்க முடியவில்லை"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"பீம் ரத்து செய்யப்பட்டது"</string>
+    <string name="cancel" msgid="61873902552555096">"ரத்துசெய்"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"பார்க்கத் தொடவும்"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"பெறுநரின் சாதனம் பீம் வழியான பெரிய கோப்புப் பரிமாற்றத்தை ஆதரிக்கவில்லை."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"மீண்டும் சாதனங்களை ஒன்றாகக் கொண்டுவரவும்"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"பீம் தற்போது பணிமிகுதியில் உள்ளது. முந்தைய இடமாற்றம் முடியும்போது, மீண்டும் முயலவும்."</string>
+    <string name="device" msgid="4459621591392478151">"சாதனம்"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ஐ இணைக்கிறது"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இணைக்கப்பட்டது"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ஐ இணைக்க முடியவில்லை"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> துண்டிக்கப்படுகிறது"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> துண்டிக்கப்பட்டது"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> இணைக்கப்படுகிறது"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ஐ இணைக்க முடியவில்லை"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"புளூடூத்தைச் செயல்படுத்த முடியவில்லை"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"புளூடூத் சாதனம் <xliff:g id="DEVICE_NAME">%1$s</xliff:g> உடன் இணைக்க வேண்டும் என்று விரும்புகிறீர்களா?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"ஆம்"</string>
+    <string name="pair_no" msgid="5022308368904055020">"இல்லை"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"<xliff:g id="APP">%1$s</xliff:g> உடன் கட்டணம் செலுத்த மீண்டும் தட்டவும்"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"<xliff:g id="APP">%1$s</xliff:g> உடன் நிறைவு செய்ய மீண்டும் தட்டவும்"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"இந்தப் பரிவர்த்தனையை <xliff:g id="APP">%1$s</xliff:g> உடன் முடிக்க முடியவில்லை."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"<xliff:g id="APP">%1$s</xliff:g> ஐப் பயன்படுத்த முடியவில்லை."</string>
+    <string name="pay_with" msgid="5531545488795798945">"இதனுடன் செலுத்து"</string>
+    <string name="complete_with" msgid="6797459104103012992">"இதனுடன் நிறைவு செய்"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"தட்டி கட்டண செலுத்தலுக்கான உங்களின் முன்னுரிமை சேவை அகற்றப்பட்டது. மற்றொன்றைத் தேர்ந்தெடுக்கவா?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"முடிக்க மற்றொரு சாதனத்தைத் தட்டவும்"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"இணை"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"நெட்வொர்க்குடன் இணைக்க முடியவில்லை"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"இணைக்கப்பட்டது"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"நெட்வொர்க்குடன் இணை"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> நெட்வொர்க்குடன் இணைக்கவா?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android பீம்மிற்கு NFC இயக்கப்பட்டிருக்க வேண்டும். இயக்கவா?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android பீம்"</string>
+</resources>

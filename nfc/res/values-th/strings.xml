@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"บริการ NFC"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"Nfc"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"ได้รับข้อมูลรายชื่อติดต่อทาง NFC"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"แตะเพื่อเพิ่มคนนี้เป็นผู้ติดต่อ"</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"ดำเนินการโต้ตอบกับ NFC ให้เสร็จสมบูรณ์"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"แตะเพื่อให้ข้อมูลรายชื่อติดต่อของคุณแก่คนนี้"</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"เปิดใช้งาน NFC แล้ว"</string>
+    <string name="touch" msgid="4727218133711188355">"แตะเพื่อบีม"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"บีมขาเข้า..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"กำลังบีม..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"บีมสำเร็จ"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"บีมไม่เสร็จสมบูรณ์"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"ยกเลิกบีมแล้ว"</string>
+    <string name="cancel" msgid="61873902552555096">"ยกเลิก"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"แตะเพื่อดู"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"อุปกรณ์ของผู้รับไม่สนับสนุนการถ่ายโอนไฟล์ขนาดใหญ่ผ่านการบีม"</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"นำอุปกรณ์มารวมกันอีกครั้ง"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Beam ไม่ว่างในขณะนี้ ลองอีกครั้งเมื่อการโอนก่อนหน้าเสร็จสมบูรณ์แล้ว"</string>
+    <string name="device" msgid="4459621591392478151">"อุปกรณ์"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"กำลังเชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"เชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> อยู่"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"ไม่สามารถเชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"กำลังยกเลิกการเชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"ยกเลิกการเชื่อมต่อกับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> แล้ว"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"กำลังจับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"ไม่สามารถจับคู่กับ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"ไม่สามารถเปิดใช้งานบลูทูธ"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"คุณแน่ใจหรือไม่ว่าต้องการจับคู่อุปกรณ์บลูทูธ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> นี้"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"ใช่"</string>
+    <string name="pair_no" msgid="5022308368904055020">"ไม่"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"แตะอีกครั้งเพื่อชำระเงินด้วย <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"แตะอีกครั้งเพื่อดำเนินการให้เสร็จสมบูรณ์ด้วย <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"ไม่สามารถดำเนินการธุรกรรมนี้ให้เสร็จสมบูรณ์ด้วย <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"ไม่สามารถใช้ <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="pay_with" msgid="5531545488795798945">"ชำระเงินด้วย"</string>
+    <string name="complete_with" msgid="6797459104103012992">"ดำเนินการให้เสร็จสมบูรณ์ด้วย"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"บริการที่คุณต้องการสำหรับแตะและจ่ายถูกลบ เลือกบริการอื่นไหม"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"แตะอุปกรณ์อื่นเพื่อทำให้เสร็จสมบูรณ์"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"เชื่อมต่อ"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"ไม่สามารถเชื่อมต่อกับเครือข่าย"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"เชื่อมต่อแล้ว"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"เชื่อมต่อกับเครือข่าย"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"เชื่อมต่อกับเครือข่าย <xliff:g id="NETWORK_SSID">%1$s</xliff:g> ไหม"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam ต้องการให้เปิดใช้ NFC คุณต้องการเปิดใช้ไหม"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android Beam"</string>
+</resources>

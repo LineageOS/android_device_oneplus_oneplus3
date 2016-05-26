@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"Nfc Service"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"NFC"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"Kontakt mottagen via NFC"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"Tryck om du vill lägga till personen som en kontakt."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC-interaktionen är slutförd"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"Tryck om du vill ge personen dina kontaktuppgifter."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC aktiverat."</string>
+    <string name="touch" msgid="4727218133711188355">"Tryck här om du vill överföra"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"Inkommande trådlös överföring ..."</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"Överför trådlöst ..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"Den trådlösa överföringen har slutförts"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"Den trådlösa överföringen slutfördes inte"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"Den trådlösa överföringen avbröts"</string>
+    <string name="cancel" msgid="61873902552555096">"Avbryt"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"Tryck och visa"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"Mottagarens enheten stöder inte trådlös överföring av stora filer."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"För samman enheterna igen"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Beam används för närvarande. Försök igen när den pågående överföringen är klar."</string>
+    <string name="device" msgid="4459621591392478151">"enhet"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"Ansluter <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> har anslutits"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"Det gick inte att ansluta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"Kopplar från <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> har kopplats från"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"Kopplar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"Det gick inte att koppla <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"Det gick inte att aktivera Bluetooth"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"Är du säker på att du vill para ihop Bluetooth-enheten <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"Ja"</string>
+    <string name="pair_no" msgid="5022308368904055020">"Nej"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"Tryck igen om du vill betala med <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"Tryck igen om du vill slutföra med <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"Transaktionen kunde inte slutföras med <xliff:g id="APP">%1$s</xliff:g>."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"Det gick inte att använda <xliff:g id="APP">%1$s</xliff:g>."</string>
+    <string name="pay_with" msgid="5531545488795798945">"Betala med"</string>
+    <string name="complete_with" msgid="6797459104103012992">"Slutför med"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"Standardtjänsten för snudda och betala har tagits bort. Vill du välja en annan?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"Slutför genom att trycka på en annan enhet"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"Anslut"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"Det gick inte att ansluta till nätverket"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"Ansluten"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"Anslut till nätverk"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"Vill du ansluta till nätverket <xliff:g id="NETWORK_SSID">%1$s</xliff:g>?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam kräver att NFC har aktiverats. Vill du göra det?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android Beam"</string>
+</resources>

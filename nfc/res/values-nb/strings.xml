@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" msgid="78565911793142902">"NFC-tjeneste"</string>
+    <string name="nfcUserLabel" msgid="7708535817084357357">"NFC"</string>
+    <string name="inbound_me_profile_title" msgid="6146013785225412693">"Kontakt mottatt per NFC"</string>
+    <string name="inbound_me_profile_text" msgid="2342757196108092923">"Trykk for å legge til denne personen som en kontakt."</string>
+    <string name="outbound_me_profile_title" msgid="2523625031572784769">"NFC-samhandling er fullført"</string>
+    <string name="outbound_me_profile_text" msgid="5594998841143667989">"Berør for å gi denne personen kontaktinformasjonen din."</string>
+    <string name="accessibility_nfc_enabled" msgid="7796246979948787735">"NFC er aktivert."</string>
+    <string name="touch" msgid="4727218133711188355">"Berør for å overføre trådløst"</string>
+    <string name="beam_progress" msgid="7453634884807323920">"Innkommende trådløs overføring"</string>
+    <string name="beam_outgoing" msgid="4679536649779123495">"Sender ..."</string>
+    <string name="beam_complete" msgid="477026736424637435">"Overføring fullført"</string>
+    <string name="beam_failed" msgid="5116241718189888630">"Overføringen ble ikke fullført"</string>
+    <string name="beam_canceled" msgid="5425192751826544741">"Overføringen ble avbrutt"</string>
+    <string name="cancel" msgid="61873902552555096">"Avbryt"</string>
+    <string name="beam_touch_to_view" msgid="7853129156831642630">"Trykk for å se"</string>
+    <string name="beam_handover_not_supported" msgid="4083165921751489015">"Mottakerens enhet støtter ikke store filoverføringer via Android Beam."</string>
+    <string name="beam_try_again" msgid="3364677301009783455">"Før enhetene sammen igjen"</string>
+    <string name="beam_busy" msgid="5253335587620612576">"Beam er opptatt for øyeblikket. Prøv igjen når den forrige overføringen er fullført."</string>
+    <string name="device" msgid="4459621591392478151">"enhet"</string>
+    <string name="connecting_peripheral" msgid="1296182660525660935">"Kobler til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="connected_peripheral" msgid="20748648543160091">"Tilkoblet <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="connect_peripheral_failed" msgid="7925702596242839275">"Kunne ikke koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnecting_peripheral" msgid="1443699384809097200">"Kobler fra <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="disconnected_peripheral" msgid="4470578100296504366">"Frakoblet <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="pairing_peripheral" msgid="6983626861540899365">"Sammenkobler <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="pairing_peripheral_failed" msgid="6087643307743264679">"Kunne ikke sammenkoble <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="failed_to_enable_bt" msgid="7229153323594758077">"Kunne ikke aktivere Bluetooth"</string>
+    <string name="confirm_pairing" msgid="4112568077038265363">"Er du sikker på at koble til Bluetooth-enheten <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="pair_yes" msgid="3525614878559994448">"Ja"</string>
+    <string name="pair_no" msgid="5022308368904055020">"Nei"</string>
+    <string name="tap_again_to_pay" msgid="5754988005412859897">"Trykk igjen for å betale med <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="tap_again_to_complete" msgid="5423640945118279123">"Trykk igjen for å fullføre med <xliff:g id="APP">%1$s</xliff:g>"</string>
+    <string name="transaction_failure" msgid="7828102078637936513">"Denne transaksjonen kunne ikke fullføres med <xliff:g id="APP">%1$s</xliff:g>."</string>
+    <string name="could_not_use_app" msgid="8137587876138569083">"Kunne ikke bruke <xliff:g id="APP">%1$s</xliff:g>."</string>
+    <string name="pay_with" msgid="5531545488795798945">"Betal med"</string>
+    <string name="complete_with" msgid="6797459104103012992">"Fullfør med"</string>
+    <string name="default_pay_app_removed" msgid="4108250545457437360">"Den foretrukne tjenesten din for berøringsbetaling har blitt fjernet. Vil du velge en annen?"</string>
+    <string name="ask_nfc_tap" msgid="2925239870458286340">"Trykk på en annen enhet for å fullføre"</string>
+    <string name="wifi_connect" msgid="6250727951843550671">"Koble til"</string>
+    <string name="status_unable_to_connect" msgid="9183908200295307657">"Kunne ikke koble til nettverket"</string>
+    <string name="status_wifi_connected" msgid="5893022897732105739">"Tilkoblet"</string>
+    <string name="title_connect_to_network" msgid="2474034615817280146">"Koble til nettverket"</string>
+    <string name="prompt_connect_to_network" msgid="8511683573657516114">"Vil du koble til nettverket «<xliff:g id="NETWORK_SSID">%1$s</xliff:g>»?"</string>
+    <string name="beam_requires_nfc_enabled" msgid="2800366967218600534">"Android Beam krever at NFC er aktivert. Ønsker du å aktivere NFC?"</string>
+    <string name="android_beam" msgid="1666446406999492763">"Android Beam"</string>
+</resources>
