@@ -1,0 +1,2 @@
+persist.net.doxlat         u:object_r:xlat_prop:s0
+persist.sys.diag.max.size  u:object_r:diag_prop:s0

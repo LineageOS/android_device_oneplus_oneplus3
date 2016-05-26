@@ -1,0 +1,4 @@
+allow ipacm-diag init:unix_stream_socket connectto;
+allow ipacm-diag property_socket:sock_file write;
+allow ipacm-diag system_prop:property_service set;
+allow ipacm-diag diag_prop:property_service set;

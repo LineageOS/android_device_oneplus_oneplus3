@@ -1,0 +1,3 @@
+allow qti diag_prop:property_service set;
+allow qti init:unix_stream_socket connectto;
+allow qti property_socket:sock_file write;

@@ -1,0 +1,2 @@
+allow rild nv_data_file:dir { getattr search };
+allow rild nv_data_file:file { write open };

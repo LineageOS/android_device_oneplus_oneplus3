@@ -1,0 +1,15 @@
+# We have a couple of non-standard NV partitions
+/dev/block/bootdevice/by-name/oem_dycnvbk                       u:object_r:modem_efs_partition_device:s0
+/dev/block/bootdevice/by-name/oem_stanvbk                       u:object_r:modem_efs_partition_device:s0
+
+# FRP partition
+/dev/block/bootdevice/by-name/config                            u:object_r:frp_block_device:s0
+
+/persist/sensors/gyro_sensitity_cal                             u:object_r:sensors_persist_file:s0
+
+/data/oemnvitems(/.*)?                                          u:object_r:nv_data_file:s0
+
+/dev/fpc1020                                                    u:object_r:fpc1020_device:s0
+/data/fpc(/.*)?                                                 u:object_r:fpc_data_file:s0
+/data/fpc_images(/.*)?                                          u:object_r:fpc_images_file:s0
+/sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc_irq:s0

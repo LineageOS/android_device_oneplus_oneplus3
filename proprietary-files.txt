@@ -399,6 +399,7 @@ vendor/lib64/qfp.wakeup.so
 # GPS
 bin/loc_launcher
 bin/lowi-server
+etc/permissions/com.qualcomm.location.xml
 -lib/libloc_api_v02.so
 -lib64/libloc_api_v02.so
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk

@@ -1,0 +1,2 @@
+allow netd firmware_file:file { read open };
+allow netd firmware_file:dir search;

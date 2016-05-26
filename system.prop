@@ -78,8 +78,10 @@ sdm.debug.disable_rotator_split=1
 # NFC
 ro.nfc.port=I2C
 
-# Perf
+# QCOM
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.frp.pst=/dev/block/bootdevice/by-name/config
+drm.service.enabled=true
 
 # Ram
 # Do we really need 6gb?

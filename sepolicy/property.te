@@ -1,0 +1,2 @@
+type xlat_prop, property_type;
+type diag_prop, property_type;
