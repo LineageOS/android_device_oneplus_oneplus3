@@ -67,7 +67,8 @@ typedef unsigned char boolean;
 #define FAILURE                 FALSE
 #define INVALID_ATL_CONNECTION_HANDLE -1
 
-#define MAX_XTRA_SERVER_URL_LENGTH 256
+#define gps_conf ContextBase::mGps_conf
+#define sap_conf ContextBase::mSap_conf
 
 enum loc_nmea_provider_e_type {
     NMEA_PROVIDER_AP = 0, // Application Processor Provider of NMEA
@@ -138,68 +139,6 @@ typedef struct loc_eng_data_s
     loc_ext_parser location_ext_parser;
     loc_ext_parser sv_ext_parser;
 } loc_eng_data_s_type;
-
-/* GPS.conf support */
-/* NOTE: the implementaiton of the parser casts number
-   fields to 32 bit. To ensure all 'n' fields working,
-   they must all be 32 bit fields. */
-typedef struct loc_gps_cfg_s
-{
-    uint32_t       INTERMEDIATE_POS;
-    uint32_t       ACCURACY_THRES;
-    uint32_t       SUPL_VER;
-    uint32_t       SUPL_MODE;
-    uint32_t       CAPABILITIES;
-    uint32_t       LPP_PROFILE;
-    uint32_t       XTRA_VERSION_CHECK;
-    char        XTRA_SERVER_1[MAX_XTRA_SERVER_URL_LENGTH];
-    char        XTRA_SERVER_2[MAX_XTRA_SERVER_URL_LENGTH];
-    char        XTRA_SERVER_3[MAX_XTRA_SERVER_URL_LENGTH];
-    uint32_t       USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL;
-    uint32_t       NMEA_PROVIDER;
-    uint32_t       GPS_LOCK;
-    uint32_t       A_GLONASS_POS_PROTOCOL_SELECT;
-    uint32_t       AGPS_CERT_WRITABLE_MASK;
-} loc_gps_cfg_s_type;
-
-/* NOTE: the implementaiton of the parser casts number
-   fields to 32 bit. To ensure all 'n' fields working,
-   they must all be 32 bit fields. */
-/* Meanwhile, *_valid fields are 8 bit fields, and 'f'
-   fields are double. Rigid as they are, it is the
-   the status quo, until the parsing mechanism is
-   change, that is. */
-typedef struct
-{
-    uint8_t        GYRO_BIAS_RANDOM_WALK_VALID;
-    double         GYRO_BIAS_RANDOM_WALK;
-    uint32_t       SENSOR_ACCEL_BATCHES_PER_SEC;
-    uint32_t       SENSOR_ACCEL_SAMPLES_PER_BATCH;
-    uint32_t       SENSOR_GYRO_BATCHES_PER_SEC;
-    uint32_t       SENSOR_GYRO_SAMPLES_PER_BATCH;
-    uint32_t       SENSOR_ACCEL_BATCHES_PER_SEC_HIGH;
-    uint32_t       SENSOR_ACCEL_SAMPLES_PER_BATCH_HIGH;
-    uint32_t       SENSOR_GYRO_BATCHES_PER_SEC_HIGH;
-    uint32_t       SENSOR_GYRO_SAMPLES_PER_BATCH_HIGH;
-    uint32_t       SENSOR_CONTROL_MODE;
-    uint32_t       SENSOR_USAGE;
-    uint32_t       SENSOR_ALGORITHM_CONFIG_MASK;
-    uint8_t        ACCEL_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
-    double         ACCEL_RANDOM_WALK_SPECTRAL_DENSITY;
-    uint8_t        ANGLE_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
-    double         ANGLE_RANDOM_WALK_SPECTRAL_DENSITY;
-    uint8_t        RATE_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
-    double         RATE_RANDOM_WALK_SPECTRAL_DENSITY;
-    uint8_t        VELOCITY_RANDOM_WALK_SPECTRAL_DENSITY_VALID;
-    double         VELOCITY_RANDOM_WALK_SPECTRAL_DENSITY;
-    uint32_t       SENSOR_PROVIDER;
-} loc_sap_cfg_s_type;
-
-extern loc_gps_cfg_s_type gps_conf;
-extern loc_sap_cfg_s_type sap_conf;
-
-
-uint32_t getCarrierCapabilities();
 
 //loc_eng functions
 int  loc_eng_init(loc_eng_data_s_type &loc_eng_data,
