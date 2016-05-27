@@ -1,2 +1,3 @@
-allow rild nv_data_file:dir { getattr search };
-allow rild nv_data_file:file { write open };
+allow rild nv_data_file:dir { getattr search write add_name };
+allow rild nv_data_file:file { write open create };
+allow rild diag_prop:property_service set;

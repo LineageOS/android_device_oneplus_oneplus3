@@ -1,2 +1,3 @@
 allow netd firmware_file:file { read open };
 allow netd firmware_file:dir search;
+allow netd vfat:file { read open };

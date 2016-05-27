@@ -29,38 +29,11 @@ on init
     write /sys/class/android_usb/android0/f_rndis/wceis 1
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
 
-#yfb add   to salve binder error log in poweroff charge
-service srvmag_charger /system/bin/servicemanager
-    user root
-    disabled
-    oneshot
-
-
-on charger
-    #yfb add  to salve binder error log in poweroff charge
-    setrlimit 13 40 40
-    #setprop persist.sys.usb.config mass_storage
-    mkdir /dev/usb-ffs 0770 shell shell
-    mkdir /dev/usb-ffs/adb 0770 shell shell
-    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
-    write /sys/class/android_usb/android0/f_ffs/aliases adb
-    setprop persist.sys.usb.config adb
-    #14(0xe) means reject cpu1 cpu2 cpu3online
-    write /sys/module/msm_thermal/core_control/cpus_offlined 14
-    #add by david.liu@oneplus.tw 2015/12/22, improve the performance of charging
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor powersave
-    write /sys/devices/system/cpu/cpu1/online 0
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    #yfb add  to salve binder error log in poweroff charge
-    start srvmag_charger
-
 on fs
     mkdir /dev/usb-ffs 0770 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     write /sys/class/android_usb/android0/f_ffs/aliases adb
-    setprop persist.sys.usb.config adb
 
 service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
     class core
@@ -891,21 +864,17 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 2A70#modify from 05C6 to 2A70 by jiachenghui for USB VID customized,2015-10-23 #VENDOR_EDIT
     write /sys/class/android_usb/android0/idProduct F003
-    write /sys/class/android_usb/android0/functions mtp,mass_storage #modify from mtp to mtp,mass_storage by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
+    write /sys/class/android_usb/android0/functions mtp
     write /sys/class/android_usb/android0/enable 1
-    wait /sys/class/android_usb/android0/f_mass_storage/cdrom/file #add by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
-    write /sys/class/android_usb/android0/f_mass_storage/cdrom/file ${sys.usb.cdrom} #add by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 2A70#modify from 05C6 to 2A70 by jiachenghui for USB VID customized,2015-10-23 #VENDOR_EDIT
-    write /sys/class/android_usb/android0/idProduct 9011 #modify from 9039 to 9011 by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
-    write /sys/class/android_usb/android0/functions mtp,mass_storage,adb #modify from mtp,adb to mtp,mass_storage,adb by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
+    write /sys/class/android_usb/android0/idProduct 9039
+    write /sys/class/android_usb/android0/functions mtp,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
-    wait /sys/class/android_usb/android0/f_mass_storage/cdrom/file #add by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
-    write /sys/class/android_usb/android0/f_mass_storage/cdrom/file ${sys.usb.cdrom} #add by jiachenghui for cdrom,2015-10-23 #VENDOR_EDIT
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=mtp,diag

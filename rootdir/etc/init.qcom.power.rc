@@ -90,19 +90,6 @@ on enable-low-power
 
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
-    # Insert core_ctl module and use conservative paremeters
-    insmod /system/lib/modules/hcube.ko
-    write /sys/devices/system/cpu/cpu4/core_ctl/max_cpus 1
-
-    # Configure foreground and background cpuset
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/foreground/boost/cpus 4-7
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-3
-
-    # Enable low power modes
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-
     # Set perfd properties
     rm /data/system/perfd/default_values
     setprop ro.min_freq_0 384000
@@ -110,6 +97,7 @@ on enable-low-power
     start perfd
 
 on charger
+    write /sys/module/msm_thermal/core_control/cpus_offlined 14
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0

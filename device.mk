@@ -278,8 +278,11 @@ PRODUCT_PACKAGES += \
     init.qcom.sensors.sh \
     init.qcom.sh \
     init.qcom.usb.rc \
-    nfc_trasmit.sh \
+    init.qcom.usb.sh \
     ueventd.qcom.rc
+
+PRODUCT_PACKAGES += \
+    init.qcom.bt.sh
 
 # RIL
 PRODUCT_PACKAGES += \

@@ -1,1 +1,2 @@
 allow vold proc_touchpanel:dir { read open };
+allow vold system_block_device:blk_file getattr;

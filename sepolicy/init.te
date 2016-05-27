@@ -1,0 +1,1 @@
+allow init vfat:file { read open };
