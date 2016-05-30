@@ -603,6 +603,7 @@ vendor/lib64/libmm-dspp-utils.so
 vendor/lib64/libmm-qdcm-diag.so
 
 # QMI
+bin/iop
 bin/irsc_util
 lib64/libqti-iop.so
 vendor/bin/pd-mapper
