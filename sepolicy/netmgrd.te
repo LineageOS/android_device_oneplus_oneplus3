@@ -1,2 +1,1 @@
-allow netmgrd xlat_prop:property_service set;
 allow netmgrd diag_prop:property_service set;

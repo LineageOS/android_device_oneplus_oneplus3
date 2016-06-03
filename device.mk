@@ -332,10 +332,5 @@ PRODUCT_PACKAGES += \
     hostapd.accept \
     hostapd.deny
 
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    ro.secure=0 \
-    ro.debuggable=1
-
 # Inherit from oppo-common
 $(call inherit-product, device/oppo/common/common.mk)
