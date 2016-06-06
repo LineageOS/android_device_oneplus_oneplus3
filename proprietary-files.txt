@@ -509,6 +509,8 @@ etc/firmware/a530v3_seq.fw2
 vendor/lib/hw/sound_trigger.primary.msm8996.so
 
 # Media
+lib/libOmxVenc.so
+lib64/libOmxVenc.so
 vendor/lib/libFileMux.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
