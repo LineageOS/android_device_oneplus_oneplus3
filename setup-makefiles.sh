@@ -58,6 +58,10 @@ done
 PRODUCT_PACKAGES += \\
     CNEService \\
     com.qualcomm.location \\
+    fastdormancy \\
+    ims \\
+    imssettings \\
+    QtiTelephonyService \\
     QtiTetherService \\
     shutdownlistener \\
     TimeService
@@ -127,6 +131,49 @@ LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
+LOCAL_MODULE := com.qualcomm.location
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/priv-app/com.qualcomm.location/com.qualcomm.location.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := fastdormancy
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/app/fastdormancy/fastdormancy.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := ims
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/vendor/app/ims/ims.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := platform
+LOCAL_PROPRIETARY_MODULE := true
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := imssettings
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/vendor/app/imssettings/imssettings.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := platform
+LOCAL_PROPRIETARY_MODULE := true
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
 LOCAL_MODULE := qcrilmsgtunnel
 LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_SRC_FILES := proprietary/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
@@ -134,6 +181,16 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_CLASS := APPS
 LOCAL_PRIVILEGED_MODULE := true
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := QtiTelephonyService
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/app/QtiTelephonyService/QtiTelephonyService.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
@@ -199,17 +256,6 @@ LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_PATH_64 := \$(TARGET_OUT_SHARED_LIBRARIES)
 LOCAL_MODULE_PATH_32 := \$(2ND_TARGET_OUT_SHARED_LIBRARIES)
 LOCAL_MULTILIB := both
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
-LOCAL_MODULE := com.qualcomm.location
-LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/priv-app/com.qualcomm.location/com.qualcomm.location.apk
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_MODULE_CLASS := APPS
-LOCAL_PRIVILEGED_MODULE := true
-LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
