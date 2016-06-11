@@ -420,14 +420,8 @@ vendor/lib64/qfp.wakeup.so
 
 # GPS
 bin/loc_launcher
-bin/lowi-server
-etc/permissions/com.qti.location.sdk.xml
-etc/permissions/com.qualcomm.location.xml
-framework/com.qti.location.sdk.jar
 -lib/libloc_api_v02.so
 -lib64/libloc_api_v02.so
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
-vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
 vendor/lib/libalarmservice_jni.so
 vendor/lib/libdataitems.so
