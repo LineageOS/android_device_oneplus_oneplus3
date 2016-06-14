@@ -1,1 +1,2 @@
 allow mm-qcamerad camera_prop:property_service set;
+allow mm-qcamerad permission_service:service_manager find;
