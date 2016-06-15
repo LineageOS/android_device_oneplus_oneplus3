@@ -395,7 +395,7 @@ public class RegisteredNfcid2Cache /*implements RegisteredServicesCache.Callback
         mCategoryNfcid2s.clear();
 
         for (ApduServiceInfo service : services) {
-            ArrayList<Nfcid2Group> nfcid2Groups = service.getNfcid2Groups();
+            List<Nfcid2Group> nfcid2Groups = service.getNfcid2Groups();
             if (nfcid2Groups == null) continue;
             for (Nfcid2Group nfcid2Group : nfcid2Groups) {
                 String groupCategory = nfcid2Group.getCategory();
@@ -440,7 +440,7 @@ public class RegisteredNfcid2Cache /*implements RegisteredServicesCache.Callback
                 // No interested services, if there is a current routing remove it
                 mRoutingManager.removeNfcid2(nfcid2);
             } else if (resolveInfo.defaultService != null) {
-                ArrayList<Nfcid2Group> group = resolveInfo.defaultService.getNfcid2Groups();
+                List<Nfcid2Group> group = resolveInfo.defaultService.getNfcid2Groups();
                 String syscode = group.get(0).getSyscodeForNfcid2(nfcid2);
                 String optparam = group.get(0).getOptparamForNfcid2(nfcid2);
                 // There is a default service set, route to that service

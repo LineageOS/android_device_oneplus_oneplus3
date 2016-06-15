@@ -1853,7 +1853,7 @@ public class NfcService implements DeviceHostListener {
             return mask;
         }
         @Override
-        public INxpNfcAdapter getNxpNfcAdapterInterface() {
+        public IBinder getNfcAdapterVendorInterface(String vendor) {
             return mNxpNfcAdapter;
         }
     }
