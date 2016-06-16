@@ -104,8 +104,7 @@ on enable-low-power
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
 
     # Set perfd properties
-    rm /data/system/perfd/default_values
-    start perfd
+    setprop sys.post_boot.parsed 1
 
     # Starting io prefetcher service
     start iop
