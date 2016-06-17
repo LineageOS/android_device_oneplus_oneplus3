@@ -84,10 +84,6 @@ ro.vendor.extension_library=libqti-perfd-client.so
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 drm.service.enabled=true
 
-# Ram
-# Do we really need 6gb?
-ro.sys.fw.bg_apps_limit=20
-
 # RIL
 rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 persist.rild.nitz_plmn=
