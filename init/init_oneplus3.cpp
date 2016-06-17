@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2015, The CyanogenMod Project
+   Copyright (c) 2016, The CyanogenMod Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -28,25 +28,72 @@
  */
 
 #include <stdlib.h>
+#include <fcntl.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
 #include "log.h"
 #include "util.h"
 
-#include "init_msm.h"
+static int read_file2(const char *fname, char *data, int max_size)
+{
+    int fd, rc;
 
-void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *board_type) {
+    if (max_size < 1)
+        return 0;
+
+    fd = open(fname, O_RDONLY);
+    if (fd < 0) {
+        ERROR("failed to open '%s'\n", fname);
+        return 0;
+    }
+
+    rc = read(fd, data, max_size - 1);
+    if ((rc > 0) && (rc < max_size))
+        data[rc] = '\0';
+    else
+        data[0] = '\0';
+    close(fd);
+
+    return 1;
+}
+
+void init_alarm_boot_properties()
+{
+    char const *alarm_file = "/proc/sys/kernel/boot_reason";
+    char buf[64];
+
+    if(read_file2(alarm_file, buf, sizeof(buf))) {
+
+    /*
+     * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+     * For existing PMIC chips, the following mapping applies
+     * for the value of boot_reason:
+     *
+     * 0 -> unknown
+     * 1 -> hard reset
+     * 2 -> sudden momentary power loss (SMPL)
+     * 3 -> real time clock (RTC)
+     * 4 -> DC charger inserted
+     * 5 -> USB charger insertd
+     * 6 -> PON1 pin toggled (for secondary PMICs)
+     * 7 -> CBLPWR_N pin toggled (for external power supply)
+     * 8 -> KPDPWR_N pin toggled (power key pressed)
+     */
+        if(buf[0] == '3')
+            property_set("ro.alarm_boot", "true");
+        else
+            property_set("ro.alarm_boot", "false");
+    }
+}
+
+void vendor_load_properties() {
     char device[PROP_VALUE_MAX];
     char rf_version[PROP_VALUE_MAX];
     int rc;
 
-    UNUSED(msm_id);
-    UNUSED(msm_ver);
-    UNUSED(board_type);
-
     rc = property_get("ro.cm.device", device);
-    if (!rc || !ISMATCH(device, "oneplus3"))
+    if (!rc || strncmp(device, "oneplus3", PROP_VALUE_MAX))
         return;
 
     property_get("ro.boot.rf_version", rf_version);
@@ -71,5 +118,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.telephony.default_network", "10,10");
         property_set("persist.radio.force_on_dc", "true");
     }
+
+    init_alarm_boot_properties();
 }
 
