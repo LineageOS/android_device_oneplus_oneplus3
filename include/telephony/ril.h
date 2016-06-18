@@ -32,10 +32,6 @@ extern "C" {
 #endif
 
 
-#ifndef RIL_QCOM_VERSION
-#define RIL_QCOM_VERSION 3
-#endif
-
 #if defined(ANDROID_SIM_COUNT_2)
 #define SIM_COUNT 2
 #elif defined(ANDROID_SIM_COUNT_3)
@@ -50,11 +46,7 @@ extern "C" {
 #define SIM_COUNT 1
 #endif
 
-#ifdef USE_RIL_VERSION_10
-#define RIL_VERSION 10
-#else
 #define RIL_VERSION 11     /* Current version */
-#endif
 #define RIL_VERSION_MIN 6 /* Minimum RIL_VERSION supported */
 
 #define CDMA_ALPHA_INFO_BUFFER_LENGTH 64
@@ -403,7 +395,6 @@ typedef struct {
                                  via PCO(Protocol Configuration Option) for IMS client. */
 } RIL_Data_Call_Response_v9;
 
-#if (RIL_VERSION == 11)
 typedef struct {
     int             status;     /* A RIL_DataCallFailCause, 0 which is PDP_FAIL_NONE if no error */
     int             suggestedRetryTime; /* If status != 0, this fields indicates the suggested retry
@@ -439,7 +430,6 @@ typedef struct {
                                    Value <= 0 means network has either not sent a value or
                                    sent an invalid value */
 } RIL_Data_Call_Response_v11;
-#endif
 
 typedef enum {
     RADIO_TECH_3GPP = 1, /* 3GPP Technologies - GSM, WCDMA */
@@ -499,7 +489,8 @@ typedef struct {
 } RIL_Dial;
 
 typedef struct {
-    int unknown;
+    //dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
+    int cla;
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
@@ -514,7 +505,8 @@ typedef struct {
 } RIL_SIM_IO_v5;
 
 typedef struct {
-    int unknown;
+    //dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
+    int cla;
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
@@ -4040,7 +4032,7 @@ typedef struct {
  * RIL_REQUEST_VOICE_RADIO_TECH
  *
  * Query the radio technology type (3GPP/3GPP2) used for voice. Query is valid only
- * when radio state is RADIO_STATE_ON
+ * when radio state is not RADIO_STATE_UNAVAILABLE
  *
  * "data" is NULL
  * "response" is int *
@@ -4559,6 +4551,57 @@ typedef struct {
  * GENERIC_FAILURE
  */
 #define RIL_REQUEST_SIM_GET_ATR 136
+//DuYuanHua@OnLineRD.AirService.RIL, 2012/09/26, Add for EngineerMode
+
+#define RIL_REQUEST_OEM_BASE	137
+
+//xufei@OnLineRD.AirService.RIL, 2012/12/14, Add for factory mode nv process
+#define RIL_REQUEST_FACTORY_MODE_NV_PROCESS (RIL_REQUEST_OEM_BASE + 1)
+
+//TongJing.Shi@EXP.DataComm.Phone, 2013.08.29, Modify for
+#define RIL_REQUEST_FACTORY_MODE_MODEM_GPIO (RIL_REQUEST_OEM_BASE + 2)
+
+/**
+ * RIL_REQUEST_GET_BAND_MODE
+ *
+ *  get current band mode 
+ *
+ * "response" is int
+ *
+ * Valid errors:
+ *  SUCCESS
+ *  GENERIC_FAILURE
+ */
+
+#define RIL_REQUEST_GET_BAND_MODE (RIL_REQUEST_OEM_BASE + 3)
+
+//#ifdef VENDOR_EDIT
+//Zhengpeng.Tan@OnlineRD.AirService.Module, 2013/10/28, Add for  report nv_restore when bootup
+#define RIL_REQUEST_REPORT_BOOTUPNVRESTOR_STATE (RIL_REQUEST_OEM_BASE + 4)  
+
+//Wenlong.Cai@OnlineRD.AirService.Module, 2013/12/09, Add for get rffe device information
+#define RIL_REQUEST_GET_RFFE_DEV_INFO (RIL_REQUEST_OEM_BASE + 5)  
+
+//dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
+// "data" is a const RIL_SIM_IO *
+// "response" is a const RIL_SIM_IO_Response *
+#define RIL_REQUEST_SIM_TRANSMIT_BASIC (RIL_REQUEST_OEM_BASE+7)
+// "data" is a const char * containing the AID of the applet
+// "response" is a int * containing the channel id
+//#define RIL_REQUEST_SIM_OPEN_CHANNEL (RIL_REQUEST_OEM_BASE+8)
+// "data" is a const int * containing the channel id
+// "response" is NULL
+//#define RIL_REQUEST_SIM_CLOSE_CHANNEL (RIL_REQUEST_OEM_BASE+9)
+// "data" is a const RIL_SIM_IO *
+// "response" is a const RIL_SIM_IO_Response *
+#define RIL_REQUEST_SIM_TRANSMIT_CHANNEL (RIL_REQUEST_OEM_BASE+10)
+//yangli@OnlineRD.AirService.Module, 2014/05/20, Add for send msg to make modem reset, {
+#define RIL_REQUEST_GO_TO_ERROR_FATAL (RIL_REQUEST_OEM_BASE+11)
+#define RIL_REQUEST_GET_MDM_BASEBAND  (RIL_REQUEST_OEM_BASE+12)
+//}add end
+
+//yangli@OnlineRD.AirService.Module, 2014/09/22, Add for set only tdd-lte
+#define RIL_REQUEST_SET_TDD_LTE (RIL_REQUEST_OEM_BASE+13)
 
 /**
  * RIL_REQUEST_CAF_SIM_OPEN_CHANNEL_WITH_P2
@@ -5191,6 +5234,8 @@ typedef struct {
  */
 #define RIL_UNSOL_LCEDATA_RECV 1045
 
+#define RIL_UNSOL_OEM_NV_BACKUP_RESPONSE 1046
+#define RIL_UNSOL_RAC_UPDATE  1047    //czp 1042-->1044  
 /***********************************************************************/
 
 
