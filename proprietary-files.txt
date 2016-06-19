@@ -550,6 +550,7 @@ vendor/lib/libhdcp1prov.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libmmosal.so
+vendor/lib/libvqzip.so
 vendor/lib/libwfdcommonutils.so
 vendor/lib/libwfdhdcpcp.so
 vendor/lib/libwfdmmservice.so
