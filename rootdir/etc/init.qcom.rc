@@ -63,6 +63,12 @@ on fs
     mount_all fstab.qcom
 
 on boot
+    # Update foreground and background cpusets
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 2-3
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-1
+
     # Secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
@@ -472,6 +478,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class main
     user camera
     group camera system inet input graphics
+    writepid /dev/cpuset/system-background/tasks
 
 # fingerprint service
 service fingerprintd /system/bin/fingerprintd
@@ -517,6 +524,7 @@ service perfd /system/vendor/bin/perfd
    class main
    user root
    disabled
+   writepid /dev/cpuset/system-background/tasks
 
 service seempd /system/bin/seempd
    class late_start
@@ -729,6 +737,7 @@ service iop /system/bin/iop
     group root
     disabled
     socket iop seqpacket 0666 root system
+    writepid /dev/cpuset/system-background/tasks
 
 service qcomsysd /system/bin/qcom-system-daemon
     class main
@@ -1365,6 +1374,7 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     user root
     group root
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service wfdservice /system/bin/wfdservice
     class main
