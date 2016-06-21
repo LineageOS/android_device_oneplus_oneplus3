@@ -648,7 +648,7 @@ service ipacm /system/bin/ipacm
 service qti /system/vendor/bin/qti
     class main
     user radio
-    group radio net_raw qcom_diag usb net_admin
+    group radio qcom_diag usb
     writepid /dev/cpuset/system-background/tasks
 
 service sensors /system/bin/sensors.qcom
