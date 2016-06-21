@@ -19,10 +19,6 @@
          is the percentage of camera preview height/width to scale to. -->
     <integer name="panorama_frame_size_reduction">100</integer>
 
-    <!-- Force use a specific preview-size
-         Example: 1920x1080 -->
-    <string name="preview_size_for_photo">1920x1080</string>
-
     <!-- A list of scenemodes where Longshot should be enabled. Comma separated.
          An empty list will use the default restrictions. If defined, longshot
          will be enabled ONLY for these scenemodes and disabled for others. -->
