@@ -223,19 +223,3 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # inherit from the proprietary version
 -include vendor/oneplus/oneplus3/BoardConfigVendor.mk
-
-# TWRP specific build flags
-TW_THEME := portrait_hdpi
-RECOVERY_SDCARD_ON_DATA := true
-BOARD_HAS_NO_REAL_SDCARD := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-TARGET_RECOVERY_QCOM_RTC_FIX := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/module/g_android/parameters/file"
-TW_BRIGHTNESS_PATH := "/sys/devices/soc/900000.qcom\x2cmdss_mdp/900000.qcom\x2cmdss_mdp:qcom\x2cmdss_fb_primary/leds/lcd-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 162
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_MTP_DEVICE := "/dev/mtp_usb"
-TW_NO_EXFAT_FUSE := true
-TW_INCLUDE_CRYPTO := true
