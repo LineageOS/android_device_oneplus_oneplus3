@@ -101,22 +101,12 @@ void vendor_load_properties() {
     if (strstr(rf_version, "11")) {
         /* Chinese */
         property_set("ro.product.model", "ONE A3000");
-        property_set("ro.rf_version", "TDD_FDD_Ch_All");
-        property_set("ro.telephony.default_network", "22,22");
-        property_set("telephony.lteOnCdmaDevice", "1,1");
-        property_set("persist.radio.force_on_dc", "true");
     } else if (strstr(rf_version, "21")) {
         /* Asia/Europe */
         property_set("ro.product.model", "ONE A3003");
-        property_set("ro.rf_version", "TDD_FDD_Eu");
-        property_set("ro.telephony.default_network", "9,9");
     } else if (strstr(rf_version, "31")) {
         /* America */
         property_set("ro.product.model", "ONE A3000");
-        property_set("ro.rf_version", "TDD_FDD_Am");
-        property_set("telephony.lteOnCdmaDevice", "1,1");
-        property_set("ro.telephony.default_network", "10,10");
-        property_set("persist.radio.force_on_dc", "true");
     }
 
     init_alarm_boot_properties();
