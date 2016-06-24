@@ -447,11 +447,6 @@ etc/firmware/a530v3_seq.fw2
 vendor/lib/hw/keystore.msm8996.so
 vendor/lib64/hw/keystore.msm8996.so
 
-# Listen
-vendor/lib/hw/sound_trigger.primary.msm8996.so
-vendor/lib/libadpcmdec.so
-vendor/lib/libsmwrapper.so
-
 # Media
 vendor/lib/libI420colorconvert.so
 vendor/lib/libOmxAacDec.so
