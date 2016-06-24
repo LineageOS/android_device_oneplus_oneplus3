@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_24cd9565",
+        "filename": "keylayout/gpio-keys.kl",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:29Z",
+      "side": 1,
+      "message": "Same not needed",
+      "revId": "c4413c2a85955f14ec4605514731cdd6436ec2f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_44ca114e",
+        "filename": "keylayout/gpio-keys.kl",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:29Z",
+      "side": 1,
+      "message": "Not needed",
+      "revId": "c4413c2a85955f14ec4605514731cdd6436ec2f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_84b489d2",
+        "filename": "keylayout/qpnp_pon.kl",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:29Z",
+      "side": 1,
+      "message": "Don\u0027t think we need this",
+      "revId": "c4413c2a85955f14ec4605514731cdd6436ec2f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_c4be01b3",
+        "filename": "keylayout/synaptics.kl",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:29Z",
+      "side": 1,
+      "message": "MENU? Should be app switch",
+      "revId": "c4413c2a85955f14ec4605514731cdd6436ec2f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_64af0d7d",
+        "filename": "keylayout/synaptics.kl",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:29Z",
+      "side": 1,
+      "message": "Please keep the same behavior as stock",
+      "revId": "c4413c2a85955f14ec4605514731cdd6436ec2f6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
