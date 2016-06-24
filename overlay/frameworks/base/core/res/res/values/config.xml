@@ -384,11 +384,6 @@
          so that applications can still use their own mechanisms. -->
     <bool name="config_enableAutoPowerModes">true</bool>
 
-    <integer name="config_buttonBrightnessSettingDefault">1</integer>
-
-    <!-- Use ERI text for network name on CDMA LTE -->
-    <bool name="config_LTE_eri_for_network_name">false</bool>
-
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
