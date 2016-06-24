@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_64e4ede0",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:07Z",
+      "side": 1,
+      "message": "Don\u0027t think those files are used anywhere",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 65
+      },
+      "revId": "72d4e7d9228caef77976b556fa7fde0fb40424d1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_84e9e9b7",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 8323
+      },
+      "writtenOn": "2016-06-24T19:29:07Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "72d4e7d9228caef77976b556fa7fde0fb40424d1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
