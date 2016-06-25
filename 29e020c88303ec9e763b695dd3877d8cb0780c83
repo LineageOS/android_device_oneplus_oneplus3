@@ -16,6 +16,24 @@
       "revId": "29e020c88303ec9e763b695dd3877d8cb0780c83",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5faad753_9f9cd4c0",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2016-06-25T03:24:36Z",
+      "side": 1,
+      "message": "It doesn\u0027t really matter, since the configs below would get included no matter what. I think this line is mainly to indicate that the configs below were added by OnePlus.",
+      "parentUuid": "5faad753_1f6b04b7",
+      "revId": "29e020c88303ec9e763b695dd3877d8cb0780c83",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
