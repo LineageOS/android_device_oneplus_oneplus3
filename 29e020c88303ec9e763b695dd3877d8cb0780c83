@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5faad753_1f6b04b7",
+        "filename": "wifi/WCNSS_qcom_cfg.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 10151
+      },
+      "writtenOn": "2016-06-25T03:14:18Z",
+      "side": 1,
+      "message": "I am not sure VENDOR_EDIT macro whether work in ini file?",
+      "revId": "29e020c88303ec9e763b695dd3877d8cb0780c83",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
