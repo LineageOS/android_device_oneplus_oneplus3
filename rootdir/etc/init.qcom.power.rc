@@ -9,8 +9,7 @@ on enable-low-power
 
     # Enable Adaptive LMK
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,51256,110296,200640"
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 202640
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 81250
 
     # Configure governor settings for little cluster
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
@@ -34,12 +33,12 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_sched_load 1
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/use_migration_notif 1
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "19000 1400000:39000 1700000:19000"
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/above_hispeed_delay "19000 1400000:39000 1700000:19000 2100000:79000"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/hispeed_freq 1248000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/io_is_busy 1
-    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
+    write /sys/devices/system/cpu/cpu2/cpufreq/interactive/target_loads "85 1500000:90 1800000:70 2100000:95"
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/min_sample_time 19000
     write /sys/devices/system/cpu/cpu2/cpufreq/interactive/max_freq_hysteresis 79000
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
@@ -59,8 +58,8 @@ on enable-low-power
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_migration_fixup 1
-    write /proc/sys/kernel/sched_upmigrate 95
-    write /proc/sys/kernel/sched_downmigrate 95
+    write /proc/sys/kernel/sched_downmigrate 45
+    write /proc/sys/kernel/sched_upmigrate 45
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
@@ -89,12 +88,6 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
-
-    # Set perfd properties
-    rm /data/system/perfd/default_values
-    setprop ro.min_freq_0 307200
-    setprop ro.min_freq_2 307200
-    start perfd
 
     # Starting io prefetcher service
     start iop
