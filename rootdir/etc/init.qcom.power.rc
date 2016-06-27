@@ -89,6 +89,12 @@ on enable-low-power
 
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
+    # Set perfd properties
+    rm /data/system/perfd/default_values
+    setprop ro.min_freq_0 307200
+    setprop ro.min_freq_2 307200
+    start perfd
+
     # Starting io prefetcher service
     start iop
 
