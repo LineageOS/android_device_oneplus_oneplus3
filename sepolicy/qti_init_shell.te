@@ -1,6 +1,5 @@
 allow qti_init_shell kmsg_device:chr_file { write open };
-allow qti_init_shell bluetooth_loader_exec:file { read open };
-allow qti_init_shell btnvtool_exec:file { read getattr open execute execute_no_trans };
+allow qti_init_shell bluetooth_loader_exec:file r_file_perms;
 allow qti_init_shell diag_prop:property_service set;
 allow qti_init_shell qmuxd:unix_stream_socket connectto;
 allow qti_init_shell qmuxd_socket:dir { write add_name search remove_name };

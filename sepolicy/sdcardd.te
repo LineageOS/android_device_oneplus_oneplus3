@@ -1,0 +1,1 @@
+allow sdcardd userdata_block_device:blk_file r_file_perms;
