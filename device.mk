@@ -144,6 +144,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/camera/imx298_chromatix.xml:system/etc/camera/imx298_chromatix.xml \
     $(LOCAL_PATH)/camera/msm8996_camera.xml:system/etc/camera/msm8996_camera.xml
 
+# Charger
+PRODUCT_PACKAGES += \
+    charger_res_images
+
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
     cneapiclient \
