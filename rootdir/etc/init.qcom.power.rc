@@ -58,8 +58,8 @@ on enable-low-power
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_migration_fixup 1
-    write /proc/sys/kernel/sched_downmigrate 45
     write /proc/sys/kernel/sched_upmigrate 45
+    write /proc/sys/kernel/sched_downmigrate 45
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
