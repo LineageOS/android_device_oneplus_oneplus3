@@ -74,8 +74,12 @@ sdm.debug.disable_rotator_split=1
 # NFC
 ro.nfc.port=I2C
 
-# QCOM
+# Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.min_freq_0=307200
+ro.min_freq_2=307200
+
+# QCOM
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 drm.service.enabled=true
 
