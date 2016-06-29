@@ -24,6 +24,15 @@ vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
 vendor/lib64/libaudiodevarb.so
 
+# Audio ACDB
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP/MTP_General_cal.acdb
+etc/acdbdata/MTP/MTP_Global_cal.acdb
+etc/acdbdata/MTP/MTP_Handset_cal.acdb
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP/MTP_Headset_cal.acdb
+etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+
 # Bluetooth
 bin/btnvtool
 bin/hci_qcomm_init
@@ -43,6 +52,9 @@ vendor/lib64/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
+etc/camera/imx179_chromatix.xml
+etc/camera/imx298_chromatix.xml
+etc/camera/msm8996_camera.xml
 lib/hw/camera.msm8996.so
 lib/libFNVfbEngineHAL.so
 lib/libmm-qcamera.so
@@ -475,6 +487,13 @@ bin/iop
 bin/msm_irqbalance
 lib64/libqti-iop.so
 vendor/bin/perfd
+vendor/etc/perf-profile0.conf
+vendor/etc/perf-profile1.conf
+vendor/etc/perf-profile2.conf
+vendor/etc/perf-profile3.conf
+vendor/etc/perf-profile4.conf
+vendor/etc/perf-profile5.conf
+vendor/etc/perf-profile6.conf
 vendor/lib/libqc-opt.so
 vendor/lib/libqti-iop-client.so
 vendor/lib/libqti-perfd-client.so
@@ -554,6 +573,9 @@ bin/netmgrd
 bin/qmuxd
 bin/radish
 bin/rmt_storage
+etc/data/dsi_config.xml
+etc/data/netmgr_config.xml
+etc/data/qmi_config.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
@@ -621,6 +643,8 @@ etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_YTL-Commercial.mbn
 
 # Sensors
 bin/sensors.qcom
+etc/sensors/hals.conf
+etc/sensors/sensor_def_qcomdev.conf
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
