@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_193af7e6",
+        "filename": "device.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-06-30T06:10:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed. This is used to migrate the prefs from the old package name, which should not be applicable for any user running any OP3 ROM.",
+      "range": {
+        "startLine": 223,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 75
+      },
+      "revId": "90c85ed6ff83acae40a840679afda95912c83b08",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
