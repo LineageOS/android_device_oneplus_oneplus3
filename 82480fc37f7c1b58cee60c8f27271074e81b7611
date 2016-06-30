@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_7950cb33",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-06-30T05:44:50Z",
+      "side": 1,
+      "message": "This is not needed. It gets installed when com.nxp.nfc.nq package is built.",
+      "range": {
+        "startLine": 216,
+        "startChar": 4,
+        "endLine": 216,
+        "endChar": 22
+      },
+      "revId": "82480fc37f7c1b58cee60c8f27271074e81b7611",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa7e38b_19451771",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-06-30T05:44:50Z",
+      "side": 1,
+      "message": "What about nqnfcse_access.xml?",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 219,
+        "endChar": 22
+      },
+      "revId": "82480fc37f7c1b58cee60c8f27271074e81b7611",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
