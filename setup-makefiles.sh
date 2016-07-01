@@ -80,8 +80,9 @@ PRODUCT_PACKAGES += \\
     libthermalclient
 
 PRODUCT_PACKAGES += \\
-    qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel \\
-    qdcm_calib_data_samsung_s6e3fa3_1080p_video_mode_dsi_panel
+    colorservice \\
+    qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml \\
+    qdcm_calib_data_samsung_s6e3fa3_1080p_video_mode_dsi_panel.xml
 
 \$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)
 EOF
@@ -134,6 +135,17 @@ LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_CLASS := APPS
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := colorservice
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_SRC_FILES := proprietary/vendor/app/colorservice/colorservice.apk
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_CLASS := APPS
+LOCAL_CERTIFICATE := platform
+LOCAL_PROPRIETARY_MODULE := true
 include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
