@@ -117,10 +117,6 @@ on boot
     chown root system /proc/tri-state-key/keyCode_bottom
     chmod 0660 /proc/tri-state-key/keyCode_bottom
 
-    # Vibrator permissions
-    chown system system /sys/class/timed_output/vibrator/vmax_mv
-    chmod 0644 /sys/class/timed_output/vibrator/vmax_mv
-
     # Graphics
     chown system graphics /sys/class/graphics/fb0/dyn_pu
     chmod 0664 /sys/class/graphics/fb0/dyn_pu
