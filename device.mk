@@ -174,7 +174,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.audio.parser.ip.buffer.size=262144 \
     vendor.audio.hw.aac.encoder=true \
     persist.vendor.bt.enable.splita2dp=false \
-    ro.config.media_vol_steps=25
+    ro.config.media_vol_steps=25 \
+    ro.config.vc_call_vol_steps=7
 
 # ANT+
 PRODUCT_PACKAGES += \
