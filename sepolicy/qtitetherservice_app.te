@@ -1,0 +1,1 @@
+allow qtitetherservice_app app_data_file:dir search;

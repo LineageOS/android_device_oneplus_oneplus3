@@ -1,0 +1,1 @@
+allow nfc app_data_file:dir search;

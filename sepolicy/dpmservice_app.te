@@ -1,0 +1,1 @@
+allow dpmservice_app app_data_file:dir search;

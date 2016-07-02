@@ -1,2 +1,3 @@
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file { write read getattr open read };
+allow system_app app_data_file:dir search;
