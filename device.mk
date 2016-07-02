@@ -101,7 +101,6 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8996 \
     audio.r_submix.default \
     audio.usb.default \
-    audio_amplifier.msm8996 \
     libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
@@ -148,7 +147,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     copybit.msm8996 \
     gralloc.msm8996 \
-    hdmi_cec.msm8996 \
     hwcomposer.msm8996 \
     memtrack.msm8996 \
     liboverlay \
@@ -228,22 +226,15 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
-    libdashplayer \
-    libdivxdrmdecrypt \
     libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
-    libOmxSwVencMpeg4 \
-    libOmxSwVencHevc \
     libOmxVdec \
-    libOmxVdecHevc \
     libOmxVenc \
-    libOmxVidcCommon \
-    libstagefrighthw \
-    libstagefright_soft_flacdec
+    libstagefrighthw
 
 # Power
 PRODUCT_PACKAGES += \
@@ -274,10 +265,6 @@ PRODUCT_PACKAGES += \
     sensors.msm8996
 
 # Wifi
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-    $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat
-
 PRODUCT_PACKAGES += \
     ipacm \
     ipacm-diag \
@@ -288,12 +275,18 @@ PRODUCT_PACKAGES += \
     hostapd \
     dhcpcd.conf \
     wpa_supplicant \
-    wpa_supplicant.conf \
-    wpa_supplicant_overlay.conf \
-    p2p_supplicant_overlay.conf \
-    hostapd_default.conf \
-    hostapd.accept \
-    hostapd.deny
+    wpa_supplicant.conf
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/wifi/hostapd.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/wifi/hostapd.deny:system/etc/hostapd/hostapd.deny \
+    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/qca_cld/WCNSS_cfg.dat
 
 # Inherit from oppo-common
 $(call inherit-product, device/oppo/common/common.mk)
