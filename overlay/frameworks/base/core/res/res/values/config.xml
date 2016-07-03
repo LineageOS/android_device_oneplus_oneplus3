@@ -30,19 +30,18 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>4</item>
-        <item>9</item>
-        <item>13</item>
-        <item>50</item>
-        <item>100</item>
+        <item>1</item>        <!-- pitch black -->
+        <item>11</item>       <!-- dark indoor -->
+        <item>25</item>       <!-- twilight -->
+        <item>50</item>       <!-- dim indoor -->
+        <item>100</item>      <!-- home -->
         <item>200</item>
-        <item>400</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
+        <item>300</item>      <!-- office -->
+        <item>500</item>      <!-- sunrise -->
+        <item>750</item>
+        <item>1000</item>     <!-- overcast -->
         <item>5000</item>
-        <item>10000</item>
-        <item>30000</item>
+        <item>10000</item>    <!-- daylight -->
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -50,20 +49,19 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>1</item>    <!-- 0-4 -->
-        <item>10</item>   <!-- 4-9 -->
-        <item>25</item>   <!-- 9-13 -->
-        <item>41</item>   <!-- 13-50 -->
-        <item>52</item>   <!-- 50-100 -->
-        <item>62</item>   <!-- 100-200 -->
-        <item>69</item>   <!-- 200-400 -->
-        <item>78</item>   <!-- 400-1000 -->
-        <item>88</item>   <!-- 1000-2000 -->
-        <item>134</item>  <!-- 2000-3000 -->
-        <item>178</item>  <!-- 3000-5000 -->
-        <item>225</item>  <!-- 5000-10000 -->
-        <item>255</item>  <!-- 10000-30000 -->
-        <item>255</item>  <!-- 30000+ -->
+        <item>7</item>
+        <item>12</item>
+        <item>17</item>
+        <item>29</item>
+        <item>35</item>
+        <item>47</item>
+        <item>75</item>
+        <item>114</item>
+        <item>130</item>
+        <item>170</item>
+        <item>195</item>
+        <item>220</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
