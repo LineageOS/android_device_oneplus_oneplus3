@@ -1,0 +1,1 @@
+allow perfd system_server:file write;
