@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_1052c168",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-07-04T20:55:02Z",
+      "side": 1,
+      "message": "Group net_raw is duplicated. Aren\u0027t you missing diag? Judging by the groups from ril-daemon2 service.",
+      "range": {
+        "startLine": 1274,
+        "startChar": 52,
+        "endLine": 1274,
+        "endChar": 86
+      },
+      "revId": "fe62b96ac79dd6166609a8b9af50fda328c326d7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
