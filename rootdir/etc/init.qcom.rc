@@ -70,8 +70,8 @@ on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
     write /dev/cpuset/foreground/boost/cpus 2-3
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-1
+    write /dev/cpuset/background/cpus 0-1
+    write /dev/cpuset/system-background/cpus 0-3
 
     # Secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
@@ -510,6 +510,7 @@ service qseecomd /system/bin/qseecomd
 service perfd /system/vendor/bin/perfd
    class main
    user root
+   socket perfd seqpacket 0666 root system
    disabled
    writepid /dev/cpuset/system-background/tasks
 
