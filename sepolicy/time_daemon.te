@@ -1,0 +1,1 @@
+allow time_daemon property_socket:sock_file write;
