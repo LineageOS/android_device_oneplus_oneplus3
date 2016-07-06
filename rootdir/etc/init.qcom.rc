@@ -1427,6 +1427,16 @@ service seemp_healthd /system/vendor/bin/seemp_healthd
     user system
     group system
 
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKLG
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
 # such color
 on property:sys.rainbow.recovery=1
     write /sys/class/leds/red/brightness 255
