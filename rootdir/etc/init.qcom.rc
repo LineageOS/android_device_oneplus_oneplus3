@@ -78,7 +78,6 @@ on boot
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
-    write /proc/sys/kernel/sched_boost 1
     write /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input0/update_fw 1
 
     # Torch
