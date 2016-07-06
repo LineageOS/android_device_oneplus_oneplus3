@@ -44,6 +44,8 @@ on init
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
 
+    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
