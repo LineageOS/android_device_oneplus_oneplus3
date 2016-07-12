@@ -14,9 +14,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">Inaktivitätsdisplay</string>
-  <string name="ambient_display_summary">Bildschirm wecken, wenn Sie Benachrichtigungen erhalten</string>
+  <string name="ambient_display_summary">Bildschirm einschalten, wenn Sie Benachrichtigungen erhalten</string>
+  <string name="always_enabled_title">Immer aktiviert</string>
+  <string name="always_enabled_summary">Auf den Sensor reagieren, sobald der Bildschirm ausgeschaltet wird</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Neigungssensor</string>
+  <string name="pick_up_title">Aufnehmen</string>
+  <string name="pick_up_summary">Benachrichtigungen kurz einblenden, wenn das Gerät aufgenommen wird</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">Näherungssensor</string>
   <string name="hand_wave_gesture_title">Winken</string>
