@@ -3,3 +3,4 @@ allow system_server proc_touchpanel:dir search;
 allow system_server proc_touchpanel:file { write open getattr read };
 allow system_server sensors_persist_file:file { read getattr open };
 allow system_server sensors_persist_file:dir search;
+allow system_server self:unix_stream_socket 0x7704;
