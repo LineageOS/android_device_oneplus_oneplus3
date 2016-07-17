@@ -22,7 +22,7 @@ audio.dolby.ds2.hardbypass=false
 audio.offload.passthrough=false
 audio.offload.multiple.enabled=true
 audio.offload.min.duration.secs=30
-af.fast_track_multiplier=1
+af.fast_track_multiplier=2
 audio_hal.period_size=192
 persist.dirac.acs.controller=qem
 
@@ -32,12 +32,10 @@ qcom.bluetooth.soc=rome
 ro.bluetooth.wipower=true
 ro.bluetooth.emb_wp_mode=true
 
-# Calb
-ro.qualcomm.foss=1
+# Display power reduction (FOSS)
+ro.qcom.dpps.sensortype=3
 ro.qualcomm.display.paneltype=1
-config.foss.xml=1
-config.foss.path=/system/etc/FOSSConfig.xml
-config.foss.xml.print=1
+ro.qualcomm.foss=1
 
 # Camera
 camera.disable_zsl_mode=1
@@ -75,6 +73,7 @@ sdm.debug.disable_rotator_split=1
 ro.nfc.port=I2C
 
 # Perf
+ro.am.reschedule_service=true
 ro.vendor.extension_library=libqti-perfd-client.so
 ro.min_freq_0=307200
 ro.min_freq_2=307200
@@ -105,9 +104,16 @@ telephony.lteOnCdmaDevice=1,1
 ro.telephony.call_ring.multiple=false
 telephony.lteOnGsmDevice=1
 persist.radio.apm_sim_not_pwdn=1
+persist.radio.custom_ecc=1
 persist.radio.sib16_support=1
 ro.telephony.default_cdma_sub=0
 persist.data.qmi.adb_logmask=0
+persist.net.doxlat=true
+persist.oem.dump=0
+persist.radio.ignore_dom_time=5
+persist.radio.hw_mbn_update=0
+persist.radio.sw_mbn_update=0
+persist.radio.start_ota_daemon=1
 
 # RmNet Data
 persist.rmnet.data.enable=true
