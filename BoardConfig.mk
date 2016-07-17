@@ -35,7 +35,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 BOARD_VENDOR := oneplus
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := MSM8996
+TARGET_BOOTLOADER_BOARD_NAME := msm8996
 TARGET_NO_BOOTLOADER := true
 
 # Platform
@@ -153,6 +153,9 @@ ifeq ($(HOST_OS),linux)
     endif
   endif
 endif
+
+# DPM
+BOARD_USES_QCNE := true
 
 # GPS
 TARGET_NO_RPC := true
