@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_de05fe7b",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2016-07-18T04:30:12Z",
+      "side": 1,
+      "message": "duplicated",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 23
+      },
+      "revId": "6fbd1db43b70bc837b40a02a77106a7480362c39",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
