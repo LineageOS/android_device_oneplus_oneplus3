@@ -30,4 +30,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Hilfe</string>
+  <string name="doze_settings_help_text">Diese Features verwenden Sensoren, um im Standby kurz Benachrichtigungen einzublenden. Der gewählte Sensor wird nur bei Eingang einer Benachrichtigung aktiviert. Dies hilft dabei, den Stromverbrauch zu reduzieren. Alternativ kann der Sensor sofort beim Abschalten des Bildschirms aktiviert werden, wodurch sich jedoch der Stromverbrauch erhöht.</string>
 </resources>
