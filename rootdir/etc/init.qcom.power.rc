@@ -100,6 +100,9 @@ on enable-low-power
 
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
 
+    # Set idle GPU to 133 Mhz
+    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
+
     # Set perfd properties
     rm /data/system/perfd/default_values
     start perfd
