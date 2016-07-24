@@ -1,3 +1,6 @@
+on boot
+    write /proc/sys/kernel/sched_boost 1
+
 on enable-low-power
 
     # Disable thermal bcl hotplug to switch governor
@@ -58,9 +61,9 @@ on enable-low-power
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
     # Setting b.L scheduler parameters
-    write /proc/sys/kernel/sched_migration_fixup 1
-    write /proc/sys/kernel/sched_upmigrate 45
+    write /proc/sys/kernel/sched_boost 0
     write /proc/sys/kernel/sched_downmigrate 45
+    write /proc/sys/kernel/sched_upmigrate 45
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
@@ -105,14 +108,10 @@ on charger
     write /sys/devices/system/cpu/cpu3/online 0
 
 on class_start:late_start
-    write /proc/sys/kernel/sched_boost 1
-
     trigger enable-low-power
 
 on property:init.svc.recovery=running
     trigger enable-low-power
 
 on property:dev.bootcomplete=1
-    write /proc/sys/kernel/sched_boost 0
-
     setprop sys.io.scheduler "bfq"
