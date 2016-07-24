@@ -16,7 +16,9 @@
   <string name="ambient_display_title">Omgevingsdisplay</string>
   <string name="ambient_display_summary">Scherm aan bij het ontvangen van meldingen</string>
   <string name="always_enabled_title">Altijd inschakelen</string>
+  <string name="always_enabled_summary">Sensoren gebruiken zodra het scherm uit is</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Hellingssensor</string>
   <string name="pick_up_title">Oppakken</string>
   <string name="pick_up_summary">Meldingen laten knipperen bij oppakken</string>
   <!-- Proximity sensor -->
@@ -28,4 +30,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Help</string>
+  <string name="doze_settings_help_text">Deze functies gebruiken sensoren om een Doze-puls te versturen. De gekozen sensor is alleen ingeschakeld als het apparaat een melding ontvangt. Dit helpt het batterijgebruik te verminderen. Er is ook een optie om de sensor te activeren zodra het scherm uitschakelt, maar dit leidt tot hoger batterijgebruik.</string>
 </resources>
