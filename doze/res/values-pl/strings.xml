@@ -16,4 +16,6 @@
   <!-- Tilt sensor -->
   <!-- Proximity sensor -->
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
+  <string name="doze_settings_help_title">Pomoc</string>
 </resources>
