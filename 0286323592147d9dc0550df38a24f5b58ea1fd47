@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_553b16ea",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-07-26T11:45:10Z",
+      "side": 1,
+      "message": "This is the symlink that some have been removing, according to http://review.cyanogenmod.org/#/c/147710/.",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "0286323592147d9dc0550df38a24f5b58ea1fd47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
