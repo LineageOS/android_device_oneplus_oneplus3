@@ -5,4 +5,9 @@ allow system_server sensors_persist_file:file r_file_perms;
 allow system_server sensors_persist_file:dir search;
 allow system_server proc_stat:file r_file_perms;
 allow system_server remosaic_service:service_manager find;
+
+# interact with thermal_config
+allow system_server thermal-engine:unix_stream_socket connectto;
+allow system_server thermal_socket:sock_file write;
+
 get_prop(system_server, diag_prop);
