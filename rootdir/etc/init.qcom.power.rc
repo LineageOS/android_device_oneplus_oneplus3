@@ -68,6 +68,7 @@ on enable-low-power
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
     write /proc/sys/kernel/sched_init_task_load 100
+    write /proc/sys/kernel/sched_upmigrate_min_nice 9
 
     # Enable bus-dcvs
     write /sys/class/devfreq/soc:qcom,cpubw/governor "bw_hwmon"
