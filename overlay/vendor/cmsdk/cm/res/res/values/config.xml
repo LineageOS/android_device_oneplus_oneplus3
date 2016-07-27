@@ -36,7 +36,6 @@
     <!-- Corresponds to color balance level of zero, this is the native
          display temperature -->
     <integer name="config_dayColorTemperature">8000</integer>
-
     <integer name="config_nightColorTemperature">5000</integer>
 
     <!-- For high brightness mode -->
@@ -46,4 +45,6 @@
          OLED displays and can cause a bit of discoloration. Reinvestigate after tuning -->
     <bool name="config_defaultCABC">false</bool>
 
+    <!-- Turn on LiveDisplay auto mode by default -->
+    <integer name="config_defaultLiveDisplayMode">2</integer>
 </resources>
