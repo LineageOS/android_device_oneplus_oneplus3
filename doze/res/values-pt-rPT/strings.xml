@@ -16,6 +16,7 @@
   <string name="ambient_display_title">Visualização de ambiente</string>
   <string name="ambient_display_summary">Ligar o ecrã quando receber notificações</string>
   <string name="always_enabled_title">Permitir sempre</string>
+  <string name="always_enabled_summary">Prestar atenção a eventos dos sensores assim que o ecrã é desligado</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Sensor de inclinação</string>
   <string name="pick_up_title">Pegar</string>

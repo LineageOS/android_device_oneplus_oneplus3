@@ -24,9 +24,9 @@
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">Сензор за близост</string>
   <string name="hand_wave_gesture_title">Махане с ръка</string>
-  <string name="hand_wave_gesture_summary">Светлинна индикация при махане с ръка</string>
+  <string name="hand_wave_gesture_summary">Показва известията при прекарване на ръка над екрана</string>
   <string name="pocket_gesture_title">Джоб</string>
-  <string name="pocket_gesture_summary">Светлинна индикация при изваждане от джоб</string>
+  <string name="pocket_gesture_summary">Показва известията, когато извадите устройството от джоба си</string>
   <!-- Help text -->
   <string name="dlg_ok">ОK</string>
   <string name="doze_settings_help_title">Помощ</string>
