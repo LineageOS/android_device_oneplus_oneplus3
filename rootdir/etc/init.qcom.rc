@@ -147,6 +147,10 @@ on boot
     chmod 0666 /dev/p61
     chown spi spi /dev/p61
 
+    # DASH
+    chmod 0666 /dev/dash
+    restorecon /dev/dash
+
     # RGB light
     chown system system /sys/class/leds/red/pause_lo
     chown system system /sys/class/leds/blue/pause_lo
@@ -713,10 +717,20 @@ service mdtpd /system/vendor/bin/mdtpd
     user root
     group system radio drmrpc
 
+service dashd /sbin/dashd
+    class core
+    critical
+    seclabel u:r:dashd:s0
+    group root system
+
+on property:init.svc.healthd=restarting
+    restart dashd
+
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    start dashd
 
 service iop /system/bin/iop
     class main
