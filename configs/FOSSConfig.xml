@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Group id="FOSS Config">
+    <LowBrightnessCutoff units="uint">20</LowBrightnessCutoff>
+    <LuxEndPoint units="uint">0</LuxEndPoint>
+    <ContrastStrength units="uint">128</ContrastStrength>
+    <EnableGradientDetection units="uint">1</EnableGradientDetection>
+    <GradientDetectionThreshold units="uint">60</GradientDetectionThreshold>
+    <PowerProfileTableLength units="uint">8</PowerProfileTableLength>
+    <PowerSaveRatioTableLength units="uint">4</PowerSaveRatioTableLength>
+    <LutUpdateSpeedTableLength units="uint">4</LutUpdateSpeedTableLength>
+    <PowerProfileInput units="uint">0 36 72 109 145 182 218 255</PowerProfileInput>
+    <PowerProfileOutput units="uint">0 45 73 143 253 438 717 1023</PowerProfileOutput>
+    <PowerSaveRatioInput units="uint">32 48 500 788</PowerSaveRatioInput>
+    <PowerSaveRatioOutput units="uint">255 204 204 192</PowerSaveRatioOutput>
+    <LutUpdateSpeedInput units="uint">27 64 85 102</LutUpdateSpeedInput>
+    <LutUpdateSpeedOutput units="uint">80 64 16 1</LutUpdateSpeedOutput>
+</Group>

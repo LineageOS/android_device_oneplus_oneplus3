@@ -24,7 +24,6 @@ audio.offload.multiple.enabled=true
 audio.offload.min.duration.secs=30
 af.fast_track_multiplier=2
 audio_hal.period_size=192
-persist.dirac.acs.controller=qem
 
 # Bluetooth
 bt.max.hfpclient.connections=1
@@ -36,6 +35,8 @@ ro.bluetooth.emb_wp_mode=true
 ro.qcom.dpps.sensortype=3
 ro.qualcomm.display.paneltype=1
 ro.qualcomm.foss=1
+config.foss.xml=1
+config.foss.path=/system/etc/FOSSConfig.xml
 
 # Camera
 camera.disable_zsl_mode=1
