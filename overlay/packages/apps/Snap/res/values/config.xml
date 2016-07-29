@@ -19,6 +19,4 @@
          is the percentage of camera preview height/width to scale to. -->
     <integer name="panorama_frame_size_reduction">100</integer>
 
-    <!-- Restart preview for back camera onPictureTaken -->
-    <bool name="back_camera_restart_preview_onPictureTaken">true</bool>
 </resources>
