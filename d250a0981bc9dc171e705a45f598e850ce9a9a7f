@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fa7e38b_67f54183",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-07-30T15:09:36Z",
+      "side": 1,
+      "message": "Isn\u0027t this only needed for QCamera2 (used here https://github.com/CyanogenMod/android_hardware_qcom_camera/blob/cm-13.0/QCamera2/Android.mk#L82), which in turn is only built on msm8992 and msm8994?",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 27
+      },
+      "revId": "d250a0981bc9dc171e705a45f598e850ce9a9a7f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
