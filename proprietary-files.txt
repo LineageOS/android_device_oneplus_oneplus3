@@ -27,8 +27,8 @@ lib/libopcamerahw_interface.so
 lib/libopcameralib.so
 lib/libqomx_core.so
 vendor/lib/libSonyIMX298PdafLibrary.so
-vendor/lib/libfastcvadsp_stub.so
-vendor/lib/libfastcvopt.so
+vendor/lib/libchromaflash.so
+vendor/lib/liboptizoom.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
@@ -50,6 +50,7 @@ vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
 vendor/lib/libmmcamera2_vpe_module.so
 vendor/lib/libmmcamera2_wnr_module.so
+vendor/lib/libmmcamera_chromaflash_lib.so
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_dummyalgo.so
 vendor/lib/libmmcamera_eebinparse.so
@@ -65,6 +66,7 @@ vendor/lib/libmmcamera_imglib_faceproc_adspstub.so
 vendor/lib/libmmcamera_imx179.so
 vendor/lib/libmmcamera_imx298.so
 vendor/lib/libmmcamera_llvd.so
+vendor/lib/libmmcamera_optizoom_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
@@ -163,6 +165,10 @@ vendor/lib/libchromatix_imx298_video.so
 vendor/lib/libchromatix_imx298_video_hdr.so
 vendor/lib/libchromatix_imx298_zsl_preview.so
 vendor/lib/libchromatix_imx298_zsl_video.so
+
+# Camera / DSP - Hexagon libraries
+lib/rfsa/adsp/libmorpho_image_stabilizer4_hvx_skel.so
+lib/rfsa/adsp/libmorpho_video_denoiser_hvx_skel.so
 
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_6.fw
