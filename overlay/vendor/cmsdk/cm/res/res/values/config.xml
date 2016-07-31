@@ -22,9 +22,6 @@
     <integer name="config_proximityCheckTimeout">100</integer>
     <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
 
-    <!-- Ambient lux at which to enable outdoor mode when LiveDisplay is enabled -->
-    <integer name="config_outdoorAmbientLux">12000</integer>
-
     <!-- Is the notification LED brightness adjustable ? Used to decide if the user can set LED brightness -->
     <bool name="config_adjustableNotificationLedBrightness">true</bool>
 
