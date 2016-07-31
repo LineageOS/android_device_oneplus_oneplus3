@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">常に画面表示ディスプレイ</string>
+  <string name="ambient_display_summary">通知を受信したときに画面を点灯する</string>
+  <string name="always_enabled_title">常に有効</string>
+  <string name="always_enabled_summary">画面を消灯した直後からセンサーイベントをリッスンする</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">傾きセンサー</string>
+  <string name="pick_up_title">持ち上げ</string>
+  <string name="pick_up_summary">端末を持ち上げたときに通知を点滅表示する</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">接近センサー</string>
+  <string name="hand_wave_gesture_title">手を振る</string>
+  <string name="hand_wave_gesture_summary">手を振ったときに通知を点滅表示する</string>
+  <string name="pocket_gesture_title">ポケット</string>
+  <string name="pocket_gesture_summary">ポケットから取り出したときに通知を点滅表示する</string>
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
+  <string name="doze_settings_help_title">ヘルプ</string>
+  <string name="doze_settings_help_text">これらの機能はdoze通知点滅表示を起動するためにセンサーイベントを使用します。電池の使用量を削減するために、端末が通知を受信した時にのみ選択したセンサーが有効になります。画面を消灯した直後から選択したセンサーを有効にするオプションもありますが、電池の使用量が多くなります。</string>
 </resources>
