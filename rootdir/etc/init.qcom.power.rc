@@ -1,8 +1,27 @@
 on boot
+    # Update foreground and background cpusets
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 2-3
+    write /dev/cpuset/background/cpus 0-1
+    write /dev/cpuset/system-background/cpus 0-3
+
+    # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
 
-on enable-low-power
+    # DASH
+    chmod 0666 /dev/dash
 
+on post-fs-data
+    # Create IOP  deamon related dirs
+    mkdir /data/misc/iop 0770 root system
+
+    # Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
+
+on enable-low-power
     # Disable thermal bcl hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/soc/soc:qcom,bcl/mode "disable"
@@ -102,11 +121,10 @@ on enable-low-power
     start iop
 
 on charger
-    write /sys/module/msm_thermal/core_control/cpus_offlined 14
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    start dashd
 
 on class_start:late_start
     trigger enable-low-power
@@ -114,5 +132,35 @@ on class_start:late_start
 on property:init.svc.recovery=running
     trigger enable-low-power
 
+on property:init.svc.healthd=restarting
+    restart dashd
+
 on property:dev.bootcomplete=1
     setprop sys.io.scheduler "bfq"
+
+service energy-awareness /system/bin/energy-awareness
+    class main
+    user root
+    group system
+    oneshot
+
+service dashd /sbin/dashd
+    class core
+    critical
+    seclabel u:r:dashd:s0
+    group root system
+
+service iop /system/bin/iop
+    class main
+    user root
+    group root
+    socket iop seqpacket 0666 root system
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
+service perfd /system/vendor/bin/perfd
+    class main
+    user root
+    socket perfd seqpacket 0666 root system
+    disabled
+    writepid /dev/cpuset/system-background/tasks

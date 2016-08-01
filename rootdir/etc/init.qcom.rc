@@ -66,12 +66,6 @@ on fs
     mount_all fstab.qcom
 
 on boot
-    # Update foreground and background cpusets
-    write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 2-3
-    write /dev/cpuset/background/cpus 0-1
-    write /dev/cpuset/system-background/cpus 0-3
-
     # Secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
@@ -148,9 +142,6 @@ on boot
     chown nfc nfc /dev/pn544
     chmod 0666 /dev/p61
     chown spi spi /dev/p61
-
-    # DASH
-    chmod 0666 /dev/dash
 
     # RGB light
     chown system system /sys/class/leds/red/pause_lo
@@ -438,18 +429,9 @@ on post-fs-data
     mkdir /data/misc/SelfHost/Running/ 2750 system shell
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
-    # Create PERFD deamon related dirs
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
-
-    #Create IOP  deamon related dirs
-    mkdir /data/misc/iop 0770 root system
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
@@ -510,13 +492,6 @@ service qseecomd /system/bin/qseecomd
    class core
    user root
    group root
-
-service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   socket perfd seqpacket 0666 root system
-   disabled
-   writepid /dev/cpuset/system-background/tasks
 
 service seempd /system/bin/seempd
    class late_start
@@ -707,39 +682,10 @@ service tlocd /system/bin/tloc_daemon
     user system
     group drmrpc gps net_raw
 
-service energy-awareness /system/bin/energy-awareness
-    class main
-    user root
-    group system
-    oneshot
-
 service mdtpd /system/vendor/bin/mdtpd
     class late_start
     user root
     group system radio drmrpc
-
-service dashd /sbin/dashd
-    class core
-    critical
-    seclabel u:r:dashd:s0
-    group root system
-
-on property:init.svc.healthd=restarting
-    restart dashd
-
-on charger
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    start dashd
-
-service iop /system/bin/iop
-    class main
-    user root
-    group root
-    disabled
-    socket iop seqpacket 0666 root system
-    writepid /dev/cpuset/system-background/tasks
 
 service qcomsysd /system/bin/qcom-system-daemon
     class main
