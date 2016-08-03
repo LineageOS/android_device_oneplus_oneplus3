@@ -10,8 +10,8 @@
     <LutUpdateSpeedTableLength units="uint">4</LutUpdateSpeedTableLength>
     <PowerProfileInput units="uint">0 36 72 109 145 182 218 255</PowerProfileInput>
     <PowerProfileOutput units="uint">0 45 73 143 253 438 717 1023</PowerProfileOutput>
-    <PowerSaveRatioInput units="uint">32 48 500 788</PowerSaveRatioInput>
+    <PowerSaveRatioInput units="uint">32 48 700 788</PowerSaveRatioInput>
     <PowerSaveRatioOutput units="uint">255 204 204 192</PowerSaveRatioOutput>
-    <LutUpdateSpeedInput units="uint">27 64 85 102</LutUpdateSpeedInput>
+    <LutUpdateSpeedInput units="uint">55 128 175 204</LutUpdateSpeedInput>
     <LutUpdateSpeedOutput units="uint">80 64 16 1</LutUpdateSpeedOutput>
 </Group>
