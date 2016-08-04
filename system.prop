@@ -126,9 +126,6 @@ persist.data.df.mux_count=8
 persist.data.df.iwlan_mux=9
 persist.data.df.dev_name=rmnet_usb0
 
-# Storage
-ro.sdcardfs.enable=true
-
 # Timeservice
 persist.timed.enable=true
 
