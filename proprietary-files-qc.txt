@@ -130,6 +130,9 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 
 # GPS
 bin/loc_launcher
+bin/lowi-server
+bin/xtwifi-client
+bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 framework/com.qti.location.sdk.jar
@@ -138,6 +141,7 @@ framework/com.qti.location.sdk.jar
 lib/libloc_ds_api.so
 lib64/libloc_ds_api.so
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
+-priv-app/xtra_t_app/xtra_t_app.apk
 vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
 vendor/lib/libalarmservice_jni.so
@@ -157,8 +161,12 @@ vendor/lib/libxtwifi_ulp_adaptor.so
 vendor/lib/libxt_native.so
 vendor/lib64/hw/flp.default.so
 vendor/lib64/libalarmservice_jni.so
+vendor/lib64/libasn1cper.so
+vendor/lib64/libasn1crt.so
+vendor/lib64/libasn1crtx.so
 vendor/lib64/libdataitems.so
 vendor/lib64/libflp.so
+vendor/lib64/libgdtap.so
 vendor/lib64/libgeofence.so
 vendor/lib64/libizat_core.so
 vendor/lib64/liblbs_core.so
@@ -171,6 +179,7 @@ vendor/lib64/liblowi_wifihal.so
 vendor/lib64/liblowi_wifihal_nl.so
 vendor/lib64/libquipc_os_api.so
 vendor/lib64/libulp2.so
+vendor/lib64/libxt_native.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
 
