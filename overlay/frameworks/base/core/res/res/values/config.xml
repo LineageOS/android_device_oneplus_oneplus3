@@ -31,7 +31,9 @@
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
         <item>1</item>        <!-- pitch black -->
-        <item>11</item>       <!-- dark indoor -->
+        <item>5</item>
+        <item>9</item>
+        <item>14</item>
         <item>25</item>       <!-- twilight -->
         <item>50</item>       <!-- dim indoor -->
         <item>100</item>      <!-- home -->
@@ -40,8 +42,10 @@
         <item>500</item>      <!-- sunrise -->
         <item>750</item>
         <item>1000</item>     <!-- overcast -->
+        <item>2000</item>
         <item>5000</item>
         <item>10000</item>    <!-- daylight -->
+        <item>20000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -50,6 +54,8 @@
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>7</item>
+        <item>8</item>
+        <item>10</item>
         <item>12</item>
         <item>17</item>
         <item>29</item>
@@ -58,9 +64,11 @@
         <item>75</item>
         <item>114</item>
         <item>130</item>
-        <item>170</item>
-        <item>195</item>
-        <item>220</item>
+        <item>152</item>
+        <item>175</item>
+        <item>200</item>
+        <item>215</item>
+        <item>235</item>
         <item>255</item>
     </integer-array>
 
