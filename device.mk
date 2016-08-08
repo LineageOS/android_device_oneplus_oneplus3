@@ -135,10 +135,6 @@ PRODUCT_PACKAGES += \
     Snap \
     libcamera_shim
 
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
-
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
     cneapiclient \
