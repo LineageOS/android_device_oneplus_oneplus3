@@ -34,6 +34,7 @@
 static const struct fs_path_config android_device_files[] = {
       // { 00755, AID_UID,     AID_GID,     (1ULL << CAPABILITY), "PATH_TO_BINARY" },
        { 00755, AID_BLUETOOTH,      AID_BLUETOOTH,      (1ULL << CAP_BLOCK_SUSPEND), "system/bin/wcnss_filter" },
+       { 00755, AID_SYSTEM,      AID_SYSTEM,      (1ULL << CAP_NET_BIND_SERVICE), "system/bin/cnss-daemon"},
 #ifdef NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
        { 00000, AID_ROOT,      AID_ROOT,      0, "system/etc/fs_config_dirs" },
 #endif
