@@ -482,7 +482,7 @@ service qvop-daemon /system/bin/qvop-daemon
     group system drmrpc
 
 # start up peripheral manager
-service per_mgr system/bin/pm-service
+service per_mgr /system/bin/pm-service
     class late_start
     user system
     group system net_raw
@@ -530,9 +530,6 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
 
 service time_daemon /system/bin/time_daemon
    class late_start
@@ -548,69 +545,6 @@ service audiod /system/bin/audiod
    class late_start
    user system
    group system
-
-service usf_tester /system/bin/usf_tester
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_epos /system/bin/usf_epos
-    class main
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_gesture /system/bin/usf_gesture
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_sync_gesture /system/bin/usf_sync_gesture
-    user system
-    group system inet audio
-    disabled
-    oneshot
-
-service usf_p2p /system/bin/usf_p2p
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_hovering /system/bin/usf_hovering
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_proximity /system/bin/usf_proximity
-    class late_start
-    user system
-    group system inet audio
-
-service usf_pairing /system/bin/usf_pairing
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_sw_calib /system/bin/usf_sw_calib
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-on property:init.svc.bootanim=stopped
-    start usf-post-boot
 
 service imsqmidaemon /system/bin/imsqmidaemon
     class main
@@ -804,18 +738,7 @@ on property:bluetooth.startbtsnoop=true
 on property:bluetooth.startbtsnoop=false
     stop btsnoop
 
-service qcom-c_core-sh /system/bin/sh /init.qcom.class_core.sh
-    class core
-    user root
-    oneshot
-
-service qcom-c_main-sh /system/bin/sh /init.class_main.sh
-    class main
-    user root
-    oneshot
-
 on property:vold.decrypt=trigger_restart_framework
-    start qcom-c_main-sh
     start config_bt_addr
     start config_bluetooth
 
@@ -1183,52 +1106,6 @@ on property:drmdiag.load=1
 
 on property:drmdiag.load=0
     stop drmdiag
-
-service qcom-sh /system/bin/sh /init.qcom.sh
-    class late_start
-    user root
-    oneshot
-
-service sensor-sh /system/bin/sh /init.qcom.sensors.sh
-    class core
-    user root
-    oneshot
-
-service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-service qti-testscripts /system/bin/sh /system/etc/init.qcom.testscripts.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-    seclabel u:r:qti-testscripts:s0
-
-service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
-    class late_start
-    group wifi inet
-    disabled
-    oneshot
-
-service wifi-crda /system/bin/sh /system/etc/init.crda.sh
-   class late_start
-   user root
-   disabled
-   oneshot
-
-service config-zram /system/bin/sh /system/etc/init.qcom.zram.sh
-   class late_start
-   user root
-   disabled
-   oneshot
-
-on property:sys.boot_completed=1
-    start qcom-post-boot
-    start qti-testscripts
-    start config-zram
 
 service atfwd /system/bin/ATFWD-daemon
     class late_start
