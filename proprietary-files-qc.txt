@@ -428,6 +428,7 @@ vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 
 # Thermal
+etc/thermal-engine.conf
 vendor/bin/thermal-engine
 -vendor/lib/libthermalclient.so
 -vendor/lib64/libthermalclient.so
