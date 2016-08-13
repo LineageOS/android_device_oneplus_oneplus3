@@ -14,8 +14,14 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">תצוגת התראות עמומה</string>
+  <string name="ambient_display_summary">הפעל את המסך כשמתקבלות התראות</string>
+  <string name="always_enabled_title">אפשר תמיד</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">חיישן הטייה</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">חיישן קרבה</string>
+  <string name="hand_wave_gesture_title">הנפת יד</string>
+  <string name="hand_wave_gesture_summary">הדגש התראות בהנפת יד</string>
   <string name="pocket_gesture_title">כיס</string>
   <string name="pocket_gesture_summary">הצג התראות בהוצאה מהכיס</string>
   <!-- Help text -->
