@@ -51,12 +51,10 @@
          app, they can be remapped here. The format is
          "oldname:newname", one per entry. -->
     <string-array name="config_displayModeMappings" translatable="false">
-		<item>eye0:standard</item>
 		<item>srgb:photography</item>
-		<item>eye7:dynamic</item>
     </string-array>
 
     <!-- Should we filter any display modes which are unampped? -->
-    <bool name="config_filterDisplayModes">true</bool>
+    <bool name="config_filterDisplayModes">false</bool>
 
 </resources>

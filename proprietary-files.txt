@@ -26,13 +26,13 @@ lib/libopcamera.so
 lib/libopcamerahw_interface.so
 lib/libopcameralib.so
 lib/libqomx_core.so
-vendor/lib/libchromaflash.so
+vendor/lib/libchromaflash.so|8fe5d31f6d1e304b6b6ffe4ca2576abbcb2cc88d
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libllvd_smore.so
-vendor/lib/libmmcamera_chromaflash_lib.so
+vendor/lib/libmmcamera_chromaflash_lib.so|fe5ce108e3fe4081e3a2c544f27bc5d13019ba15
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_dummyalgo.so
 vendor/lib/libmmcamera_eebinparse.so
@@ -48,7 +48,7 @@ vendor/lib/libmmcamera_imglib.so
 vendor/lib/libmmcamera_imx179.so
 vendor/lib/libmmcamera_imx298.so
 vendor/lib/libmmcamera_llvd.so
-vendor/lib/libmmcamera_optizoom_lib.so
+vendor/lib/libmmcamera_optizoom_lib.so|17dfddb185f8c9a2bc075d656849024a9912dc88
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
@@ -81,7 +81,7 @@ vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
 vendor/lib/libois_rohm_bu63165gwl.so
-vendor/lib/liboptizoom.so
+vendor/lib/liboptizoom.so|5cd3d2b56986eebe4a0d4605d13be825886ae017
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
@@ -257,7 +257,7 @@ vendor/lib64/libqfp-service.so
 vendor/lib64/qfp.wakeup.so
 
 # LiveDisplay
-vendor/lib64/libjni_livedisplay.so
+vendor/lib64/libjni_livedisplay.so|773a202a10f60245dfdf3617f484e01a03782cfb
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
