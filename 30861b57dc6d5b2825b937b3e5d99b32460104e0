@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_129e5207",
+        "filename": "proprietary-files-qc.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-08-15T07:47:26Z",
+      "side": 1,
+      "message": "Steve, is there any special reason to pin these blobs?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 63
+      },
+      "revId": "30861b57dc6d5b2825b937b3e5d99b32460104e0",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
