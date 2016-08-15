@@ -158,11 +158,10 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtinyxml
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/FOSSConfig.xml:system/etc/FOSSConfig.xml
-
 # Display calibration
 PRODUCT_PACKAGES += \
+    FOSSConfig.xml \
+    qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml \
     libjni_livedisplay
 
 # Doze mode
