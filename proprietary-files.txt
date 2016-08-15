@@ -389,10 +389,6 @@ vendor/lib/libmmcamera_isp_sub_module.so
 # DASH
 -sbin/dashd:rootfs
 
-# Display calibration
--etc/qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml
--etc/qdcm_calib_data_samsung_s6e3fa3_1080p_video_mode_dsi_panel.xml
-
 # Fingerprint sensor
 bin/qfp-daemon
 lib64/hw/fingerprint.msm8996.so
