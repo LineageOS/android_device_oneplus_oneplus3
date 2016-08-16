@@ -33,6 +33,10 @@ qcom.bluetooth.soc=rome
 persist.camera.imglib.fddsp=1
 persist.camera.llc=1
 persist.camera.llnoise=1
+camera.hal1.packagelist=com.skype.raider,com.google.android.talk,com.whatsapp,
+    com.instagram.android,com.snapchat.android,org.codeaurora.snapcam,
+    com.google.android.GoogleCamera,com.facebook.orca,com.facebook.katana,
+    com.flavionet.android.camera.lite,com.nianticlabs.pokemongo
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
