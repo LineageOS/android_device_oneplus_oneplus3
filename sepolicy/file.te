@@ -3,3 +3,4 @@ type fpc_images_file, file_type;
 type sysfs_fpc_irq, sysfs_type, fs_type;
 type proc_touchpanel, fs_type;
 type nv_data_file, file_type;
+type alipay_app_data_file, file_type, data_file_type;

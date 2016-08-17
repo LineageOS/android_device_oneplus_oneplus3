@@ -1,0 +1,4 @@
+type alipay_app, domain;
+app_domain(alipay_app)
+
+#allow alipay_app tee_device:chr_file { rw_file_perms ioctl };
