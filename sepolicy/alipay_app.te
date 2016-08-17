@@ -1,0 +1,29 @@
+# Generally based on untrusted_app.te
+
+type alipay_app, domain;
+app_domain(alipay_app)
+net_domain(alipay_app)
+bluetooth_domain(alipay_app)
+
+# Some apps ship with shared libraries and binaries that they write out
+# to their sandbox directory and then execute.
+allow alipay_app app_data_file:file { rx_file_perms execmod };
+
+allow alipay_app tun_device:chr_file rw_file_perms;
+
+# Read and write system app data files passed over Binder.
+# Motivating case was /data/data/com.android.settings/cache/*.jpg for
+# cropping or taking user photos.
+allow alipay_app system_app_data_file:file { read write getattr };
+
+# Access to /data/media.
+allow alipay_app media_rw_data_file:dir create_dir_perms;
+allow alipay_app media_rw_data_file:file create_file_perms;
+
+# Write to /cache.
+allow alipay_app cache_file:dir create_dir_perms;
+allow alipay_app cache_file:file create_file_perms;
+
+# Programs routinely attempt to scan through /system, looking
+# for files. Suppress the denials when they occur.
+dontaudit alipay_app exec_type:file getattr;
