@@ -1,0 +1,26 @@
+type ifaadaemon, domain;
+type ifaadaemon_exec, exec_type, file_type;
+
+#Allow for transition from init domain to ifaadaemon
+init_daemon_domain(ifaadaemon)
+
+#Allow ifaadaemon to use Binder IPC
+binder_use(ifaadaemon)
+
+#Allow servicemanager to interact with ifaadaemon
+binder_call(ifaadaemon, servicemanager)
+
+#Allow alipay_app to interact with ifaadaemon
+binder_call(ifaadaemon, alipay_app)
+
+#Mark ifaadaemon as a Binder service domain
+binder_service(ifaadaemon)
+
+#Allow ifaadaemon to be registered with service manager
+allow ifaadaemon ifaadaemon_service:service_manager add;
+
+#Allow access to tee device
+allow ifaadaemon tee_device:chr_file rw_file_perms;
+
+#Allow access to firmware
+r_dir_file(ifaadaemon, firmware_file)
