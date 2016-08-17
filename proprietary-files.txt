@@ -1,3 +1,16 @@
+# Alipay
+bin/ifaadaemon
+etc/firmware/alipay.b00
+etc/firmware/alipay.b01
+etc/firmware/alipay.b02
+etc/firmware/alipay.b03
+etc/firmware/alipay.b04
+etc/firmware/alipay.b05
+etc/firmware/alipay.b06
+etc/firmware/alipay.mdt
+lib/libteeclientjni.so
+lib64/libteeclientjni.so
+
 # Audio
 etc/firmware/tfa98xx.cnt
 

@@ -1302,6 +1302,11 @@ service iprenew_eth0 /system/bin/dhcpcd -n
     disabled
     oneshot
 
+service ifaadaemon /system/bin/ifaadaemon
+    class late_start
+    user system
+    group system
+
 # such color
 on property:sys.rainbow.recovery=1
     write /sys/class/leds/red/brightness 255
