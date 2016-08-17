@@ -206,7 +206,7 @@ vendor/lib/libmmQSM.so|d22c0c15742bc174a4b098c8b447e27d810a5e30
 vendor/lib/librs_adreno.so|afe142fb2397cdd257958e7c3815a57688c71693
 vendor/lib/librs_adreno_sha1.so|723b5e627e997bdd361ed4f894e3733c83ffbd26
 vendor/lib/libsd_sdk_display.so|77339f0b41eaa4e8b8ff8c2312636ba3aadd878b
-vendor/lib/libsdm-disp-apis.so|6dfee0a5ddfd3f6e8decbc9aaaebef4c7b764118
+-vendor/lib/libsdm-disp-apis.so|6dfee0a5ddfd3f6e8decbc9aaaebef4c7b764118
 vendor/lib64/egl/eglSubDriverAndroid.so|57d1f8ace6a3fb8b9e79c44b06c3240b6c7e1bb6
 vendor/lib64/egl/libEGL_adreno.so|19e83189b14db7995c87086829aa033d4584fa42
 vendor/lib64/egl/libGLESv1_CM_adreno.so|1d8d95e79fa110b5948f98bea792f156abd9594d
