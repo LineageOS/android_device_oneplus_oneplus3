@@ -1,3 +1,15 @@
+# Alipay
+etc/firmware/alipay.b00
+etc/firmware/alipay.b01
+etc/firmware/alipay.b02
+etc/firmware/alipay.b03
+etc/firmware/alipay.b04
+etc/firmware/alipay.b05
+etc/firmware/alipay.b06
+etc/firmware/alipay.mdt
+lib/libteeclientjni.so|17fededb131959b538178c983773377840b495b4
+lib64/libteeclientjni.so|5095d0ffbfb2b03b5c1c4f46c0c3f3e6a6318942
+
 # Audio
 etc/firmware/tfa98xx.cnt
 
