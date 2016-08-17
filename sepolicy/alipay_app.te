@@ -1,0 +1,2 @@
+type alipay_app, domain;
+app_domain(alipay_app)
