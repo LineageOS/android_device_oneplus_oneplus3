@@ -96,6 +96,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
+# Alipay
+PRODUCT_PACKAGES += \
+    org.ifaa.android.manager
+
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
