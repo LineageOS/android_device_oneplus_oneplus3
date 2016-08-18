@@ -1,5 +1,5 @@
 allow system_server persist_file:dir { read write };
 allow system_server proc_touchpanel:dir search;
-allow system_server proc_touchpanel:file { write open getattr read };
-allow system_server sensors_persist_file:file { read getattr open };
+allow system_server proc_touchpanel:file rw_file_perms;
+allow system_server sensors_persist_file:file r_file_perms;
 allow system_server sensors_persist_file:dir search;

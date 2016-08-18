@@ -1,7 +1,4 @@
 allow qti_init_shell kmsg_device:chr_file { write open };
-allow qti_init_shell bluetooth_loader_exec:file r_file_perms;
 allow qti_init_shell diag_prop:property_service set;
-allow qti_init_shell qmuxd:unix_stream_socket connectto;
-allow qti_init_shell qmuxd_socket:dir { write add_name search remove_name };
-allow qti_init_shell qmuxd_socket:sock_file { write create unlink };
-allow qti_init_shell self:socket { write getopt create read ioctl };
+allow qti_init_shell self:socket create_socket_perms;
+qmux_socket(qti_init_shell)
