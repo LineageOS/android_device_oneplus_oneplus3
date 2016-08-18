@@ -99,6 +99,7 @@ persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
+ro.telephony.ril_class=OP3RIL
 persist.radio.multisim.config=dsds
 persist.volte_enalbed_by_hw=1
 persist.radio.data_ltd_sys_ind=1

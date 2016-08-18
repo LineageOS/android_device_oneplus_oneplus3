@@ -181,6 +181,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 
 # RIL
 TARGET_RIL_VARIANT := caf
+BOARD_RIL_CLASS := ../../../$(PLATFORM_PATH)/ril
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
