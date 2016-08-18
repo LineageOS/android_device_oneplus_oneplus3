@@ -1,3 +1,1 @@
-allow qmuxd diag_prop:property_service set;
-allow qmuxd init:unix_stream_socket connectto;
-allow qmuxd property_socket:sock_file write;
+set_prop(qmuxd, diag_prop)

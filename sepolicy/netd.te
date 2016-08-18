@@ -1,3 +1,2 @@
-allow netd firmware_file:file { read open };
-allow netd firmware_file:dir search;
-allow netd vfat:file { read open };
+r_dir_file(netd, firmware_file)
+allow netd vfat:file r_file_perms;
