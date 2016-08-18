@@ -5,8 +5,6 @@
 # FRP partition
 /dev/block/bootdevice/by-name/config                            u:object_r:frp_block_device:s0
 
-/system/etc/init\.qcom\.bt\.sh                                  u:object_r:bluetooth_loader_exec:s0
-
 /persist/sensors/gyro_sensitity_cal                             u:object_r:sensors_persist_file:s0
 
 /data/oemnvitems(/.*)?                                          u:object_r:nv_data_file:s0
