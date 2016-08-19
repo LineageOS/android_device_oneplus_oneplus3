@@ -32,6 +32,10 @@ extern "C" {
 #endif
 
 
+#ifndef RIL_QCOM_VERSION
+#define RIL_QCOM_VERSION 3
+#endif
+
 #if defined(ANDROID_SIM_COUNT_2)
 #define SIM_COUNT 2
 #elif defined(ANDROID_SIM_COUNT_3)
@@ -46,7 +50,11 @@ extern "C" {
 #define SIM_COUNT 1
 #endif
 
+#ifdef USE_RIL_VERSION_10
+#define RIL_VERSION 10
+#else
 #define RIL_VERSION 11     /* Current version */
+#endif
 #define RIL_VERSION_MIN 6 /* Minimum RIL_VERSION supported */
 
 #define CDMA_ALPHA_INFO_BUFFER_LENGTH 64
@@ -395,6 +403,7 @@ typedef struct {
                                  via PCO(Protocol Configuration Option) for IMS client. */
 } RIL_Data_Call_Response_v9;
 
+#if (RIL_VERSION == 11)
 typedef struct {
     int             status;     /* A RIL_DataCallFailCause, 0 which is PDP_FAIL_NONE if no error */
     int             suggestedRetryTime; /* If status != 0, this fields indicates the suggested retry
@@ -430,6 +439,7 @@ typedef struct {
                                    Value <= 0 means network has either not sent a value or
                                    sent an invalid value */
 } RIL_Data_Call_Response_v11;
+#endif
 
 typedef enum {
     RADIO_TECH_3GPP = 1, /* 3GPP Technologies - GSM, WCDMA */
