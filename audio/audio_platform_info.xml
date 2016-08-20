@@ -54,8 +54,8 @@
         <device name="SND_DEVICE_OUT_VOICE_TTY_FULL_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_VCO_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
 
-        <device name="SND_DEVICE_OUT_SPEAKER" backend="quat_i2s" interface="QUAT_MI2S_RX"/>
-        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="quat_i2s" interface="QUAT_MI2S_RX"/>
+        <device name="SND_DEVICE_OUT_SPEAKER" backend="quat_i2s"/>
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="quat_i2s"/>
     </backend_names>
 
     <config_params>
