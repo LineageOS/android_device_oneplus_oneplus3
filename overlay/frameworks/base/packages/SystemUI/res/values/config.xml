@@ -30,9 +30,6 @@
     <!-- Doze: check proximity sensor before pulsing from intent? -->
     <bool name="doze_proximity_check_before_pulse_intent">true</bool>
 
-    <!-- Doze: pulse parameter - how long does it take to fade in after an intent? -->
-    <integer name="doze_pulse_duration_in_intent">0</integer>
-
     <!-- Doze: pulse parameter - delay to wait for the screen to wake up after an intent -->
     <integer name="doze_pulse_delay_in_intent">0</integer>
 
