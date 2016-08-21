@@ -16,9 +16,6 @@
     <string name="ambient_display_title">Ambient display</string>
     <string name="ambient_display_summary">Wake screen when you receive notifications</string>
 
-    <string name="always_enabled_title">Always enable</string>
-    <string name="always_enabled_summary">Listen for sensor events as soon as the screen turns off</string>
-
     <!-- Tilt sensor -->
     <string name="tilt_sensor_title">Tilt sensor</string>
     <string name="pick_up_title">Pick up</string>

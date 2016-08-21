@@ -33,13 +33,6 @@
             android:summary="@string/pick_up_summary"
             android:dependency="ambient_display" />
 
-        <SwitchPreference
-            android:key="tilt_always"
-            android:defaultValue="false"
-            android:title="@string/always_enabled_title"
-            android:summary="@string/always_enabled_summary"
-            android:dependency="ambient_display" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -58,13 +51,6 @@
             android:defaultValue="false"
             android:title="@string/pocket_gesture_title"
             android:summary="@string/pocket_gesture_summary"
-            android:dependency="ambient_display" />
-
-        <SwitchPreference
-            android:key="proximity_always"
-            android:defaultValue="false"
-            android:title="@string/always_enabled_title"
-            android:summary="@string/always_enabled_summary"
             android:dependency="ambient_display" />
 
     </PreferenceCategory>
