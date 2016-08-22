@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_2f919753",
+        "filename": "system.prop",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2016-08-22T00:57:28Z",
+      "side": 1,
+      "message": "I think even the CAF SnapdragonCamera supports HAL3",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 69
+      },
+      "revId": "cac2d6bb7beed2c9b6bfcf15ab3fe41295a83795",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
