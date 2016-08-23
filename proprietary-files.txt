@@ -269,9 +269,6 @@ lib64/lib_fpc_tac_shared.so
 vendor/lib64/libqfp-service.so
 vendor/lib64/qfp.wakeup.so
 
-# LiveDisplay
-vendor/lib64/libjni_livedisplay.so|773a202a10f60245dfdf3617f484e01a03782cfb
-
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
 
