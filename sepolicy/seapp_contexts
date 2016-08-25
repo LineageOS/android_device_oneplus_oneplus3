@@ -1,1 +1,2 @@
 user=_app seinfo=alipay name=com.eg.android.AlipayGphone* domain=alipay_app type=app_data_file
+user=_app seinfo=taobao name=com.taobao.taobao* domain=alipay_app type=app_data_file
