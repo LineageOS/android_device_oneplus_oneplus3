@@ -9,27 +9,12 @@ bluetooth_domain(alipay_app)
 # to their sandbox directory and then execute.
 allow alipay_app app_data_file:file { rx_file_perms execmod };
 
-allow alipay_app tun_device:chr_file rw_file_perms;
-
-# ASEC
-allow alipay_app asec_apk_file:file r_file_perms;
-# Execute libs in asec containers.
-allow alipay_app asec_public_file:file { execute execmod };
-
 # Used by Finsky / Android "Verify Apps" functionality when
 # running "adb install foo.apk".
 # TODO: Long term, we don't want apps probing into shell data files.
 # Figure out a way to remove these rules.
 allow alipay_app shell_data_file:file r_file_perms;
 allow alipay_app shell_data_file:dir r_dir_perms;
-
-# b/18504118: Allow reads from /data/anr/traces.txt
-# TODO: We shouldn't be allowing all alipay_apps to read
-# this file. This is only needed for the GMS feedback agent.
-# See also b/18340553. GMS runs as alipay_app, and
-# it's too late to change the domain it runs in.
-# This line needs to be deleted.
-allow alipay_app anr_data_file:file r_file_perms;
 
 # Read and write system app data files passed over Binder.
 # Motivating case was /data/data/com.android.settings/cache/*.jpg for
@@ -53,9 +38,7 @@ allow alipay_app mnt_media_rw_file:dir search;
 allow alipay_app cache_file:dir create_dir_perms;
 allow alipay_app cache_file:file create_file_perms;
 
-# allow cts to query all services
-allow alipay_app servicemanager:service_manager list;
-
+allow alipay_app battery_service:service_manager find;
 allow alipay_app drmserver_service:service_manager find;
 allow alipay_app healthd_service:service_manager find;
 allow alipay_app mediaserver_service:service_manager find;
@@ -68,59 +51,6 @@ allow alipay_app ifaadaemon_service:service_manager find;
 # TODO: remove this once priv-apps are no longer running in alipay_app
 allow alipay_app system_api_service:service_manager find;
 
-# TODO: remove and replace with specific package that accesses this
-allow alipay_app persistent_data_block_service:service_manager find;
-
-# Allow verifier to access staged apks.
-allow alipay_app { apk_tmp_file apk_private_tmp_file }:dir r_dir_perms;
-allow alipay_app { apk_tmp_file apk_private_tmp_file }:file r_file_perms;
-
-# only allow unprivileged socket ioctl commands
-allow alipay_app domain:{ rawip_socket tcp_socket udp_socket } unpriv_sock_ioctls;
-
 # Programs routinely attempt to scan through /system, looking
 # for files. Suppress the denials when they occur.
 dontaudit alipay_app exec_type:file getattr;
-
-###
-### neverallow rules
-###
-
-# Receive or send uevent messages.
-neverallow alipay_app domain:netlink_kobject_uevent_socket *;
-
-# Receive or send generic netlink messages
-neverallow alipay_app domain:netlink_socket *;
-
-# Too much leaky information in debugfs. It's a security
-# best practice to ensure these files aren't readable.
-neverallow alipay_app debugfs:file read;
-
-# Do not allow untrusted apps to register services.
-# Only trusted components of Android should be registering
-# services.
-neverallow alipay_app service_manager_type:service_manager add;
-
-# Do not allow alipay_apps to connect to the property service
-# or set properties. b/10243159
-neverallow alipay_app property_socket:sock_file write;
-neverallow alipay_app init:unix_stream_socket connectto;
-neverallow alipay_app property_type:property_service set;
-
-# Do not allow alipay_app to be assigned mlstrustedsubject.
-# This would undermine the per-user isolation model being
-# enforced via levelFrom=user in seapp_contexts and the mls
-# constraints.  As there is no direct way to specify a neverallow
-# on attribute assignment, this relies on the fact that fork
-# permission only makes sense within a domain (hence should
-# never be granted to any other domain within mlstrustedsubject)
-# and alipay_app is allowed fork permission to itself.
-neverallow alipay_app mlstrustedsubject:process fork;
-
-# Do not allow alipay_app to hard link to any files.
-# In particular, if alipay_app links to other app data
-# files, installd will not be able to guarantee the deletion
-# of the linked to file. Hard links also contribute to security
-# bugs, so we want to ensure alipay_app never has this
-# capability.
-neverallow alipay_app file_type:file link;
