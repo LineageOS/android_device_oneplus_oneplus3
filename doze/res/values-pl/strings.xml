@@ -13,6 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Aktywny wyświetlacz</string>
   <string name="ambient_display_summary">Wybudź ekran po odebraniu powiadomienia</string>
   <string name="always_enabled_summary">Nasłuchiwanie zdarzeń z czujników zaraz po wyłączeniu ekranu</string>
   <!-- Tilt sensor -->

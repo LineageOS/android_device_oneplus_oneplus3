@@ -13,7 +13,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Affichage ambiant</string>
+  <string name="always_enabled_title">Toujours activer</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Capteur d’inclinaison</string>
+  <string name="pick_up_title">Prise en main</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Capteur de proximité</string>
+  <string name="hand_wave_gesture_title">Passage de la main</string>
+  <string name="pocket_gesture_title">Poche</string>
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
 </resources>
