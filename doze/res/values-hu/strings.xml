@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Környezeti kijelző</string>
+  <string name="ambient_display_summary">Képernyő felébresztése értesítések fogadásakor</string>
+  <string name="always_enabled_title">Mindig engedélyezze</string>
+  <string name="always_enabled_summary">Figyelje az érzékelő eseményeket, amint a képernyő kikapcsol</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Dőlés érzékelő</string>
+  <string name="pick_up_title">Kézbevétel</string>
+  <string name="pick_up_summary">Villantsa fel az értesítéseket kézbevételkor</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Közelség érzékelő</string>
+  <string name="hand_wave_gesture_title">Lebegő simítás</string>
+  <string name="hand_wave_gesture_summary">Értesítések felvillantása lebegő simításnál</string>
+  <string name="pocket_gesture_title">Zseb</string>
+  <string name="pocket_gesture_summary">Értesítések felvillantása zsebből való kivételkor</string>
   <!-- Help text -->
+  <string name="dlg_ok">Rendben</string>
+  <string name="doze_settings_help_title">Súgó</string>
+  <string name="doze_settings_help_text">Ezen funkció az érzékelő eseményeket használja a környezeti kijelző értesítési impulzusaihoz. A választott érzékelő csak akkor engedélyezett, ha a készülék értesítést kap, ez segít csökkenteni az akkumulátor használatát. Lehetőség van a választott érzékelő engedélyezésére is, amint a képernyő kikapcsol, de ez nagyobb akkumulátor használatot jelent.</string>
 </resources>
