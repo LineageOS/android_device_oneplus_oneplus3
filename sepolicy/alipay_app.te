@@ -38,19 +38,28 @@ allow alipay_app mnt_media_rw_file:dir search;
 allow alipay_app cache_file:dir create_dir_perms;
 allow alipay_app cache_file:file create_file_perms;
 
+allow alipay_app audioserver_service:service_manager find;
 allow alipay_app battery_service:service_manager find;
+allow alipay_app cameraserver_service:service_manager find;
 allow alipay_app drmserver_service:service_manager find;
-allow alipay_app healthd_service:service_manager find;
+allow alipay_app ifaadaemon_service:service_manager find;
 allow alipay_app mediaserver_service:service_manager find;
+allow alipay_app mediaextractor_service:service_manager find;
+allow alipay_app mediacodec_service:service_manager find;
+allow alipay_app mediadrmserver_service:service_manager find;
 allow alipay_app nfc_service:service_manager find;
 allow alipay_app radio_service:service_manager find;
 allow alipay_app surfaceflinger_service:service_manager find;
 allow alipay_app app_api_service:service_manager find;
-allow alipay_app ifaadaemon_service:service_manager find;
-
-# TODO: remove this once priv-apps are no longer running in alipay_app
-allow alipay_app system_api_service:service_manager find;
 
 # Programs routinely attempt to scan through /system, looking
 # for files. Suppress the denials when they occur.
 dontaudit alipay_app exec_type:file getattr;
+
+# TODO: switch to meminfo service
+allow alipay_app proc_meminfo:file r_file_perms;
+
+# https://code.google.com/p/chromium/issues/detail?id=586021
+allow alipay_app proc:file r_file_perms;
+# access /proc/net/xt_qtguid/stats
+r_dir_file(alipay_app, proc_net)
