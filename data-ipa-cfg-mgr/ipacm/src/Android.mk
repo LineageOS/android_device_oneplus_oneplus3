@@ -16,7 +16,6 @@ LOCAL_C_INCLUDES += external/icu/icu4c/source/common
 else
 LOCAL_C_INCLUDES += external/icu4c/common
 endif
-LOCAL_C_INCLUDES += external/dhcpcd
 LOCAL_C_INCLUDES += external/libxml2/include
 LOCAL_C_INCLUDES += external/libnetfilter_conntrack/include
 LOCAL_C_INCLUDES += external/libnfnetlink/include
@@ -68,7 +67,6 @@ LOCAL_SHARED_LIBRARIES := libipanat
 LOCAL_SHARED_LIBRARIES += libxml2
 LOCAL_SHARED_LIBRARIES += libnfnetlink
 LOCAL_SHARED_LIBRARIES += libnetfilter_conntrack
-LOCAL_SHARED_LIBRARIES += libdhcpcd
 LOCAL_CLANG := true
 include $(BUILD_EXECUTABLE)
 
