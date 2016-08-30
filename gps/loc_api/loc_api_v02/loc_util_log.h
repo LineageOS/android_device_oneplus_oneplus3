@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2012, 2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -28,9 +28,10 @@
 #ifndef LOC_UTIL_LOG_H
 #define LOC_UTIL_LOG_H
 
+#include <platform_lib_log_util.h>
+
 #if defined(_ANDROID_)
 #include "loc_api_v02_log.h"
-#include <log_util.h>
 
 #else // no _ANDROID_
 
@@ -41,7 +42,7 @@
 #define LOC_LOGD(...) MSG_LOG(__VA_ARGS__);
 #define LOC_LOGI(...) MSG_LOG(__VA_ARGS__);
 #define LOC_LOGV(...) MSG_LOG(__VA_ARGS__);
-#else
+#elif !defined(USE_GLIB)
 
 // common for QNX and Griffon
 
@@ -68,7 +69,7 @@
 //specific to OFF TARGET
 #ifdef LOC_UTIL_TARGET_OFF_TARGET
 
-#include <stdio.h>
+# include <stdio.h>
 # include <asm/errno.h>
 # include <sys/time.h>
 

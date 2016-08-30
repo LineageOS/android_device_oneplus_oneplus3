@@ -43,8 +43,7 @@
 
 #include <loc_eng.h>
 
-#include "log_util.h"
-#include "platform_lib_includes.h"
+#include <platform_lib_includes.h>
 
 using namespace loc_core;
 
@@ -189,7 +188,7 @@ void loc_eng_ni_request_handler(loc_eng_data_s_type &loc_eng_data,
         }
 
         CALLBACK_LOG_CALLFLOW("ni_notify_cb - id", %d, notif->notification_id);
-        loc_eng_data.ni_notify_cb((GpsNiNotification*)notif);
+        loc_eng_data.ni_notify_cb((GpsNiNotification*)notif, gps_conf.SUPL_ES != 0);
     }
     EXIT_LOG(%s, VOID_RET);
 }

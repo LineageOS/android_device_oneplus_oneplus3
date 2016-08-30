@@ -34,11 +34,7 @@
 #include <sys/time.h>
 #include "loc_log.h"
 #include "msg_q.h"
-#ifdef USE_GLIB
-#include <time.h>
-#endif /* USE_GLIB  */
-#include "log_util.h"
-#include "platform_lib_includes.h"
+#include <platform_lib_includes.h>
 
 #define  BUFFER_SIZE  120
 

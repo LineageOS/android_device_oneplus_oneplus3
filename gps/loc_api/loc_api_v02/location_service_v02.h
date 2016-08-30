@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2016, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -63,7 +63,7 @@
  *====*====*====*====*====*====*====*====*====*====*====*====*====*====*====*/
 
 /* This file was generated with Tool version 6.14.7
-   It was generated on: Tue Dec  1 2015 (Spin 0)
+   It was generated on: Tue Jun 28 2016 (Spin 0)
    From IDL File: location_service_v02.idl */
 
 /** @defgroup loc_qmi_consts Constant values defined in the IDL */
@@ -89,11 +89,11 @@ extern "C" {
 /** Major Version Number of the IDL used to generate this file */
 #define LOC_V02_IDL_MAJOR_VERS 0x02
 /** Revision Number of the IDL used to generate this file */
-#define LOC_V02_IDL_MINOR_VERS 0x31
+#define LOC_V02_IDL_MINOR_VERS 0x39
 /** Major Version Number of the qmi_idl_compiler used to generate this file */
 #define LOC_V02_IDL_TOOL_VERS 0x06
 /** Maximum Defined Message ID */
-#define LOC_V02_MAX_MESSAGE_ID 0x00A6
+#define LOC_V02_MAX_MESSAGE_ID 0x00A9
 /**
     @}
   */
@@ -115,6 +115,9 @@ extern "C" {
 /**  Maximum length of the list containing the SVs that were used to generate
      a position report.  */
 #define QMI_LOC_MAX_SV_USED_LIST_LENGTH_V02 80
+
+/**  East, North, Up array length  */
+#define QMI_LOC_ENU_ARRAY_LENGTH_V02 3
 
 /**  Maximum number of satellites in the satellite report.  */
 #define QMI_LOC_SV_INFO_LIST_MAX_SIZE_V02 80
@@ -164,7 +167,7 @@ extern "C" {
 /**  Maximum length that can be injected.   */
 #define QMI_LOC_MAX_GDT_PATH_LEN_V02 255
 
-/**  Maximum client info size in bytes.   */
+/**  Maximum client information size in bytes.   */
 #define QMI_LOC_MAX_GTP_CL_INFO_LEN_V02 1500
 
 /**  Maximum mobile status data size in bytes.   */
@@ -315,6 +318,12 @@ extern "C" {
 
 /**  Maximum number of APs that can be injected in a TLV.  */
 #define QMI_LOC_APCACHE_DATA_MAX_SAMPLES_V02 80
+
+/**  Maximum part length that can be injected. The client should
+     also look at the maxPartSize field in the predicted orbits injection
+     request indication and pick the minimum of the two.  */
+#define QMI_LOC_MAX_XTRA_PART_LEN_V02 1024
+#define QMI_LOC_SUPPORTED_FEATURE_LENGTH_V02 100
 /**
     @}
   */
@@ -429,9 +438,9 @@ typedef uint64_t qmiLocEventRegMaskT_v02;
   using the context ID in this indication. The context of a Geofence may contain Wi-Fi area ID lists, IBeacon lists,
   Cell-ID list, and so forth.    */
 #define QMI_LOC_EVENT_MASK_GDT_UPLOAD_BEGIN_REQ_V02 ((qmiLocEventRegMaskT_v02)0x08000000ull) /**<  The control point must enable this mask to receive Generic Data Transport (GDT)
-        session begin request event indications.  */
+        upload session begin request event indications.  */
 #define QMI_LOC_EVENT_MASK_GDT_UPLOAD_END_REQ_V02 ((qmiLocEventRegMaskT_v02)0x10000000ull) /**<  The control point must enable this mask to receive GDT
-        session end request event indications.  */
+        upload session end request event indications.  */
 #define QMI_LOC_EVENT_MASK_GEOFENCE_BATCH_DWELL_NOTIFICATION_V02 ((qmiLocEventRegMaskT_v02)0x20000000ull) /**<  The control point must enable this mask to receive notifications when
        a Geofence is dwelled. These events are generated when a UE enters
        or leaves the perimeter of a Geofence and dwells inside or outside for a specified time.
@@ -531,9 +540,9 @@ typedef struct {
   using the context ID in this indication. The context of a Geofence may contain Wi-Fi area ID lists, IBeacon lists,
   Cell-ID list, and so forth.
       - QMI_LOC_EVENT_MASK_GDT_UPLOAD_BEGIN_REQ (0x08000000) --  The control point must enable this mask to receive Generic Data Transport (GDT)
-        session begin request event indications.
+        upload session begin request event indications.
       - QMI_LOC_EVENT_MASK_GDT_UPLOAD_END_REQ (0x10000000) --  The control point must enable this mask to receive GDT
-        session end request event indications.
+        upload session end request event indications.
       - QMI_LOC_EVENT_MASK_GEOFENCE_BATCH_DWELL_NOTIFICATION (0x20000000) --  The control point must enable this mask to receive notifications when
        a Geofence is dwelled. These events are generated when a UE enters
        or leaves the perimeter of a Geofence and dwells inside or outside for a specified time.
@@ -742,6 +751,17 @@ typedef struct {
        - Units: Milliseconds \n
        - Default: 255*1000 ms \n
        - Range: 1000 - 255*1000 ms
+  */
+
+  /* Optional */
+  /*  Share position report with other clients */
+  uint8_t sharePosition_valid;  /**< Must be set to true if sharePosition is being passed */
+  uint8_t sharePosition;
+  /**<   Allow to share the position report with the other QMI_LOC clients \n
+         \item    0x00(FALSE) Do not share the position report
+         \item    0x01(TRUE)  Share the position report
+    If this optional TLV is not set, the GPS engine allows the position sharing.
+        \vspace{-0.18in} \end{itemize1}
   */
 }qmiLocStartReqMsgT_v02;  /* Message */
 /**
@@ -1246,6 +1266,20 @@ typedef struct {
          \item    0x01 (TRUE) -- Altitude is assumed; there may not be enough
                                  satellites to determine the precise altitude
         \vspace{-0.18in} \end{itemize1}*/
+
+  /* Optional */
+  /*   Velocity ENU(East, North, Up) */
+  uint8_t velEnu_valid;  /**< Must be set to true if velEnu is being passed */
+  float velEnu[QMI_LOC_ENU_ARRAY_LENGTH_V02];
+  /**<   East, North, Up velocity.\n
+       - Units: Meters/second */
+
+  /* Optional */
+  /*   Velocity uncertainty ENU(East, North, Up) */
+  uint8_t velUncEnu_valid;  /**< Must be set to true if velUncEnu is being passed */
+  float velUncEnu[QMI_LOC_ENU_ARRAY_LENGTH_V02];
+  /**<   East, North, Up velocity uncertainty.\n
+       - Units: Meters/second */
 }qmiLocEventPositionReportIndMsgT_v02;  /* Message */
 /**
     @}
@@ -2543,6 +2577,19 @@ typedef struct {
   uint16_t tbfInMs;
   /**<   Time between fixes for a periodic request.\n
         - Units: Milliseconds */
+
+  /* Optional */
+  /*  E911 Mode */
+  uint8_t e911Mode_valid;  /**< Must be set to true if e911Mode is being passed */
+  uint8_t e911Mode;
+  /**<   Specifies whether GPS engine is in e911 mode when this
+       indication is sent to the client.
+
+       Valid values: \begin{itemize1}
+       \item    0x00 (FALSE) -- GPS engine is not in e911 mode
+       \item    0x01 (TRUE) -- GPS engine is in e911 mode
+       \end{itemize1}
+  */
 }qmiLocEventWifiReqIndMsgT_v02;  /* Message */
 /**
     @}
@@ -3453,7 +3500,7 @@ typedef struct {
 typedef enum {
   QMILOCGDTSERVICEIDENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
   eQMI_LOC_GDT_SERVICE_WWAN_V02 = 1, /**<  GDT service for WWAN UL  */
-  eQMI_LOC_GDT_SERVICE_WWAN_DL_V02 = 2, /**<  GDT Service for WWAN DL  */
+  eQMI_LOC_GDT_SERVICE_WWAN_DL_V02 = 2, /**<  GDT service for WWAN DL  */
   QMILOCGDTSERVICEIDENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
 }qmiLocGdtServiceIdEnumT_v02;
 /**
@@ -3481,12 +3528,12 @@ typedef enum {
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
@@ -3533,7 +3580,7 @@ typedef struct {
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
@@ -3552,6 +3599,8 @@ typedef struct {
     @}
   */
 
+typedef uint32_t qmiLocGdtDownloadReqMaskT_v02;
+#define QMI_LOC_GDT_DOWNLOAD_REQ_MASK_DBH_V02 ((qmiLocGdtDownloadReqMaskT_v02)0x00000001) /**<  Bitmask to specify whether DBH is on or off for the request   */
 /** @addtogroup loc_qmi_messages
     @{
   */
@@ -3564,7 +3613,7 @@ typedef struct {
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
@@ -3572,15 +3621,15 @@ typedef struct {
   /**<   Session ID. */
 
   /* Mandatory */
-  /*  Interval after which AP must respond MP in seconds */
+  /*  Interval After Which AP Must Respond to MP */
   uint32_t respTimeoutInterval;
-  /**<   Interval after which AP must respond MP in seconds */
+  /**<   Interval after which the AP must respond to the MP, in seconds. */
 
   /* Mandatory */
   /*  Encoded GTP Client Information */
   uint32_t clientInfo_len;  /**< Must be set to # of elements in clientInfo */
   uint8_t clientInfo[QMI_LOC_MAX_GTP_CL_INFO_LEN_V02];
-  /**<   Gtp client info encoded in asn.1 format. \n
+  /**<   GTP client information encoded in asn.1 format. \n
          - Type: Array of bytes \n
          - Maximum length of the array: 1500
     */
@@ -3589,16 +3638,16 @@ typedef struct {
   /*  Encoded Mobile Status Data */
   uint32_t mobileStatusData_len;  /**< Must be set to # of elements in mobileStatusData */
   uint8_t mobileStatusData[QMI_LOC_MAX_GTP_MSD_LEN_V02];
-  /**<   mobile status data encoded in asn.1 format. \n
+  /**<   Mobile status data encoded in asn.1 format. \n
          - Type: Array of bytes \n
          - Maximum length of the array: 4000
     */
 
   /* Mandatory */
-  /*  Data filepath */
+  /*  Data Filepath (Null terminated) */
   uint32_t filePath_len;  /**< Must be set to # of elements in filePath */
   char filePath[QMI_LOC_MAX_GDT_PATH_LEN_V02];
-  /**<   file path to the position data expected by MP. \n
+  /**<   File path to the GTP response data that is applicable to MP. \n
          - Type: Array of bytes \n
          - Maximum length of the array: 255
     */
@@ -3607,13 +3656,19 @@ typedef struct {
   /*  Power Budget Info */
   uint8_t powerBudgetInfo_valid;  /**< Must be set to true if powerBudgetInfo is being passed */
   uint32_t powerBudgetInfo;
-  /**<   Power budget info */
+  /**<   Power budget information. */
 
   /* Optional */
   /*  Power Budget Allowance */
   uint8_t powerBudgetAllowance_valid;  /**< Must be set to true if powerBudgetAllowance is being passed */
   uint32_t powerBudgetAllowance;
-  /**<   Power budget allowance */
+  /**<   Power budget allowance. */
+
+  /* Optional */
+  /*  Download Request Mask */
+  uint8_t downloadRequestMask_valid;  /**< Must be set to true if downloadRequestMask is being passed */
+  qmiLocGdtDownloadReqMaskT_v02 downloadRequestMask;
+  /**<   Download Request Mask */
 }qmiLocEventGdtDownloadBeginReqIndMsgT_v02;  /* Message */
 /**
     @}
@@ -3624,8 +3679,8 @@ typedef struct {
   */
 typedef enum {
   QMILOCGDTRECEIVESTATUSENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
-  eQMI_LOC_GTP_RCV_STATUS_CONTINUE_V02 = 1, /**<  Indicates AP shall continue sending more partitions to MP   */
-  eQMI_LOC_GTP_RCV_STATUS_DONE_V02 = 2, /**<  Indicates AP shall stop sending more partitions to MP  */
+  eQMI_LOC_GTP_RCV_STATUS_CONTINUE_V02 = 1, /**<  Indicates that the AP is to continue sending more partitions to the MP   */
+  eQMI_LOC_GTP_RCV_STATUS_DONE_V02 = 2, /**<  Indicates that the AP is to stop sending partitions to the MP  */
   QMILOCGDTRECEIVESTATUSENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
 }qmiLocGdtReceiveStatusEnumT_v02;
 /**
@@ -3635,29 +3690,29 @@ typedef enum {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Notifies the control point after consuming current data transfer. */
+/** Indication Message; Notifies the control point after consuming the current data transfer. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
   uint32_t sessionId;
-  /**<   Session ID */
+  /**<   Session ID. */
 
   /* Mandatory */
-  /*  GDT receive status */
+  /*  GDT Receive Status */
   qmiLocGdtReceiveStatusEnumT_v02 status;
-  /**<   Status indicating continuation or termination of AP sending.
+  /**<   Status indicating the continuation or termination of sending to the AP.
  Valid values: \n
-      - eQMI_LOC_GTP_RCV_STATUS_CONTINUE (1) --  Indicates AP shall continue sending more partitions to MP
-      - eQMI_LOC_GTP_RCV_STATUS_DONE (2) --  Indicates AP shall stop sending more partitions to MP
+      - eQMI_LOC_GTP_RCV_STATUS_CONTINUE (1) --  Indicates that the AP is to continue sending more partitions to the MP
+      - eQMI_LOC_GTP_RCV_STATUS_DONE (2) --  Indicates that the AP is to stop sending partitions to the MP
  */
 }qmiLocEventGdtReceiveDoneIndMsgT_v02;  /* Message */
 /**
@@ -3689,24 +3744,24 @@ typedef enum {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Notifies the control point of end of download session. */
+/** Indication Message; Notifies the control point of the end of a download session. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
   uint32_t sessionId;
-  /**<   Session ID */
+  /**<   Session ID. */
 
   /* Mandatory */
-  /*  GDT download end status */
+  /*  GDT Download End Status */
   qmiLocStatusEnumT_v02 status;
   /**<   Status of the download session.
  Valid values: \n
@@ -3898,6 +3953,53 @@ typedef struct {
   uint8_t applicationId_valid;  /**< Must be set to true if applicationId is being passed */
   qmiLocApplicationIdStructT_v02 applicationId;
   /**<   \vspace{0.06in} \n Application provider, name, and version.*/
+
+  /* Optional */
+  /*  Configuration for Altitude Assumed Info in GNSS SV Info Event */
+  uint8_t configAltitudeAssumed_valid;  /**< Must be set to true if configAltitudeAssumed is being passed */
+  qmiLocConfigIncludeAltitudeAssumedInGnssSvInfoEnumT_v02 configAltitudeAssumed;
+  /**<   Specifies the configuration to include Altitude Assumed information in the GNSS SV Info Event.
+ When enabled, an additional GNSS SV Info event indication is sent to the control
+ point that also includes the altitude assumed information.
+ If not specified, the configuration defaults to ENABLED.
+ Valid values: \n
+      - eQMI_LOC_ALTITUDE_ASSUMED_IN_GNSS_SV_INFO_ENABLED (1) --  Enable Altitude Assumed information in GNSS SV Info Event.
+      - eQMI_LOC_ALTITUDE_ASSUMED_IN_GNSS_SV_INFO_DISABLED (2) --  Disable Altitude Assumed information in GNSS SV Info Event.
+ */
+
+  /* Optional */
+  /*  Minimum Interval Between Intermediate Position Reports */
+  uint8_t minIntermediatePositionReportInterval_valid;  /**< Must be set to true if minIntermediatePositionReportInterval is being passed */
+  uint32_t minIntermediatePositionReportInterval;
+  /**<   Minimum time interval for intermediate position reports, specified by the control point,
+       that, between the position reports elapsed time, must be longer than the interval time.
+       If this optional value is not set or set to the default value (0), the intermediate position
+       will be reported when it is ready. \n
+       - Units: Milliseconds \n
+       - Default: 0 ms
+  */
+
+  /* Optional */
+  /*  Maximum Wait Time to Get a Position Report */
+  uint8_t positionReportTimeout_valid;  /**< Must be set to true if positionReportTimeout is being passed */
+  uint32_t positionReportTimeout;
+  /**<   Maximum time to work on each fix, specified by the control point.
+       The GPS engine returns QMI_ERR_INTERNAL if a position cannot be obtained
+       within the positionReportTimeout value. \n
+       - Units: Milliseconds \n
+       - Default: 255*1000 ms \n
+       - Range: 1000 - 255*1000 ms
+  */
+
+  /* Optional */
+  /*  Share position report with other clients */
+  uint8_t sharePosition_valid;  /**< Must be set to true if sharePosition is being passed */
+  uint8_t sharePosition;
+  /**<   Allow to share the position report with the other QMI_LOC clients \n
+         \item    0x00(FALSE) Do not share the position report
+         \item    0x01(TRUE)  Share the position report
+        \vspace{-0.18in} \end{itemize1}
+  */
 }qmiLocGetFixCriteriaIndMsgT_v02;  /* Message */
 /**
     @}
@@ -4591,6 +4693,17 @@ typedef struct {
         \end{itemize1}
         This field must be specified together with raw horizontal uncertainty.
         If not specified when rawHorUncCircular is set, the default value is 50. */
+
+  /* Optional */
+  /*  Free CPI or On-Demand CPI */
+  uint8_t onDemandCpi_valid;  /**< Must be set to true if onDemandCpi is being passed */
+  uint8_t onDemandCpi;
+  /**<   If this position injection is requested by the modem.
+        Type : boolean
+       Valid values: \begin{itemize1}
+       \item    0x00 (FALSE) -- The position injection was not requested by the modem(Free CPI).
+       \item    0x01 (TRUE) -- The position injection was requested by the modem(On-Demand CPI).
+       \end{itemize1} */
 }qmiLocInjectPositionReqMsgT_v02;  /* Message */
 /**
     @}
@@ -5450,7 +5563,7 @@ typedef struct {
     @{
   */
 /** Request Message; This command is used to delete the location engine
-                    assistance data */
+                    assistance data. */
 typedef struct {
 
   /* Mandatory */
@@ -5597,7 +5710,7 @@ typedef struct {
     @{
   */
 /** Indication Message; This command is used to delete the location engine
-                    assistance data */
+                    assistance data. */
 typedef struct {
 
   /* Mandatory */
@@ -6131,9 +6244,9 @@ typedef struct {
   using the context ID in this indication. The context of a Geofence may contain Wi-Fi area ID lists, IBeacon lists,
   Cell-ID list, and so forth.
       - QMI_LOC_EVENT_MASK_GDT_UPLOAD_BEGIN_REQ (0x08000000) --  The control point must enable this mask to receive Generic Data Transport (GDT)
-        session begin request event indications.
+        upload session begin request event indications.
       - QMI_LOC_EVENT_MASK_GDT_UPLOAD_END_REQ (0x10000000) --  The control point must enable this mask to receive GDT
-        session end request event indications.
+        upload session end request event indications.
       - QMI_LOC_EVENT_MASK_GEOFENCE_BATCH_DWELL_NOTIFICATION (0x20000000) --  The control point must enable this mask to receive notifications when
        a Geofence is dwelled. These events are generated when a UE enters
        or leaves the perimeter of a Geofence and dwells inside or outside for a specified time.
@@ -7139,6 +7252,7 @@ typedef enum {
   QMILOCSUPLVERSIONENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
   eQMI_LOC_SUPL_VERSION_1_0_V02 = 1, /**<  SUPL version 1.0  */
   eQMI_LOC_SUPL_VERSION_2_0_V02 = 2, /**<  SUPL version 2.0  */
+  eQMI_LOC_SUPL_VERSION_2_0_2_V02 = 3, /**<    SUPL version 2.0.2  */
   QMILOCSUPLVERSIONENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
 }qmiLocSuplVersionEnumT_v02;
 /**
@@ -7196,6 +7310,12 @@ typedef enum {
     @}
   */
 
+typedef uint64_t qmiLocLppeUpAuxTechMaskT_v02;
+#define QMI_LOC_LPPE_MASK_UP_DBH_V02 ((qmiLocLppeUpAuxTechMaskT_v02)0x00000001ull) /**<  Enable Device Based Hybrid (3D High Accuracy Position) mode on LPPe User Plane  */
+#define QMI_LOC_LPPE_MASK_UP_AP_WIFI_MEASUREMENT_V02 ((qmiLocLppeUpAuxTechMaskT_v02)0x00000002ull) /**<  Enable WLAN AP Measurements mode on LPPe User Plane */
+typedef uint64_t qmiLocLppeCpAuxTechMaskT_v02;
+#define QMI_LOC_LPPE_MASK_CP_DBH_V02 ((qmiLocLppeCpAuxTechMaskT_v02)0x00000001ull) /**<  Enable Device Based Hybrid (3D High Accuracy Position) mode on LPPe Control Plane  */
+#define QMI_LOC_LPPE_MASK_CP_AP_WIFI_MEASUREMENT_V02 ((qmiLocLppeCpAuxTechMaskT_v02)0x00000002ull) /**<  Enable WLAN AP Measurements mode on LPPe Control Plane */
 /** @addtogroup loc_qmi_messages
     @{
   */
@@ -7233,6 +7353,7 @@ typedef struct {
  Valid values: \n
       - eQMI_LOC_SUPL_VERSION_1_0 (1) --  SUPL version 1.0
       - eQMI_LOC_SUPL_VERSION_2_0 (2) --  SUPL version 2.0
+      - eQMI_LOC_SUPL_VERSION_2_0_2 (3) --    SUPL version 2.0.2
  */
 
   /* Optional */
@@ -7315,6 +7436,28 @@ typedef struct {
        disables sending the Wi-Fi scan injection notification and ignores any
        scan results injection request.
   */
+
+  /* Optional */
+  /*  LPPe User Plane Configure */
+  uint8_t lppeUpConfig_valid;  /**< Must be set to true if lppeUpConfig is being passed */
+  qmiLocLppeUpAuxTechMaskT_v02 lppeUpConfig;
+  /**<   LPPe User Plane Auxiliary Technology Mask.
+
+ Valid bitmasks: \n
+      - QMI_LOC_LPPE_MASK_UP_DBH (0x00000001) --  Enable Device Based Hybrid (3D High Accuracy Position) mode on LPPe User Plane
+      - QMI_LOC_LPPE_MASK_UP_AP_WIFI_MEASUREMENT (0x00000002) --  Enable WLAN AP Measurements mode on LPPe User Plane
+ */
+
+  /* Optional */
+  /*  LPPe Control Plane Configure */
+  uint8_t lppeCpConfig_valid;  /**< Must be set to true if lppeCpConfig is being passed */
+  qmiLocLppeCpAuxTechMaskT_v02 lppeCpConfig;
+  /**<   LPPe Control Plane Auxiliary Technology Mask.
+
+ Valid bitmasks: \n
+      - QMI_LOC_LPPE_MASK_CP_DBH (0x00000001) --  Enable Device Based Hybrid (3D High Accuracy Position) mode on LPPe Control Plane
+      - QMI_LOC_LPPE_MASK_CP_AP_WIFI_MEASUREMENT (0x00000002) --  Enable WLAN AP Measurements mode on LPPe Control Plane
+ */
 }qmiLocSetProtocolConfigParametersReqMsgT_v02;  /* Message */
 /**
     @}
@@ -7330,6 +7473,8 @@ typedef uint64_t qmiLocProtocolConfigParamMaskT_v02;
 #define QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_SUPL_TLS_VERSION_V02 ((qmiLocProtocolConfigParamMaskT_v02)0x0000000000000040ull) /**<  Mask for the SUPL TLS version configuration parameter  */
 #define QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_EMERGENCY_PROTOCOL_V02 ((qmiLocProtocolConfigParamMaskT_v02)0x0000000000000080ull) /**<  Mask for the emergency protocol configuration parameter  */
 #define QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_WIFI_SCAN_INJECT_TIMEOUT_V02 ((qmiLocProtocolConfigParamMaskT_v02)0x0000000000000100ull) /**<  Mask for the Wi-Fi scan injection timeout configuration parameter  */
+#define QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_LPPE_UP_V02 ((qmiLocProtocolConfigParamMaskT_v02)0x0000000000000200ull) /**<  Mask for the LPPe user plane configuration parameter  */
+#define QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_LPPE_CP_V02 ((qmiLocProtocolConfigParamMaskT_v02)0x0000000000000400ull) /**<  Mask for the LPPe control plane configuration parameter  */
 /** @addtogroup loc_qmi_messages
     @{
   */
@@ -7373,6 +7518,8 @@ typedef struct {
       - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_SUPL_TLS_VERSION (0x0000000000000040) --  Mask for the SUPL TLS version configuration parameter
       - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_EMERGENCY_PROTOCOL (0x0000000000000080) --  Mask for the emergency protocol configuration parameter
       - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_WIFI_SCAN_INJECT_TIMEOUT (0x0000000000000100) --  Mask for the Wi-Fi scan injection timeout configuration parameter
+      - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_LPPE_UP (0x0000000000000200) --  Mask for the LPPe user plane configuration parameter
+      - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_LPPE_CP (0x0000000000000400) --  Mask for the LPPe control plane configuration parameter
  */
 }qmiLocSetProtocolConfigParametersIndMsgT_v02;  /* Message */
 /**
@@ -7401,6 +7548,8 @@ typedef struct {
       - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_SUPL_TLS_VERSION (0x0000000000000040) --  Mask for the SUPL TLS version configuration parameter
       - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_EMERGENCY_PROTOCOL (0x0000000000000080) --  Mask for the emergency protocol configuration parameter
       - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_WIFI_SCAN_INJECT_TIMEOUT (0x0000000000000100) --  Mask for the Wi-Fi scan injection timeout configuration parameter
+      - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_LPPE_UP (0x0000000000000200) --  Mask for the LPPe user plane configuration parameter
+      - QMI_LOC_PROTOCOL_CONFIG_PARAM_MASK_LPPE_CP (0x0000000000000400) --  Mask for the LPPe control plane configuration parameter
  */
 }qmiLocGetProtocolConfigParametersReqMsgT_v02;  /* Message */
 /**
@@ -7463,6 +7612,7 @@ typedef struct {
  Valid values: \n
       - eQMI_LOC_SUPL_VERSION_1_0 (1) --  SUPL version 1.0
       - eQMI_LOC_SUPL_VERSION_2_0 (2) --  SUPL version 2.0
+      - eQMI_LOC_SUPL_VERSION_2_0_2 (3) --    SUPL version 2.0.2
  */
 
   /* Optional */
@@ -7537,6 +7687,28 @@ typedef struct {
        Values: \n
        0 to 10 seconds
   */
+
+  /* Optional */
+  /*  LPPe User Plane Configure */
+  uint8_t lppeUpConfig_valid;  /**< Must be set to true if lppeUpConfig is being passed */
+  qmiLocLppeUpAuxTechMaskT_v02 lppeUpConfig;
+  /**<   LPPe User Plane Auxiliary Technology Mask.
+
+ Valid bitmasks: \n
+      - QMI_LOC_LPPE_MASK_UP_DBH (0x00000001) --  Enable Device Based Hybrid (3D High Accuracy Position) mode on LPPe User Plane
+      - QMI_LOC_LPPE_MASK_UP_AP_WIFI_MEASUREMENT (0x00000002) --  Enable WLAN AP Measurements mode on LPPe User Plane
+ */
+
+  /* Optional */
+  /*  LPPe Control Plane Configure */
+  uint8_t lppeCpConfig_valid;  /**< Must be set to true if lppeCpConfig is being passed */
+  qmiLocLppeCpAuxTechMaskT_v02 lppeCpConfig;
+  /**<   LPPe Control Plane Auxiliary Technology Mask.
+
+ Valid bitmasks: \n
+      - QMI_LOC_LPPE_MASK_CP_DBH (0x00000001) --  Enable Device Based Hybrid (3D High Accuracy Position) mode on LPPe Control Plane
+      - QMI_LOC_LPPE_MASK_CP_AP_WIFI_MEASUREMENT (0x00000002) --  Enable WLAN AP Measurements mode on LPPe Control Plane
+ */
 }qmiLocGetProtocolConfigParametersIndMsgT_v02;  /* Message */
 /**
     @}
@@ -9766,7 +9938,6 @@ typedef struct {
   /* Mandatory */
   /*  Time Zone Information */
   qmiLocTimeZoneStructT_v02 timeZone;
-  /**<   The time zone information  */
 }qmiLocInjectTimeZoneInfoReqMsgT_v02;  /* Message */
 /**
     @}
@@ -11425,12 +11596,20 @@ typedef struct {
   */
 /** Indication Message; Requests the control point to inject Wi-Fi AP data. */
 typedef struct {
-  /* This element is a placeholder to prevent the declaration of
-     an empty struct.  DO NOT USE THIS FIELD UNDER ANY CIRCUMSTANCE */
-  char __placeholder;
-}qmiLocEventInjectWifiApDataReqIndMsgT_v02;
 
-  /* Message */
+  /* Optional */
+  /*  E911 Mode */
+  uint8_t e911Mode_valid;  /**< Must be set to true if e911Mode is being passed */
+  uint8_t e911Mode;
+  /**<   Specifies whether GPS engine is in e911 mode when this
+       indication is sent to the client.
+
+       Valid values: \begin{itemize1}
+       \item    0x01 (TRUE) -- GPS engine is in e911 mode
+       \item    0x00 (FALSE) -- GPS engine is not in e911 mode
+       \end{itemize1}
+  */
+}qmiLocEventInjectWifiApDataReqIndMsgT_v02;  /* Message */
 /**
     @}
   */
@@ -11476,6 +11655,11 @@ typedef uint32_t qmiLocWifiApDataMaskT_v02;
 #define QMI_LOC_WIFI_APDATA_MASK_AP_ROUNDTRIP_DELAY_ACCURACY_V02 ((qmiLocWifiApDataMaskT_v02)0x00000080) /**<  AP roundtrip delay accuracy is valid   */
 #define QMI_LOC_WIFI_APDATA_MASK_MOBILE_SNR_V02 ((qmiLocWifiApDataMaskT_v02)0x00000100) /**<  Mobile signal-to-noise ratio is valid   */
 #define QMI_LOC_WIFI_APDATA_MASK_MOBILE_RSSI_V02 ((qmiLocWifiApDataMaskT_v02)0x00000200) /**<  Mobile RSSI is valid  */
+#define QMI_LOC_WIFI_APDATA_MASK_RSSI_TIMESTAMP_V02 ((qmiLocWifiApDataMaskT_v02)0x00000400) /**<  RSSI timestamp is valid  */
+#define QMI_LOC_WIFI_APDATA_MASK_MEASUREMENT_AGE_V02 ((qmiLocWifiApDataMaskT_v02)0x00000800) /**<  Measurement age is valid  */
+#define QMI_LOC_WIFI_APDATA_MASK_SERVING_AP_V02 ((qmiLocWifiApDataMaskT_v02)0x00001000) /**<  Serving access point is valid  */
+#define QMI_LOC_WIFI_APDATA_MASK_FREQUENCY_V02 ((qmiLocWifiApDataMaskT_v02)0x00002000) /**<  Channel frequency is valid  */
+#define QMI_LOC_WIFI_APDATA_MASK_SSID_V02 ((qmiLocWifiApDataMaskT_v02)0x00004000) /**<  SSID is valid  */
 /** @addtogroup loc_qmi_aggregates
     @{
   */
@@ -11494,7 +11678,12 @@ typedef struct {
       - QMI_LOC_WIFI_APDATA_MASK_AP_ROUNDTRIP_DELAY (0x00000040) --  AP roundtrip delay is valid
       - QMI_LOC_WIFI_APDATA_MASK_AP_ROUNDTRIP_DELAY_ACCURACY (0x00000080) --  AP roundtrip delay accuracy is valid
       - QMI_LOC_WIFI_APDATA_MASK_MOBILE_SNR (0x00000100) --  Mobile signal-to-noise ratio is valid
-      - QMI_LOC_WIFI_APDATA_MASK_MOBILE_RSSI (0x00000200) --  Mobile RSSI is valid  */
+      - QMI_LOC_WIFI_APDATA_MASK_MOBILE_RSSI (0x00000200) --  Mobile RSSI is valid
+      - QMI_LOC_WIFI_APDATA_MASK_RSSI_TIMESTAMP (0x00000400) --  RSSI timestamp is valid
+      - QMI_LOC_WIFI_APDATA_MASK_MEASUREMENT_AGE (0x00000800) --  Measurement age is valid
+      - QMI_LOC_WIFI_APDATA_MASK_SERVING_AP (0x00001000) --  Serving access point is valid
+      - QMI_LOC_WIFI_APDATA_MASK_FREQUENCY (0x00002000) --  Channel frequency is valid
+      - QMI_LOC_WIFI_APDATA_MASK_SSID (0x00004000) --  SSID is valid  */
 
   uint8_t macAddress[QMI_LOC_WIFI_MAC_ADDR_LENGTH_V02];
   /**<   MAC address. \n
@@ -11541,6 +11730,61 @@ typedef struct {
     @}
   */
 
+/** @addtogroup loc_qmi_aggregates
+    @{
+  */
+typedef struct {
+
+  int64_t rssiTimestamp;
+  /**<   Measurement time stamp, it is corresponding to when the beacon was received.
+       Units: Milliseconds \n
+       Type : int64 */
+
+  int32_t measAge;
+  /**<   Measurements age, -1 means info not available.
+       Units: Milliseconds \n
+       Type : int32 */
+
+  uint8_t servingAccessPoint;
+  /**<   This parameter indicates whether a set of WLAN-AP measurements
+       were obtained for a serving WLAN-AP (TRUE) or a non-serving WLAN-AP (FALSE).
+       A target device with multiple radio support may indicate more than
+       one type of serving access for the same time instant.
+       Type : boolean */
+
+  uint32_t channelFrequency;
+  /**<   Primary channel frequency.
+       Units: MHz \n
+       Type : uint32 */
+
+  char ssid[QMI_LOC_MAX_WIFI_AP_SSID_STR_LENGTH_V02 + 1];
+  /**<   The NULL-terminated SSID of the Wi-Fi AP.
+       Its maximum length according to the ASCII standard is 32 octets.
+       Type : string */
+
+  int32_t apHighResolutionRssi;
+  /**<   AP signal strength indicator in 0.1 dBm.
+       Units: 0.1dBm \n
+       Type : int32 */
+}qmiLocWifiApAdditionalDataStructT_v02;  /* Type */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_enums
+    @{
+  */
+typedef enum {
+  QMILOCWLANAPERRENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
+  eQMI_LOC_WLAN_AP_ERR_UNKNOWN_V02 = 0, /**<  Error is unknown  */
+  eQMI_LOC_WLAN_AP_ERR_NO_REQ_MEAS_AVAILABLE_V02 = 1, /**<  None of the requested measurements could be provided  */
+  eQMI_LOC_WLAN_AP_ERR_WIFI_OFF_V02 = 2, /**<  Wifi is off  */
+  QMILOCWLANAPERRENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
+}qmiLocWlanApErrEnumT_v02;
+/**
+    @}
+  */
+
 /** @addtogroup loc_qmi_messages
     @{
   */
@@ -11552,6 +11796,51 @@ typedef struct {
   uint32_t wifiApInfo_len;  /**< Must be set to # of elements in wifiApInfo */
   qmiLocWifiApDataStructT_v02 wifiApInfo[QMI_LOC_WIFI_MAX_REPORTED_APS_PER_MSG_V02];
   /**<   \n List of Wi-Fi AP scan information entered by the control point. */
+
+  /* Optional */
+  /*  The failure reason of WLAN-AP measurements not available  */
+  uint8_t errorCause_valid;  /**< Must be set to true if errorCause is being passed */
+  qmiLocWlanApErrEnumT_v02 errorCause;
+  /**<   In case of WLAN-AP measurements not available,
+ the appropriate reason for error/failure should be indicated.
+ This field won’t be present in the success case when WLAN-AP measurements are available.
+ Valid values: \n
+      - eQMI_LOC_WLAN_AP_ERR_UNKNOWN (0) --  Error is unknown
+      - eQMI_LOC_WLAN_AP_ERR_NO_REQ_MEAS_AVAILABLE (1) --  None of the requested measurements could be provided
+      - eQMI_LOC_WLAN_AP_ERR_WIFI_OFF (2) --  Wifi is off  */
+
+  /* Optional */
+  /*  Scan Request Timestamp */
+  uint8_t requestTimestamp_valid;  /**< Must be set to true if requestTimestamp is being passed */
+  int64_t requestTimestamp;
+  /**<   UTC timestamp at which the scan was requested.
+       Units: Milliseconds \n
+       Type : int64 */
+
+  /* Optional */
+  /*  Scan Receive Timestamp */
+  uint8_t receiveTimestamp_valid;  /**< Must be set to true if receiveTimestamp is being passed */
+  int64_t receiveTimestamp;
+  /**<   UTC timestamp at which the scan was received.
+       Units: Milliseconds \n
+       Type : int64 */
+
+  /* Optional */
+  /*  Free Scan or On-Demand Scan */
+  uint8_t onDemandScan_valid;  /**< Must be set to true if onDemandScan is being passed */
+  uint8_t onDemandScan;
+  /**<   If this scan is requested by the modem.
+        Type : boolean
+          0x00 (FALSE) -- The wifi AP data injection is not requested by the modem(Free Scan).
+          0x01 (TRUE) -- The wifi AP data injection is requested by the modem(On-Demand Scan).*/
+
+  /* Optional */
+  /*  Wi-Fi AP Additional Measurements Scan Data */
+  uint8_t wifiApInfoA_valid;  /**< Must be set to true if wifiApInfoA is being passed */
+  uint32_t wifiApInfoA_len;  /**< Must be set to # of elements in wifiApInfoA */
+  qmiLocWifiApAdditionalDataStructT_v02 wifiApInfoA[QMI_LOC_WIFI_MAX_REPORTED_APS_PER_MSG_V02];
+  /**<   \n List of Wi-Fi AP additional measurements scan information entered by the control point.
+          The order and the number of additional measurements must be as same as wifiApInfo */
 }qmiLocInjectWifiApDataReqMsgT_v02;  /* Message */
 /**
     @}
@@ -12270,6 +12559,7 @@ typedef enum {
   eQMI_LOC_PREMIUM_SERVICE_GTP_CELL_V02 = 0, /**<  Premium service -- Global terrestrial positioning for the cell  */
   eQMI_LOC_PREMIUM_SERVICE_SAP_V02 = 1, /**<  Premium service -- Sensor-assisted positioning  */
   eQMI_LOC_PREMIUM_SERVICE_GTP_ENH_CELL_V02 = 2, /**<  Premium service -- Global terrestrial positioning enhanced cell  */
+  eQMI_LOC_PREMIUM_SERVICE_GTP_WIFI_V02 = 3, /**<  Premium service -- Global terrestrial positioning for the WIFI  */
   QMILOCPREMIUMSERVICEENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
 }qmiLocPremiumServiceEnumT_v02;
 /**
@@ -12305,6 +12595,7 @@ typedef struct {
       - eQMI_LOC_PREMIUM_SERVICE_GTP_CELL (0) --  Premium service -- Global terrestrial positioning for the cell
       - eQMI_LOC_PREMIUM_SERVICE_SAP (1) --  Premium service -- Sensor-assisted positioning
       - eQMI_LOC_PREMIUM_SERVICE_GTP_ENH_CELL (2) --  Premium service -- Global terrestrial positioning enhanced cell
+      - eQMI_LOC_PREMIUM_SERVICE_GTP_WIFI (3) --  Premium service -- Global terrestrial positioning for the WIFI
  */
 
   /* Mandatory */
@@ -12516,7 +12807,7 @@ typedef struct {
     */
 
   float clockDriftUnc;
-  /**<   Receiver clock frift uncertainty. \n
+  /**<   Receiver clock drift uncertainty. \n
          - Units: Meters per second
     */
 
@@ -12739,7 +13030,7 @@ typedef struct {
 
   uint32_t svTimeMs;
   /**<       Satellite time in milliseconds. \n
-            - For GPS, BDS, GAL and QZSS -- Range is 0 thru (604800000-1) \n
+            - For GPS, BDS, GAL, and QZSS -- Range is 0 thru (604800000-1) \n
             - For GLONASS -- Range is 0 thru (86400000-1) \n
             - Units: Milliseconds \vspace{4pt}
 
@@ -13077,6 +13368,12 @@ typedef struct {
   uint8_t svMeasurement_valid;  /**< Must be set to true if svMeasurement is being passed */
   uint32_t svMeasurement_len;  /**< Must be set to # of elements in svMeasurement */
   qmiLocSVMeasurementStructT_v02 svMeasurement[QMI_LOC_SV_MEAS_LIST_MAX_SIZE_V02];
+
+  /* Optional */
+  /*  Extended Time Information - Cumulative number of clock resets */
+  uint8_t numClockResets_valid;  /**< Must be set to true if numClockResets is being passed */
+  uint32_t numClockResets;
+  /**<   Number of clock reset/discontinuities detected, affecting local HW counter value */
 }qmiLocEventGnssSvMeasInfoIndMsgT_v02;  /* Message */
 /**
     @}
@@ -13592,7 +13889,7 @@ typedef struct {
   /*  Data */
   uint32_t ClientDownloadedData_len;  /**< Must be set to # of elements in ClientDownloadedData */
   char ClientDownloadedData[QMI_LOC_MAX_GTP_WWAN_CLIENT_DOWNLOADED_DATA_LEN_V02];
-  /**<   All GTP response client downloaded data incl. WWAN, WLAN, common etc.. \n
+  /**<   WWAN client downloaded data. \n
          - Type: Array of bytes \n
          - Maximum length of the array: 512
     */
@@ -13640,7 +13937,7 @@ typedef struct {
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
@@ -13716,7 +14013,7 @@ typedef struct {
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL */
 
   /* Mandatory */
   /*  Session ID */
@@ -13772,9 +14069,9 @@ typedef struct {
   */
 typedef enum {
   QMILOCGTPAPSTATUSENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
-  eQMI_LOC_GTP_AP_STATUS_DB_READY_V02 = 1, /**<  Indicates AP is finished initialization and ready to process MP download request   */
-  eQMI_LOC_GTP_AP_STATUS_DB_REFRESHED_V02 = 2, /**<  Indicates AP has successfully refreshed partitions  */
-  eQMI_LOC_GTP_AP_STATUS_DB_DELETED_V02 = 3, /**<  Indicates AP has removed local partitions   */
+  eQMI_LOC_GTP_AP_STATUS_DB_READY_V02 = 1, /**<  Indicates that the AP is initialized and ready to process MP download requests   */
+  eQMI_LOC_GTP_AP_STATUS_DB_REFRESHED_V02 = 2, /**<  Indicates that the AP has successfully refreshed partitions  */
+  eQMI_LOC_GTP_AP_STATUS_DB_DELETED_V02 = 3, /**<  Indicates that the AP has removed local partitions   */
   QMILOCGTPAPSTATUSENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
 }qmiLocGtpApStatusEnumT_v02;
 /**
@@ -13784,44 +14081,44 @@ typedef enum {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Request Message; Sends a Global Terrestrial Position (GTP) message to MP
-                    notifying GTP MP of AP DB readiness. */
+/** Request Message; Sends a Global Terrestrial Position (GTP) message to the MP
+                    notifying the GTP MP of AP DB readiness. */
 typedef struct {
 
   /* Mandatory */
-  /*  AP DB status */
+  /*  AP DB Status */
   qmiLocGtpApStatusEnumT_v02 gtpApDbStatus;
   /**<   GTP AP DB status information.
 
  Valid values: \n
-      - eQMI_LOC_GTP_AP_STATUS_DB_READY (1) --  Indicates AP is finished initialization and ready to process MP download request
-      - eQMI_LOC_GTP_AP_STATUS_DB_REFRESHED (2) --  Indicates AP has successfully refreshed partitions
-      - eQMI_LOC_GTP_AP_STATUS_DB_DELETED (3) --  Indicates AP has removed local partitions
+      - eQMI_LOC_GTP_AP_STATUS_DB_READY (1) --  Indicates that the AP is initialized and ready to process MP download requests
+      - eQMI_LOC_GTP_AP_STATUS_DB_REFRESHED (2) --  Indicates that the AP has successfully refreshed partitions
+      - eQMI_LOC_GTP_AP_STATUS_DB_DELETED (3) --  Indicates that the AP has removed local partitions
  */
 
   /* Optional */
   /*  AP PCID (8 byte) */
   uint8_t gtpApPcid64_valid;  /**< Must be set to true if gtpApPcid64 is being passed */
   uint64_t gtpApPcid64;
-  /**<   AP Pseudoclient ID */
+  /**<   AP pseudoclient ID. */
 
   /* Optional */
-  /*  OEM ID (non-null terminated) */
+  /*  OEM ID (non-NULL Terminated) */
   uint8_t oemId_valid;  /**< Must be set to true if oemId is being passed */
   uint32_t oemId_len;  /**< Must be set to # of elements in oemId */
   char oemId[QMI_LOC_MAX_OEM_ID_LEN_V02];
   /**<   OEM ID. \n
-         - Type: char string \n
+         - Type: character string \n
          - Maximum length of the array: 256
     */
 
   /* Optional */
-  /*  MODEL ID (non-null terminated) */
+  /*  Model ID (non-NULL Terminated) */
   uint8_t modelId_valid;  /**< Must be set to true if modelId is being passed */
   uint32_t modelId_len;  /**< Must be set to # of elements in modelId */
   char modelId[QMI_LOC_MAX_MODEL_ID_LEN_V02];
   /**<   Model ID. \n
-         - Type: char string \n
+         - Type: character string \n
          - Maximum length of the array: 256
     */
 }qmiLocGtpApStatusReqMsgT_v02;  /* Message */
@@ -13835,13 +14132,13 @@ typedef struct {
 typedef struct {
 
   uint8_t asnMajorVersion;
-  /**<   ASN Major version */
+  /**<   ASN major version. */
 
   uint8_t asnMinorVersion;
-  /**<   ASN Minor version */
+  /**<   ASN minor version. */
 
   uint8_t asnPointVersion;
-  /**<   ASN Point version */
+  /**<   ASN point version. */
 }qmiLocGtpAsnVerStructT_v02;  /* Type */
 /**
     @}
@@ -13850,8 +14147,8 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Sends a Global Terrestrial Position (GTP) message to MP
-                    notifying GTP MP of AP DB readiness. */
+/** Indication Message; Sends a Global Terrestrial Position (GTP) message to the MP
+                    notifying the GTP MP of AP DB readiness. */
 typedef struct {
 
   /* Mandatory */
@@ -13873,14 +14170,13 @@ typedef struct {
  */
 
   /* Mandatory */
-  /*  MP Client Software version */
+  /*  MP Client Software Version */
   uint16_t clientSoftwareVersion;
-  /**<   MP Client SW version */
+  /**<   MP client software version. */
 
   /* Mandatory */
-  /*  MP ASN version */
+  /*  MP ASN Version */
   qmiLocGtpAsnVerStructT_v02 asnVersion;
-  /**<   MP ASN Version */
 }qmiLocGtpApStatusIndMsgT_v02;  /* Message */
 /**
     @}
@@ -13891,13 +14187,16 @@ typedef struct {
   */
 typedef enum {
   QMILOCGTPPROCESSSTATUSENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
-  eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_LOCAL_V02 = 1, /**<  DL processing is allowed using local AP cache   */
-  eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_SERVER_V02 = 2, /**<  DL processing is allowed using server access   */
-  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_NOT_READY_V02 = 3, /**<  DL processing is not allowed since AP not ready   */
-  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_TIMEOUT_V02 = 4, /**<  DL processing is not allowed since AP cannot process within given interval   */
-  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_NO_CONNECTIVITY_V02 = 5, /**<  DL processing is not allowed since AP has no connectivity   */
-  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_THROTTLED_V02 = 6, /**<  DL processing is not allowed due to throttling   */
-  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_OTHER_V02 = 7, /**<  DL processing is not allowed for any other reason   */
+  eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_LOCAL_V02 = 1, /**<  DL processing is processed successfully locally   */
+  eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_SERVER_V02 = 2, /**<  DL processing is processed successfully via server access   */
+  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_NOT_READY_V02 = 3, /**<  DL processing is not allowed because the AP is not ready   */
+  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_TIMEOUT_V02 = 4, /**<  DL processing is not allowed because the AP cannot process within the given interval   */
+  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_NO_CONNECTIVITY_V02 = 5, /**<  DL processing via server is not allowed since AP has no connectivity but
+       will be processed locally   */
+  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_THROTTLED_V02 = 6, /**<  DL processing via server is not allowed due to throttling but will be
+       processed locally   */
+  eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_OTHER_V02 = 7, /**<  DL processing via server is not allowed for any other reason but will be
+       processed locally    */
   eQMI_LOC_GTP_PROCESS_FAILED_UNSPECIFIED_V02 = 8, /**<  DL processing failed for any other reason   */
   QMILOCGTPPROCESSSTATUSENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
 }qmiLocGtpProcessStatusEnumT_v02;
@@ -13908,53 +14207,62 @@ typedef enum {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Request Message; Sends a GTP message to MP notifying MP of AP DB readiness. */
+/** Request Message; Sends a GTP message to MP notifying MP of AP download response. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
   uint32_t sessionId;
-  /**<   Session ID */
+  /**<   Session ID. */
 
   /* Mandatory */
-  /*  AP Process status */
+  /*  AP Process Status */
   qmiLocGtpProcessStatusEnumT_v02 processingStatus;
-  /**<   AP processing status information for this serviceId.
+  /**<   AP processing status information for this service ID.
 
  Valid values: \n
-      - eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_LOCAL (1) --  DL processing is allowed using local AP cache
-      - eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_SERVER (2) --  DL processing is allowed using server access
-      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_NOT_READY (3) --  DL processing is not allowed since AP not ready
-      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_TIMEOUT (4) --  DL processing is not allowed since AP cannot process within given interval
-      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_NO_CONNECTIVITY (5) --  DL processing is not allowed since AP has no connectivity
-      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_THROTTLED (6) --  DL processing is not allowed due to throttling
-      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_OTHER (7) --  DL processing is not allowed for any other reason
+      - eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_LOCAL (1) --  DL processing is processed successfully locally
+      - eQMI_LOC_GTP_PROCESS_SUCCESS_FROM_SERVER (2) --  DL processing is processed successfully via server access
+      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_NOT_READY (3) --  DL processing is not allowed because the AP is not ready
+      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_AP_TIMEOUT (4) --  DL processing is not allowed because the AP cannot process within the given interval
+      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_NO_CONNECTIVITY (5) --  DL processing via server is not allowed since AP has no connectivity but
+       will be processed locally
+      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_THROTTLED (6) --  DL processing via server is not allowed due to throttling but will be
+       processed locally
+      - eQMI_LOC_GTP_PROCESS_NOT_ALLOWED_OTHER (7) --  DL processing via server is not allowed for any other reason but will be
+       processed locally
       - eQMI_LOC_GTP_PROCESS_FAILED_UNSPECIFIED (8) --  DL processing failed for any other reason
  */
 
   /* Optional */
-  /*  WWAN download flag */
+  /*  WWAN Download Flag */
   uint8_t wwanDownloadFlag_valid;  /**< Must be set to true if wwanDownloadFlag is being passed */
   uint16_t wwanDownloadFlag;
-  /**<   WWAN Download flag */
+  /**<   WWAN download flag. */
 
   /* Optional */
   /*  Encoded Response Location Information */
   uint8_t respLocInfo_valid;  /**< Must be set to true if respLocInfo is being passed */
   uint32_t respLocInfo_len;  /**< Must be set to # of elements in respLocInfo */
   uint8_t respLocInfo[QMI_LOC_MAX_GTP_RLI_LEN_V02];
-  /**<   response location information encoded in asn.1 format. \n
+  /**<   Response location information encoded in asn.1 format. \n
          - Type: Array of bytes \n
          - Maximum length of the array: 256
     */
+
+  /* Optional */
+  /*  AP Remaining Throttle Time */
+  uint8_t apRemainingThrottleTime_valid;  /**< Must be set to true if apRemainingThrottleTime is being passed */
+  uint32_t apRemainingThrottleTime;
+  /**<   Remaining time in seconds during which AP will remain throttled for server access. */
 }qmiLocGdtDownloadBeginStatusReqMsgT_v02;  /* Message */
 /**
     @}
@@ -13963,11 +14271,11 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Sends a GTP message to MP notifying MP of AP DB readiness. */
+/** Indication Message; Sends a GTP message to MP notifying MP of AP download response. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT download begin Status */
+  /*  GDT Download Begin Status */
   qmiLocStatusEnumT_v02 status;
   /**<   Status of the GDT begin request.
  Valid values: \n
@@ -13991,26 +14299,26 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Request Message; Sends a GTP message to MP notifying MP of data readiness. */
+/** Request Message; Sends a GTP message to the MP notifying it of data readiness. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
   uint32_t sessionId;
-  /**<   Session ID */
+  /**<   Session ID. */
 
   /* Mandatory */
   /*  Processing Status */
   qmiLocStatusEnumT_v02 status;
-  /**<   Status of AP processing request.
+  /**<   Status of the AP processing request.
  Valid values: \n
       - eQMI_LOC_SUCCESS (0) --  Request was completed successfully \n
       - eQMI_LOC_GENERAL_FAILURE (1) --  Request failed because of a general failure \n
@@ -14026,10 +14334,10 @@ typedef struct {
  */
 
   /* Mandatory */
-  /*  Data file path (non-null terminated) */
+  /*  Data File Path (NULL Terminated) */
   uint32_t filePath_len;  /**< Must be set to # of elements in filePath */
   char filePath[QMI_LOC_MAX_GDT_PATH_LEN_V02];
-  /**<   file path to the data. \n
+  /**<   File path to the data. \n
          - Type: Array of bytes \n
          - Maximum length of the array: 255
     */
@@ -14041,11 +14349,11 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Sends a GTP message to MP notifying MP of data readiness. */
+/** Indication Message; Sends a GTP message to the MP notifying it of data readiness. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT ready  begin Status */
+  /*  GDT Ready Begin Status */
   qmiLocStatusEnumT_v02 status;
   /**<   Status of the GDT ready request.
  Valid values: \n
@@ -14069,24 +14377,24 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Request Message; Acknowledges reception of receive done to GDT MP. */
+/** Request Message; Acknowledges receipt of Receive Done to the GDT MP. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
   uint32_t sessionId;
-  /**<   Session ID */
+  /**<   Session ID. */
 
   /* Mandatory */
-  /*  QMI LOC status */
+  /*  QMI LOC Status */
   qmiLocStatusEnumT_v02 status;
   /**<   Values: \n
 
@@ -14109,13 +14417,13 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Acknowledges reception of receive done to GDT MP. */
+/** Indication Message; Acknowledges receipt of Receive Done to the GDT MP. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT receive done Status */
+  /*  GDT Receive Done Status */
   qmiLocStatusEnumT_v02 status;
-  /**<   Status of the receive done request.
+  /**<   Status of the Receive Done request.
  Valid values: \n
       - eQMI_LOC_SUCCESS (0) --  Request was completed successfully \n
       - eQMI_LOC_GENERAL_FAILURE (1) --  Request failed because of a general failure \n
@@ -14137,24 +14445,24 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Request Message; Acknowledges reception of download completion to GDT MP. */
+/** Request Message; Acknowledges the receipt of download completion to the GDT MP. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT service ID */
+  /*  GDT Service ID */
   qmiLocGdtServiceIdEnumT_v02 serviceId;
   /**<   Values: \n
 
       - eQMI_LOC_GDT_SERVICE_WWAN (1) --  GDT service for WWAN UL
-      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT Service for WWAN DL  */
+      - eQMI_LOC_GDT_SERVICE_WWAN_DL (2) --  GDT service for WWAN DL  */
 
   /* Mandatory */
   /*  Session ID */
   uint32_t sessionId;
-  /**<   Session ID */
+  /**<   Session ID. */
 
   /* Mandatory */
-  /*  QMI LOC status */
+  /*  QMI LOC Status */
   qmiLocStatusEnumT_v02 status;
   /**<   Values: \n
 
@@ -14177,11 +14485,11 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; Acknowledges reception of download completion to GDT MP. */
+/** Indication Message; Acknowledges the receipt of download completion to the GDT MP. */
 typedef struct {
 
   /* Mandatory */
-  /*  GDT download end Status */
+  /*  GDT Download End Status */
   qmiLocStatusEnumT_v02 status;
   /**<   Status of the GDT download end request.
  Valid values: \n
@@ -14791,7 +15099,7 @@ typedef enum {
 typedef struct {
 
   /* Mandatory */
-  /*  Data Security Mode for Encoded Data Buffer. */
+  /*  Data Security Mode for Encoded Data Buffer */
   qmiLocSecureLocDataModeEnumT_v02 secureLocDataMode;
   /**<   Data security mode for the encoded data buffer.
 
@@ -15038,8 +15346,27 @@ typedef struct {
   uint8_t qmilocSecureGetAvailablePositionInd_valid;  /**< Must be set to true if qmilocSecureGetAvailablePositionInd is being passed */
   uint32_t qmilocSecureGetAvailablePositionInd_len;  /**< Must be set to # of elements in qmilocSecureGetAvailablePositionInd */
   uint8_t qmilocSecureGetAvailablePositionInd[QMI_LOC_SECURE_GET_AVAILABLE_POSITION_IND_ENCRYPTED_MAX_V02];
-  /**<   Encoded data buffer containing the secured Get Available position report indication.*/
+  /**<   Encoded data buffer containing the secured Get Available Position Report indication.*/
 }qmiLocSecureGetAvailablePositionIndMsgT_v02;  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_enums
+    @{
+  */
+typedef enum {
+  QMILOCAPRELIABILITYENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
+  eQMI_LOC_AP_RELIABILITY_NOT_SET_V02 = 0, /**<  AP Location reliability is not set  */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_1_V02 = 1, /**<  AP Location reliability level 1  */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_2_V02 = 2, /**<  AP Location reliability level 2  */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_3_V02 = 3, /**<  AP Location reliability level 3   */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_4_V02 = 4, /**<  AP Location reliability level 4  */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_5_V02 = 5, /**<  AP Location reliability level 5  */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_6_V02 = 6, /**<  AP Location reliability level 6  */
+  eQMI_LOC_AP_RELIABILITY_LEVEL_7_V02 = 7, /**<  AP Location reliability level 7  */
+  QMILOCAPRELIABILITYENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
+}qmiLocApReliabilityEnumT_v02;
 /**
     @}
   */
@@ -15064,6 +15391,39 @@ typedef struct {
   /**<   Maximum antenna range. \n
        - Units: Meters */
 }qmiLocApCacheStructT_v02;  /* Type */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_aggregates
+    @{
+  */
+typedef struct {
+
+  uint8_t hepeValid;
+  /**<   Indicates whether hepe data is available or not:
+       0x00 (FALSE) -- Ignore hepe data of this AP.
+       0x01 (TRUE) -- hepe data of this AP is available. */
+
+  uint16_t hepe;
+  /**<   Horizontal Estimated Position Error
+       - Units: Meters */
+
+  qmiLocApReliabilityEnumT_v02 apReliability;
+  /**<   Specifies the reliability of the AP position.
+ The lowest is eQMI_LOC_AP_RELIABILITY_LEVEL_1, and the highest is eQMI_LOC_AP_RELIABILITY_LEVEL_7,
+ The AP reliability increases as the level increases.
+ Valid values: \n
+      - eQMI_LOC_AP_RELIABILITY_NOT_SET (0) --  AP Location reliability is not set
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_1 (1) --  AP Location reliability level 1
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_2 (2) --  AP Location reliability level 2
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_3 (3) --  AP Location reliability level 3
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_4 (4) --  AP Location reliability level 4
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_5 (5) --  AP Location reliability level 5
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_6 (6) --  AP Location reliability level 6
+      - eQMI_LOC_AP_RELIABILITY_LEVEL_7 (7) --  AP Location reliability level 7
+ */
+}qmiLocApCacheHepeRelStructT_v02;  /* Type */
 /**
     @}
   */
@@ -15094,7 +15454,17 @@ typedef struct {
   /*  AP Cache Data */
   uint32_t apCacheData_len;  /**< Must be set to # of elements in apCacheData */
   qmiLocApCacheStructT_v02 apCacheData[QMI_LOC_APCACHE_DATA_MAX_SAMPLES_V02];
-  /**<   AP cache information. */
+  /**<   \vspace{4pt} \n AP cache information. */
+
+  /* Optional */
+  /*  AP Cache Hepe Data */
+  uint8_t apCacheHepeRelData_valid;  /**< Must be set to true if apCacheHepeRelData is being passed */
+  uint32_t apCacheHepeRelData_len;  /**< Must be set to # of elements in apCacheHepeRelData */
+  qmiLocApCacheHepeRelStructT_v02 apCacheHepeRelData[QMI_LOC_APCACHE_DATA_MAX_SAMPLES_V02];
+  /**<   \vspace{4pt} \n
+       The ordering of apCacheHepeRelData list should match the apCacheData list.
+       That is, the first element of the apCacheHepeRelData must be the cache hepe data of the AP
+       whose cache data is the first element in the apCacheData, and so on. */
 }qmiLocInjectApCacheDataReqMsgT_v02;  /* Message */
 /**
     @}
@@ -15307,7 +15677,7 @@ typedef uint32_t qmiLocAonCapabilityMaskT_v02;
 #define QMI_LOC_MASK_AON_DISTANCE_BASED_BATCHING_SUPPORTED_V02 ((qmiLocAonCapabilityMaskT_v02)0x00000002) /**<  The service supports distance-based batching  */
 #define QMI_LOC_MASK_AON_TIME_BASED_BATCHING_SUPPORTED_V02 ((qmiLocAonCapabilityMaskT_v02)0x00000004) /**<  The service supports time-based batching */
 #define QMI_LOC_MASK_AON_DISTANCE_BASED_TRACKING_SUPPORTED_V02 ((qmiLocAonCapabilityMaskT_v02)0x00000008) /**<  The service supports distance-based tracking  */
-#define QMI_LOC_MASK_AON_UPDATE_TBF_SUPPORTED_V02 ((qmiLocAonCapabilityMaskT_v02)0x00000010) /**<  The service supports to change TBF dynamically  */
+#define QMI_LOC_MASK_AON_UPDATE_TBF_SUPPORTED_V02 ((qmiLocAonCapabilityMaskT_v02)0x00000010) /**<  The service supports changing TBF dynamically  */
 /** @addtogroup loc_qmi_messages
     @{
   */
@@ -15368,28 +15738,28 @@ typedef struct {
       - QMI_LOC_MASK_AON_DISTANCE_BASED_BATCHING_SUPPORTED (0x00000002) --  The service supports distance-based batching
       - QMI_LOC_MASK_AON_TIME_BASED_BATCHING_SUPPORTED (0x00000004) --  The service supports time-based batching
       - QMI_LOC_MASK_AON_DISTANCE_BASED_TRACKING_SUPPORTED (0x00000008) --  The service supports distance-based tracking
-      - QMI_LOC_MASK_AON_UPDATE_TBF_SUPPORTED (0x00000010) --  The service supports to change TBF dynamically */
+      - QMI_LOC_MASK_AON_UPDATE_TBF_SUPPORTED (0x00000010) --  The service supports changing TBF dynamically */
 }qmiLocQueryAonConfigIndMsgT_v02;  /* Message */
 /**
     @}
   */
 
 typedef uint32_t qmiLocDeleteCommonDataMaskT_v02;
-#define QMI_LOC_DELETE_COMMON_MASK_POS_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000001) /**<  Position estimate, common for all GNSS type  */
+#define QMI_LOC_DELETE_COMMON_MASK_POS_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000001) /**<  Position estimate; common for all GNSS types  */
 #define QMI_LOC_DELETE_COMMON_MASK_TIME_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000002) /**<  Reset all CLOCK_INFO mask  */
 #define QMI_LOC_DELETE_COMMON_MASK_UTC_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000004) /**<  UTC estimate  */
 #define QMI_LOC_DELETE_COMMON_MASK_RTI_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000008) /**<  RTI  */
-#define QMI_LOC_DELETE_COMMON_MASK_FREQ_BIAS_EST_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000010) /**<  Frequency bias estimate, common for all GNSS type  */
+#define QMI_LOC_DELETE_COMMON_MASK_FREQ_BIAS_EST_V02 ((qmiLocDeleteCommonDataMaskT_v02)0x00000010) /**<  Frequency bias estimate; common for all GNSS types  */
 typedef uint32_t qmiLocDeleteSatelliteDataMaskT_v02;
-#define QMI_LOC_DELETE_DATA_MASK_EPHEMERIS_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000001) /**<  Ephemeris */
-#define QMI_LOC_DELETE_DATA_MASK_ALMANAC_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000002) /**<  Almanac */
-#define QMI_LOC_DELETE_DATA_MASK_SVHEALTH_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000004) /**<  SV Health  */
+#define QMI_LOC_DELETE_DATA_MASK_EPHEMERIS_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000001) /**<  Ephemeris  */
+#define QMI_LOC_DELETE_DATA_MASK_ALMANAC_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000002) /**<  Almanac  */
+#define QMI_LOC_DELETE_DATA_MASK_SVHEALTH_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000004) /**<  SV health  */
 #define QMI_LOC_DELETE_DATA_MASK_SVDIR_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000008) /**<  SV direction  */
 #define QMI_LOC_DELETE_DATA_MASK_SVSTEER_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000010) /**<  SV steer  */
 #define QMI_LOC_DELETE_DATA_MASK_ALM_CORR_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000020) /**<  Almanac correction  */
 #define QMI_LOC_DELETE_DATA_MASK_BLACKLIST_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000040) /**<  Blacklist SVs  */
 #define QMI_LOC_DELETE_DATA_MASK_SA_DATA_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000080) /**<  Sensitivity assistance data  */
-#define QMI_LOC_DELETE_DATA_MASK_SV_NO_EXIST_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000100) /**<  SV not exist  */
+#define QMI_LOC_DELETE_DATA_MASK_SV_NO_EXIST_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000100) /**<  SV does not exist  */
 #define QMI_LOC_DELETE_DATA_MASK_IONO_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000200) /**<  Ionosphere correction  */
 #define QMI_LOC_DELETE_DATA_MASK_TIME_V02 ((qmiLocDeleteSatelliteDataMaskT_v02)0x00000400) /**<  Reset satellite time  */
 typedef uint32_t qmiLocGNSSConstellMaskT_v02;
@@ -15404,8 +15774,8 @@ typedef uint32_t qmiLocGNSSConstellMaskT_v02;
 typedef struct {
 
   qmiLocGNSSConstellMaskT_v02 system;
-  /**<   Indicates to which satellite system's data will be deleted.
- The control point can delete multiple system at a time.
+  /**<   Indicates which satellite system's data is to be deleted.
+ The control point can delete multiple systems at a time.
  Valid values: \n
       - QMI_LOC_SYSTEM_GPS (0x00000001) --
       - QMI_LOC_SYSTEM_GLO (0x00000002) --
@@ -15419,13 +15789,13 @@ typedef struct {
  Valid values: \n
       - QMI_LOC_DELETE_DATA_MASK_EPHEMERIS (0x00000001) --  Ephemeris
       - QMI_LOC_DELETE_DATA_MASK_ALMANAC (0x00000002) --  Almanac
-      - QMI_LOC_DELETE_DATA_MASK_SVHEALTH (0x00000004) --  SV Health
+      - QMI_LOC_DELETE_DATA_MASK_SVHEALTH (0x00000004) --  SV health
       - QMI_LOC_DELETE_DATA_MASK_SVDIR (0x00000008) --  SV direction
       - QMI_LOC_DELETE_DATA_MASK_SVSTEER (0x00000010) --  SV steer
       - QMI_LOC_DELETE_DATA_MASK_ALM_CORR (0x00000020) --  Almanac correction
       - QMI_LOC_DELETE_DATA_MASK_BLACKLIST (0x00000040) --  Blacklist SVs
       - QMI_LOC_DELETE_DATA_MASK_SA_DATA (0x00000080) --  Sensitivity assistance data
-      - QMI_LOC_DELETE_DATA_MASK_SV_NO_EXIST (0x00000100) --  SV not exist
+      - QMI_LOC_DELETE_DATA_MASK_SV_NO_EXIST (0x00000100) --  SV does not exist
       - QMI_LOC_DELETE_DATA_MASK_IONO (0x00000200) --  Ionosphere correction
       - QMI_LOC_DELETE_DATA_MASK_TIME (0x00000400) --  Reset satellite time
  */
@@ -15437,8 +15807,8 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Request Message; This command is used to delete the location engine
-                    service data from the memory */
+/** Request Message; Deletes the location engine
+                    service data from memory. */
 typedef struct {
 
   /* Mandatory */
@@ -15446,20 +15816,20 @@ typedef struct {
   uint8_t deleteAllFlag;
   /**<   Indicates whether all GNSS service data is to be deleted.
        Values:
-       0x01 (TRUE)  -- All constellation's service data is to be reset;
+       0x01 (TRUE)  -- All constellations' service data is to be reset;
                        if this flag is set, all the other information
                        contained in the optional fields for this
                        message are ignored
        0x00 (FALSE) -- The optional fields in the message are to be
-                        used to determine which data is to be deleted
+                       used to determine which data is to be deleted
   */
 
   /* Optional */
-  /*  Requested bitmask of clock info data to be deleted */
+  /*  Requested Bitmask of Clock Info Data to be Deleted */
   uint8_t deleteClockInfoMask_valid;  /**< Must be set to true if deleteClockInfoMask is being passed */
   qmiLocDeleteClockInfoMaskT_v02 deleteClockInfoMask;
   /**<   Mask for the clock information service data that is to be deleted.
- if QMI_LOC_DELETE_DATA_MASK_TIME is set in deleteServiceDataMask,
+ If QMI_LOC_DELETE_DATA_MASK_TIME is set in deleteServiceDataMask,
  deleteClockInfoMask will be ignored.
  Valid values: \n
       - QMI_LOC_MASK_DELETE_CLOCK_INFO_TIME_EST (0x00000001) --  Mask to delete time estimate from clock information
@@ -15494,11 +15864,11 @@ typedef struct {
  */
 
   /* Optional */
-  /*  Requested bitmask of cell DB data to be deleted */
+  /*  Requested Bitmask of Cell DB Data to be Deleted */
   uint8_t deleteCellDbDataMask_valid;  /**< Must be set to true if deleteCellDbDataMask is being passed */
   qmiLocDeleteCelldbDataMaskT_v02 deleteCellDbDataMask;
-  /**<   Mask for the cell database service data that is to be deleted,
- common for all GNSS type
+  /**<   Mask for the cell database service data that is to be deleted;
+ common for all GNSS types.
  Valid values: \n
       - QMI_LOC_MASK_DELETE_CELLDB_POS (0x00000001) --  Mask to delete cell database position
       - QMI_LOC_MASK_DELETE_CELLDB_LATEST_GPS_POS (0x00000002) --  Mask to delete cell database latest GPS position
@@ -15513,20 +15883,20 @@ typedef struct {
  */
 
   /* Optional */
-  /*  Requested bitmask of common data to be deleted */
+  /*  Requested Bitmask of Common Data to be Deleted */
   uint8_t deleteCommonDataMask_valid;  /**< Must be set to true if deleteCommonDataMask is being passed */
   qmiLocDeleteCommonDataMaskT_v02 deleteCommonDataMask;
-  /**<   Mask for the common service data that is to be deleted,
+  /**<   Mask for the common service data that is to be deleted.
  Valid values: \n
-      - QMI_LOC_DELETE_COMMON_MASK_POS (0x00000001) --  Position estimate, common for all GNSS type
+      - QMI_LOC_DELETE_COMMON_MASK_POS (0x00000001) --  Position estimate; common for all GNSS types
       - QMI_LOC_DELETE_COMMON_MASK_TIME (0x00000002) --  Reset all CLOCK_INFO mask
       - QMI_LOC_DELETE_COMMON_MASK_UTC (0x00000004) --  UTC estimate
       - QMI_LOC_DELETE_COMMON_MASK_RTI (0x00000008) --  RTI
-      - QMI_LOC_DELETE_COMMON_MASK_FREQ_BIAS_EST (0x00000010) --  Frequency bias estimate, common for all GNSS type
+      - QMI_LOC_DELETE_COMMON_MASK_FREQ_BIAS_EST (0x00000010) --  Frequency bias estimate; common for all GNSS types
  */
 
   /* Optional */
-  /*  GNSS service data to be deleted */
+  /*  GNSS Service Data to be Deleted */
   uint8_t deleteSatelliteData_valid;  /**< Must be set to true if deleteSatelliteData is being passed */
   qmiLocDeleteSatelliteDataStructT_v02 deleteSatelliteData;
   /**<   Request to delete the GNSS service data.*/
@@ -15538,8 +15908,8 @@ typedef struct {
 /** @addtogroup loc_qmi_messages
     @{
   */
-/** Indication Message; This command is used to delete the location engine
-                    service data from the memory */
+/** Indication Message; Deletes the location engine
+                    service data from memory. */
 typedef struct {
 
   /* Mandatory */
@@ -15561,6 +15931,212 @@ typedef struct {
       - eQMI_LOC_XTRA_VERSION_CHECK_FAILURE (10) --  Location service failed because of an XTRA version-based file format check failure
  */
 }qmiLocDeleteGNSSServiceDataIndMsgT_v02;  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_enums
+    @{
+  */
+typedef enum {
+  QMILOCXTRADATAFORMATENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
+  eQMI_LOC_XTRA_DATA_V02 = 0, /**<  Default is QCOM-XTRA format.  */
+  QMILOCXTRADATAFORMATENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
+}qmiLocXtraDataFormatEnumT_v02;
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_messages
+    @{
+  */
+/** Request Message; Injects XTRA data. */
+typedef struct {
+
+  /* Mandatory */
+  /*  Total Size */
+  uint32_t totalSize;
+  /**<   Total size of the XTRA data to be injected. \n
+        - Units: Bytes */
+
+  /* Mandatory */
+  /*  Total Parts */
+  uint16_t totalParts;
+  /**<   Total number of parts into which the XTRA data is divided. */
+
+  /* Mandatory */
+  /*  Part Number */
+  uint16_t partNum;
+  /**<   Number of the current XTRA data part; starts at 1. */
+
+  /* Mandatory */
+  /*  Data */
+  uint32_t partData_len;  /**< Must be set to # of elements in partData */
+  uint8_t partData[QMI_LOC_MAX_XTRA_PART_LEN_V02];
+  /**<   XTRA data. \n
+         - Type: Array of bytes \n
+         - Maximum length of the array: 1024
+    */
+
+  /* Optional */
+  /*  Format Type */
+  uint8_t formatType_valid;  /**< Must be set to true if formatType is being passed */
+  qmiLocXtraDataFormatEnumT_v02 formatType;
+  /**<   XTRA data format. \n
+ Valid values: \n
+      - eQMI_LOC_XTRA_DATA (0) --  Default is QCOM-XTRA format.
+ */
+}qmiLocInjectXtraDataReqMsgT_v02;  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_messages
+    @{
+  */
+/** Indication Message; Injects XTRA data. */
+typedef struct {
+
+  /* Mandatory */
+  /*  Data Injection Status */
+  qmiLocStatusEnumT_v02 status;
+  /**<   Status of the Data Injection request.
+
+ Valid values: \n
+      - eQMI_LOC_SUCCESS (0) --  Request was completed successfully \n
+      - eQMI_LOC_GENERAL_FAILURE (1) --  Request failed because of a general failure \n
+      - eQMI_LOC_UNSUPPORTED (2) --  Request failed because it is not supported \n
+      - eQMI_LOC_INVALID_PARAMETER (3) --  Request failed because it contained invalid parameters \n
+      - eQMI_LOC_ENGINE_BUSY (4) --  Request failed because the engine is busy \n
+      - eQMI_LOC_PHONE_OFFLINE (5) --  Request failed because the phone is offline \n
+      - eQMI_LOC_TIMEOUT (6) --  Request failed because it timed out \n
+      - eQMI_LOC_CONFIG_NOT_SUPPORTED (7) --  Request failed because an undefined configuration was requested \n
+      - eQMI_LOC_INSUFFICIENT_MEMORY (8) --  Request failed because the engine could not allocate sufficient memory for the request \n
+      - eQMI_LOC_MAX_GEOFENCE_PROGRAMMED (9) --  Request failed because the maximum number of Geofences are already programmed \n
+      - eQMI_LOC_XTRA_VERSION_CHECK_FAILURE (10) --  Location service failed because of an XTRA version-based file format check failure
+ */
+
+  /* Optional */
+  /*  Part Number */
+  uint8_t partNum_valid;  /**< Must be set to true if partNum is being passed */
+  uint16_t partNum;
+  /**<   Number of the XTRA data part for which this indication
+      is sent; starts at 1. */
+}qmiLocInjectXtraDataIndMsgT_v02;  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_messages
+    @{
+  */
+/** Request Message; Used by the control point to inject PCID which is used by XTRA service. */
+typedef struct {
+
+  /* Mandatory */
+  /*  XTRA PCID */
+  uint64_t xtraPcid;
+  /**<   - Type: uint64 \n */
+}qmiLocInjectXtraPcidReqMsgT_v02;  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_messages
+    @{
+  */
+/** Indication Message; Used by the control point to inject PCID which is used by XTRA service. */
+typedef struct {
+
+  /* Mandatory */
+  /*  Inject XTRA PCID Status */
+  qmiLocStatusEnumT_v02 status;
+  /**<   Status of the inject XTRA PCID.
+
+ Valid values: \n
+      - eQMI_LOC_SUCCESS (0) --  Request was completed successfully \n
+      - eQMI_LOC_GENERAL_FAILURE (1) --  Request failed because of a general failure \n
+      - eQMI_LOC_UNSUPPORTED (2) --  Request failed because it is not supported \n
+      - eQMI_LOC_INVALID_PARAMETER (3) --  Request failed because it contained invalid parameters \n
+      - eQMI_LOC_ENGINE_BUSY (4) --  Request failed because the engine is busy \n
+      - eQMI_LOC_PHONE_OFFLINE (5) --  Request failed because the phone is offline \n
+      - eQMI_LOC_TIMEOUT (6) --  Request failed because it timed out \n
+      - eQMI_LOC_CONFIG_NOT_SUPPORTED (7) --  Request failed because an undefined configuration was requested \n
+      - eQMI_LOC_INSUFFICIENT_MEMORY (8) --  Request failed because the engine could not allocate sufficient memory for the request \n
+      - eQMI_LOC_MAX_GEOFENCE_PROGRAMMED (9) --  Request failed because the maximum number of Geofences are already programmed \n
+      - eQMI_LOC_XTRA_VERSION_CHECK_FAILURE (10) --  Location service failed because of an XTRA version-based file format check failure  */
+}qmiLocInjectXtraPcidIndMsgT_v02;  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_messages
+    @{
+  */
+/** Request Message; Used by the control point to query QMI_LOC service supported features. */
+typedef struct {
+  /* This element is a placeholder to prevent the declaration of
+     an empty struct.  DO NOT USE THIS FIELD UNDER ANY CIRCUMSTANCE */
+  char __placeholder;
+}qmiLocGetSupportedFeatureReqMsgT_v02;
+
+  /* Message */
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_enums
+    @{
+  */
+typedef enum {
+  QMILOCSUPPORTEDFEATUREENUMT_MIN_ENUM_VAL_V02 = -2147483647, /**< To force a 32 bit signed enum.  Do not change or use*/
+  eQMI_LOC_SUPPORTED_FEATURE_ODCPI_2_V02 = 0, /**<  Support ODCPI version 2 feature  */
+  eQMI_LOC_SUPPORTED_FEATURE_WIFI_AP_DATA_INJECT_2_V02 = 1, /**<  Support Wifi AP data inject version 2 feature  */
+  QMILOCSUPPORTEDFEATUREENUMT_MAX_ENUM_VAL_V02 = 2147483647 /**< To force a 32 bit signed enum.  Do not change or use*/
+}qmiLocSupportedFeatureEnumT_v02;
+/**
+    @}
+  */
+
+/** @addtogroup loc_qmi_messages
+    @{
+  */
+/** Indication Message; Used by the control point to query QMI_LOC service supported features. */
+typedef struct {
+
+  /* Mandatory */
+  /*  Supported Feature Status */
+  qmiLocStatusEnumT_v02 status;
+  /**<   Status of the Query Supported Feature request.
+ Valid values: \n
+      - eQMI_LOC_SUCCESS (0) --  Request was completed successfully \n
+      - eQMI_LOC_GENERAL_FAILURE (1) --  Request failed because of a general failure \n
+      - eQMI_LOC_UNSUPPORTED (2) --  Request failed because it is not supported \n
+      - eQMI_LOC_INVALID_PARAMETER (3) --  Request failed because it contained invalid parameters \n
+      - eQMI_LOC_ENGINE_BUSY (4) --  Request failed because the engine is busy \n
+      - eQMI_LOC_PHONE_OFFLINE (5) --  Request failed because the phone is offline \n
+      - eQMI_LOC_TIMEOUT (6) --  Request failed because it timed out \n
+      - eQMI_LOC_CONFIG_NOT_SUPPORTED (7) --  Request failed because an undefined configuration was requested \n
+      - eQMI_LOC_INSUFFICIENT_MEMORY (8) --  Request failed because the engine could not allocate sufficient memory for the request \n
+      - eQMI_LOC_MAX_GEOFENCE_PROGRAMMED (9) --  Request failed because the maximum number of Geofences are already programmed \n
+      - eQMI_LOC_XTRA_VERSION_CHECK_FAILURE (10) --  Location service failed because of an XTRA version-based file format check failure
+ */
+
+  /* Mandatory */
+  /*   Supported feature */
+  uint32_t feature_len;  /**< Must be set to # of elements in feature */
+  uint8_t feature[QMI_LOC_SUPPORTED_FEATURE_LENGTH_V02];
+  /**<   This field describes which feature are supported in the running
+       QMI_LOC service. The array of unit8 is the bitmask where each bit
+       represents a feature enum. Bit 0 represents feature enum ID 0,
+       bit 1 represents feature enum ID 1, etc.
+       For example, if QMI_LOC spports feature enum 0,1,2,8,
+       feature_len is 2,
+       feature array is [7,1]
+       - Type: Array of uint8
+       - Maximum array length: 100
+  */
+}qmiLocGetSupportedFeatureIndMsgT_v02;  /* Message */
 /**
     @}
   */
@@ -15640,6 +16216,7 @@ typedef struct {
 //#define REMOVE_QMI_LOC_GET_SENSOR_PROPERTIES_V02
 //#define REMOVE_QMI_LOC_GET_SERVER_V02
 //#define REMOVE_QMI_LOC_GET_SERVICE_REVISION_V02
+//#define REMOVE_QMI_LOC_GET_SUPPORTED_FEATURE_V02
 //#define REMOVE_QMI_LOC_GET_SUPPORTED_FIELDS_V02
 //#define REMOVE_QMI_LOC_GET_SUPPORTED_MSGS_V02
 //#define REMOVE_QMI_LOC_GET_XTRA_T_SESSION_CONTROL_V02
@@ -15666,6 +16243,8 @@ typedef struct {
 //#define REMOVE_QMI_LOC_INJECT_WCDMA_CELL_INFO_V02
 //#define REMOVE_QMI_LOC_INJECT_WIFI_AP_DATA_V02
 //#define REMOVE_QMI_LOC_INJECT_WIFI_POSITION_V02
+//#define REMOVE_QMI_LOC_INJECT_XTRA_DATA_V02
+//#define REMOVE_QMI_LOC_INJECT_XTRA_PCID_V02
 //#define REMOVE_QMI_LOC_NOTIFY_WIFI_ATTACHMENT_STATUS_V02
 //#define REMOVE_QMI_LOC_NOTIFY_WIFI_ENABLED_STATUS_V02
 //#define REMOVE_QMI_LOC_NOTIFY_WIFI_STATUS_V02
@@ -16039,6 +16618,15 @@ typedef struct {
 #define QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02 0x00A6
 #define QMI_LOC_DELETE_GNSS_SERVICE_DATA_RESP_V02 0x00A6
 #define QMI_LOC_DELETE_GNSS_SERVICE_DATA_IND_V02 0x00A6
+#define QMI_LOC_INJECT_XTRA_DATA_REQ_V02 0x00A7
+#define QMI_LOC_INJECT_XTRA_DATA_RESP_V02 0x00A7
+#define QMI_LOC_INJECT_XTRA_DATA_IND_V02 0x00A7
+#define QMI_LOC_INJECT_XTRA_PCID_REQ_V02 0x00A8
+#define QMI_LOC_INJECT_XTRA_PCID_RESP_V02 0x00A8
+#define QMI_LOC_INJECT_XTRA_PCID_IND_V02 0x00A8
+#define QMI_LOC_GET_SUPPORTED_FEATURE_REQ_V02 0x00A9
+#define QMI_LOC_GET_SUPPORTED_FEATURE_RESP_V02 0x00A9
+#define QMI_LOC_GET_SUPPORTED_FEATURE_IND_V02 0x00A9
 /**
     @}
   */
