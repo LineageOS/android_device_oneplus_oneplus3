@@ -397,6 +397,23 @@ void LocEngAdapter::reportSv(GnssSvStatus &svStatus,
     }
 }
 
+
+void LocEngAdapter::reportSvMeasurement(GnssSvMeasurementSet &svMeasurementSet)
+{
+    // We send SvMeasurementSet to AmtProxy/ULPProxy to be forwarded as necessary.
+    if (! mUlp->reportSvMeasurement(svMeasurementSet)) {
+        //Send to Internal Adapter later if needed by LA
+    }
+}
+
+void LocEngAdapter::reportSvPolynomial(GnssSvPolynomial &svPolynomial)
+{
+    // We send SvMeasurementSet to AmtProxy/ULPProxy to be forwarded as necessary.
+    if (! mUlp->reportSvPolynomial(svPolynomial)) {
+       //Send to Internal Adapter later if needed by LA
+    }
+}
+
 void LocEngAdapter::setInSession(bool inSession)
 {
     mNavigating = inSession;
@@ -534,9 +551,8 @@ enum loc_api_adapter_err LocEngAdapter::setTime(GpsUtcTime time,
     if (mSupportsTimeInjection) {
         LOC_LOGD("%s:%d]: Injecting time", __func__, __LINE__);
         result = mLocApi->setTime(time, timeReference, uncertainty);
-    } else {
-        mSupportsTimeInjection = true;
     }
+
     return result;
 }
 
@@ -566,26 +582,10 @@ enum loc_api_adapter_err LocEngAdapter::setXtraVersionCheck(int check)
     return ret;
 }
 
-void LocEngAdapter::reportGpsMeasurementData(GpsData &gpsMeasurementData)
+void LocEngAdapter::reportGnssMeasurementData(GnssData &gnssMeasurementData)
 {
-    sendMsg(new LocEngReportGpsMeasurement(mOwner,
-                                           gpsMeasurementData));
-}
-
-/*
-  Update Registration Mask
- */
-void LocEngAdapter::updateRegistrationMask(LOC_API_ADAPTER_EVENT_MASK_T event,
-                                           loc_registration_mask_status isEnabled)
-{
-    LOC_LOGD("entering %s", __func__);
-    int result = LOC_API_ADAPTER_ERR_FAILURE;
-    result = mLocApi->updateRegistrationMask(event, isEnabled);
-    if (result == LOC_API_ADAPTER_ERR_SUCCESS) {
-        LOC_LOGD("%s] update registration mask succeed.", __func__);
-    } else {
-        LOC_LOGE("%s] update registration mask failed.", __func__);
-    }
+    sendMsg(new LocEngReportGnssMeasurement(mOwner,
+                                           gnssMeasurementData));
 }
 
 /*

@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2012,2014 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -37,8 +37,7 @@
 #include <grp.h>
 #include <sys/stat.h>
 
-#include "log_util.h"
-#include "platform_lib_includes.h"
+#include <platform_lib_includes.h>
 #include "loc_eng_dmn_conn_glue_msg.h"
 #include "loc_eng_dmn_conn_handler.h"
 #include "loc_eng_dmn_conn.h"

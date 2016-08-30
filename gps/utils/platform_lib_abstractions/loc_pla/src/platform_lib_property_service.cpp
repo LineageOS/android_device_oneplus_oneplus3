@@ -1,4 +1,4 @@
-/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -25,11 +25,15 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include "platform_lib_property_service.h"
 
-#ifndef _PLATFORM_LIB_TIME_H_
-#define _PLATFORM_LIB_TIME_H_
+#ifdef USE_GLIB
+#include <loc_stub_property_service.h>
+#else
+#include <cutils/properties.h>
+#endif /* USE_GLIB */
 
-int64_t systemTime(int clock);
-int64_t elapsedMillisSinceBoot();
-
-#endif
+int platform_lib_abstraction_property_get(const char *key, char *value, const char *default_value)
+{
+    return property_get(key, value, default_value);
+}

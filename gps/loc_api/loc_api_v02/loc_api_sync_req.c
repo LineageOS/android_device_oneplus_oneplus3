@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, 2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2012, 2015-2016, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -157,7 +157,8 @@ SIDE EFFECTS
 void loc_sync_process_ind(
       locClientHandleType    client_handle, /* handle of the client */
       uint32_t               ind_id ,      /* ind id */
-      void                   *ind_payload_ptr /* payload              */
+      void                   *ind_payload_ptr, /* payload              */
+      uint32_t               ind_payload_size  /* payload size         */
 )
 {
 
@@ -188,22 +189,18 @@ void loc_sync_process_ind(
       if ( (loc_sync_array.slot_in_use[i]) && (slot->client_handle == client_handle)
             && (ind_id == slot->recv_ind_id) && (!slot->ind_has_arrived))
       {
-         // copy the payload to the slot waiting for this ind
-         size_t payload_size = 0;
-
          LOC_LOGV("%s:%d]: found slot %d selected for ind %u \n",
                        __func__, __LINE__, i, ind_id);
 
-         if(true == locClientGetSizeByRespIndId(ind_id, &payload_size) &&
-            NULL != slot->recv_ind_payload_ptr && NULL != ind_payload_ptr)
+         if( NULL != slot->recv_ind_payload_ptr &&
+                 NULL != ind_payload_ptr && ind_payload_size > 0 )
          {
             LOC_LOGV("%s:%d]: copying ind payload size = %zu \n",
-                          __func__, __LINE__, payload_size);
+                          __func__, __LINE__, ind_payload_size);
 
-            memcpy(slot->recv_ind_payload_ptr, ind_payload_ptr, payload_size);
+            memcpy(slot->recv_ind_payload_ptr, ind_payload_ptr, ind_payload_size);
 
             consumed = true;
-
          }
          /* Received a callback while waiting, wake up thread to check it */
          if (slot->ind_is_waiting)

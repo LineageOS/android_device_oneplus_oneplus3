@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014,2016 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -32,7 +32,7 @@
 #include <dlfcn.h>
 #include <LocApiBase.h>
 #include <LocAdapterBase.h>
-#include <log_util.h>
+#include <platform_lib_log_util.h>
 #include <LocDualContext.h>
 
 namespace loc_core {
@@ -132,6 +132,7 @@ LocApiBase::LocApiBase(const MsgTask* msgTask,
     mMask(0), mSupportedMsg(0), mContext(context)
 {
     memset(mLocAdapters, 0, sizeof(mLocAdapters));
+    memset(mFeaturesSupported, 0, sizeof(mFeaturesSupported));
 }
 
 LOC_API_ADAPTER_EVENT_MASK_T LocApiBase::getEvtMask()
@@ -257,25 +258,50 @@ void LocApiBase::reportSv(GnssSvStatus &svStatus,
                   GpsLocationExtended &locationExtended,
                   void* svExt)
 {
+    const char* constellationString[] = { "Unknown", "GPS", "SBAS", "GLONASS",
+        "QZSS", "BEIDOU", "GALILEO" };
+
     // print the SV info before delivering
-    LOC_LOGV("num sv: %d\n  ephemeris mask: %dxn  almanac mask: %x\n  gps/glo/bds in use"
-             " mask: %x/%x/%x\n      sv: prn         snr       elevation      azimuth",
-             svStatus.num_svs, svStatus.ephemeris_mask,
-             svStatus.almanac_mask, svStatus.gps_used_in_fix_mask,
-             svStatus.glo_used_in_fix_mask, svStatus.bds_used_in_fix_mask);
-    for (int i = 0; i < svStatus.num_svs && i < GPS_MAX_SVS; i++) {
-        LOC_LOGV("   %d:   %d    %f    %f    %f",
-                 i,
-                 svStatus.sv_list[i].prn,
-                 svStatus.sv_list[i].snr,
-                 svStatus.sv_list[i].elevation,
-                 svStatus.sv_list[i].azimuth);
+    LOC_LOGV("num sv: %d\n"
+        "      sv: constellation svid         cN0"
+        "    elevation    azimuth    flags",
+        svStatus.num_svs);
+    for (int i = 0; i < svStatus.num_svs && i < GNSS_MAX_SVS; i++) {
+        if (svStatus.gnss_sv_list[i].constellation >
+            sizeof(constellationString) / sizeof(constellationString[0]) - 1) {
+            svStatus.gnss_sv_list[i].constellation = 0;
+        }
+        LOC_LOGV("   %03d: %*s  %02d    %f    %f    %f   0x%02X",
+            i,
+            13,
+            constellationString[svStatus.gnss_sv_list[i].constellation],
+            svStatus.gnss_sv_list[i].svid,
+            svStatus.gnss_sv_list[i].c_n0_dbhz,
+            svStatus.gnss_sv_list[i].elevation,
+            svStatus.gnss_sv_list[i].azimuth,
+            svStatus.gnss_sv_list[i].flags);
     }
     // loop through adapters, and deliver to all adapters.
     TO_ALL_LOCADAPTERS(
         mLocAdapters[i]->reportSv(svStatus,
-                                     locationExtended,
-                                     svExt)
+            locationExtended,
+            svExt)
+        );
+}
+
+void LocApiBase::reportSvMeasurement(GnssSvMeasurementSet &svMeasurementSet)
+{
+    // loop through adapters, and deliver to all adapters.
+    TO_ALL_LOCADAPTERS(
+        mLocAdapters[i]->reportSvMeasurement(svMeasurementSet)
+    );
+}
+
+void LocApiBase::reportSvPolynomial(GnssSvPolynomial &svPolynomial)
+{
+    // loop through adapters, and deliver to all adapters.
+    TO_ALL_LOCADAPTERS(
+        mLocAdapters[i]->reportSvPolynomial(svPolynomial)
     );
 }
 
@@ -358,16 +384,21 @@ void LocApiBase::saveSupportedMsgList(uint64_t supportedMsgList)
     mSupportedMsg = supportedMsgList;
 }
 
+void LocApiBase::saveSupportedFeatureList(uint8_t *featureList)
+{
+    memcpy((void *)mFeaturesSupported, (void *)featureList, sizeof(mFeaturesSupported));
+}
+
 void* LocApiBase :: getSibling()
     DEFAULT_IMPL(NULL)
 
 LocApiProxyBase* LocApiBase :: getLocApiProxy()
     DEFAULT_IMPL(NULL)
 
-void LocApiBase::reportGpsMeasurementData(GpsData &gpsMeasurementData)
+void LocApiBase::reportGnssMeasurementData(GnssData &gnssMeasurementData)
 {
     // loop through adapters, and deliver to all adapters.
-    TO_ALL_LOCADAPTERS(mLocAdapters[i]->reportGpsMeasurementData(gpsMeasurementData));
+    TO_ALL_LOCADAPTERS(mLocAdapters[i]->reportGnssMeasurementData(gnssMeasurementData));
 }
 
 enum loc_api_adapter_err LocApiBase::
@@ -446,6 +477,10 @@ enum loc_api_adapter_err LocApiBase::
 DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
 
 enum loc_api_adapter_err LocApiBase::
+    setNMEATypes (uint32_t typesMask)
+DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
+
+enum loc_api_adapter_err LocApiBase::
     setLPPConfig(uint32_t profile)
 DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
 
@@ -481,12 +516,12 @@ enum loc_api_adapter_err LocApiBase::
 DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
 
 enum loc_api_adapter_err LocApiBase::
-    setExtPowerConfig(int isBatteryCharging)
+    setAGLONASSProtocol(unsigned long aGlonassProtocol)
 DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
 
 enum loc_api_adapter_err LocApiBase::
-    setAGLONASSProtocol(unsigned long aGlonassProtocol)
-DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
+        setLPPeProtocol(unsigned long lppeCP, unsigned long lppeUP)
+    DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
 
 enum loc_api_adapter_err LocApiBase::
    getWwanZppFix(GpsLocation& zppLoc)
@@ -541,13 +576,18 @@ enum loc_api_adapter_err LocApiBase::
     setXtraVersionCheck(enum xtra_version_check check)
 DEFAULT_IMPL(LOC_API_ADAPTER_ERR_SUCCESS)
 
-int LocApiBase::
-    updateRegistrationMask(LOC_API_ADAPTER_EVENT_MASK_T event,
-                           loc_registration_mask_status isEnabled)
-DEFAULT_IMPL(-1)
-
 bool LocApiBase::
     gnssConstellationConfig()
 DEFAULT_IMPL(false)
+
+bool LocApiBase::
+    isFeatureSupported(uint8_t featureVal)
+{
+    uint8_t arrayIndex = featureVal >> 3;
+    uint8_t bitPos = featureVal & 7;
+
+    if (arrayIndex >= MAX_FEATURE_LENGTH) return false;
+    return ((mFeaturesSupported[arrayIndex] >> bitPos ) & 0x1);
+}
 
 } // namespace loc_core

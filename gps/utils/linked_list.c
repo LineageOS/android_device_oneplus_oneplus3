@@ -1,4 +1,4 @@
-/* Copyright (c) 2011, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011,2014 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -31,8 +31,7 @@
 #include <string.h>
 
 #define LOG_TAG "LocSvc_utils_ll"
-#include "log_util.h"
-#include "platform_lib_includes.h"
+#include <platform_lib_includes.h>
 #include <stdlib.h>
 #include <stdint.h>
 

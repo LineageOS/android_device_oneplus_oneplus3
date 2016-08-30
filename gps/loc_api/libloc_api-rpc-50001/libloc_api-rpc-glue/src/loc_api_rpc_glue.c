@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2012,2014 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -62,7 +62,6 @@
 #endif /* USE_GLIB */
 
 /* Logging Improvement */
-#include "log_util.h"
 #include "platform_lib_includes.h"
 /*Maximum number of Modem init*/
 #define RPC_TRY_NUM 10

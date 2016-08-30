@@ -38,7 +38,7 @@
 #include <cutils/properties.h>
 #include "loc_target.h"
 #include "loc_log.h"
-#include "log_util.h"
+#include <platform_lib_includes.h>
 
 #define APQ8064_ID_1 "109"
 #define APQ8064_ID_2 "153"
@@ -49,11 +49,12 @@
 #define APQ8074_ID_1 "184"
 
 #define LINE_LEN 100
-#define STR_LIQUID    "Liquid"
-#define STR_SURF      "Surf"
-#define STR_MTP       "MTP"
-#define STR_APQ       "apq"
-#define STR_AUTO      "auto"
+#define STR_LIQUID      "Liquid"
+#define STR_SURF        "Surf"
+#define STR_MTP         "MTP"
+#define STR_APQ         "apq"
+#define STR_APQ_NO_WGR  "baseband_apq_nowgr"
+#define STR_AUTO        "auto"
 #define IS_STR_END(c) ((c) == '\0' || (c) == '\n' || (c) == '\r')
 #define LENGTH(s) (sizeof(s) - 1)
 #define GPS_CHECK_NO_ERROR 0
@@ -112,7 +113,7 @@ static bool is_qca1530(void)
 
     for (i = 0; i < QCA1530_DETECT_TIMEOUT; ++i)
     {
-        ret = property_get(qca1530_property_name, buf, NULL);
+        ret = platform_lib_abstraction_property_get(qca1530_property_name, buf, NULL);
         if (ret < 0)
         {
             LOC_LOGV( "qca1530: property %s is not accessible, ret=%d",
@@ -174,6 +175,20 @@ void loc_get_platform_name(char *platform_name, int array_length)
     }
 }
 
+/*The character array passed to this function should have length
+  of atleast PROPERTY_VALUE_MAX*/
+void loc_get_auto_platform_name(char *platform_name, int array_length)
+{
+    if(platform_name && (array_length >= PROPERTY_VALUE_MAX)) {
+        property_get("ro.hardware.type", platform_name, "");
+        LOC_LOGD("%s:%d]: Autoplatform name: %s\n", __func__, __LINE__, platform_name);
+    }
+    else {
+        LOC_LOGE("%s:%d]: Null parameter or array length less than PROPERTY_VALUE_MAX\n",
+                 __func__, __LINE__);
+    }
+}
+
 unsigned int loc_get_target(void)
 {
     if (gTarget != (unsigned int)-1)
@@ -190,6 +205,7 @@ unsigned int loc_get_target(void)
     char rd_id[LINE_LEN];
     char rd_mdm[LINE_LEN];
     char baseband[LINE_LEN];
+    char rd_auto_platform[LINE_LEN];
 
     if (is_qca1530()) {
         gTarget = TARGET_QCA1530;
@@ -208,16 +224,26 @@ unsigned int loc_get_target(void)
     } else {
         read_a_line(id_dep, rd_id, LINE_LEN);
     }
-    if( !memcmp(baseband, STR_AUTO, LENGTH(STR_AUTO)) )
+
+    /*check automotive platform*/
+    loc_get_auto_platform_name(rd_auto_platform, sizeof(rd_auto_platform));
+    if( !memcmp(rd_auto_platform, STR_AUTO, LENGTH(STR_AUTO)) )
     {
           gTarget = TARGET_AUTO;
           goto detected;
     }
+
+    if( !memcmp(baseband, STR_APQ_NO_WGR, LENGTH(STR_APQ_NO_WGR)) ){
+
+        gTarget = TARGET_NO_GNSS;
+        goto detected;
+    }
+
     if( !memcmp(baseband, STR_APQ, LENGTH(STR_APQ)) ){
 
         if( !memcmp(rd_id, MPQ8064_ID_1, LENGTH(MPQ8064_ID_1))
             && IS_STR_END(rd_id[LENGTH(MPQ8064_ID_1)]) )
-            gTarget = TARGET_MPQ;
+            gTarget = TARGET_NO_GNSS;
         else
             gTarget = TARGET_APQ_SA;
     }

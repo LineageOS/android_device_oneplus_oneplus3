@@ -1,4 +1,4 @@
-/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -29,7 +29,22 @@
 #ifndef __PLATFORM_LIB_MACROS_H__
 #define __PLATFORM_LIB_MACROS_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef USE_GLIB
 #include <sys/time.h>
+#include <string.h>
+#include <stdlib.h>
+#ifndef OFF_TARGET
+#include <glib.h>
+#define strlcat g_strlcat
+#define strlcpy g_strlcpy
+#else
+#define strlcat strncat
+#define strlcpy strncpy
+#endif
 
 #define TS_PRINTF(format, x...)                                \
 {                                                              \
@@ -43,39 +58,16 @@
   fprintf(stdout,"%02d:%02d:%02d.%06ld]" format "\n", hh, mm, ss, tv.tv_usec,##x);    \
 }
 
-
-#ifdef USE_GLIB
-
-#define strlcat g_strlcat
-#define strlcpy g_strlcpy
-
 #define ALOGE(format, x...) TS_PRINTF("E/%s (%d): " format , LOG_TAG, getpid(), ##x)
 #define ALOGW(format, x...) TS_PRINTF("W/%s (%d): " format , LOG_TAG, getpid(), ##x)
 #define ALOGI(format, x...) TS_PRINTF("I/%s (%d): " format , LOG_TAG, getpid(), ##x)
 #define ALOGD(format, x...) TS_PRINTF("D/%s (%d): " format , LOG_TAG, getpid(), ##x)
 #define ALOGV(format, x...) TS_PRINTF("V/%s (%d): " format , LOG_TAG, getpid(), ##x)
 
-#define GETTID_PLATFORM_LIB_ABSTRACTION (syscall(SYS_gettid))
-
-#define LOC_EXT_CREATE_THREAD_CB_PLATFORM_LIB_ABSTRACTION createPthread
-#define ELAPSED_MILLIS_SINCE_BOOT_PLATFORM_LIB_ABSTRACTION (elapsedMillisSinceBoot())
-
-
-#else
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-pid_t gettid(void);
+#endif /* USE_GLIB */
 
 #ifdef __cplusplus
 }
-#endif
+#endif /*__cplusplus */
 
-#define GETTID_PLATFORM_LIB_ABSTRACTION (gettid())
-#define LOC_EXT_CREATE_THREAD_CB_PLATFORM_LIB_ABSTRACTION android::AndroidRuntime::createJavaThread
-#define ELAPSED_MILLIS_SINCE_BOOT_PLATFORM_LIB_ABSTRACTION  (android::elapsedRealtime())
-
-#endif
-
-#endif
+#endif /* __PLATFORM_LIB_MACROS_H__ */

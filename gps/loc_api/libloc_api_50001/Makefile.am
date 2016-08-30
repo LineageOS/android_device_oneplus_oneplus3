@@ -1,7 +1,9 @@
 AM_CFLAGS = \
      -I../../utils \
      -I../../platform_lib_abstractions \
+     -I$(WORKSPACE)/gps-noship/flp \
      -fno-short-enums \
+      -D__func__=__PRETTY_FUNCTION__ \
      -DFEATURE_GNSS_BIT_API
 
 libloc_adapter_so_la_SOURCES = loc_eng_log.cpp LocEngAdapter.cpp

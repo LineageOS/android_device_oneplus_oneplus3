@@ -1,4 +1,4 @@
-/* Copyright (c) 2011, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011,2013,2016, The Linux Foundation. All rights reserved
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -70,7 +70,8 @@ extern void loc_sync_req_init();
 extern void loc_sync_process_ind(
       locClientHandleType     client_handle,     /* handle of the client */
       uint32_t                ind_id ,      /* respInd id */
-      void                    *ind_payload_ptr /* payload              */
+      void                    *ind_payload_ptr, /* payload              */
+      uint32_t                ind_payload_size  /* payload size */
 );
 
 /* Thread safe synchronous request,  using Loc API status return code */
