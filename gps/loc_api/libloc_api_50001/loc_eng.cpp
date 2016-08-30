@@ -1,4 +1,4 @@
-/* Copyright (c) 2009-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -843,9 +843,9 @@ void LocEngReportSv::proc() const {
 
     if (locEng->mute_session_state != LOC_MUTE_SESS_IN_SESSION)
     {
-        if (locEng->sv_status_cb != NULL) {
-            locEng->sv_status_cb((GpsSvStatus*)&(mSvStatus),
-                                 (void*)mSvExt);
+        if (locEng->gnss_sv_status_cb != NULL) {
+            LOC_LOGE("Calling gnss_sv_status_cb");
+            locEng->gnss_sv_status_cb((GnssSvStatus*)&(mSvStatus));
         }
 
         if (locEng->generateNmea)
@@ -1375,6 +1375,32 @@ struct LocEngSetCapabilities : public LocMsg {
     }
 };
 
+struct LocEngSetSystemInfo : public LocMsg {
+    loc_eng_data_s_type* mLocEng;
+    inline LocEngSetSystemInfo(loc_eng_data_s_type* locEng) :
+        LocMsg(), mLocEng(locEng)
+    {
+        locallog();
+    }
+    inline virtual void proc() const {
+        if (NULL != mLocEng->set_capabilities_cb) {
+            LOC_LOGV("calling set_system_info_cb 0x%x",
+                mLocEng->adapter->mGnssInfo.year_of_hw);
+            mLocEng->set_system_info_cb(&(mLocEng->adapter->mGnssInfo));
+        }
+        else {
+            LOC_LOGV("set_system_info_cb is NULL.\n");
+        }
+    }
+    inline void locallog() const
+    {
+        LOC_LOGV("LocEngSetSystemInfo");
+    }
+    inline virtual void log() const
+    {
+        locallog();
+    }
+};
 //        case LOC_ENG_MSG_LOC_INIT:
 struct LocEngInit : public LocMsg {
     loc_eng_data_s_type* mLocEng;
@@ -1387,6 +1413,7 @@ struct LocEngInit : public LocMsg {
         loc_eng_reinit(*mLocEng);
         // set the capabilities
         mLocEng->adapter->sendMsg(new LocEngSetCapabilities(mLocEng));
+        mLocEng->adapter->sendMsg(new LocEngSetSystemInfo(mLocEng));
     }
     inline void locallog() const
     {
@@ -1606,10 +1633,13 @@ struct LocEngGnssConstellationConfig : public LocMsg {
         locallog();
     }
     inline virtual void proc() const {
+        mAdapter->mGnssInfo.size = sizeof(GnssSystemInfo);
         if (mAdapter->gnssConstellationConfig()) {
             LOC_LOGV("Modem supports GNSS measurements\n");
             gps_conf.CAPABILITIES |= GPS_CAPABILITY_MEASUREMENTS;
+            mAdapter->mGnssInfo.year_of_hw = 2016;
         } else {
+            mAdapter->mGnssInfo.year_of_hw = 2015;
             LOC_LOGV("Modem does not support GNSS measurements\n");
         }
     }
@@ -1622,50 +1652,59 @@ struct LocEngGnssConstellationConfig : public LocMsg {
 };
 
 //        case LOC_ENG_MSG_REPORT_GNSS_MEASUREMENT:
-LocEngReportGpsMeasurement::LocEngReportGpsMeasurement(void* locEng,
-                                                       GpsData &gpsData) :
-    LocMsg(), mLocEng(locEng), mGpsData(gpsData)
+LocEngReportGnssMeasurement::LocEngReportGnssMeasurement(void* locEng,
+                                                       GnssData &gnssData) :
+    LocMsg(), mLocEng(locEng), mGnssData(gnssData)
 {
     locallog();
 }
-void LocEngReportGpsMeasurement::proc() const {
+void LocEngReportGnssMeasurement::proc() const {
     loc_eng_data_s_type* locEng = (loc_eng_data_s_type*) mLocEng;
     if (locEng->mute_session_state != LOC_MUTE_SESS_IN_SESSION)
     {
-        if (locEng->gps_measurement_cb != NULL) {
-            locEng->gps_measurement_cb((GpsData*)&(mGpsData));
+        if (locEng->gnss_measurement_cb != NULL) {
+            LOC_LOGV("Calling gnss_measurement_cb");
+            locEng->gnss_measurement_cb((GnssData*)&(mGnssData));
         }
     }
 }
-void LocEngReportGpsMeasurement::locallog() const {
+void LocEngReportGnssMeasurement::locallog() const {
     IF_LOC_LOGV {
         LOC_LOGV("%s:%d]: Received in GPS HAL."
                  "GNSS Measurements count: %d \n",
-                 __func__, __LINE__, mGpsData.measurement_count);
-        for (int i =0; i< mGpsData.measurement_count && i < GPS_MAX_SVS; i++) {
+                 __func__, __LINE__, mGnssData.measurement_count);
+        for (int i =0; i< mGnssData.measurement_count && i < GNSS_MAX_SVS; i++) {
                 LOC_LOGV(" GNSS measurement data in GPS HAL: \n"
-                         " GPS_HAL => Measurement ID | prn | time_offset_ns | state |"
-                         " received_gps_tow_ns| c_n0_dbhz | pseudorange_rate_mps |"
+                         " GPS_HAL => Measurement ID | svid | time_offset_ns | state |"
+                         " c_n0_dbhz | pseudorange_rate_mps |"
                          " pseudorange_rate_uncertainty_mps |"
                          " accumulated_delta_range_state | flags \n"
-                         " GPS_HAL => %d | %d | %f | %d | %lld | %f | %f | %f | %d | %d \n",
+                         " GPS_HAL => %d | %d | %f | %d | %f | %f | %f | %d | %d \n",
                          i,
-                         mGpsData.measurements[i].prn,
-                         mGpsData.measurements[i].time_offset_ns,
-                         mGpsData.measurements[i].state,
-                         mGpsData.measurements[i].received_gps_tow_ns,
-                         mGpsData.measurements[i].c_n0_dbhz,
-                         mGpsData.measurements[i].pseudorange_rate_mps,
-                         mGpsData.measurements[i].pseudorange_rate_uncertainty_mps,
-                         mGpsData.measurements[i].accumulated_delta_range_state,
-                         mGpsData.measurements[i].flags);
+                         mGnssData.measurements[i].svid,
+                         mGnssData.measurements[i].time_offset_ns,
+                         mGnssData.measurements[i].state,
+                         mGnssData.measurements[i].c_n0_dbhz,
+                         mGnssData.measurements[i].pseudorange_rate_mps,
+                         mGnssData.measurements[i].pseudorange_rate_uncertainty_mps,
+                         mGnssData.measurements[i].accumulated_delta_range_state,
+                         mGnssData.measurements[i].flags);
         }
-        LOC_LOGV(" GPS_HAL => Clocks Info: type | time_ns \n"
-                 " GPS_HAL => Clocks Info: %d | %lld", mGpsData.clock.type,
-                 mGpsData.clock.time_ns);
+        LOC_LOGV(" GPS_HAL => Clocks Info: \n"
+                 " time_ns | full_bias_ns | bias_ns | bias_uncertainty_ns | "
+                 " drift_nsps | drift_uncertainty_nsps | hw_clock_discontinuity_count | flags"
+                 " GPS_HAL => Clocks Info: %lld | %lld | %g | %g | %g | %g | %d | 0x%04x\n",
+            mGnssData.clock.time_ns,
+            mGnssData.clock.full_bias_ns,
+            mGnssData.clock.bias_ns,
+            mGnssData.clock.bias_uncertainty_ns,
+            mGnssData.clock.drift_nsps,
+            mGnssData.clock.drift_uncertainty_nsps,
+            mGnssData.clock.hw_clock_discontinuity_count,
+            mGnssData.clock.flags);
     }
 }
-inline void LocEngReportGpsMeasurement::log() const {
+inline void LocEngReportGnssMeasurement::log() const {
     locallog();
 }
 
@@ -1727,6 +1766,8 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
     loc_eng_data.acquire_wakelock_cb = callbacks->acquire_wakelock_cb;
     loc_eng_data.release_wakelock_cb = callbacks->release_wakelock_cb;
     loc_eng_data.request_utc_time_cb = callbacks->request_utc_time_cb;
+    loc_eng_data.set_system_info_cb = callbacks->set_system_info_cb;
+    loc_eng_data.gnss_sv_status_cb = callbacks->gnss_sv_status_cb;
     loc_eng_data.location_ext_parser = callbacks->location_ext_parser ?
         callbacks->location_ext_parser : noProc;
     loc_eng_data.sv_ext_parser = callbacks->sv_ext_parser ?
@@ -1751,6 +1792,8 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
         new LocEngAdapter(event, &loc_eng_data, context,
                           (LocThread::tCreate)callbacks->create_thread_cb);
 
+    loc_eng_data.adapter->mGnssInfo.size = sizeof(GnssSystemInfo);
+    loc_eng_data.adapter->mGnssInfo.year_of_hw = 2015;
     LOC_LOGD("loc_eng_init created client, id = %p\n",
              loc_eng_data.adapter);
     loc_eng_data.adapter->sendMsg(new LocEngInit(&loc_eng_data));
@@ -2922,8 +2965,8 @@ int loc_eng_gps_measurement_init(loc_eng_data_s_type &loc_eng_data,
 {
     ENTRY_LOG_CALLFLOW();
 
-    STATE_CHECK((NULL == loc_eng_data.gps_measurement_cb),
-                "gps measurement already initialized",
+    STATE_CHECK((NULL == loc_eng_data.gnss_measurement_cb),
+                "gnss measurement already initialized",
                 return GPS_MEASUREMENT_ERROR_ALREADY_INIT);
     STATE_CHECK((callbacks != NULL),
                 "callbacks can not be NULL",
@@ -2939,7 +2982,7 @@ int loc_eng_gps_measurement_init(loc_eng_data_s_type &loc_eng_data,
                                                         event,
                                                         LOC_REGISTRATION_MASK_ENABLED));
     // set up the callback
-    loc_eng_data.gps_measurement_cb = callbacks->measurement_callback;
+    loc_eng_data.gnss_measurement_cb = callbacks->gnss_measurement_callback;
     LOC_LOGD ("%s, event masks updated successfully", __func__);
 
     return GPS_MEASUREMENT_OPERATION_SUCCESS;
@@ -2974,6 +3017,6 @@ void loc_eng_gps_measurement_close(loc_eng_data_s_type &loc_eng_data)
                                                           event,
                                                           LOC_REGISTRATION_MASK_DISABLED));
     // set up the callback
-    loc_eng_data.gps_measurement_cb = NULL;
+    loc_eng_data.gnss_measurement_cb = NULL;
     EXIT_LOG(%d, 0);
 }

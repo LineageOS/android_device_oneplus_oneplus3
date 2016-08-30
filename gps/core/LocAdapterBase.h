@@ -111,7 +111,7 @@ public:
                                  const void* data);
     inline virtual bool isInSession() { return false; }
     ContextBase* getContext() const { return mContext; }
-    virtual void reportGpsMeasurementData(GpsData &gpsMeasurementData);
+    virtual void reportGnssMeasurementData(GnssData &gnssMeasurementData);
 };
 
 } // namespace loc_core

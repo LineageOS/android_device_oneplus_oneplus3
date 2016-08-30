@@ -130,7 +130,7 @@ public:
     void reportDataCallClosed();
     void requestNiNotify(GpsNiNotification &notify, const void* data);
     void saveSupportedMsgList(uint64_t supportedMsgList);
-    void reportGpsMeasurementData(GpsData &gpsMeasurementData);
+    void reportGnssMeasurementData(GnssData &gnssMeasurementData);
 
     // downward calls
     // All below functions are to be defined by adapter specific modules:

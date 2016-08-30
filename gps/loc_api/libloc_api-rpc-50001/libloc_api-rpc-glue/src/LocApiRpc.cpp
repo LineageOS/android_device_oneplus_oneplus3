@@ -797,7 +797,7 @@ void LocApiRpc::reportPosition(const rpc_loc_parsed_position_s_type *location_re
 
 void LocApiRpc::reportSv(const rpc_loc_gnss_info_s_type *gnss_report_ptr)
 {
-    GnssSvStatus     SvStatus = {0};
+    QtiGnssSvStatus     SvStatus = {0};
     GpsLocationExtended locationExtended = {0};
     locationExtended.size = sizeof(locationExtended);
     int             num_svs_max = 0;
