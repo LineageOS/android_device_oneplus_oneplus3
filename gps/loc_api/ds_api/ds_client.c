@@ -35,8 +35,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <wireless_data_service_v01.h>
-#include <utils/Log.h>
-#include <log_util.h>
 #include <loc_log.h>
 #include <qmi_client.h>
 #include <qmi_idl_lib.h>
@@ -45,8 +43,8 @@
 #include <qmi_cci_common.h>
 #include <dsi_netctrl.h>
 #include <ds_client.h>
-
-#include<sys/time.h>
+#include <sys/time.h>
+#include <platform_lib_includes.h>
 
 /**
  * @file

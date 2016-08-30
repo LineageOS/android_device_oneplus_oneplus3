@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2016, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -221,6 +221,16 @@ static const locClientEventIndTableStructT locClientEventIndTable[]= {
   { QMI_LOC_EVENT_GEOFENCE_PROXIMITY_NOTIFICATION_IND_V02,
     sizeof(qmiLocEventGeofenceProximityIndMsgT_v02),
     QMI_LOC_EVENT_MASK_GEOFENCE_PROXIMITY_NOTIFICATION_V02},
+
+    //GNSS Measurement Indication
+   { QMI_LOC_EVENT_GNSS_MEASUREMENT_REPORT_IND_V02,
+     sizeof(qmiLocEventGnssSvMeasInfoIndMsgT_v02),
+     QMI_LOC_EVENT_MASK_GNSS_MEASUREMENT_REPORT_V02 },
+
+    //GNSS Measurement Indication
+   { QMI_LOC_EVENT_SV_POLYNOMIAL_REPORT_IND_V02,
+    sizeof(qmiLocEventGnssSvPolyIndMsgT_v02),
+    QMI_LOC_EVENT_MASK_GNSS_SV_POLYNOMIAL_REPORT_V02 },
 
   // for GDT
   { QMI_LOC_EVENT_GDT_UPLOAD_BEGIN_STATUS_REQ_IND_V02,
@@ -613,9 +623,19 @@ static const locClientRespIndTableStructT locClientRespIndTable[]= {
    { QMI_LOC_GDT_DOWNLOAD_END_STATUS_IND_V02,
      sizeof(qmiLocGdtDownloadEndStatusIndMsgT_v02) },
 
+   { QMI_LOC_GET_SUPPORTED_FEATURE_IND_V02,
+     sizeof(qmiLocGetSupportedFeatureIndMsgT_v02) },
+
    //Delete Gnss Service Data Resp Ind
    { QMI_LOC_DELETE_GNSS_SERVICE_DATA_IND_V02,
-     sizeof(qmiLocDeleteGNSSServiceDataIndMsgT_v02) }
+     sizeof(qmiLocDeleteGNSSServiceDataIndMsgT_v02) },
+
+   // for XTRA Client 2.0
+   { QMI_LOC_INJECT_XTRA_DATA_IND_V02,
+     sizeof(qmiLocInjectXtraDataIndMsgT_v02) },
+
+   { QMI_LOC_INJECT_XTRA_PCID_IND_V02,
+     sizeof(qmiLocInjectXtraPcidIndMsgT_v02) }
 };
 
 
@@ -993,6 +1013,7 @@ static void locClientIndCb
               (locClientHandleType)pCallbackData,
               msg_id,
               respIndUnion,
+              indSize,
               pCallbackData->pClientCookie);
         }
       }
@@ -1511,11 +1532,30 @@ static bool validateRequest(
         *pOutLen = sizeof(qmiLocGdtDownloadEndStatusReqMsgT_v02);
         break;
     }
-	
-	case QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02:
+
+    case QMI_LOC_GET_SUPPORTED_FEATURE_REQ_V02:
+    {
+        *pOutLen = sizeof(qmiLocGetSupportedFeatureReqMsgT_v02);
+        break;
+    }
+
+    case QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02:
     {
       *pOutLen = sizeof(qmiLocDeleteGNSSServiceDataReqMsgT_v02);
       break;
+    }
+
+    // XTRA Client 2.0
+    case QMI_LOC_INJECT_XTRA_DATA_REQ_V02:
+    {
+        *pOutLen = sizeof(qmiLocInjectXtraDataReqMsgT_v02);
+        break;
+    }
+
+    case QMI_LOC_INJECT_XTRA_PCID_REQ_V02:
+    {
+        *pOutLen = sizeof(qmiLocInjectXtraPcidReqMsgT_v02);
+        break;
     }
 
     // ALL requests with no payload

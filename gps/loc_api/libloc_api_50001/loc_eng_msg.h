@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -34,16 +34,16 @@
 #include <gps_extended.h>
 #include <stdlib.h>
 #include <string.h>
-#include <log_util.h>
 #include <loc_eng_log.h>
 #include <loc_eng.h>
 #include <MsgTask.h>
 #include <LocEngAdapter.h>
+#include <platform_lib_includes.h>
 
 #ifndef SSID_BUF_SIZE
     #define SSID_BUF_SIZE (32+1)
 #endif
-#ifdef USE_GLIB
+#if defined(USE_GLIB) && !defined(OFF_TARGET)
 
 #include <glib.h>
 
@@ -289,11 +289,11 @@ struct LocEngGetZpp : public LocMsg {
     void send() const;
 };
 
-struct LocEngReportGpsMeasurement : public LocMsg {
+struct LocEngReportGnssMeasurement : public LocMsg {
     void* mLocEng;
-    const GpsData mGpsData;
-    LocEngReportGpsMeasurement(void* locEng,
-                               GpsData &gpsData);
+    const GnssData mGnssData;
+    LocEngReportGnssMeasurement(void* locEng,
+                               GnssData &gnssData);
     virtual void proc() const;
     void locallog() const;
     virtual void log() const;

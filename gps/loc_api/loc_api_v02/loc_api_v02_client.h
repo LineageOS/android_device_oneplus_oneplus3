@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2016, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -697,6 +697,9 @@ typedef union
     const qmiLocQueryAonConfigReqMsgT_v02 *pQueryAonConfigReq;
     /*QMI_LOC_QUERY_AON_CONFIG_REQ_V02*/
 
+    const qmiLocGetSupportedFeatureReqMsgT_v02 *pGetSupportedFeatureReq;
+    /* QMI_LOC_GET_SUPPORTED_FEATURE_REQ_V02*/
+
     const qmiLocGtpApStatusReqMsgT_v02* pGtpApStatusReq;
     /* QMI_LOC_GTP_AP_STATUS_REQ_V02 */
 
@@ -711,9 +714,16 @@ typedef union
 
     const qmiLocGdtDownloadEndStatusReqMsgT_v02* pGdtDownloadEndStatusReq;
     /* QMI_LOC_GDT_DOWNLOAD_END_STATUS_REQ_V02*/
-	
-	const qmiLocDeleteGNSSServiceDataReqMsgT_v02* pDeleteGNSSServiceDataReq;
-	/* QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02*/
+
+    const qmiLocDeleteGNSSServiceDataReqMsgT_v02* pDeleteGNSSServiceDataReq;
+    /* QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02*/
+
+    // XTRA Client 2.0
+    const qmiLocInjectXtraDataReqMsgT_v02 *pInjectXtraDataReq;
+    /*QMI_LOC_INJECT_XTRA_DATA_REQ_V02*/
+
+    const qmiLocInjectXtraPcidReqMsgT_v02 *pInjectXtraPcidReq;
+    /*QMI_LOC_INJECT_XTRA_PCID_REQ_V02*/
 }locClientReqUnionType;
 
 
@@ -911,6 +921,18 @@ typedef union
         The eventIndId field in the event indication callback is set to
         QMI_LOC_EVENT_GEOFENCE_PROXIMITY_NOTIFICATION_IND_V02. @newpagetable */
 
+   const qmiLocEventGnssSvMeasInfoIndMsgT_v02* pGnssSvRawInfoEvent;
+
+   /**< Sent by the engine when GNSS measurements are available
+        The eventIndId field in the event indication callback is set to
+        QMI_LOC_EVENT_GNSS_MEASUREMENT_REPORT_IND_V02. @newpagetable */
+
+   const qmiLocEventGnssSvPolyIndMsgT_v02* pGnssSvPolyInfoEvent;
+
+   /**< Sent by the engine when GNSS measurements are available
+        The eventIndId field in the event indication callback is set to
+        QMI_LOC_EVENT_SV_POLYNOMIAL_REPORT_IND_V02. @newpagetable */
+
    const qmiLocEventGdtUploadBeginStatusReqIndMsgT_v02* pGdtUploadBeginEvent;
    /**< Sent by the engine to notify the client about a GDT upload
         begine event.
@@ -924,11 +946,6 @@ typedef union
 
        The eventIndId field in the event indication callback is set to
        QMI_LOC_EVENT_GDT_UPLOAD_END_REQ_IND_V02. @newpagetable */
-
-   const qmiLocEventGnssSvMeasInfoIndMsgT_v02* pGnssSvRawInfoEvent;
-   /**< Sent by the engine to report GNSS measurement.
-        The eventIndId field in the event indication callback is set to
-        QMI_LOC_EVENT_GNSS_MEASUREMENT_REPORT_IND_V02. @newpagetable */
 
    const qmiLocEventDbtPositionReportIndMsgT_v02 *pDbtPositionReportEvent;
    /**< Sent by the engine to notify the client of a distance based
@@ -1402,6 +1419,9 @@ typedef union
     const qmiLocQueryAonConfigIndMsgT_v02 *pQueryAonConfigInd;
     /*QMI_LOC_QUERY_AON_CONFIG_IND_V02*/
 
+    const qmiLocGetSupportedFeatureIndMsgT_v02 *pGetSupportedFeatureInd;
+    /*QMI_LOC_GET_SUPPORTED_FEATURE_IND_V02*/
+
     const qmiLocGtpApStatusIndMsgT_v02 *pGtpApStatusInd;
     /*QMI_LOC_GTP_AP_STATUS_IND_V02*/
 
@@ -1416,9 +1436,9 @@ typedef union
 
     const qmiLocGdtDownloadEndStatusIndMsgT_v02 *pGdtDownloadEndStatusInd;
     /*QMI_LOC_GDT_DOWNLOAD_END_STATUS_IND_V02*/
-	
-	const qmiLocDeleteGNSSServiceDataIndMsgT_v02 *pDeleteGNSSServiceDataInd;
-	/* QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02*/
+
+    const qmiLocDeleteGNSSServiceDataIndMsgT_v02 *pDeleteGNSSServiceDataInd;
+    /* QMI_LOC_DELETE_GNSS_SERVICE_DATA_REQ_V02*/
 }locClientRespIndUnionType;
 
 /** @} */ /* end_addtogroup data_types */
@@ -1498,6 +1518,7 @@ typedef void  (*locClientRespIndCbType)(
       locClientHandleType handle,
       uint32_t respIndId,
       const locClientRespIndUnionType respIndPayload,
+      uint32_t respIndPayloadSize,
       void *pClientCookie
 );
 

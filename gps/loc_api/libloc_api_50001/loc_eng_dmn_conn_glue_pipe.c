@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2012,2014 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -37,8 +37,7 @@
 #include <sys/stat.h>
 
 #include "loc_eng_dmn_conn_glue_pipe.h"
-#include "log_util.h"
-#include "platform_lib_includes.h"
+#include <platform_lib_includes.h>
 /*===========================================================================
 FUNCTION    loc_eng_dmn_conn_glue_pipeget
 
@@ -110,8 +109,10 @@ SIDE EFFECTS
 int loc_eng_dmn_conn_glue_piperemove(const char * pipe_name, int fd)
 {
     close(fd);
-    if (pipe_name) unlink(pipe_name);
-    LOC_LOGD("fd = %d, %s\n", fd, pipe_name);
+    if (pipe_name != NULL) {
+        unlink(pipe_name);
+        LOC_LOGD("fd = %d, %s\n", fd, pipe_name);
+    }
     return 0;
 }
 

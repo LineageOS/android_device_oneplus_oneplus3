@@ -28,7 +28,7 @@
  */
 #include <stdio.h>
 #include <string.h>
-#include <log_util.h>
+#include <platform_lib_log_util.h>
 #include <loc_misc_utils.h>
 #include <ctype.h>
 

@@ -54,7 +54,11 @@ extern "C" {
 /**
  * @brief Library name for loading DS client
  */
+#ifdef USE_GLIB
+#define DS_CLIENT_LIB_NAME "libloc_ds_api.so.1"
+#else
 #define DS_CLIENT_LIB_NAME "libloc_ds_api.so"
+#endif
 
 typedef void* dsClientHandleType;
 
