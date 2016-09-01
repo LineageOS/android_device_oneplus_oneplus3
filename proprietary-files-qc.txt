@@ -130,9 +130,6 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 
 # GPS
 bin/loc_launcher
-bin/lowi-server
-bin/xtwifi-client
-bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 framework/com.qti.location.sdk.jar
@@ -141,7 +138,6 @@ framework/com.qti.location.sdk.jar
 lib/libloc_ds_api.so|bf21a8e6c04232dabc8de252a52f03b8f23dca98
 lib64/libloc_ds_api.so|33022f3539db6b2201ed6efad05dcfa1e65db387
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
--priv-app/xtra_t_app/xtra_t_app.apk|e451268f4e7e6b245a7eaf2a1ece15920449640a
 vendor/bin/slim_daemon
 vendor/lib/hw/flp.default.so
 vendor/lib/libalarmservice_jni.so
@@ -384,8 +380,8 @@ bin/ims_rtp_daemon
 bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
--vendor/app/ims/ims.apk
--vendor/app/imssettings/imssettings.apk
+#-vendor/app/ims/ims.apk
+#-vendor/app/imssettings/imssettings.apk
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
 vendor/lib64/lib-imsSDP.so
