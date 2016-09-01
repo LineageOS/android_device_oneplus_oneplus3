@@ -16,4 +16,3 @@
 
 /dev/dash                                                       u:object_r:input_device:s0
 
-/system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
