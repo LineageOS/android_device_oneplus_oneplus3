@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_ee0e01e4",
+        "filename": "data-ipa-cfg-mgr/ipanat/test/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-09-01T06:03:00Z",
+      "side": 1,
+      "message": "You have this guard here.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 69
+      },
+      "revId": "80b38607965c2e1303824449a25adadf8c28a19e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
