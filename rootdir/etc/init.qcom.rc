@@ -1145,7 +1145,7 @@ service battery_monitor /system/bin/battery_monitor
     group system
     disabled
 
-service_redefine ril-daemon /system/bin/rild
+service ril-daemon /system/bin/rild
     class main
     socket rild stream 660 root radio
     socket sap_uim_socket1 stream 660 bluetooth bluetooth
