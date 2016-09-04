@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2012-2013 The Android Open Source Project
-     Copyright (C) 2012-2015 The Linux Foundation. All rights reserved.
+     Copyright (C) 2012-2016 The Linux Foundation. All rights reserved.
      Not a contribution.
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -134,7 +134,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
           <!-- vt-version, upper 16 bit major version lower 16 bit minor version -->
-            <Limit name="vt-version" value="65536" />
+            <Limit name="vt-version" value="65537" />
             <Limit name="vt-low-latency" value="1" />
             <Limit name="vt-max-instances" value="16" />
             <Limit name="vt-max-temporal-layer-count" value="3" />
@@ -147,6 +147,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="vt-down-scale-factor" value="8" />
             <Limit name="vt-min-scale-factor" value="1" />
             <Limit name="vt-slice-hdr-spacing" value="1" />
+            <Feature name="intra-refresh" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.mpeg4" type="video/mp4v-es" >
             <Quirk name="requires-allocate-on-input-ports" />
@@ -183,6 +184,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-20000000" />
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
+            <Feature name="intra-refresh" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.hevc" type="video/hevc" >
             <Quirk name="requires-allocate-on-input-ports" />
@@ -195,6 +197,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-100000000" />
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
+            <Feature name="intra-refresh" />
         </MediaCodec>
     </Encoders>
     <Decoders>
@@ -208,7 +211,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" min="1" max="1958400" />
             <Limit name="bitrate" range="1-100000000" />
             <Limit name="frame-rate" range="1-240" />
-            <Limit name="vt-version" value="65536" />
+            <Limit name="vt-version" value="65537" />
             <Limit name="vt-low-latency" value="1" />
             <Limit name="vt-max-macroblock-processing-rate" value="972000" />
             <Limit name="vt-max-level" value="52" />
