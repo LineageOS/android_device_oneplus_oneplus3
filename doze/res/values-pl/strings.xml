@@ -15,6 +15,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">Aktywny wyświetlacz</string>
   <string name="ambient_display_summary">Wybudź ekran po odebraniu powiadomienia</string>
+  <string name="always_enabled_title">Zawsze włączone</string>
   <string name="always_enabled_summary">Nasłuchiwanie zdarzeń z czujników zaraz po wyłączeniu ekranu</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Czujnik pochylenia</string>
@@ -28,4 +29,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Pomoc</string>
+  <string name="doze_settings_help_text">Te funkcje używają czujników, aby pokazywać powiadomienia tylko w odpowiednim momencie. Czujniki są wykorzystywane, kiedy telefon odbierze powiadomienie. Pozwala to w oszczędzaniu baterii. Istnieje również możliwość, aby włączyć wybrany czujnik zaraz po wyłączeniu ekranu, spowoduje to większe zużycie baterii.</string>
 </resources>
