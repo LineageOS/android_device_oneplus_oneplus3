@@ -32,6 +32,5 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- Overlay config file -->
 
     <!-- Wifi framework supports ECBM mode -->
-    <bool translatable="false" name="config_wifi_ecbm_mode_change">false</bool>
 
 </resources>

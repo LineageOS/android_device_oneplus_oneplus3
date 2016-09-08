@@ -323,7 +323,6 @@
 
     <!-- Flag indicating emergency calls will always use IMS irrespective of the state of
     the IMS connection -->
-    <bool name="useImsAlwaysForEmergencyCall">false</bool>
 
     <!-- Flag specifying whether VoLTE & VT is available on device -->
     <bool name="config_device_volte_available">true</bool>

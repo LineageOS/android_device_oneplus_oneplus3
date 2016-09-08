@@ -29,6 +29,5 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Template for showing cellular network operator name while LTE calling is enabled -->
-    <string name="high_definition_tag">%s (HD)</string>
 
 </resources>
