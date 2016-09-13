@@ -135,6 +135,8 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/screen_state
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/proximity_state
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
     chmod 0666 /dev/qseecom
 
     # NFC
