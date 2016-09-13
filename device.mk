@@ -167,7 +167,8 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
-    fingerprintd
+    fingerprintd \
+    OneplusPocketMode
 
 # Gello
 PRODUCT_PACKAGES += \
