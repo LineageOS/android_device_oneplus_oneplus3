@@ -1527,13 +1527,20 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 	struct ipa_nat_ip4_table_cache *tbl_ptr;
 	del_type rule_pos;
 	uint8_t tbl_indx = (uint8_t)(tbl_hdl - 1);
+	int ret;
 
 	/* Parse the rule handle */
 	ipa_nati_parse_ipv4_rule_hdl(tbl_indx, (uint16_t)rule_hdl,
 															 &expn_tbl, &tbl_entry);
 	if (IPA_NAT_INVALID_NAT_ENTRY == tbl_entry) {
 		IPAERR("Invalid Rule Entry\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto fail;
+	}
+
+	if (pthread_mutex_lock(&nat_mutex) != 0) {
+		ret = -1;
+		goto mutex_lock_error;
 	}
 
 	IPADBG("Delete below rule\n");
@@ -1542,7 +1549,10 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 	tbl_ptr = &ipv4_nat_cache.ip4_tbl[tbl_indx];
 	if (!tbl_ptr->valid) {
 		IPAERR("invalid table handle\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		if (pthread_mutex_unlock(&nat_mutex) != 0)
+			goto mutex_unlock_error;
+		goto fail;
 	}
 
 	ipa_nati_find_rule_pos(tbl_ptr, expn_tbl,
@@ -1551,7 +1561,10 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 
 	if (ipa_nati_post_del_dma_cmd(tbl_indx, tbl_entry,
 					expn_tbl, rule_pos)) {
-		return -EINVAL;
+		ret = -EINVAL;
+		if (pthread_mutex_unlock(&nat_mutex) != 0)
+			goto mutex_unlock_error;
+		goto fail;
 	}
 
 	ipa_nati_del_dead_ipv4_head_nodes(tbl_indx);
@@ -1565,7 +1578,22 @@ int ipa_nati_del_ipv4_rule(uint32_t tbl_hdl,
 	ipa_nat_dump_ipv4_table(tbl_hdl);
 #endif
 
+	if (pthread_mutex_unlock(&nat_mutex) != 0) {
+		ret = -1;
+		goto mutex_unlock_error;
+	}
+
 	return 0;
+
+mutex_lock_error:
+	IPAERR("unable to lock the nat mutex\n");
+	return ret;
+
+mutex_unlock_error:
+	IPAERR("unable to unlock the nat mutex\n");
+
+fail:
+	return ret;
 }
 
 void ReorderCmds(struct ipa_ioc_nat_dma_cmd *cmd, int size)
