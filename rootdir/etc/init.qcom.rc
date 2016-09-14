@@ -36,7 +36,7 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS /system/lib/hw/camera.msm8996.so|libcamera_shim.so
+    export LD_SHIM_LIBS /system/lib/hw/camera.msm8996.so|libcamera_shim.so:/system/lib/libopcamerahw_interface.so|libcamera_shim.so
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
