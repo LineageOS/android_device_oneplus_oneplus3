@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_fbea0eaa",
+        "filename": "pocketmode/src/com/cyanogenmod/pocketmode/Utils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2016-09-16T12:10:12Z",
+      "side": 1,
+      "message": "The CMSDK FileUtils was introduced for this very reason :)\nhttps://github.com/CyanogenMod/cm_platform_sdk/commit/522b0c3db16b061716078b202d3be5ae87ce06f0",
+      "revId": "07fe33cd10add5cea0f99644ba8b4db5a5ce2df4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
