@@ -260,6 +260,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
+    libperfd_shim \
     power.msm8996
 
 # QMI
