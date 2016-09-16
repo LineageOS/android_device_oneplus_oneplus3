@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_7beffeaf",
+        "filename": "pocketmode/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2016-09-16T12:24:49Z",
+      "side": 1,
+      "message": "It needs to be a static library, otherwise it doesn\u0027t get linked properly IIRC",
+      "revId": "97090537db1fb662cd0ff9ac88386fd1ee3de8e8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
