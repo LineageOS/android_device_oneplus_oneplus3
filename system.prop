@@ -1,3 +1,5 @@
+ro.display.series=OnePlus 3
+
 # Audio
 ro.qc.sdk.audio.ssr=false
 ro.qc.sdk.audio.fluencetype=fluence
