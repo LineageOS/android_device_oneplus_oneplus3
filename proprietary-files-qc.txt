@@ -425,7 +425,7 @@ vendor/lib64/libTimeService.so
 # Widevine
 vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/libwvdrm_L3.so
-#vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wifi
 bin/cnss-daemon
