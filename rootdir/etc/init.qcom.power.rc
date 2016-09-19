@@ -116,7 +116,7 @@ on charger
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     start dashd
 
-on class_start:late_start
+on property:sys.boot_completed=1
     trigger enable-low-power
 
 on property:init.svc.recovery=running
