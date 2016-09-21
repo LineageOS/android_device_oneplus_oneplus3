@@ -190,6 +190,9 @@ BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
+# SecComp
+BOARD_SECCOMP_POLICY := $(PLATFORM_PATH)/seccomp
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
