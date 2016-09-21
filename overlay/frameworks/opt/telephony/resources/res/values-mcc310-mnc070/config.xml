@@ -31,6 +31,5 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      for different hardware and product builds.  Do not translate. -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Configuration for displaying 14 digit IMEI Number -->
-    <bool name="config_enable_display_14digit_imei">true</bool>
 </resources>
 
