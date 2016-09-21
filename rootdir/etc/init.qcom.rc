@@ -33,7 +33,7 @@ on early-init
     mkdir /bt_firmware 0771 system system
     symlink /data/tombstones /tombstones
     mkdir /dsp 0771 media media
-    chmod 0755 /sys/kernel/debug
+    mount debugfs debugfs /sys/kernel/debug
 
 on init
     export LD_SHIM_LIBS /system/lib/hw/camera.msm8996.so|libcamera_shim.so:/system/lib/libopcamerahw_interface.so|libcamera_shim.so
