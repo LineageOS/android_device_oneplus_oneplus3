@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fa4df85_fb8a0119",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 15727
+      },
+      "writtenOn": "2016-09-21T17:29:08Z",
+      "side": 1,
+      "message": "BOARD_SECCOMP_POLICY :\u003d $(PLATFORM_PATH)/seccomp",
+      "revId": "f7a18567aa40f225f2e065cdc6ac51ed8577fcf7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
