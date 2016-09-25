@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Visualización ambiente</string>
+  <string name="ambient_display_summary">Activar a pantalla ao recibir notificacións</string>
+  <string name="always_enabled_title">Sempre activo</string>
+  <string name="always_enabled_summary">Atender ao eventos do sensor así que se apague a pantalla</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Sensor de inclinación</string>
+  <string name="pick_up_title">Coller</string>
+  <string name="pick_up_summary">Amosar notificacións ao coller o dispositivo</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Sensor de proximidade</string>
+  <string name="hand_wave_gesture_title">Pasar a man</string>
+  <string name="hand_wave_gesture_summary">Amosar notificacións ao pasar a man</string>
+  <string name="pocket_gesture_title">Peto</string>
+  <string name="pocket_gesture_summary">Amosar notificacións ao sacar do peto</string>
   <!-- Help text -->
+  <string name="dlg_ok">ACEPTAR</string>
+  <string name="doze_settings_help_title">Axuda</string>
+  <string name="doze_settings_help_text">Estas características usan eventos do sensor para amosar unha notificación latente. O sensor seleccionado habilitarase só cando reciba unha notificación axudando a reducir o consumo da batería. Tamén existe unha opción para activar o sensor así que se apague a pantalla, pero isto causará un maior uso da batería.</string>
 </resources>

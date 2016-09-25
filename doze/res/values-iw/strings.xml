@@ -27,4 +27,5 @@
   <!-- Help text -->
   <string name="dlg_ok">אישור</string>
   <string name="doze_settings_help_title">עזרה</string>
+  <string name="doze_settings_help_text">התכונות נעזרות בחיישני אירועים כדי להפעיל הדגשת התראות עם Doze. החיישן הנבחר מופעל רק כאשר המכשיר מקבל התראה, מה שעוזר להקטין את השימוש בסוללה. בנוסף, יש אפשרות להפעיל את החיישן הנבחר ברגע שהמסך נכבה, מה שעלול לגרום לשימוש רב יותר בסוללה.</string>
 </resources>

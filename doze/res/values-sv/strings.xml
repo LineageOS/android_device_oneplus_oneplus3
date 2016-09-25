@@ -15,8 +15,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Tilt sensor -->
   <string name="pick_up_title">Plocka upp</string>
+  <string name="pick_up_summary">Pulsera aviseringarna när enheten plockas upp</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">Närhetscensor</string>
+  <string name="pocket_gesture_summary">Pulsera aviseringar när telefonen tas upp ur fickan</string>
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Hjälp</string>

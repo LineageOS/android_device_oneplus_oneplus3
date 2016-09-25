@@ -30,5 +30,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Help</string>
-  <string name="doze_settings_help_text">Deze functies gebruiken sensoren om een Doze-puls te versturen. De gekozen sensor is alleen ingeschakeld als het apparaat een melding ontvangt. Dit helpt het batterijgebruik te verminderen. Er is ook een optie om de sensor te activeren zodra het scherm uitschakelt, maar dit leidt tot hoger batterijgebruik.</string>
+  <string name="doze_settings_help_text">Deze functies gebruiken sensoren om een Doze-puls te versturen. De gekozen sensor is alleen ingeschakeld als het apparaat een melding ontvangt. Dit helpt het accugebruik te verminderen. Er is ook een optie om de sensor te activeren zodra het scherm uitschakelt, maar dit leidt tot hoger accugebruik.</string>
 </resources>
