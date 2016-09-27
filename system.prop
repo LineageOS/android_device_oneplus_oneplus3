@@ -37,6 +37,9 @@ persist.camera.llc=1
 persist.camera.llnoise=1
 camera.hal1.packagelist=com.skype.raider,com.whatsapp,com.tencent.mm,com.google.android.GoogleCamera
 
+# ZOMG HAX!! - remove when we have something that works
+persist.camera.HAL3.enabled=0
+
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
 ro.qualcomm.display.paneltype=1
