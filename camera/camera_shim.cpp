@@ -17,6 +17,7 @@
 #include <stdio.h>
 
 const char *_ZN7android18gClientPackageNameE;
+const char *_ZN7android16CameraParameters31KEY_SUPPORTED_VIDEO_SIZES_60FPSE = "support-60fps-video-sizes";
 
 extern "C" {
 
