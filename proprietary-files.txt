@@ -41,7 +41,6 @@ vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
-vendor/lib/libllvd_smore.so
 vendor/lib/libmmcamera_chromaflash_lib.so|fe5ce108e3fe4081e3a2c544f27bc5d13019ba15
 vendor/lib/libmmcamera_optizoom_lib.so|17dfddb185f8c9a2bc075d656849024a9912dc88
 vendor/lib/libmmcamera2_c2d_module.so
@@ -139,7 +138,6 @@ vendor/lib/liboptizoom.so|5cd3d2b56986eebe4a0d4605d13be825886ae017
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
-vendor/lib/libseemore.so
 vendor/lib/libSonyIMX298PdafLibrary.so
 
 # Camera actuators
@@ -201,6 +199,7 @@ vendor/lib/libchromatix_imx298_4K_preview.so
 vendor/lib/libchromatix_imx298_4K_preview_s.so
 vendor/lib/libchromatix_imx298_4K_video.so
 vendor/lib/libchromatix_imx298_4K_video_s.so
+vendor/lib/libchromatix_imx298_common_60fps.so
 vendor/lib/libchromatix_imx298_common_manual.so
 vendor/lib/libchromatix_imx298_common.so
 vendor/lib/libchromatix_imx298_cpp_hfr_120.so
