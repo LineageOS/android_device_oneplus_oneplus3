@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff2e2bb8_6513200f",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1254,
+      "author": {
+        "id": 13274
+      },
+      "writtenOn": "2016-09-29T18:13:22Z",
+      "side": 1,
+      "message": "What happened here?",
+      "range": {
+        "startLine": 1254,
+        "startChar": 0,
+        "endLine": 1254,
+        "endChar": 101
+      },
+      "revId": "5d06c20e544ac0055117a6f8a441d1c60a92925f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
