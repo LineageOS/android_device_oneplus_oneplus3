@@ -1,9 +1,10 @@
 on boot
     # Update foreground and background cpusets
-    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/cpus 0,2-3
     write /dev/cpuset/foreground/boost/cpus 2-3
-    write /dev/cpuset/background/cpus 0-1
-    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-1
+    write /dev/cpuset/top-app/cpus 0-3
 
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
