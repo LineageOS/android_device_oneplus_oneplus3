@@ -15,5 +15,15 @@
 /sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc_irq:s0
 
 /dev/dash                                                       u:object_r:input_device:s0
+/sys/devices/soc/.*ssusb/power_supply/usb(/.*)?                 u:object_r:sysfs_usb_supply:s0
+
+/sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/capacity u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/current_now u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/voltage_now u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/temp u:object_r:sysfs_batteryinfo:s0
+
+/sys/kernel/debug/msm_core(/.*)?                                u:object_r:debugfs_msm_core:s0
+
+/sys/kernel/debug/rmt_storage/rmts                              u:object_r:debugfs_rmts:s0
 
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0

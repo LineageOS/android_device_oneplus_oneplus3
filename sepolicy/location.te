@@ -1,1 +1,2 @@
 allow location permission_service:service_manager find;
+allow location self:capability net_raw;
