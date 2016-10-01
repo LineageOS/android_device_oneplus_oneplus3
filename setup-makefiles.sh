@@ -70,11 +70,12 @@ write_makefiles "$MY_DIR"/proprietary-files-qc-perf.txt
 echo "endif" >> "$PRODUCTMK"
 
 cat << EOF >> "$ANDROIDMK"
+
 endif
 
-\$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
-\$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib64/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib64 > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
 EOF
+
+printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8996/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
 
 # We are done!
 write_footers
