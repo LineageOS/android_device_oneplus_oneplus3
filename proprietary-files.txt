@@ -201,6 +201,7 @@ vendor/lib/libchromatix_imx298_4K_preview.so
 vendor/lib/libchromatix_imx298_4K_preview_s.so
 vendor/lib/libchromatix_imx298_4K_video.so
 vendor/lib/libchromatix_imx298_4K_video_s.so
+vendor/lib/libchromatix_imx298_common_60fps.so
 vendor/lib/libchromatix_imx298_common_manual.so
 vendor/lib/libchromatix_imx298_common.so
 vendor/lib/libchromatix_imx298_cpp_hfr_120.so
