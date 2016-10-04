@@ -288,7 +288,7 @@ on boot
     chown wifi wifi /sys/class/net/bond0/bonding/queue_id
 
     # change this when HAL3 is working
-    setprop persist.camera.HAL3.enabled 0
+    setprop persist.camera.HAL3.enabled 1
 
 # msm specific files that need to be created on /data
 on post-fs-data
