@@ -13,7 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">Атмосферен екран</string>
+  <string name="ambient_display_title">Активен дисплей</string>
   <string name="ambient_display_summary">Събуждане на екрана при получаване на известие</string>
   <string name="always_enabled_title">Винаги разрешено</string>
   <string name="always_enabled_summary">Останете на линия за събития, веднага след като екранът се изключи</string>

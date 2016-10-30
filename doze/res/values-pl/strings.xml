@@ -19,6 +19,7 @@
   <string name="always_enabled_summary">Nasłuchiwanie zdarzeń z czujników zaraz po wyłączeniu ekranu</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Czujnik pochylenia</string>
+  <string name="pick_up_title">Podniesienie</string>
   <string name="pick_up_summary">Pokaż powiadomienia, gdy urządzenie zostało podniesione</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">Czujnik zbliżeniowy</string>
