@@ -24,7 +24,7 @@
     <integer name="OtaShowListeningScreen">1</integer>
 
     <!-- Flag indicating if the phone is a world phone -->
-    <bool name="world_phone">true</bool>
+    <bool name="world_phone">false</bool>
 
     <!-- Flag indicating if dtmf tone type is enabled -->
     <bool name="dtmf_type_enabled">true</bool>
@@ -50,7 +50,7 @@
     <bool name="config_enabled_lte" translatable="false">true</bool>
 
     <!-- Show APN Settings for some CDMA carriers -->
-    <bool name="config_show_apn_setting_cdma">true</bool>
+    <bool name="config_show_apn_setting_cdma">false</bool>
 
     <!-- Allows the telephony HFA logic to run even if we're not in setup wizard. -->
     <bool name="config_allow_hfa_outside_of_setup_wizard">false</bool>
