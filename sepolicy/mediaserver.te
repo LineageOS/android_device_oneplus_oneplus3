@@ -1,0 +1,1 @@
+allow mediaserver audio_device:chr_file { ioctl open read write };
