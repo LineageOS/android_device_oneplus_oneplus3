@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff2e2bb8_59794efa",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 11834
+      },
+      "writtenOn": "2016-11-07T06:34:16Z",
+      "side": 1,
+      "message": "this is a mistake?",
+      "range": {
+        "startLine": 145,
+        "startChar": 4,
+        "endLine": 145,
+        "endChar": 10
+      },
+      "revId": "31d1f9a16753acb41ba2e5cc91186e5772b5ca3b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
