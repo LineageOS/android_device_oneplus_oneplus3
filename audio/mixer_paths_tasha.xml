@@ -26,7 +26,7 @@
     <ctl name="LINEOUT4 Volume" value="13" />
     <ctl name="HPHL Volume" value="20" />
     <ctl name="HPHR Volume" value="20" />
-    <ctl name="RX0 Digital Volume" value="84" />
+    <ctl name="RX0 Digital Volume" value="75" />
     <ctl name="RX1 Digital Volume" value="84" />
     <ctl name="RX2 Digital Volume" value="84" />
     <ctl name="RX3 Digital Volume" value="84" />
@@ -48,7 +48,7 @@
     <ctl name="DEC1 Volume" value="84" />
     <ctl name="DEC2 Volume" value="84" />
     <ctl name="DEC3 Volume" value="84" />
-    <ctl name="DEC4 Volume" value="84" />
+    <ctl name="DEC4 Volume" value="75" />
     <ctl name="DEC5 Volume" value="84" />
     <ctl name="DEC6 Volume" value="84" />
     <ctl name="DEC7 Volume" value="84" />
