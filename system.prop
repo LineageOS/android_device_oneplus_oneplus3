@@ -2,7 +2,7 @@ ro.display.series=OnePlus 3
 
 # Audio
 ro.qc.sdk.audio.ssr=false
-ro.qc.sdk.audio.fluencetype=fluence
+ro.qc.sdk.audio.fluencetype=none
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=true
