@@ -1,3 +1,7 @@
+on early-init
+    # Enable sched boost
+    write /proc/sys/kernel/sched_boost 1
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
@@ -5,9 +9,6 @@ on boot
     write /dev/cpuset/background/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/top-app/cpus 0-3
-
-    # Enable sched boost
-    write /proc/sys/kernel/sched_boost 1
 
 on enable-low-power
     # Disable thermal bcl hotplug to switch governor
