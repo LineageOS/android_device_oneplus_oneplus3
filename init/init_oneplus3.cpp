@@ -43,6 +43,7 @@
 #include "property_service.h"
 #include "vendor_init.h"
 
+using android::base::GetProperty;
 using android::base::ReadFileToString;
 using android::base::Trim;
 using android::init::property_set;
@@ -68,6 +69,7 @@ void init_alarm_boot_properties()
 {
     char const *boot_reason_file = "/proc/sys/kernel/boot_reason";
     std::string boot_reason;
+    std::string reboot_reason = GetProperty("ro.boot.alarmboot", "");
 
     if (ReadFileToString(boot_reason_file, &boot_reason)) {
         /*
@@ -85,7 +87,7 @@ void init_alarm_boot_properties()
         * 7 -> CBLPWR_N pin toggled (for external power supply)
         * 8 -> KPDPWR_N pin toggled (power key pressed)
         */
-        if (Trim(boot_reason) == "3") {
+        if (Trim(boot_reason) == "3" || reboot_reason == "true") {
             property_set("ro.alarm_boot", "true");
         } else {
             property_set("ro.alarm_boot", "false");
