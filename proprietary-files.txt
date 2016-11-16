@@ -217,6 +217,8 @@ vendor/lib/libchromatix_imx298_cpp_snapshot_manual.so
 vendor/lib/libchromatix_imx298_cpp_snapshot_nomultiframe.so
 vendor/lib/libchromatix_imx298_cpp_snapshot.so
 vendor/lib/libchromatix_imx298_cpp_video.so
+vendor/lib/libchromatix_imx298_cpp_video_4k.so
+vendor/lib/libchromatix_imx298_cpp_video_preview.so
 vendor/lib/libchromatix_imx298_default_preview.so
 vendor/lib/libchromatix_imx298_default_preview_s.so
 vendor/lib/libchromatix_imx298_default_video.so
