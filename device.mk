@@ -163,8 +163,7 @@ PRODUCT_PACKAGES += \
 # Display calibration
 PRODUCT_PACKAGES += \
     FOSSConfig.xml \
-    qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml \
-    libjni_livedisplay
+    qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml
 
 # Doze mode
 PRODUCT_PACKAGES += \
