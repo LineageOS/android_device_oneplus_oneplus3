@@ -1,7 +1,621 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<!--Copyright (c) 2016, The Linux Foundation. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+    * Neither the name of The Linux Foundation nor the names of its
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
+
 <carrier_config_list>
+    <!-- Below are some sample filters for various scenarios.
+         You can have multiple carrier_config blocks.
+         blocks for various filters. For more info visit DefaultCarrierConfigService.java
+
+        <carrier_config mcc="1234">
+        //Configs applicable for mcc=1234 and any mnc
+        </carrier_config>
+
+        <carrier_config mcc="1234" mnc="678">
+        //Configs applicable for mcc=1234 and mnc=678
+        </carrier_config>
+
+        <carrier_config device="msm8996">
+        //Configs applicable for msms8996.
+        </carrier_config>-->
+
     <carrier_config>
+        <boolean name="apn_expand_bool" value="true" />
         <boolean name="world_phone_bool" value="true" />
+        <boolean name="allow_adding_apns_bool" value="true" />
+        <boolean name="hide_preferred_network_type_bool" value="false" />
         <boolean name="show_cdma_choices_bool" value="true" />
+        <boolean name="allow_video_call_in_low_battery" value="true" />
+        <boolean name="config_enable_display_14digit_imei" value="false" />
+        <!-- Determines whether UI extensions for video calls should be used or not -->
+        <boolean name="video_call_use_ext" value="true" />
+        <!-- Determines if a customized video ui support is required or not -->
+        <boolean name="use_custom_video_ui" value="false" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="false" />
+        <boolean name="config_carrier_cs_retry_available" value="false" />
+        <!-- Controls modify call capabilities
+             FALSE - default capabilities will be retained
+             TRUE - remove modify call capabilities which will hide modify call button -->
+        <boolean name="remove_modify_call_capability" value="false" />
+        <!-- Config to show/hide Video quality toast -->
+        <boolean name="show_video_quality_toast" value="true"/>
+        <!-- Config to show/hide call session event toast like player start/stop -->
+        <boolean name="show_call_session_event_toast" value="true"/>
+        <!-- Config to show/hide data usage toast -->
+        <boolean name="show_data_usage_toast" value="true"/>
+
     </carrier_config>
+
+    <carrier_config mcc="222" mnc="01">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="840">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="854">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="855">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="856">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="857">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="858">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="859">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="860">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="861">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="862">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="863">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="864">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="865">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="866">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="867">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="868">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="869">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="870">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="871">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="872">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="873">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="405" mnc="874">
+        <boolean name="config_display_wfc_mode" value="false" />
+        <int name="carrier_default_wfc_ims_mode_int" value="2" />
+        <boolean name="video_call_use_ext" value="false" />
+        <boolean name="use_custom_video_ui" value="true" />
+        <boolean name="config_hide_preview_in_vt_confcall" value="true" />
+        <boolean name="config_carrier_specific_network_type_display" value="true"/>
+        <boolean name="remove_modify_call_capability" value="true" />
+        <boolean name="config_dds_switch_alert_dialog_supported" value="true"/>
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="450" mnc="05">
+        <boolean name="allow_video_call_in_low_battery" value="false" />
+        <boolean name="config_carrier_cs_retry_available" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="450" mnc="06">
+        <boolean name="allow_video_call_in_low_battery" value="false" />
+    </carrier_config>
+
+    <carrier_config mcc="450" mnc="08">
+        <boolean name="allow_video_call_in_low_battery" value="false" />
+        <boolean name="config_carrier_cs_retry_available" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="00">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+        <boolean name="check_mobile_data_for_cf" value="true" />
+        <boolean name="config_enable_callbarring_over_ims" value="true" />
+        <boolean name="config_spn_override_enabled" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_disable_clir_over_ut" value="true" />
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="01">
+        <boolean name="config_spn_override_enabled" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="02">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+        <boolean name="check_mobile_data_for_cf" value="true" />
+        <boolean name="config_enable_callbarring_over_ims" value="true" />
+        <boolean name="config_spn_override_enabled" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_disable_clir_over_ut" value="true" />
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="03">
+        <boolean name="ascii_7_bit_support_for_long_message" value="true" />
+        <boolean name="cdma_cw_cf_enabled_bool" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="04">
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="05">
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_show_orig_dial_string_for_cdma" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="06">
+        <boolean name="config_spn_override_enabled" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="07">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+        <boolean name="check_mobile_data_for_cf" value="true" />
+        <boolean name="config_enable_callbarring_over_ims" value="true" />
+        <boolean name="config_spn_override_enabled" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_disable_clir_over_ut" value="true" />
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="08">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+        <boolean name="check_mobile_data_for_cf" value="true" />
+        <boolean name="config_enable_callbarring_over_ims" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_disable_clir_over_ut" value="true" />
+        <boolean name="show_video_quality_toast" value="false"/>
+        <boolean name="show_call_session_event_toast" value="false"/>
+        <boolean name="show_data_usage_toast" value="false"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="09">
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="10">
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="11">
+        <boolean name="ascii_7_bit_support_for_long_message" value="true" />
+        <boolean name="cdma_cw_cf_enabled_bool" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_show_orig_dial_string_for_cdma" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="460" mnc="12">
+        <boolean name="ascii_7_bit_support_for_long_message" value="true" />
+        <boolean name="cdma_cw_cf_enabled_bool" value="true" />
+        <boolean name="allow_emergency_numbers_in_call_log_bool" value="true"/>
+        <boolean name="config_show_orig_dial_string_for_cdma" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="030">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="070">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="080">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="030">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="150">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="170">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="280">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="380">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="410">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="560">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="680">
+        <boolean name="config_enable_display_14digit_imei" value="true" />
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="260">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="160">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="200">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="210">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="220">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="230">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="240">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="250">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="270">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="300">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="310">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="490">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="530">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="580">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="590">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="640">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="660">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="310" mnc="800">
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+
 </carrier_config_list>
