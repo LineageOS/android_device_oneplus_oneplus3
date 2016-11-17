@@ -13,10 +13,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
   <string name="ambient_display_title">Okoliški zaslon</string>
   <string name="ambient_display_summary">Zbudi zaslon ob prejemu obvestila</string>
-  <string name="always_enabled_title">Vedno omogoči</string>
-  <string name="always_enabled_summary">Poslušaj za dogodke tipal, takoj ko se zaslon izklopi</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Tipalo nagiba</string>
   <string name="pick_up_title">Dvig</string>
@@ -30,5 +30,5 @@
   <!-- Help text -->
   <string name="dlg_ok">V redu</string>
   <string name="doze_settings_help_title">Pomoč</string>
-  <string name="doze_settings_help_text">Te značilnosti uporabljajo dogodke tipal za sprožitev utripanja obvestil ob spanju. Izbrano tipalo se omogoči samo, ko naprava prejme obvestilo. To pomaga zmanjšati porabo energije. Obstaja tudi možnost omogočanja izbranega tipala, takoj ko se zaslon izklopi, vendar bo to povzročilo večjo porabo energije.</string>
+  <string name="doze_settings_help_text">Te značilnosti uporabljajo dogodke tipal za sprožitev utripanja obvestil. To bo povzročilo večjo porabo energije.</string>
 </resources>

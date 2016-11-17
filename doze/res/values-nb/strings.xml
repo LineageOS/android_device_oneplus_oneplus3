@@ -13,10 +13,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
   <string name="ambient_display_title">Ambient visning</string>
   <string name="ambient_display_summary">Våkne skjermen når du får varsler</string>
-  <string name="always_enabled_title">Alltid aktivere</string>
-  <string name="always_enabled_summary">Lete etter sensor aktivitet etter at skjermen slår seg av</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Tilt sensor</string>
   <string name="pick_up_title">Opp-plukking</string>

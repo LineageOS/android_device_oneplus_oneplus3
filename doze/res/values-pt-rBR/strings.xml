@@ -13,10 +13,10 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
   <string name="ambient_display_title">Tela ambiente</string>
   <string name="ambient_display_summary">Ligar a tela ao receber notificações</string>
-  <string name="always_enabled_title">Sempre habilitado</string>
-  <string name="always_enabled_summary">Monitorar o sensor assim que a tela for desligada</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Sensor de inclinação</string>
   <string name="pick_up_title">Pegar</string>

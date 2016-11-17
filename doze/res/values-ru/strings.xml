@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">Включено</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">Выключено</string>
   <string name="ambient_display_title">Индикация событий</string>
   <string name="ambient_display_summary">Включать экран при получении уведомлений</string>
-  <string name="always_enabled_title">Всегда включено</string>
-  <string name="always_enabled_summary">Прослушивать события сенсора сразу после отключения экрана</string>
+  <string name="ambient_display_summary_on">Включать экран при получении уведомлений</string>
+  <string name="ambient_display_summary_off">Не включать экран при получении уведомлений</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Датчик наклона</string>
   <string name="pick_up_title">Поднять</string>

@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">常に画面表示ディスプレイ</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">ON</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">OFF</string>
+  <string name="ambient_display_title">画面のクイックチェック</string>
   <string name="ambient_display_summary">通知を受信したときに画面を点灯する</string>
-  <string name="always_enabled_title">常に有効</string>
-  <string name="always_enabled_summary">画面を消灯した直後からセンサーイベントをリッスンする</string>
+  <string name="ambient_display_summary_on">通知を受信したときに画面を点灯する</string>
+  <string name="ambient_display_summary_off">通知を受信したときに画面を点灯しない</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">傾きセンサー</string>
   <string name="pick_up_title">持ち上げ</string>
