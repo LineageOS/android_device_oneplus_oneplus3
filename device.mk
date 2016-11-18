@@ -313,3 +313,6 @@ PRODUCT_COPY_FILES += \
 
 # Inherit from oppo-common
 $(call inherit-product, device/oppo/common/common.mk)
+
+# Inherit common graphics blobs
+$(call inherit-product-if-exists,vendor/qcom/binaries/msm8996/graphics/graphics-vendor.mk)
