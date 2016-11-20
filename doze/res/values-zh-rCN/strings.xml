@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">开</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">关</string>
   <string name="ambient_display_title">环境显示</string>
   <string name="ambient_display_summary">当接收到通知时唤醒屏幕</string>
-  <string name="always_enabled_title">始终启用</string>
-  <string name="always_enabled_summary">当屏幕关闭后立即监听传感器事件</string>
+  <string name="ambient_display_summary_on">当接收到通知时将唤醒屏幕</string>
+  <string name="ambient_display_summary_off">当接收到通知时将不会唤醒屏幕</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">倾斜传感器</string>
   <string name="pick_up_title">拿起</string>

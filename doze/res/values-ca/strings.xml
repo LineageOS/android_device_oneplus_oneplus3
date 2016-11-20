@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">Sí</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">No</string>
   <string name="ambient_display_title">Pantalla ambient</string>
   <string name="ambient_display_summary">Encen la pantalla quan rebis notificacions</string>
-  <string name="always_enabled_title">Sempre habilitat</string>
-  <string name="always_enabled_summary">Estigues atent als esdeveniments del sensor tan aviat com s\'apagui la pantalla</string>
+  <string name="ambient_display_summary_on">La pantalla s\'encendrà quan rebis notificacions</string>
+  <string name="ambient_display_summary_off">La pantalla no s\'encendrà quan rebis notificacions</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Sensor d\'inclinació</string>
   <string name="pick_up_title">Contesta</string>
