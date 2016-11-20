@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">Uključen</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">Isključen</string>
   <string name="ambient_display_title">Ambijentni zaslon</string>
   <string name="ambient_display_summary">Probudi zaslon kada primite obavijesti</string>
-  <string name="always_enabled_title">Uvijek omogući</string>
-  <string name="always_enabled_summary">Praćenje senzora čim se zaslon isključi</string>
+  <string name="ambient_display_summary_on">Zaslon će se probuditi kad primite obavijesti</string>
+  <string name="ambient_display_summary_off">Zaslon se neće probuditi kad primite obavijesti</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Senzor nagiba</string>
   <string name="pick_up_title">Podizanje</string>

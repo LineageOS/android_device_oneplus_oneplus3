@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">Bai</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">Ez</string>
   <string name="ambient_display_title">Ambient display</string>
   <string name="ambient_display_summary">Piztu pantaila jakinarazpenak jasotzean</string>
-  <string name="always_enabled_title">Gaitu beti</string>
-  <string name="always_enabled_summary">Sentsoreen gertakizunei entzun pantaila itzali eta berehala</string>
+  <string name="ambient_display_summary_on">Pantaila piztuko da jakinarazpenak jasotzen dituzunean</string>
+  <string name="ambient_display_summary_off">Pantaila ez da piztuko jakinarazpenak jasotzen dituzunean</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Inklinazio sentsorea</string>
   <string name="pick_up_title">Hartu</string>

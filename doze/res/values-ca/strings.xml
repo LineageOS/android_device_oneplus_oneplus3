@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">Sí</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">No</string>
   <string name="ambient_display_title">Pantalla ambient</string>
   <string name="ambient_display_summary">Encen la pantalla quan rebis notificacions</string>
-  <string name="always_enabled_title">Sempre habilitat</string>
-  <string name="always_enabled_summary">Estigues atent als esdeveniments del sensor tan aviat com s\'apagui la pantalla</string>
+  <string name="ambient_display_summary_on">La pantalla s\'encendrà quan rebis notificacions</string>
+  <string name="ambient_display_summary_off">La pantalla no s\'encendrà quan rebis notificacions</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Sensor d\'inclinació</string>
   <string name="pick_up_title">Contesta</string>
@@ -30,5 +34,5 @@
   <!-- Help text -->
   <string name="dlg_ok">D\'ACORD</string>
   <string name="doze_settings_help_title">Ajuda</string>
-  <string name="doze_settings_help_text">Aquestes característiques utilitzen esdeveniments dels sensors per llançar una notificació latent. El sensor escollit només serà habilitat quan el dispositiu rebi una notificació, això ajuda a reduir l\'ús de la bateria. També hi ha una opció per habilitar el sensor escollit tan aviat com s\'apagui la pantalla, això causarà un major ús de la bateria.</string>
+  <string name="doze_settings_help_text">Aquestes característiques utilitzen esdeveniments dels sensors per llançar una notificació latent, això causarà un major ús de la bateria.</string>
 </resources>

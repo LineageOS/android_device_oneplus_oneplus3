@@ -13,10 +13,14 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">An</string>
+  <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">Aus</string>
   <string name="ambient_display_title">Inaktivitätsdisplay</string>
   <string name="ambient_display_summary">Bildschirm einschalten, wenn Sie Benachrichtigungen erhalten</string>
-  <string name="always_enabled_title">Immer aktiviert</string>
-  <string name="always_enabled_summary">Auf den Sensor reagieren, sobald der Bildschirm ausgeschaltet wird</string>
+  <string name="ambient_display_summary_on">Bildschirm wird eingeschalten, wenn Sie Benachrichtigungen erhalten</string>
+  <string name="ambient_display_summary_off">Bildschirm nicht einschalten, wenn Sie Benachrichtigungen erhalten</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Neigungssensor</string>
   <string name="pick_up_title">Aufnehmen</string>
