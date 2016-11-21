@@ -496,7 +496,7 @@ service qvop-daemon /system/bin/qvop-daemon
 service per_mgr /system/bin/pm-service
     class late_start
     user system
-    group system net_raw
+    group system
     writepid /dev/cpuset/system-background/tasks
 
 service per_proxy /system/bin/pm-proxy
@@ -565,14 +565,14 @@ service imsqmidaemon /system/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
-    group radio net_raw log diag
+    group radio log diag
     writepid /dev/cpuset/system-background/tasks
 
 service imsdatadaemon /system/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
-    group system wifi radio inet net_raw log diag net_admin
+    group system wifi radio inet log diag
     writepid /dev/cpuset/system-background/tasks
     disabled
 
@@ -594,13 +594,13 @@ service ims_rtp_daemon /system/bin/ims_rtp_daemon
     class main
     user system
     socket ims_rtpd stream 0660 system radio
-    group radio net_raw diag inet log
+    group radio diag inet log
     disabled
 
 service imscmservice /system/bin/imscmservice
     class main
     user system
-    group radio net_raw diag diag log
+    group radio diag log
     writepid /dev/cpuset/system-background/tasks
     disabled
 
@@ -651,7 +651,7 @@ on property:init.svc.zygote=restarting
 service tlocd /system/bin/tloc_daemon
     class late_start
     user system
-    group drmrpc gps net_raw
+    group drmrpc gps
 
 service energy-awareness /system/bin/energy-awareness
     class main
@@ -1051,7 +1051,7 @@ service cnss-daemon /system/bin/cnss-daemon -n -l
 service loc_launcher /system/bin/loc_launcher
     # loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps inet net_raw qcom_diag net_admin wifi
+    group gps inet qcom_diag wifi
     writepid /dev/cpuset/system-background/tasks
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
