@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df33271e_2103ce0f",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-11-22T09:20:06Z",
+      "side": 1,
+      "message": "I guess we should also assign the same groups as seen in ril-daemon service (in the rild.rc).",
+      "range": {
+        "startLine": 1123,
+        "startChar": 10,
+        "endLine": 1123,
+        "endChar": 84
+      },
+      "revId": "53a44d6130c6a01c7e3f7f17c81756175ca9219b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
