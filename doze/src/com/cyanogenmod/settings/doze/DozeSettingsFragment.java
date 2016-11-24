@@ -172,7 +172,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.doze_settings_help_title)
                     .setMessage(R.string.doze_settings_help_text)
-                    .setNegativeButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                    .setNegativeButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
