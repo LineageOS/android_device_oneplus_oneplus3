@@ -31,7 +31,7 @@
 
         <activity
             android:name=".DozeSettings"
-            android:label="@string/ambient_display_title"
+            android:label="@string/screen_gestures_panel_title"
             android:theme="@style/DozeSettings">
             <intent-filter>
                 <action android:name="org.cyanogenmod.settings.device.DOZE_SETTINGS" />
