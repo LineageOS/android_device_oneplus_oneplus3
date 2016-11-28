@@ -14,9 +14,13 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_on">Ativada</string>
   <!-- Label for feature switch [CHAR LIMIT=30] -->
+  <string name="switch_bar_off">Desativada</string>
   <string name="ambient_display_title">Visualização de ambiente</string>
   <string name="ambient_display_summary">Ligar o ecrã quando receber notificações</string>
+  <string name="ambient_display_summary_on">O ecrã vai acordar quando receber notificações</string>
+  <string name="ambient_display_summary_off">O ecrã não vai acordar quando receber notificações</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Sensor de inclinação</string>
   <string name="pick_up_title">Pegar</string>
@@ -30,5 +34,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Ajuda</string>
-  <string name="doze_settings_help_text">Estes recursos utilizam eventos de sensores para mostrarem notificações enquanto o dispositivo está em repouso. O sensor escolhido só é ativado quando o dispositivo recebe uma notificação, o que ajuda a reduzir a utilização da bateria. Há também uma opção para ativar o sensor escolhido assim que o ecrã se desliga, o que resultará numa maior utilização da bateria.</string>
+  <string name="doze_settings_help_text">Estes recursos utilizam eventos de sensores para mostrarem notificações enquanto o dispositivo está em repouso. Isto pode resultar num maior consumo de bateria.</string>
 </resources>
