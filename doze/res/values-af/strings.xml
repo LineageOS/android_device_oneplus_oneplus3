@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Omgewings temperatuur skerm</string>
+  <string name="ambient_display_summary">Skerm sal wakker word wanneer jy kennisgewings ontvang</string>
+  <string name="always_enabled_title">Altyd geaktiveer</string>
+  <string name="always_enabled_summary">Luister vir sensor gebeure so gou as die skerm afskakel word</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Kantel sensor</string>
+  <string name="pick_up_title">Optel</string>
+  <string name="pick_up_summary">Pols kennisgewings wanneer toestel opgetel word</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Nabyheid sensor</string>
+  <string name="hand_wave_gesture_title">Hand waai</string>
+  <string name="hand_wave_gesture_summary">Pols kennisgewings met hand waai</string>
+  <string name="pocket_gesture_title">Sak</string>
+  <string name="pocket_gesture_summary">Pols kennisgewings wanneer jy toestel uit jou sak haal</string>
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
+  <string name="doze_settings_help_title">Hulp</string>
+  <string name="doze_settings_help_text">Hierdie kenmerke gebruik \'n sensor gebaar om \'n slaap kennisgewing pols te laai. Die gekose sensor is slegs geaktiveer wanneer die toestel \'n kennisgewing ontvang, dit help om battery gebruik te verminder. Daar is ook \'n opsie om die gekose sensor te aktiveer sodra die skerm afskakel word, maar dit sal hoër battery gebruik veroorsaak.</string>
 </resources>
