@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_91d1395b",
+        "filename": "proprietary-files-qc.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-02T14:02:49Z",
+      "side": 0,
+      "message": "Do you still have this? I don\u0027t find it on gemini.",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 9
+      },
+      "revId": "7bb7b226f7f7cfda2520f45fd5789d3390d8e380",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_31e30536",
+        "filename": "proprietary-files-qc.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-02T14:02:49Z",
+      "side": 0,
+      "message": "Hasn\u0027t this moved to vendor/lib64 now?",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 26
+      },
+      "revId": "7bb7b226f7f7cfda2520f45fd5789d3390d8e380",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
