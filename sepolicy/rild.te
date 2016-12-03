@@ -1,3 +1,4 @@
 allow rild nv_data_file:dir rw_dir_perms;
 allow rild nv_data_file:file create_file_perms;
 allow rild diag_prop:property_service set;
+get_prop(rild, diag_prop);

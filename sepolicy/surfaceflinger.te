@@ -1,0 +1,1 @@
+get_prop(surfaceflinger, diag_prop);

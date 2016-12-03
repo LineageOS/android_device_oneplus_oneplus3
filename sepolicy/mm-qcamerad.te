@@ -1,3 +1,4 @@
 allow mm-qcamerad camera_prop:property_service set;
 allow mm-qcamerad permission_service:service_manager find;
 allow mm-qcamerad mpctl_socket:sock_file write;
+get_prop(mm-qcamerad, diag_prop);
