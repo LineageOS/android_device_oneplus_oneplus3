@@ -8,7 +8,7 @@ etc/firmware/alipay.b04
 etc/firmware/alipay.b05
 etc/firmware/alipay.b06
 etc/firmware/alipay.mdt
--framework/org.ifaa.android.manager.jar|8fe5d31f6d1e304b6b6ffe4ca2576abbcb2cc88d
+-framework/org.ifaa.android.manager.jar|f754a81d6ddb6e1927d063802e40925ec6d8e885
 lib/libteeclientjni.so
 lib64/libteeclientjni.so
 
