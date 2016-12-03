@@ -178,6 +178,9 @@ if (!(a)) {                                                 \
 #define IPACMNat_TAG                         "IPACMNAT"
 #define NAT_MaxEntries_TAG                   "MaxNatEntries"
 
+#define IP_PassthroughFlag_TAG               "IPPassthroughFlag"
+#define IP_PassthroughMode_TAG               "IPPassthroughMode"
+
 /*---------------------------------------------------------------------------
       IP protocol numbers - use in dss_socket() to identify protocols.
       Also contains the extension header types for IPv6.
@@ -276,6 +279,7 @@ typedef struct  _IPACM_conf_t
 	bool router_mode_enable;
 	bool odu_embms_enable;
 	int num_wlan_guest_ap;
+	bool ip_passthrough_mode;
 } IPACM_conf_t;  
 
 /* This function read IPACM XML configuration*/
