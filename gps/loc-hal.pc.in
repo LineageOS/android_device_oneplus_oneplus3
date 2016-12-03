@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: loc-hal
+Description: QTI GPS Loc HAL
+Version: @VERSION
+Libs: -L${libdir} -lgps_utils_so -lloc_core -lloc_eng_so -lgps_default_so -lloc_ds_api -lloc_api_v02
+Cflags: -I${includedir} -I${includedir}/loc-hal/utils -I${includedir}/loc-hal/core -I${includedir}/loc-hal
