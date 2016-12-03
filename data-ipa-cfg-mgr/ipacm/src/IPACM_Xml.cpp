@@ -174,7 +174,8 @@ static int ipacm_cfg_xml_parse_tree
 						IPACM_util_icmp_string((char*)xml_node->name, SUBNET_TAG) == 0 ||
 						IPACM_util_icmp_string((char*)xml_node->name, IPACMALG_TAG) == 0 ||
 						IPACM_util_icmp_string((char*)xml_node->name, ALG_TAG) == 0 ||
-						IPACM_util_icmp_string((char*)xml_node->name, IPACMNat_TAG) == 0)
+						IPACM_util_icmp_string((char*)xml_node->name, IPACMNat_TAG) == 0 ||
+						IPACM_util_icmp_string((char*)xml_node->name, IP_PassthroughFlag_TAG) == 0)
 				{
 					if (0 == IPACM_util_icmp_string((char*)xml_node->name, IFACE_TAG))
 					{
@@ -195,6 +196,27 @@ static int ipacm_cfg_xml_parse_tree
 					}
 					/* go to child */
 					ret_val = ipacm_cfg_xml_parse_tree(xml_node->children, config);
+				}
+				else if (IPACM_util_icmp_string((char*)xml_node->name, IP_PassthroughMode_TAG) == 0)
+				{
+					IPACMDBG_H("inside IP Passthrough\n");
+					content = IPACM_read_content_element(xml_node);
+					if (content)
+					{
+						str_size = strlen(content);
+						memset(content_buf, 0, sizeof(content_buf));
+						memcpy(content_buf, (void *)content, str_size);
+						if (atoi(content_buf))
+						{
+							config->ip_passthrough_mode = true;
+							IPACMDBG_H("Passthrough enable %d buf(%d)\n", config->ip_passthrough_mode, atoi(content_buf));
+						}
+						else
+						{
+							config->ip_passthrough_mode = false;
+							IPACMDBG_H("Passthrough enable %d buf(%d)\n", config->ip_passthrough_mode, atoi(content_buf));
+						}
+					}
 				}
 				else if (IPACM_util_icmp_string((char*)xml_node->name, ODUMODE_TAG) == 0)
 				{
@@ -246,7 +268,7 @@ static int ipacm_cfg_xml_parse_tree
 						str_size = strlen(content);
 						memset(content_buf, 0, sizeof(content_buf));
 						memcpy(content_buf, (void *)content, str_size);
-						strncpy(config->iface_config.iface_entries[config->iface_config.num_iface_entries - 1].iface_name, content_buf, str_size);
+						strlcpy(config->iface_config.iface_entries[config->iface_config.num_iface_entries - 1].iface_name, content_buf, str_size+1);
 						IPACMDBG_H("Name %s\n", config->iface_config.iface_entries[config->iface_config.num_iface_entries - 1].iface_name);
 					}
 				}
