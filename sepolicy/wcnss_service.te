@@ -1,1 +1,7 @@
-allow wcnss_service self:capability { setgid setuid };
+allow wcnss_service self:capability {
+    setgid
+    setuid
+    dac_override
+    net_raw
+};
+get_prop(wcnss_service, diag_prop);
