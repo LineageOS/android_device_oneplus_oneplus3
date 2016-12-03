@@ -63,3 +63,7 @@
     {RIL_UNSOL_RESPONSE_ADN_INIT_DONE, responseVoid, WAKE_PARTIAL},
     {RIL_UNSOL_RESPONSE_ADN_RECORDS, responseAdnRecords, WAKE_PARTIAL},
     {RIL_UNSOL_PCO_DATA, responsePcoData, WAKE_PARTIAL},
+    //penghongyi@Oneplus.network add for nv backup
+	//#ifdef VENDOR_EDIT
+	{RIL_UNSOL_OEM_NV_BACKUP_RESPONSE,responseString,WAKE_PARTIAL},
+	//#endif
