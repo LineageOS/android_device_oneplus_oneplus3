@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -62,7 +62,7 @@ typedef struct _ipa_rm_client
     bool rx_bypass_ipa;          /* support WLAN may not register RX-property, should not add dependency */
 }ipa_rm_client;
 
-#define MAX_NUM_EXT_PROPS 15
+#define MAX_NUM_EXT_PROPS 25
 
 /* used to hold extended properties */
 typedef struct
@@ -115,6 +115,8 @@ public:
 
 	bool ipacm_odu_embms_enable;
 
+	bool ipacm_ip_passthrough_mode;
+
 	int ipa_nat_iface_entries;
 
 	/* Store the total number of wlan guest ap configured */
@@ -139,15 +141,14 @@ public:
 	/* IPACM routing table name for v4/v6 */
 	struct ipa_ioc_get_rt_tbl rt_tbl_lan_v4, rt_tbl_wan_v4, rt_tbl_default_v4, rt_tbl_v6, rt_tbl_wan_v6;
 	struct ipa_ioc_get_rt_tbl rt_tbl_wan_dl;
-	struct ipa_ioc_get_rt_tbl rt_tbl_lan2lan_v4, rt_tbl_lan2lan_v6;
 	struct ipa_ioc_get_rt_tbl rt_tbl_odu_v4, rt_tbl_odu_v6;
-	struct ipa_ioc_get_rt_tbl rt_tbl_eth_bridge_lan_lan_v4, rt_tbl_eth_bridge_lan_wlan_v4, rt_tbl_eth_bridge_wlan_wlan_v4;
-	struct ipa_ioc_get_rt_tbl rt_tbl_eth_bridge_lan_lan_v6, rt_tbl_eth_bridge_lan_wlan_v6, rt_tbl_eth_bridge_wlan_wlan_v6;
 
 	bool isMCC_Mode;
 
 	/* To return the instance */
 	static IPACM_Config* GetInstance();
+
+	const char* getEventName(ipa_cm_event_id event_id);
 
 	inline void increaseFltRuleCount(int index, ipa_ip_type iptype, int increment)
 	{
