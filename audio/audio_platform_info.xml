@@ -39,16 +39,24 @@
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
     </bit_width_configs>
-    <native_configs>
-        <feature name="NATIVE_AUDIO_44.1" codec_support="1"/>
-    </native_configs>
-
+    <config_params>
+        <param key="spkr_1_tz_name" value="wsatz.11"/>
+        <param key="spkr_2_tz_name" value="wsatz.12"/>
+        <!-- In the below value string, first parameter indicates size -->
+        <!-- followed by perf lock options                             -->
+        <param key="perf_lock_opts" value="2, 0x101, 0x20F"/>
+        <param key="native_audio_mode" value="src"/>
+        <param key="input_mic_max_count" value="4"/>
+    </config_params>
     <backend_names>
         <device name="SND_DEVICE_OUT_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_LINE" backend="headphones" interface="SLIMBUS_6_RX"/>
+        <device name="SND_DEVICE_OUT_ANC_HEADSET" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="speaker-and-headphones" interface="QUAT_MI2S_RX-and-SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_SPEAKER_AND_LINE" backend="speaker-and-headphones" interface="QUAT_MI2S_RX-and-SLIMBUS_6_RX"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_ANC_HEADSET" backend="speaker-and-headphones" interface="QUAT_MI2S_RX-and-SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
+        <device name="SND_DEVICE_OUT_VOICE_ANC_HEADSET" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_LINE" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_FULL_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_VCO_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
@@ -56,13 +64,8 @@
         <device name="SND_DEVICE_OUT_SPEAKER" backend="quat_i2s"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="quat_i2s"/>
     </backend_names>
-
-    <config_params>
-        <param key="spkr_1_tz_name" value="wsatz.11"/>
-        <param key="spkr_2_tz_name" value="wsatz.12"/>
-        <!-- In the below value string, first parameter indicates size -->
-        <!-- followed by perf lock options                             -->
-        <param key="perf_lock_opts" value="2, 0x101, 0x20F"/>
-    </config_params>
+     <pcm_ids>
+       <usecase name="USECASE_AUDIO_RECORD_LOW_LATENCY" type="in" id="19" />
+       <usecase name="USECASE_AUDIO_PLAYBACK_ULL" type="out" id="19" />
+     </pcm_ids>
 </audio_platform_info>
-
