@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--- Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.       -->
+<!--- Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.       -->
 <!---                                                                           -->
 <!--- Redistribution and use in source and binary forms, with or without        -->
 <!--- modification, are permitted provided that the following conditions are    -->
@@ -26,33 +26,45 @@
 <!--- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN    -->
 <!--- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                             -->
 <sound_trigger_platform_info>
-    <device name="DEVICE_HANDSET_APE_ACDB_ID" value="100" />
-    <device name="DEVICE_HANDSET_CPE_ACDB_ID" value="128" />
-    <ctrl name="execution_type" value="CPE" /> <!-- value: "CPE" "APE" -->
-    <ctrl name="max_cpe_sessions" value="1" />
-    <ctrl name="max_ape_sessions" value="8" />
-    <ctrl name="enable_failure_detection" value="false" />
+    <param version="0x0101" /> <!-- this must be the first param -->
 
-    <!-- vendor_uuid for a soundmodel. More than one vendor_uuid tags can be -->
-    <!-- listed in sequence, the below vendor uuid is reserved for Qualcomm  -->
-    <!-- module. ISV must use their own unique vendor uuid. app_type,        -->
-    <!-- module_id, param_id must match to the calibration database          -->
-    <!-- If ISV vendor_uuid is present, execution_type will be forced to APE -->
-    <vendor_uuid value="68ab2d40-e860-11e3-95ef-0002a5d5c51b" app_type="2" library="libsmwrapper.so">
+    <common_config>
+        <param execution_type="CPE" /> <!-- value: "CPE" "APE" -->
+        <param max_cpe_sessions="1" />
+        <param max_ape_sessions="8" />
+        <param enable_failure_detection="false" />
+    </common_config>
+
+    <acdb_ids>
+        <param DEVICE_HANDSET_APE_ACDB_ID="100" />
+        <param DEVICE_HANDSET_CPE_ACDB_ID="128" />
+        <param DEVICE_HANDSET_CPE_ECPP_ACDB_ID="128" />
+    </acdb_ids>
+
+    <!-- Multiple sound_model_config tags can be listed, each with unique    -->
+    <!-- vendor_uuid. The below tag represents QTI SVA engine sound model    -->
+    <!-- configuration. ISV must use their own unique vendor_uuid.           -->
+    <sound_model_config>
+        <param vendor_uuid="68ab2d40-e860-11e3-95ef-0002a5d5c51b" />
+        <param app_type="2" /> <!-- app type used in ACDB -->
+        <param library="libsmwrapper.so" />
+        <param max_cpe_phrases="6" />
+        <param max_cpe_users="3" />
+        <param max_ape_phrases="10" />
+        <param max_ape_users="10" />
+        <param sample_rate="16000" />
+
+        <!-- Module and param ids with which the algorithm is integrated in firmware -->
+        <param load_sound_model_ids="0x00012C0D, 0x00012C14" />
+        <param unload_sound_model_ids="0x00012C0D, 0x00012C15" />
+        <param confidence_levels_ids="0x00012C0D, 0x00012C07" />
+        <param operation_mode_ids="0x00012C0D, 0x00012C02" />
+
         <!-- format: "ADPCM_packet" or "PCM_packet" !-->
         <!-- transfer_mode: "FTRT" or "RT" -->
         <!--  kw_duration is in milli seconds. It is valid only for FTRT transfer mode -->
-        <capture_keyword format="PCM_packet" transfer_mode="RT" kw_duration="2000" />
-        <param_type name="load_sound_model" module_id="0x00012C0D" param_id="0x00012C14"/>
-        <param_type name="unload_sound_model" module_id="0x00012C0D" param_id="0x00012C15"/>
-        <param_type name="confidence_levels" module_id="0x00012C0D" param_id="0x00012C07"/>
-        <param_type name="operation_mode" module_id="0x00012C0D" param_id="0x00012C02"/>
-        <ctrl name="max_cpe_phrases" value="6" />
-        <ctrl name="max_cpe_users" value="3" />
-        <ctrl name="max_ape_phrases" value="10" />
-        <ctrl name="max_ape_users" value="10" />
-        <ctrl name="client_capture_read_delay" value="2000" /> <!-- in milli seconds -->
-    </vendor_uuid>
+        <param capture_keyword="PCM_packet, RT, 2000" />
+        <param client_capture_read_delay="2000" />
+    </sound_model_config>
 
 </sound_trigger_platform_info>
-

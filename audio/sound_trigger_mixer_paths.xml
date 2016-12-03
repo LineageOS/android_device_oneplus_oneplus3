@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--- Copyright (c) 2014-2015, The Linux Foundation. All rights reserved.            -->
+<!--- Copyright (c) 2014-2016, The Linux Foundation. All rights reserved.       -->
 <!---                                                                           -->
 <!--- Redistribution and use in source and binary forms, with or without        -->
 <!--- modification, are permitted provided that the following conditions are    -->
@@ -44,6 +44,10 @@
     <ctl name="AIF4_MAD Mixer SLIM TX12" value="0" />
     <ctl name="AIF4_MAD Mixer SLIM TX13" value="0" />
     <ctl name="CPE AFE MAD Enable" value="0"/>
+    <ctl name="CLK MODE" value="EXTERNAL" />
+    <ctl name="EC BUF MUX INP" value="ZERO" />
+    <ctl name="ADC MUX1" value="DMIC" />
+    <ctl name="DMIC MUX1" value="ZERO" />
 
     <path name="listen-voice-wakeup-1">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
@@ -85,6 +89,13 @@
         <ctl name="AIF4_MAD Mixer SLIM TX13" value="1" />
         <ctl name="MAD Input" value="DMIC0" />
         <ctl name="CPE AFE MAD Enable" value="1"/>
+    </path>
+
+    <path name="listen-cpe-handset-mic-ecpp">
+        <ctl name="CLK MODE" value="INTERNAL" />
+        <ctl name="EC BUF MUX INP" value="DEC1" />
+        <ctl name="ADC MUX1" value="DMIC" />
+        <ctl name="DMIC MUX1" value="DMIC0" />
     </path>
 
     <!-- path name used for low bandwidth FTRT codec interface -->
