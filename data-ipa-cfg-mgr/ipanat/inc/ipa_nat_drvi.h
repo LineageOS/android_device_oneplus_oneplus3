@@ -39,6 +39,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <netinet/in.h>
 #include <sys/inotify.h>
 #include <errno.h>
+#include <pthread.h>
 
 #include "ipa_nat_logi.h"
 

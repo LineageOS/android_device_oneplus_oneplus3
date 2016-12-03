@@ -133,6 +133,9 @@ int IPACM_Iface::handle_software_routing_enable(void)
 	flt_rule_entry.flt_rule_hdl = -1;
 	flt_rule_entry.status = -1;
 	flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
+#ifdef FEATURE_IPA_V3
+	flt_rule_entry.rule.hashable = true;
+#endif
 	memcpy(&flt_rule_entry.rule.attrib,
 				 &rx_prop->rx[0].attrib,
 				 sizeof(flt_rule_entry.rule.attrib));
@@ -639,48 +642,6 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 	const char *dev_wlan1="wlan1";
 	const char *dev_ecm0="ecm0";
 
-	/* update the iface ip-type to be IPA_IP_v4, IPA_IP_v6 or both*/
-	if (iptype == IPA_IP_v4)
-	{
-
-		if ((ip_type == IPA_IP_v4) || (ip_type == IPA_IP_MAX))
-		{
-			IPACMDBG_H(" interface(%s:%d) already in ip-type %d\n", dev_name, ipa_if_num, ip_type);
-			return res;
-		}
-
-		if (ip_type == IPA_IP_v6)
-		{
-			ip_type = IPA_IP_MAX;
-		}
-		else
-		{
-			ip_type = IPA_IP_v4;
-		}
-
-		IPACMDBG_H(" interface(%s:%d) now ip-type is %d\n", dev_name, ipa_if_num, ip_type);
-	}
-	else
-	{
-
-		if ((ip_type == IPA_IP_v6) || (ip_type == IPA_IP_MAX))
-		{
-			IPACMDBG_H(" interface(%s:%d) already in ip-type %d\n", dev_name, ipa_if_num, ip_type);
-			return res;
-		}
-
-		if (ip_type == IPA_IP_v4)
-		{
-			ip_type = IPA_IP_MAX;
-		}
-		else
-		{
-			ip_type = IPA_IP_v6;
-		}
-
-		IPACMDBG_H(" interface(%s:%d) now ip-type is %d\n", dev_name, ipa_if_num, ip_type);
-	}
-
     /* ADD corresponding ipa_rm_resource_name of RX-endpoint before adding all IPV4V6 FT-rules */
 	if((IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].if_cat== WAN_IF) || (IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].if_cat== EMBMS_IF))
 	{
@@ -746,7 +707,7 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 		flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
 #ifdef FEATURE_IPA_V3
 		flt_rule_entry.at_rear = false;
-		flt_rule_entry.rule.hashable = IPA_RULE_NON_HASHABLE;
+		flt_rule_entry.rule.hashable = false;
 #endif
 		IPACMDBG_H("rx property attrib mask:0x%x\n", rx_prop->rx[0].attrib.attrib_mask);
 		memcpy(&flt_rule_entry.rule.attrib,
@@ -763,11 +724,19 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 		flt_rule_entry.rule.attrib.attrib_mask |= IPA_FLT_DST_ADDR;
 		flt_rule_entry.rule.attrib.u.v4.dst_addr_mask = 0xF0000000;
 		flt_rule_entry.rule.attrib.u.v4.dst_addr = 0xE0000000;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.at_rear = true;
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memcpy(&(m_pFilteringTable->rules[1]), &flt_rule_entry, sizeof(struct ipa_flt_rule_add));
 
 		/* Configuring Broadcast Filtering Rule */
 		flt_rule_entry.rule.attrib.u.v4.dst_addr_mask = 0xFFFFFFFF;
 		flt_rule_entry.rule.attrib.u.v4.dst_addr = 0xFFFFFFFF;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.at_rear = true;
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memcpy(&(m_pFilteringTable->rules[2]), &flt_rule_entry, sizeof(struct ipa_flt_rule_add));
 
 		if (false == m_filtering.AddFilteringRule(m_pFilteringTable))
@@ -832,6 +801,10 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[1] = 0x00000000;
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[2] = 0x00000000;
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[3] = 0X00000000;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.at_rear = true;
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memcpy(&(m_pFilteringTable->rules[0]), &flt_rule_entry, sizeof(struct ipa_flt_rule_add));
 
 		/* Configuring fe80::/10 Link-Scoped Unicast Filtering Rule */
@@ -843,6 +816,10 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[1] = 0x00000000;
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[2] = 0x00000000;
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[3] = 0X00000000;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.at_rear = true;
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memcpy(&(m_pFilteringTable->rules[1]), &flt_rule_entry, sizeof(struct ipa_flt_rule_add));
 
 		/* Configuring fec0::/10 Reserved by IETF Filtering Rule */
@@ -854,6 +831,10 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[1] = 0x00000000;
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[2] = 0x00000000;
 		flt_rule_entry.rule.attrib.u.v6.dst_addr[3] = 0X00000000;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.at_rear = true;
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memcpy(&(m_pFilteringTable->rules[2]), &flt_rule_entry, sizeof(struct ipa_flt_rule_add));
 
 #ifdef FEATURE_IPA_ANDROID
@@ -969,47 +950,46 @@ int IPACM_Iface::ipa_get_if_index
   return IPACM_SUCCESS;
 }
 
-size_t IPACM_Iface::strlcpy(char *dest, const char *src, size_t n)
+void IPACM_Iface::config_ip_type(ipa_ip_type iptype)
 {
-	size_t ret = strlen(src);
-	size_t len = 0;
-	if (n > 0) {
-		if(ret >= n)
+	/* update the iface ip-type to be IPA_IP_v4, IPA_IP_v6 or both*/
+	if (iptype == IPA_IP_v4)
+	{
+		if ((ip_type == IPA_IP_v4) || (ip_type == IPA_IP_MAX))
 		{
-			len = n-1;
-			IPACMERR(" overflow detected \n");
+			IPACMDBG_H(" interface(%s:%d) already in ip-type %d\n", dev_name, ipa_if_num, ip_type);
+			return;
+		}
+
+		if (ip_type == IPA_IP_v6)
+		{
+			ip_type = IPA_IP_MAX;
 		}
 		else
 		{
-			len = ret;
+			ip_type = IPA_IP_v4;
 		}
-		dest[len] = '\0';
-		memcpy(dest, src, len);
-	}
-	return ret;
-}
-
-size_t IPACM_Iface::strlcat(char *dest, const char *src, size_t n)
-{
-	size_t dsize = strlen(dest);
-	size_t len = strlen(src);
-	size_t ret = dsize + len;
-
-	if (dsize < n)
-	{
-		dest += dsize;
-		n -= dsize;
-		if (len >= n)
-		{
-			len = n - 1;
-			IPACMERR(" overflow detected \n");
-		}
-		dest[len] = '\0';
-		memcpy(dest, src, len);
+		IPACMDBG_H(" interface(%s:%d) now ip-type is %d\n", dev_name, ipa_if_num, ip_type);
 	}
 	else
 	{
-		IPACMERR(" dest buffer full\n");
+		if ((ip_type == IPA_IP_v6) || (ip_type == IPA_IP_MAX))
+		{
+			IPACMDBG_H(" interface(%s:%d) already in ip-type %d\n", dev_name, ipa_if_num, ip_type);
+			return;
+		}
+
+		if (ip_type == IPA_IP_v4)
+		{
+			ip_type = IPA_IP_MAX;
+		}
+		else
+		{
+			ip_type = IPA_IP_v6;
+		}
+
+		IPACMDBG_H(" interface(%s:%d) now ip-type is %d\n", dev_name, ipa_if_num, ip_type);
 	}
-	return ret;
+
+	return;
 }
