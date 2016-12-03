@@ -1,4 +1,5 @@
 # Copyright (C) 2016 The CyanogenMod Project
+#           (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -128,7 +129,6 @@ BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/cmhw
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
 
 # CNE and DPM
-TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
 
 # Crypto
@@ -191,6 +191,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 57436708864
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 # RIL
+BOARD_PROVIDES_LIBRIL := true
 TARGET_RIL_VARIANT := caf
 
 # Recovery
