@@ -176,8 +176,10 @@ bool IPACM_Routing::GetRoutingTable(struct ipa_ioc_get_rt_tbl *routingTable)
 		IPACMERR("IPA_IOCTL_GET_RT_TBL ioctl failed, routingTable =0x%p, retval=0x%x.\n", routingTable, retval);
 		return false;
 	}
-
 	IPACMDBG_H("IPA_IOCTL_GET_RT_TBL ioctl issued to IPA routing block.\n");
+	/* put routing table right after successfully get routing table */
+	PutRoutingTable(routingTable->hdl);
+
 	return true;
 }
 

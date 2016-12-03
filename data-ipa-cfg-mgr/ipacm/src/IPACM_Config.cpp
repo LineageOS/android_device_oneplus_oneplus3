@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -47,10 +47,72 @@ IPACM_Config *IPACM_Config::pInstance = NULL;
 const char *IPACM_Config::DEVICE_NAME = "/dev/ipa";
 const char *IPACM_Config::DEVICE_NAME_ODU = "/dev/odu_ipa_bridge";
 
+#define __stringify(x...) #x
+
+const char *ipacm_event_name[] = {
+	__stringify(IPA_CFG_CHANGE_EVENT),                     /* NULL */
+	__stringify(IPA_PRIVATE_SUBNET_CHANGE_EVENT),          /* ipacm_event_data_fid */
+	__stringify(IPA_FIREWALL_CHANGE_EVENT),                /* NULL */
+	__stringify(IPA_LINK_UP_EVENT),                        /* ipacm_event_data_fid */
+	__stringify(IPA_LINK_DOWN_EVENT),                      /* ipacm_event_data_fid */
+	__stringify(IPA_USB_LINK_UP_EVENT),                    /* ipacm_event_data_fid */
+	__stringify(IPA_BRIDGE_LINK_UP_EVENT),                 /* ipacm_event_data_all */
+	__stringify(IPA_WAN_EMBMS_LINK_UP_EVENT),              /* ipacm_event_data_mac */
+	__stringify(IPA_ADDR_ADD_EVENT),                       /* ipacm_event_data_addr */
+	__stringify(IPA_ADDR_DEL_EVENT),                       /* no use */
+	__stringify(IPA_ROUTE_ADD_EVENT),                      /* ipacm_event_data_addr */
+	__stringify(IPA_ROUTE_DEL_EVENT),                      /* ipacm_event_data_addr */
+	__stringify(IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT),         /* ipacm_event_data_fid */
+	__stringify(IPA_WAN_UPSTREAM_ROUTE_DEL_EVENT),         /* ipacm_event_data_fid */
+	__stringify(IPA_WLAN_AP_LINK_UP_EVENT),                /* ipacm_event_data_mac */
+	__stringify(IPA_WLAN_STA_LINK_UP_EVENT),               /* ipacm_event_data_mac */
+	__stringify(IPA_WLAN_LINK_DOWN_EVENT),                 /* ipacm_event_data_mac */
+	__stringify(IPA_WLAN_CLIENT_ADD_EVENT),                /* ipacm_event_data_mac */
+	__stringify(IPA_WLAN_CLIENT_ADD_EVENT_EX),             /* ipacm_event_data_wlan_ex */
+	__stringify(IPA_WLAN_CLIENT_DEL_EVENT),                /* ipacm_event_data_mac */
+	__stringify(IPA_WLAN_CLIENT_POWER_SAVE_EVENT),         /* ipacm_event_data_mac */
+	__stringify(IPA_WLAN_CLIENT_RECOVER_EVENT),            /* ipacm_event_data_mac */
+	__stringify(IPA_NEW_NEIGH_EVENT),                      /* ipacm_event_data_all */
+	__stringify(IPA_DEL_NEIGH_EVENT),                      /* ipacm_event_data_all */
+	__stringify(IPA_NEIGH_CLIENT_IP_ADDR_ADD_EVENT),       /* ipacm_event_data_all */
+	__stringify(IPA_NEIGH_CLIENT_IP_ADDR_DEL_EVENT),       /* ipacm_event_data_all */
+	__stringify(IPA_SW_ROUTING_ENABLE),                    /* NULL */
+	__stringify(IPA_SW_ROUTING_DISABLE),                   /* NULL */
+	__stringify(IPA_PROCESS_CT_MESSAGE),                   /* ipacm_ct_evt_data */
+	__stringify(IPA_PROCESS_CT_MESSAGE_V6),                /* ipacm_ct_evt_data */
+	__stringify(IPA_LAN_TO_LAN_NEW_CONNECTION),            /* ipacm_event_connection */
+	__stringify(IPA_LAN_TO_LAN_DEL_CONNECTION),            /* ipacm_event_connection */
+	__stringify(IPA_WLAN_SWITCH_TO_SCC),                   /* No Data */
+	__stringify(IPA_WLAN_SWITCH_TO_MCC),                   /* No Data */
+	__stringify(IPA_CRADLE_WAN_MODE_SWITCH),               /* ipacm_event_cradle_wan_mode */
+	__stringify(IPA_WAN_XLAT_CONNECT_EVENT),               /* ipacm_event_data_fid */
+	__stringify(IPA_TETHERING_STATS_UPDATE_EVENT),         /* ipacm_event_data_fid */
+	__stringify(IPA_NETWORK_STATS_UPDATE_EVENT),           /* ipacm_event_data_fid */
+	__stringify(IPA_EXTERNAL_EVENT_MAX),
+	__stringify(IPA_HANDLE_WAN_UP),                        /* ipacm_event_iface_up  */
+	__stringify(IPA_HANDLE_WAN_DOWN),                      /* ipacm_event_iface_up  */
+	__stringify(IPA_HANDLE_WAN_UP_V6),                     /* NULL */
+	__stringify(IPA_HANDLE_WAN_DOWN_V6),                   /* NULL */
+	__stringify(IPA_HANDLE_WAN_UP_TETHER),                 /* ipacm_event_iface_up_tehter */
+	__stringify(IPA_HANDLE_WAN_DOWN_TETHER),               /* ipacm_event_iface_up_tehter */
+	__stringify(IPA_HANDLE_WAN_UP_V6_TETHER),              /* ipacm_event_iface_up_tehter */
+	__stringify(IPA_HANDLE_WAN_DOWN_V6_TETHER),            /* ipacm_event_iface_up_tehter */
+	__stringify(IPA_HANDLE_WLAN_UP),                       /* ipacm_event_iface_up */
+	__stringify(IPA_HANDLE_LAN_UP),                        /* ipacm_event_iface_up */
+	__stringify(IPA_ETH_BRIDGE_IFACE_UP),                  /* ipacm_event_eth_bridge*/
+	__stringify(IPA_ETH_BRIDGE_IFACE_DOWN),                /* ipacm_event_eth_bridge*/
+	__stringify(IPA_ETH_BRIDGE_CLIENT_ADD),                /* ipacm_event_eth_bridge*/
+	__stringify(IPA_ETH_BRIDGE_CLIENT_DEL),                /* ipacm_event_eth_bridge*/
+	__stringify(IPA_ETH_BRIDGE_WLAN_SCC_MCC_SWITCH),       /* ipacm_event_eth_bridge*/
+	__stringify(IPA_LAN_DELETE_SELF),                      /* ipacm_event_data_fid */
+	__stringify(IPACM_EVENT_MAX),
+};
+
 IPACM_Config::IPACM_Config()
 {
 	iface_table = NULL;
 	alg_table = NULL;
+	pNatIfaces = NULL;
 	memset(&ipa_client_rm_map_tbl, 0, sizeof(ipa_client_rm_map_tbl));
 	memset(&ipa_rm_tbl, 0, sizeof(ipa_rm_tbl));
 	ipa_rm_a2_check=0;
@@ -79,11 +141,6 @@ IPACM_Config::IPACM_Config()
 
 	memset(&ext_prop_v4, 0, sizeof(ext_prop_v4));
 	memset(&ext_prop_v6, 0, sizeof(ext_prop_v6));
-
-	memset(&rt_tbl_eth_bridge_lan_wlan_v4, 0, sizeof(rt_tbl_eth_bridge_lan_wlan_v4));
-	memset(&rt_tbl_eth_bridge_wlan_wlan_v4, 0, sizeof(rt_tbl_eth_bridge_wlan_wlan_v4));
-	memset(&rt_tbl_eth_bridge_lan_wlan_v6, 0, sizeof(rt_tbl_eth_bridge_lan_wlan_v6));
-	memset(&rt_tbl_eth_bridge_wlan_wlan_v6, 0, sizeof(rt_tbl_eth_bridge_wlan_wlan_v6));
 
 	qmap_id = ~0;
 
@@ -166,7 +223,7 @@ int IPACM_Config::Init(void)
 		/* copy bridge interface name to ipacmcfg */
 		if( iface_table[i].if_cat == VIRTUAL_IF)
 		{
-			memcpy(ipa_virtual_iface_name, iface_table[i].iface_name, sizeof(ipa_virtual_iface_name));
+			strlcpy(ipa_virtual_iface_name, iface_table[i].iface_name, sizeof(ipa_virtual_iface_name));
 			IPACMDBG_H("ipa_virtual_iface_name(%s) \n", ipa_virtual_iface_name);
 		}
 	}
@@ -230,6 +287,10 @@ int IPACM_Config::Init(void)
 	IPACMDBG_H("ipacm_odu_enable %d\n", ipacm_odu_enable);
 	IPACMDBG_H("ipacm_odu_mode %d\n", ipacm_odu_router_mode);
 	IPACMDBG_H("ipacm_odu_embms_enable %d\n", ipacm_odu_embms_enable);
+
+	ipacm_ip_passthrough_mode = cfg->ip_passthrough_mode;
+	IPACMDBG_H("ipacm_ip_passthrough_mode %d. \n", ipacm_ip_passthrough_mode);
+
 	ipa_num_wlan_guest_ap = cfg->num_wlan_guest_ap;
 	IPACMDBG_H("ipa_num_wlan_guest_ap %d\n",ipa_num_wlan_guest_ap);
 
@@ -275,30 +336,6 @@ int IPACM_Config::Init(void)
 
 	rt_tbl_wan_dl.ip = IPA_IP_MAX;
 	strncpy(rt_tbl_wan_dl.name, WAN_DL_ROUTE_TABLE_NAME, sizeof(rt_tbl_wan_dl.name));
-
-	rt_tbl_lan2lan_v4.ip = IPA_IP_v4;
-	strncpy(rt_tbl_lan2lan_v4.name, V4_LAN_TO_LAN_ROUTE_TABLE_NAME, sizeof(rt_tbl_lan2lan_v4.name));
-
-	rt_tbl_lan2lan_v6.ip = IPA_IP_v6;
-	strncpy(rt_tbl_lan2lan_v6.name, V6_LAN_TO_LAN_ROUTE_TABLE_NAME, sizeof(rt_tbl_lan2lan_v6.name));
-
-	rt_tbl_eth_bridge_lan_lan_v4.ip = IPA_IP_v4;
-	strncpy(rt_tbl_eth_bridge_lan_lan_v4.name, ETH_BRIDGE_USB_CPE_ROUTE_TABLE_NAME_V4, sizeof(rt_tbl_eth_bridge_lan_lan_v4.name));
-
-	rt_tbl_eth_bridge_lan_wlan_v4.ip = IPA_IP_v4;
-	strncpy(rt_tbl_eth_bridge_lan_wlan_v4.name, ETH_BRIDGE_USB_WLAN_ROUTE_TABLE_NAME_V4, sizeof(rt_tbl_eth_bridge_lan_wlan_v4.name));
-
-	rt_tbl_eth_bridge_wlan_wlan_v4.ip = IPA_IP_v4;
-	strncpy(rt_tbl_eth_bridge_wlan_wlan_v4.name, ETH_BRIDGE_WLAN_WLAN_ROUTE_TABLE_NAME_V4, sizeof(rt_tbl_eth_bridge_wlan_wlan_v4.name));
-
-	rt_tbl_eth_bridge_lan_lan_v6.ip = IPA_IP_v6;
-	strncpy(rt_tbl_eth_bridge_lan_lan_v6.name, ETH_BRIDGE_USB_CPE_ROUTE_TABLE_NAME_V6, sizeof(rt_tbl_eth_bridge_lan_lan_v6.name));
-
-	rt_tbl_eth_bridge_lan_wlan_v6.ip = IPA_IP_v6;
-	strncpy(rt_tbl_eth_bridge_lan_wlan_v6.name, ETH_BRIDGE_USB_WLAN_ROUTE_TABLE_NAME_V6, sizeof(rt_tbl_eth_bridge_lan_wlan_v6.name));
-
-	rt_tbl_eth_bridge_wlan_wlan_v6.ip = IPA_IP_v6;
-	strncpy(rt_tbl_eth_bridge_wlan_wlan_v6.name, ETH_BRIDGE_WLAN_WLAN_ROUTE_TABLE_NAME_V6, sizeof(rt_tbl_eth_bridge_wlan_wlan_v6.name));
 
 	/* Construct IPACM ipa_client map to rm_resource table */
 	ipa_client_rm_map_tbl[IPA_CLIENT_WLAN1_PROD]= IPA_RM_RESOURCE_WLAN_PROD;
@@ -719,7 +756,7 @@ int IPACM_Config::SetExtProp(ipa_ioc_query_intf_ext_props *prop)
 		{
 			if(ext_prop_v4.num_ext_props >= MAX_NUM_EXT_PROPS)
 			{
-				IPACMDBG_H("IPv4 extended property table is full!\n");
+				IPACMERR("IPv4 extended property table is full!\n");
 				continue;
 			}
 			memcpy(&ext_prop_v4.prop[ext_prop_v4.num_ext_props], &prop->ext[i], sizeof(struct ipa_ioc_ext_intf_prop));
@@ -729,7 +766,7 @@ int IPACM_Config::SetExtProp(ipa_ioc_query_intf_ext_props *prop)
 		{
 			if(ext_prop_v6.num_ext_props >= MAX_NUM_EXT_PROPS)
 			{
-				IPACMDBG_H("IPv6 extended property table is full!\n");
+				IPACMERR("IPv6 extended property table is full!\n");
 				continue;
 			}
 			memcpy(&ext_prop_v6.prop[ext_prop_v6.num_ext_props], &prop->ext[i], sizeof(struct ipa_ioc_ext_intf_prop));
@@ -773,4 +810,15 @@ int IPACM_Config::DelExtProp(ipa_ip_type ip_type)
 	}
 
 	return IPACM_SUCCESS;
+}
+
+const char* IPACM_Config::getEventName(ipa_cm_event_id event_id)
+{
+	if(event_id >= sizeof(ipacm_event_name)/sizeof(ipacm_event_name[0]))
+	{
+		IPACMERR("Event name array is not consistent with event array!\n");
+		return NULL;
+	}
+
+	return ipacm_event_name[event_id];
 }
