@@ -3,8 +3,8 @@
 
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = utils loc_api/libloc_api_50001 loc_api/loc_api_v02
+SUBDIRS = utils core loc_api
 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = loc-api.pc
+pkgconfig_DATA = loc-hal.pc
 EXTRA_DIST = $(pkgconfig_DATA)
