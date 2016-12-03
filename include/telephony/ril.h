@@ -604,6 +604,8 @@ typedef struct {
 } RIL_Dial;
 
 typedef struct {
+    //dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
+    int cla;
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
@@ -618,6 +620,8 @@ typedef struct {
 } RIL_SIM_IO_v5;
 
 typedef struct {
+    //dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
+    int cla;
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
@@ -918,6 +922,10 @@ typedef enum {
     PDP_FAIL_TETHERED_CALL_ACTIVE = -6,   /* data call was disconnected by modem because tethered
                                              mode was up on same APN/data profile - no retry until
                                              tethered call is off */
+
+    PDP_FAIL_IPV4_CALL_THROTTLED = -7,
+
+    PDP_FAIL_IPV6_CALL_THROTTLED = -8,
 
     PDP_FAIL_ERROR_UNSPECIFIED = 0xffff,  /* retry silently. Will be deprecated soon as
                                              new error codes are added making this unnecessary */
@@ -5288,6 +5296,59 @@ typedef struct {
  */
 #define RIL_REQUEST_GET_CARRIER_RESTRICTIONS 141
 
+//DuYuanHua@OnLineRD.AirService.RIL, 2012/09/26, Add for EngineerMode
+
+#define RIL_REQUEST_OEM_BASE	141
+
+//xufei@OnLineRD.AirService.RIL, 2012/12/14, Add for factory mode nv process
+#define RIL_REQUEST_FACTORY_MODE_NV_PROCESS (RIL_REQUEST_OEM_BASE + 1)
+
+//TongJing.Shi@EXP.DataComm.Phone, 2013.08.29, Modify for
+#define RIL_REQUEST_FACTORY_MODE_MODEM_GPIO (RIL_REQUEST_OEM_BASE + 2)
+
+/**
+ * RIL_REQUEST_GET_BAND_MODE
+ *
+ *  get current band mode
+ *
+ * "response" is int
+ *
+ * Valid errors:
+ *  SUCCESS
+ *  GENERIC_FAILURE
+ */
+
+#define RIL_REQUEST_GET_BAND_MODE (RIL_REQUEST_OEM_BASE + 3)
+
+//#ifdef VENDOR_EDIT
+//Zhengpeng.Tan@OnlineRD.AirService.Module, 2013/10/28, Add for  report nv_restore when bootup
+#define RIL_REQUEST_REPORT_BOOTUPNVRESTOR_STATE (RIL_REQUEST_OEM_BASE + 4)
+
+//Wenlong.Cai@OnlineRD.AirService.Module, 2013/12/09, Add for get rffe device information
+#define RIL_REQUEST_GET_RFFE_DEV_INFO (RIL_REQUEST_OEM_BASE + 5)
+
+//dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
+// "data" is a const RIL_SIM_IO *
+// "response" is a const RIL_SIM_IO_Response *
+#define RIL_REQUEST_SIM_TRANSMIT_BASIC (RIL_REQUEST_OEM_BASE+7)
+// "data" is a const char * containing the AID of the applet
+// "response" is a int * containing the channel id
+//#define RIL_REQUEST_SIM_OPEN_CHANNEL (RIL_REQUEST_OEM_BASE+8)
+// "data" is a const int * containing the channel id
+// "response" is NULL
+//#define RIL_REQUEST_SIM_CLOSE_CHANNEL (RIL_REQUEST_OEM_BASE+9)
+// "data" is a const RIL_SIM_IO *
+// "response" is a const RIL_SIM_IO_Response *
+#define RIL_REQUEST_SIM_TRANSMIT_CHANNEL (RIL_REQUEST_OEM_BASE+10)
+
+//yangli@OnlineRD.AirService.Module, 2014/05/20, Add for send msg to make modem reset, {
+#define RIL_REQUEST_GO_TO_ERROR_FATAL (RIL_REQUEST_OEM_BASE+11)
+#define RIL_REQUEST_GET_MDM_BASEBAND  (RIL_REQUEST_OEM_BASE+12)
+//}add end
+
+//yangli@OnlineRD.AirService.Module, 2014/09/22, Add for set only tdd-lte
+#define RIL_REQUEST_SET_TDD_LTE (RIL_REQUEST_OEM_BASE+13)
+
 /***********************************************************************/
 
 /**
@@ -5935,6 +5996,16 @@ typedef struct {
   *
   */
 #define RIL_UNSOL_PCO_DATA 1049
+
+//penghongyi@oem.network add for nv backup response
+//#ifdef VENDOR_EDIT
+#define RIL_UNSOL_OEM_NV_BACKUP_RESPONSE 1050
+//#endif
+
+//#ifdef VENDOR_EDIT
+//Hongyu.Bi@EXP.DataComm.Modem, 2014/02/26, Add for clearcode29/33
+#define RIL_UNSOL_RAC_UPDATE  1051    //czp 1042-->1044
+//#endif /* VENDOR_EDIT */
 
 /***********************************************************************/
 
