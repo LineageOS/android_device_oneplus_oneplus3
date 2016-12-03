@@ -105,7 +105,6 @@ typedef struct loc_eng_data_s
     // AGPS state machines
     AgpsStateMachine*              agnss_nif;
     AgpsStateMachine*              internet_nif;
-    AgpsStateMachine*              wifi_nif;
     //State machine for Data Services
     AgpsStateMachine*              ds_nif;
 
