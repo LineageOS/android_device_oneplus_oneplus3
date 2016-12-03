@@ -13,7 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">画面のクイックチェック</string>
+  <string name="ambient_display_title">アンビエント表示</string>
   <string name="ambient_display_summary">通知を受信したときに画面を点灯する</string>
   <string name="always_enabled_title">常に有効</string>
   <string name="always_enabled_summary">画面を消灯した直後からセンサーイベントをリッスンする</string>
