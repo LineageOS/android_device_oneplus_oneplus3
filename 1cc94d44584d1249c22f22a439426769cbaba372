@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_c88e5b2d",
+        "filename": "configs/media_profiles.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-03T18:24:08Z",
+      "side": 0,
+      "message": "This was changed recently by Steve.",
+      "range": {
+        "startLine": 790,
+        "startChar": 38,
+        "endLine": 790,
+        "endChar": 44
+      },
+      "revId": "1cc94d44584d1249c22f22a439426769cbaba372",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
