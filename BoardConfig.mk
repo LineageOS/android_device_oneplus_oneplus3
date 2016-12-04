@@ -159,6 +159,7 @@ ifeq ($(HOST_OS),linux)
 endif
 
 # GPS
+BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
 
