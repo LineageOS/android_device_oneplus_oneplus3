@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_4524f1c6",
+        "filename": "proprietary-files-qc.txt",
+        "patchSetId": 17
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-04T13:40:04Z",
+      "side": 1,
+      "message": "Why is this one pinned?",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 57
+      },
+      "revId": "594f0230839e222e40367039493f7096eddcb2f8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_852e09a3",
+        "filename": "proprietary-files-qc.txt",
+        "patchSetId": 17
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-04T13:40:04Z",
+      "side": 1,
+      "message": "And this one?",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 34
+      },
+      "revId": "594f0230839e222e40367039493f7096eddcb2f8",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
