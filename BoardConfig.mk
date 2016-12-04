@@ -29,8 +29,6 @@ PLATFORM_PATH := device/oneplus/oneplus3
 
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 
-BOARD_VENDOR := oneplus
-
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
 
@@ -227,6 +225,9 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
+
+# inherit from OnePlus common
+-include device/oneplus/common/BoardConfigCommon.mk
 
 # inherit from the proprietary version
 -include vendor/oneplus/oneplus3/BoardConfigVendor.mk
