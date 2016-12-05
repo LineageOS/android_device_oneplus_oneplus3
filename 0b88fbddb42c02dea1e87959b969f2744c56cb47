@@ -34,6 +34,42 @@
       "revId": "0b88fbddb42c02dea1e87959b969f2744c56cb47",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_1114fb4d",
+        "filename": "configs/nfc/libnfc-brcm.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 3133
+      },
+      "writtenOn": "2016-12-05T18:33:00Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "5f681702_113b5beb",
+      "revId": "0b88fbddb42c02dea1e87959b969f2744c56cb47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_b11ee76d",
+        "filename": "configs/nfc/libnfc-brcm.conf",
+        "patchSetId": 5
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 3133
+      },
+      "writtenOn": "2016-12-05T18:33:00Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "5f681702_712baf93",
+      "revId": "0b88fbddb42c02dea1e87959b969f2744c56cb47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
