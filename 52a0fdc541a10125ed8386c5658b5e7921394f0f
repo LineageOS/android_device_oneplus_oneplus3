@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_76c6056a",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 3962
+      },
+      "writtenOn": "2016-12-05T07:53:30Z",
+      "side": 1,
+      "message": "You sure you shouldn\u0027t be redefining it? It\u0027s defined in rild.rc in hardware/ril-caf/rild",
+      "range": {
+        "startLine": 1118,
+        "startChar": 0,
+        "endLine": 1118,
+        "endChar": 35
+      },
+      "revId": "52a0fdc541a10125ed8386c5658b5e7921394f0f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
