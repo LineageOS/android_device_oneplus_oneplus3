@@ -14,7 +14,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">Okoliški zaslon</string>
-  <string name="ambient_display_summary">Zbudi zaslon ob prejemu obvestila</string>
+  <string name="ambient_display_summary">Vklopi zaslon, ko prejmem obvestila</string>
   <string name="always_enabled_title">Vedno omogoči</string>
   <string name="always_enabled_summary">Poslušaj za dogodke tipal, takoj ko se zaslon izklopi</string>
   <!-- Tilt sensor -->
