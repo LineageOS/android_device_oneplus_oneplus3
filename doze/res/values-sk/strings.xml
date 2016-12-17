@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Ambientné zobrazenie</string>
+  <string name="ambient_display_summary">Prebudiť obrazovku po prijatí oznámenia</string>
+  <string name="always_enabled_title">Vždy povoliť</string>
+  <string name="always_enabled_summary">Čítať dáta zo senzora, hneď sa obrazovka vypne</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Senzor naklonenia</string>
+  <string name="pick_up_title">Zdvihnutie</string>
+  <string name="pick_up_summary">Upozorňovať pulzovaním pri zdvihnutí zariadenia</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Senzor priblíženia</string>
+  <string name="hand_wave_gesture_title">Mávnutie rukou</string>
+  <string name="hand_wave_gesture_summary">Upozorniť pulzovaním pri mávnutí rukou</string>
+  <string name="pocket_gesture_title">Vrecko</string>
+  <string name="pocket_gesture_summary">Upozorniť pulzovaním pri vybratí z vrecka</string>
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
+  <string name="doze_settings_help_title">Pomocník</string>
+  <string name="doze_settings_help_text">Tieto funkcie používajú udalosti senzorov pre spustenie upozorňovania pulzovaním. Vybraný senzor je zapnutý iba v prípade prijatia upozornenia, čo vedie k úspore batérie. Je tu aj možnosť zapnúť daný senzor ihneď po vypnutí obrazovky, ale dochádza k vyššej spotrebe batérie.</string>
 </resources>
