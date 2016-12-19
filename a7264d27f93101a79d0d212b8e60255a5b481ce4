@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_75852408",
+        "filename": "audio/audio_policy_configuration.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2016-12-19T12:50:44Z",
+      "side": 1,
+      "message": "Bootloop without this commented",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 281,
+        "endChar": 19
+      },
+      "revId": "a7264d27f93101a79d0d212b8e60255a5b481ce4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
