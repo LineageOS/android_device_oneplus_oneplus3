@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_950e0030",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8328
+      },
+      "writtenOn": "2016-12-19T08:54:43Z",
+      "side": 1,
+      "message": "are you sure you want that back in?\n\n\nhttps://github.com/CyanogenMod/android_device_oneplus_oneplus3/commit/0286323592147d9dc0550df38a24f5b58ea1fd47#diff-8472ffe72e0c5f6647d51f32a743ec77L45",
+      "range": {
+        "startLine": 40,
+        "startChar": 3,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "7b6d65c63c4b565a22f237516851132d1673636a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
