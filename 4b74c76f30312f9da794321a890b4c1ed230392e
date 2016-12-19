@@ -34,6 +34,24 @@
       "revId": "4b74c76f30312f9da794321a890b4c1ed230392e",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_f0f4a288",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7880
+      },
+      "writtenOn": "2016-12-19T23:05:39Z",
+      "side": 1,
+      "message": "I believe persist props in build.prop dont get persisted after being removed.",
+      "parentUuid": "",
+      "revId": "4b74c76f30312f9da794321a890b4c1ed230392e",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
