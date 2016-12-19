@@ -45,6 +45,30 @@
       "revId": "d1b831b95e983ecae17728cc75a1ec7e7c00c091",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_6a153f4a",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2016-12-19T08:35:24Z",
+      "side": 1,
+      "message": "stock ril blobs need net_raw group",
+      "parentUuid": "5f681702_ea5aef4c",
+      "range": {
+        "startLine": 890,
+        "startChar": 0,
+        "endLine": 896,
+        "endChar": 77
+      },
+      "revId": "d1b831b95e983ecae17728cc75a1ec7e7c00c091",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
