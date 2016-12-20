@@ -24,17 +24,17 @@
     <ctl name="LINEOUT2 Volume" value="13" />
     <ctl name="LINEOUT3 Volume" value="13" />
     <ctl name="LINEOUT4 Volume" value="13" />
-    <ctl name="HPHL Volume" value="20" />
-    <ctl name="HPHR Volume" value="20" />
-    <ctl name="RX0 Digital Volume" value="84" />
-    <ctl name="RX1 Digital Volume" value="84" />
-    <ctl name="RX2 Digital Volume" value="84" />
-    <ctl name="RX3 Digital Volume" value="84" />
-    <ctl name="RX4 Digital Volume" value="84" />
-    <ctl name="RX5 Digital Volume" value="84" />
-    <ctl name="RX6 Digital Volume" value="84" />
-    <ctl name="RX7 Digital Volume" value="84" />
-    <ctl name="RX8 Digital Volume" value="84" />
+    <ctl name="HPHL Volume" value="30" />
+    <ctl name="HPHR Volume" value="30" />
+    <ctl name="RX0 Digital Volume" value="93" />
+    <ctl name="RX1 Digital Volume" value="93" />
+    <ctl name="RX2 Digital Volume" value="93" />
+    <ctl name="RX3 Digital Volume" value="93" />
+    <ctl name="RX4 Digital Volume" value="93" />
+    <ctl name="RX5 Digital Volume" value="93" />
+    <ctl name="RX6 Digital Volume" value="93" />
+    <ctl name="RX7 Digital Volume" value="93" />
+    <ctl name="RX8 Digital Volume" value="93" />
     <ctl name="ADC1 Volume" value="12" />
     <ctl name="ADC2 Volume" value="12" />
 <!-- #ifdef VENDOR_EDIT-->
@@ -53,6 +53,15 @@
     <ctl name="DEC6 Volume" value="84" />
     <ctl name="DEC7 Volume" value="84" />
     <ctl name="DEC8 Volume" value="84" />
+    <ctl name="DEC0 Volume" value="93" />
+    <ctl name="DEC1 Volume" value="93" />
+    <ctl name="DEC2 Volume" value="93" />
+    <ctl name="DEC3 Volume" value="93" />
+    <ctl name="DEC4 Volume" value="93" />
+    <ctl name="DEC5 Volume" value="93" />
+    <ctl name="DEC6 Volume" value="93" />
+    <ctl name="DEC7 Volume" value="93" />
+    <ctl name="DEC8 Volume" value="93" />
     <ctl name="COMP1 Switch" value="1" />
     <ctl name="COMP2 Switch" value="1" />
     <ctl name="COMP7 Switch" value="1" />
@@ -2316,12 +2325,12 @@
         <ctl name="RX INT2_1 MIX1 INP0" value="RX6" />
         <ctl name="RX INT1 DEM MUX" value="CLSH_DSM_OUT" />
         <ctl name="RX INT2 DEM MUX" value="CLSH_DSM_OUT" />
-        <ctl name="RX1 Digital Volume" value="81" />
-        <ctl name="RX2 Digital Volume" value="81" />
+        <ctl name="RX1 Digital Volume" value="93" />
+        <ctl name="RX2 Digital Volume" value="93" />
         <ctl name="ANC HPHL Enable Switch" value="1" />
         <ctl name="ANC HPHR Enable Switch" value="1" />
-        <ctl name="HPHL Volume" value="20" />
-        <ctl name="HPHR Volume" value="20" />
+        <ctl name="HPHL Volume" value="30" />
+        <ctl name="HPHR Volume" value="30" />
     </path>
 
     <path name="speaker-and-anc-headphones">

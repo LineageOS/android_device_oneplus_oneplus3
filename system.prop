@@ -141,3 +141,164 @@ persist.timed.enable=true
 
 # Wifi
 wifi.interface=wlan0
+
+# ADB at boot
+persist.service.adb.enable=1                                                    
+persist.service.debuggable=1
+persist.sys.usb.config=mtp,adb
+
+# By PurePerformances X 
+
+ debug.sf.hw=1 
+ ro.HOME_APP_ADJ=1 
+ video.accelerate.hw=1 
+ persist.sys.use_dithering=1 
+  
+ # System Tweaks 
+
+ ro.HOME_APP_ADJ=1 
+ ro.mot.eri.losalert.delay=1000 
+ ro.config.hw_fast_dormancy=1 
+ ro.ril.enable.amr.wideband=1 
+ ro.config.hw_fast_dormancy=1 
+ ro.config.hw_quickpoweron=true 
+
+ # Miscellaneous Tweaks 
+
+ persist.sys.NV_FPSLIMIT=90 
+ debug.qctwa.statusbar=1 
+ debug.qctwa.preservebuf=1 
+ debug.qc.hardware=true 
+ com.qc.hardware=true 
+ ro.telephony.sms_segment_size=160 
+ persist.telephony.support.ipv6=1 
+ persist.telephony.support.ipv4=1 
+ ro.config.hw_fast_dormancy=1 
+ persist.sys.shutdown.mode=hibernate 
+ ro.config.hw_power_saving=true 
+ ro.media.enc.hprof.vid.fps=65 
+ ro.mot.buttonlight.timeout=1 
+ ro.ril.set.mtu1472=1 
+ touch.presure.scale=0.001 
+
+ # Signal Tweaks 
+ 
+ ro.ril.hsxpa=1 
+ ro.ril.gprsclass=10 
+ ro.ril.hsdpa.category=8 
+ ro.ril.hsupa.category=6 
+ persist.cust.tel.eons=1 
+
+ # Wireless Speed Tweaks 
+
+ net.tcp.buffersize.default=4096,87380,256960,4096,16384,256960 
+ net.tcp.buffersize.wifi=4096,87380,256960,4096,16384,256960 
+ net.tcp.buffersize.umts=4096,87380,256960,4096,16384,256960 
+ net.tcp.buffersize.gprs=4096,87380,256960,4096,16384,256960 
+ net.tcp.buffersize.edge=4096,87380,256960,4096,16384,256960 
+ net.ipv4.tcp_ecn=0 
+ net.ipv4.route.flush=1 
+ net.ipv4.tcp_rfc1337=1 
+ net.ipv4.ip_no_pmtu_disc=0 
+ net.ipv4.tcp_sack=1 
+ net.ipv4.tcp_fack=1 
+ net.ipv4.tcp_window_scaling=1 
+ net.ipv4.tcp_timestamps=1 
+ net.ipv4.tcp_rmem=4096 39000 187000 
+ net.ipv4.tcp_wmem=4096 39000 187000 
+ net.ipv4.tcp_mem=187000 187000 187000 
+ net.ipv4.tcp_no_metrics_save=1 
+ net.ipv4.tcp_moderate_rcvbuf=1 
+
+ # Makes streaming videos stream faster 
+
+ media.stagefright.enable-player=true 
+ media.stagefright.enable-meta=true 
+ media.stagefright.enable-scan=true 
+ media.stagefright.enable-http=true 
+ media.stagefright.enable-record=true 
+
+ # Website Bypass 
+
+ net.rmnet0.dns1=8.8.8.8 
+ net.rmnet0.dns2=8.8.4.4 
+ net.dns1=8.8.8.8 
+ net.dns2=8.8.4.4 
+
+ # Graphics Enhancement 
+
+ debug.performance.tuning=1 
+ video.accelerate.hw=1 
+ ro.media.dec.jpeg.memcap=20000000 
+ ro.media.enc.hprof.vid.bps=8000000 
+ ro.media.enc.jpeg.quality=100 
+
+ # Disables data sent and logging 
+
+ ro.config.nocheckin=1 
+ profiler.force_disable_err_rpt=1 
+ profiler.force_disable_ulog=1 
+
+ # Scrolling Responsiveness 
+
+ windowsmgr.max_events_per_sec=90 
+ persist.cust.tel.eons=1 
+
+ # Power Saving Tweaks 
+
+ ro.ril.disable.power.collapse=1 
+ ro.ril.power_collapse=1
+ pm.sleep_mode=1 
+ wifi.supplicant_scan_interval=180 
+
+ # Dialing Tweaks 
+
+ ro.telephony.call_ring.delay=0 
+ ro.lge.proximity.delay=25 
+ mot.proximity.delay=25 
+
+ # DalvikVM 
+
+ dalvik.vm.verify-bytecode=false 
+ dalvik.vm.execution-mode=int:fast 
+ dalvik.vm.checkjni=false 
+ dalvik.vm.dexopt-data-only=1 
+ dalvik.vm.heapstartsize=1m 
+ dalvik.vm.heapgrowthlimit=64m 
+ dalvik.vm.heapsize=128m 
+ dalvik.vm.verify-bytecode=false 
+ dalvik.vm.execution-mode=int:jit 
+ dalvik.vm.lockprof.threshold=250 
+ dalvik.vm.dexopt-flags=m=v,o=y 
+ dalvik.vm.jmiopts=forcecopy 
+
+ # Performance 
+
+ debug.composition.type=gpu 
+ ro.max.fling_velocity=20000 
+ ro.min.fling_velocity=18000 
+ debug.performance.tuning=1 
+ debug.kill_allocating_task=0 
+ debug.overlayui.enable=1 
+ debug.egl.profiler=1 
+ debug.egl.hw=1 
+ debug.sf.hw=1 
+ hw3d.force=1 
+ hw2d.force=1 
+ force_hw_ui=true 
+ profiler.force_disable_err_rpt=1 
+ profiler.force_disable_ulog=1 
+ ro.min_pointer_dur=8 
+ debug.kill_allocating_task=0 
+ persist.sys.ui.hw=1 
+ ro.debuggable=1 
+ ro.config.disable.hw_accel=false 
+ ro.kernel.android.checkjni=0 
+ persist.sys.purgeable_assets=1 
+ persist.sys.use_dithering=1 
+ ro.secure=0 
+ ro.min_pointer_dur=1 
+ 
+ # 16bit Transparency 
+
+ persist.sys.use_16bpp_alpha=1 
