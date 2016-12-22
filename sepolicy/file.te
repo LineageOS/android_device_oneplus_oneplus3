@@ -7,3 +7,4 @@ type nv_data_file, file_type;
 type proc_stat, fs_type;
 type debugfs_msm_core, debugfs_type, fs_type;
 type debugfs_rmts, debugfs_type, fs_type;
+type sysfs_fpc_wakeup, sysfs_type, fs_type;
