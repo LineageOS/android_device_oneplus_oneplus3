@@ -15,7 +15,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">環境顯示</string>
   <string name="ambient_display_summary">當接收到通知時喚醒螢幕</string>
-  <string name="always_enabled_title">永遠啟用</string>
+  <string name="always_enabled_title">一律啟用</string>
   <string name="always_enabled_summary">當螢幕關閉時監聽感應器事件</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">傾側感應器</string>
