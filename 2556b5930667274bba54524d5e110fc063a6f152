@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a202591_9e88fc23",
+        "filename": "include/telephony/ril.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 5301,
+      "author": {
+        "id": 11124
+      },
+      "writtenOn": "2016-12-30T00:47:16Z",
+      "side": 1,
+      "message": "Maybe change this to 142",
+      "revId": "2556b5930667274bba54524d5e110fc063a6f152",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
