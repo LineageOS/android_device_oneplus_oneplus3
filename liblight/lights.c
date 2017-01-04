@@ -1,6 +1,7 @@
 /*
+ * Copyright (C) 2014, 2017 The  Linux Foundation. All rights reserved.
+ * Not a contribution
  * Copyright (C) 2008 The Android Open Source Project
- * Copyright (C) 2014 The Linux Foundation. All rights reserved.
  * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,6 +32,10 @@
 #include <sys/types.h>
 
 #include <hardware/lights.h>
+
+#ifndef DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS
+#define DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS 0x80
+#endif
 
 /******************************************************************************/
 
@@ -112,6 +117,9 @@ char const*const BLUE_BLINK_FILE
 char const*const RGB_BLINK_FILE
         = "/sys/class/leds/rgb/rgb_blink";
 
+char const*const PERSISTENCE_FILE
+        = "/sys/class/graphics/fb0/msm_fb_persist_mode";
+
 #define RAMP_SIZE 8
 static int BRIGHTNESS_RAMP[RAMP_SIZE]
         = { 0, 12, 25, 37, 50, 72, 85, 100 };
@@ -191,11 +199,32 @@ set_light_backlight(struct light_device_t* dev,
 {
     int err = 0;
     int brightness = rgb_to_brightness(state);
+    unsigned int lpEnabled =
+        state->brightnessMode == BRIGHTNESS_MODE_LOW_PERSISTENCE;
     if(!dev) {
         return -1;
     }
+
     pthread_mutex_lock(&g_lock);
-    err = write_int(LCD_FILE, brightness);
+    // Toggle low persistence mode state
+    if ((g_last_backlight_mode != state->brightnessMode && lpEnabled) ||
+        (!lpEnabled &&
+         g_last_backlight_mode == BRIGHTNESS_MODE_LOW_PERSISTENCE)) {
+        if ((err = write_int(PERSISTENCE_FILE, lpEnabled)) != 0) {
+            ALOGE("%s: Failed to write to %s: %s\n", __FUNCTION__,
+                   PERSISTENCE_FILE, strerror(errno));
+        }
+        if (lpEnabled != 0) {
+            brightness = DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS;
+        }
+    }
+
+    g_last_backlight_mode = state->brightnessMode;
+
+    if (!err) {
+        err = write_int(LCD_FILE, brightness);
+    }
+
     pthread_mutex_unlock(&g_lock);
     return err;
 }
@@ -451,7 +480,7 @@ static int open_lights(const struct hw_module_t* module, char const* name,
     memset(dev, 0, sizeof(*dev));
 
     dev->common.tag = HARDWARE_DEVICE_TAG;
-    dev->common.version = 0;
+    dev->common.version = LIGHTS_DEVICE_API_VERSION_2_0;
     dev->common.module = (struct hw_module_t*)module;
     dev->common.close = (int (*)(struct hw_device_t*))close_lights;
     dev->set_light = set_light;
