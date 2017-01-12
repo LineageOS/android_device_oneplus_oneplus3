@@ -21,7 +21,6 @@
         <item>@string/pref_camera_scenemode_entry_steadyphoto</item>
         <item>@string/pref_camera_scenemode_entry_hdr</item>
 		<item>@string/pref_camera_scenemode_entry_asd</item>
-		<item>@string/pref_camera_advanced_feature_entry_chromaflash</item>
         <item>@string/pref_camera_scenemode_entry_sports</item>
 	</string-array>
 
@@ -30,7 +29,6 @@
 		<item>steadyphoto</item>
 		<item>hdr</item>
 		<item>asd</item>
-		<item>chroma-flash-on</item>
 		<item>sports</item>
 	</string-array>
 
@@ -39,7 +37,6 @@
         <item>@drawable/ic_scene_mode_entry_steadyphoto</item>
         <item>@drawable/ic_scene_mode_hdr</item>
         <item>@drawable/ic_scene_mode_smartauto</item>
-        <item>@drawable/ic_scene_mode_entry_dark</item>
 		<item>@drawable/ic_scene_mode_sports</item>
 	</array>
 
