@@ -575,21 +575,3 @@ on property:sys.rainbow.recovery=1
 
 on property:sys.rainbow.recovery=0
     write /sys/class/leds/rgb/rgb_blink 0
-
-# happy dance!
-on post-fs-data
-    write /sys/class/leds/red/brightness 0
-    write /sys/class/leds/red/blink 0
-    write /sys/class/leds/green/brightness 0
-    write /sys/class/leds/green/blink 0
-    write /sys/class/leds/blue/brightness 0
-    write /sys/class/leds/blue/blink 0
-    write /sys/class/leds/rgb/rgb_blink 0
-    write /sys/class/leds/green/start_idx 0
-    write /sys/class/leds/green/pause_hi 0
-    write /sys/class/leds/green/pause_lo 0
-    write /sys/class/leds/green/ramp_step_ms 50
-    write /sys/class/leds/green/duty_pcts "16,25,33,41,50,58,66,74,83,91,100"
-    write /sys/class/leds/green/brightness 255
-    write /sys/class/leds/blue/brightness 255
-    write /sys/class/leds/green/blink 1
