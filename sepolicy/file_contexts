@@ -7,6 +7,8 @@
 
 /persist/sensors/gyro_sensitity_cal                             u:object_r:sensors_persist_file:s0
 
+/data/misc/netmgr(/.*)?                                         u:object_r:net_data_file:s0
+
 /data/oemnvitems(/.*)?                                          u:object_r:nv_data_file:s0
 
 /dev/fpc1020                                                    u:object_r:fpc1020_device:s0
