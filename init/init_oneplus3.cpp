@@ -89,6 +89,7 @@ void init_alarm_boot_properties()
 }
 
 void load_op3(const char *model) {
+    property_set("ro.display.series", "OnePlus 3");
     property_set("ro.product.model", model);
     property_set("ro.build.product", "OnePlus3");
     property_set("ro.product.device", "OnePlus3");
@@ -97,6 +98,7 @@ void load_op3(const char *model) {
 }
 
 void load_op3t(const char *model) {
+    property_set("ro.display.series", "OnePlus 3T");
     property_set("ro.product.model", model);
     property_set("ro.build.product", "OnePlus3");
     property_set("ro.product.device", "OnePlus3T");
