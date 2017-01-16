@@ -1,1 +1,3 @@
 allow location permission_service:service_manager find;
+allow location diag_prop:file r_file_perms;
+set_prop(location, diag_prop);
