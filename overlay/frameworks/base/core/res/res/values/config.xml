@@ -30,22 +30,11 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>        <!-- pitch black -->
-        <item>5</item>
-        <item>9</item>
-        <item>14</item>
-        <item>25</item>       <!-- twilight -->
-        <item>50</item>       <!-- dim indoor -->
-        <item>100</item>      <!-- home -->
-        <item>200</item>
-        <item>300</item>      <!-- office -->
-        <item>500</item>      <!-- sunrise -->
-        <item>750</item>
-        <item>1000</item>     <!-- overcast -->
-        <item>2000</item>
-        <item>5000</item>
-        <item>10000</item>    <!-- daylight -->
-        <item>20000</item>
+        <item>45</item>
+        <item>1025</item>
+        <item>1480</item>
+        <item>2940</item>
+        <item>10000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -53,35 +42,29 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>7</item>
-        <item>8</item>
-        <item>10</item>
-        <item>12</item>
-        <item>17</item>
-        <item>29</item>
-        <item>35</item>
-        <item>47</item>
-        <item>75</item>
-        <item>114</item>
-        <item>130</item>
-        <item>152</item>
+        <item>11</item>
+        <item>26</item>
+        <item>60</item>
+        <item>108</item>
         <item>175</item>
-        <item>200</item>
-        <item>215</item>
-        <item>235</item>
         <item>255</item>
     </integer-array>
+
+    <!-- OOS brightness tweaks -->
+    <integer name="config_autoBrightnessBrighteningLightFastDebounce">500</integer>
+    <integer name="config_autoBrightnessBrighteningLightDebounce">1000</integer>
+    <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
     <integer name="config_screenBrightnessDim">6</integer>
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
-    <integer name="config_screenBrightnessSettingMinimum">1</integer>
+    <integer name="config_screenBrightnessSettingMinimum">2</integer>
 
     <!-- Default screen brightness setting.
          Must be in the range specified by minimum and maximum. -->
-    <integer name="config_screenBrightnessSettingDefault">53</integer>
+    <integer name="config_screenBrightnessSettingDefault">46</integer>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
