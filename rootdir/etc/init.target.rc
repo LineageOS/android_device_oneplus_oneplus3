@@ -48,6 +48,8 @@ on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
     export LD_SHIM_LIBS /system/lib/hw/camera.msm8996.so|libcamera_shim.so:/system/lib/libopcamera_native_modules.so|libcamera_shim.so
 
+    setprop persist.camera.HAL3.enabled 0
+
 on post-fs-data
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system

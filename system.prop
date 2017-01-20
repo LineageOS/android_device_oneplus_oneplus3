@@ -33,7 +33,6 @@ bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=rome
 
 # Camera
-persist.camera.HAL3.enabled=0
 persist.camera.imglib.fddsp=1
 persist.camera.llc=1
 persist.camera.llnoise=1
