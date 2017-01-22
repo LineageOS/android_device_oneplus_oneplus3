@@ -553,6 +553,11 @@ service ifaadaemon /system/bin/ifaadaemon
     group system
     writepid /dev/cpuset/system-background/tasks
 
+service remosaic_daemon /system/bin/remosaic_daemon
+    class late_start
+    user camera
+    writepid /dev/cpuset/system-background/tasks
+
 # such color
 on property:sys.rainbow.recovery=1
     write /sys/class/leds/red/brightness 255
