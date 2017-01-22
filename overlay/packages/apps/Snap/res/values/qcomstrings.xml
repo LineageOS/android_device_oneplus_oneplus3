@@ -21,4 +21,7 @@
 -->
 <resources>
     <string name="pref_video_quality_default" translatable="false">1920x1080</string>
+
+    <!-- HDR needs 1x frame -->
+    <string name="pref_camera_hdr_need_1x_default" translatable="false">false</string>
 </resources>
