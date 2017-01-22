@@ -30,3 +30,5 @@
 /sys/kernel/debug/rmt_storage/rmts                              u:object_r:debugfs_rmts:s0
 
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
+
+/system/bin/remosaic_daemon                                     u:object_r:remosaic_daemon_exec:s0
