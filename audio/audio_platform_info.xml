@@ -29,12 +29,6 @@
         <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15" />
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="15" />
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124" />
-        <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" acdb_id="26" />
-        <device name="SND_DEVICE_IN_HANDSET_DMIC_AEC_NS" acdb_id="41" />
-        <device name="SND_DEVICE_IN_SPEAKER_DMIC_AEC_NS" acdb_id="43" />
-        <device name="SND_DEVICE_IN_HEADSET_MIC_FLUENCE" acdb_id="16" />
-        <device name="SND_DEVICE_IN_VOICE_HEADSET_MIC" acdb_id="16" />
-        <device name="SND_DEVICE_IN_HEADSET_MIC" acdb_id="8" />
     </acdb_ids>
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>
