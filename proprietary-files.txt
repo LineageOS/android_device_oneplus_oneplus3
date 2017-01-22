@@ -18,22 +18,23 @@ etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
 # Camera
 bin/mm-qcamera-daemon
+etc/camera/camera_config.xml
+etc/camera/csidtg_camera.xml
+etc/camera/csidtg_chromatix.xml
 etc/camera/imx179_chromatix.xml
 etc/camera/imx298_chromatix.xml
-etc/camera/msm8996_camera.xml
 etc/camera/s5k3p8_chromatix.xml
 etc/camera/s5k3p8sp_chromatix.xml
 lib/hw/camera.msm8996.so
-lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
-lib/libopcamera_crypt.so
-lib/libopcamera_native_modules.so
 lib/libqomx_core.so
+vendor/lib/libchromaflash.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
+vendor/lib/libmmcamera_chromaflash_lib.so
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_dummyalgo.so
 vendor/lib/libmmcamera_eebinparse.so
@@ -91,6 +92,8 @@ vendor/lib/libmmcamera_isp_scaler_viewfinder46.so
 vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
+vendor/lib/libmmcamera_llvd.so
+vendor/lib/libmmcamera_optizoom_lib.so
 vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
@@ -102,11 +105,15 @@ vendor/lib/libmmcamera_s5k3p8sp_m24c64s_eeprom.so
 vendor/lib/libmmcamera_s5k3p8sp.so
 vendor/lib/libmmcamera_sony_imx179_eeprom.so
 vendor/lib/libmmcamera_sony_imx298_eeprom.so
+vendor/lib/libmmcamera_stillmore_lib.so
+vendor/lib/libmmcamera_sw2d_lib.so
 vendor/lib/libmmcamera_thread_services.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
+vendor/lib/libmmcamera_trueportrait_lib.so
 vendor/lib/libmmcamera_tuning_lookup.so
 vendor/lib/libmmcamera_tuning.so
+vendor/lib/libmmcamera_ubifocus_lib.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_frame_algorithm.so
@@ -114,8 +121,8 @@ vendor/lib/libmmcamera2_iface_modules.so
 vendor/lib/libmmcamera2_imglib_modules.so
 vendor/lib/libmmcamera2_is.so
 vendor/lib/libmmcamera2_isp_modules.so
+vendor/lib/libmmcamera2_mct_shimlayer.so
 vendor/lib/libmmcamera2_mct.so
-vendor/lib/libmmcamera2_memleak.so
 vendor/lib/libmmcamera2_pp_buf_mgr.so
 vendor/lib/libmmcamera2_pproc_modules.so
 vendor/lib/libmmcamera2_q3a_core.so
@@ -126,13 +133,14 @@ vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
 vendor/lib/libois_rohm_bu63165gwl.so
+vendor/lib/liboptizoom.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
-vendor/lib/libremosaic_daemon.so
-vendor/lib/libremosaic_tuning.so
-vendor/lib/libremosaiclib.so
+vendor/lib/libseemore.so
 vendor/lib/libSonyIMX298PdafLibrary.so
+vendor/lib/libtrueportrait.so
+vendor/lib/libubifocus.so
 
 # Camera actuators
 vendor/lib/libactuator_rohm_bu63165gwl.so
@@ -187,6 +195,8 @@ vendor/lib/libchromatix_imx179_isp_3280x2464_30fps_video.so
 vendor/lib/libchromatix_imx179_postproc.so
 vendor/lib/libchromatix_imx298_3a_clearshot_s.so
 vendor/lib/libchromatix_imx298_3a_clearshot.so
+vendor/lib/libchromatix_imx298_3a_HDR_s.so
+vendor/lib/libchromatix_imx298_3a_HDR.so
 vendor/lib/libchromatix_imx298_3a_panorama_s.so
 vendor/lib/libchromatix_imx298_3a_panorama.so
 vendor/lib/libchromatix_imx298_4K_preview_s.so
@@ -279,26 +289,61 @@ vendor/lib/libchromatix_s5k3p8sp_isp_4608x3456_30fps_video.so
 vendor/lib/libchromatix_s5k3p8sp_postproc.so
 
 # Camera postprocessing
+bin/remosaic_daemon
+lib/lib_oneplus_facebeauty.so
 lib/lib_oneplus_md.so
 lib/libFNVfbEngineHAL.so
 lib/libmorpho_image_stab4.so
 lib/libmorpho_video_refiner.so
 lib/libop_calib3d.so
+lib/libop_carotene.so
 lib/libop_core.so
+lib/libop_face.so
+lib/libop_features2d.so
 lib/libop_flann.so
+lib/libop_fuzzy.so
+lib/libop_gpu.so
+lib/libop_highgui.so
 lib/libop_imgcodecs.so
 lib/libop_imgproc.so
 lib/libop_jasper.so
 lib/libop_jpeg.so
+lib/libop_ml.so
+lib/libop_objdetect.so
 lib/libop_openexr.so
+lib/libop_openxv.so
 lib/libop_optflow.so
+lib/libop_photo.so
 lib/libop_png.so
+lib/libop_shape.so
+lib/libop_stitching.so
+lib/libop_structure_light.so
+lib/libop_superpixel.so
+lib/libop_superres.so
+lib/libop_surface_matching.so
 lib/libop_tiff.so
+lib/libop_ts.so
 lib/libop_video.so
+lib/libop_videoio.so
+lib/libop_videostab.so
+lib/libop_world.so
+lib/libop_xfeatures2d.so
 lib/libop_ximgproc.so
+lib/libop_xobjdetect.so
+lib/libop_xphoto.so
 lib/libop_zlib.so
 lib/libopcamera_crypt.so
 lib/libopcamera_native_modules.so
+lib/libopcamera.so
+lib/libopcameralib.so
+lib/qpd_dspcl_v2.bin
+lib/TC_Bayer_Converter_v6_core_opt.bin
+vendor/lib/libremosaic_daemon.so
+vendor/lib/libremosaic_tuning.so
+vendor/lib/libremosaiclib.so
+vendor/lib64/libremosaic_daemon.so
+vendor/lib64/libremosaic_tuning.so
+vendor/lib64/libremosaiclib.so
 
 # Camera / DSP - Hexagon libraries
 lib/rfsa/adsp/libmorpho_image_stabilizer4_hvx_skel.so
@@ -308,6 +353,7 @@ lib/rfsa/adsp/libmorpho_video_denoiser_hvx_skel.so
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_10_0.fw
+etc/firmware/cpp_firmware_v1_12_0.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_5_0.fw
