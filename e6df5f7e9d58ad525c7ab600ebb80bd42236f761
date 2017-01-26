@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_7699d46d",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-01-26T13:12:27Z",
+      "side": 1,
+      "message": "Not sure about this part",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
