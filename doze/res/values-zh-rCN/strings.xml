@@ -24,11 +24,11 @@
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">距离传感器</string>
   <string name="hand_wave_gesture_title">挥手</string>
-  <string name="hand_wave_gesture_summary">挥手时闪烁通知呼吸灯</string>
+  <string name="hand_wave_gesture_summary">挥手时闪烁通知灯</string>
   <string name="pocket_gesture_title">口袋</string>
-  <string name="pocket_gesture_summary">从口袋中拿出时闪烁通知呼吸灯</string>
+  <string name="pocket_gesture_summary">从口袋中拿出时闪烁通知灯</string>
   <!-- Help text -->
   <string name="dlg_ok">确定</string>
   <string name="doze_settings_help_title">帮助</string>
-  <string name="doze_settings_help_text">这些功能使用传感器启用打盹通知指示灯，选择的传感器将仅在设备收到通知时开启，这将有助于优化电池用量。还有一个选项是当屏幕关闭后立即启用传感器，这会导致更多的电池用量。</string>
+  <string name="doze_settings_help_text">这些功能使用传感器事件来启动一个打盹通知脉冲。所选的传感器仅在设备收到一条通知时启用，这有助于降低电池消耗。另有一个选项是屏幕关闭后马上启用所选的传感器，而这会消耗更多电量。</string>
 </resources>

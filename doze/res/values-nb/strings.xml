@@ -20,15 +20,15 @@
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Tilt sensor</string>
   <string name="pick_up_title">Opp-plukking</string>
-  <string name="pick_up_summary">Pulseringsnotifikasjon når telefonen er plukket opp</string>
+  <string name="pick_up_summary">Pulseringsvarsel når telefonen plukkes opp</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">Avstandsmåler</string>
   <string name="hand_wave_gesture_title">Håndvink</string>
-  <string name="hand_wave_gesture_summary">Pulseringsnotifikasjon ved håndvink</string>
+  <string name="hand_wave_gesture_summary">Pulseringsvarsel ved håndvink</string>
   <string name="pocket_gesture_title">Lomme</string>
-  <string name="pocket_gesture_summary">Pulseringsnotifikasjon når telefonen er tatt opp av lommen</string>
+  <string name="pocket_gesture_summary">Pulseringsvarsel når telefonen er tatt opp av lommen</string>
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Hjelp</string>
-  <string name="doze_settings_help_text">Disse funksjonene bruker sensor aktiviteter for å åpne en doze pulseringsnotifikasjon. Den valgte sensoren er bare slått på når du har fått et varsel, for å spare batteriet. Du kan også slå på så sensoren slår seg på når skjermen slår seg av, som vill tappe mer strøm.</string>
+  <string name="doze_settings_help_text">Disse funksjonene bruker sensor aktiviteter for å åpne en doze pulseringsvarsel. Den valgte sensoren er bare slått på når du har fått et varsel, for å spare batteriet. Du kan også slå på så sensoren slår seg på når skjermen slår seg av, som vill tappe mer strøm.</string>
 </resources>

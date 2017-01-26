@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Afișare ambientală</string>
+  <string name="ambient_display_summary">Trezește ecranul când primiți notificări</string>
+  <string name="always_enabled_title">Întotdeauna activ</string>
+  <string name="always_enabled_summary">Ascultă pentru evenimentele senzorilor de îndată ce ecranul se stinge</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Senzor de înclinare</string>
+  <string name="pick_up_title">Ridicare</string>
+  <string name="pick_up_summary">Pulsează notificările atunci când dispozitivul este ridicat</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Senzor de proximitate</string>
+  <string name="hand_wave_gesture_title">Unduire mână</string>
+  <string name="hand_wave_gesture_summary">Pulsează notificările la unduirea mâinii</string>
+  <string name="pocket_gesture_title">Buzunar</string>
+  <string name="pocket_gesture_summary">Pulsează notificările la scoaterea din buzunar</string>
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
+  <string name="doze_settings_help_title">Ajutor</string>
+  <string name="doze_settings_help_text">Aceste caracteristici utilizează evenimentele senzorilor pentru a lansa pulsul notificărilor doze. Senzorul ales este pornit numai când dispozitivul a primit o notificare, asta ajutând la reducerea utilizării bateriei. De asemenea, există o opțiune pentru a activa senzorul ales de îndată ce ecranul se stinge, asta cauzând o utilizare a bateriei mai mare.</string>
 </resources>
