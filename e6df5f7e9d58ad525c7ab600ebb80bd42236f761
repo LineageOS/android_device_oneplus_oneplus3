@@ -70,6 +70,30 @@
       "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_360c6c42",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 11221
+      },
+      "writtenOn": "2017-01-26T14:43:56Z",
+      "side": 1,
+      "message": "Missed this:\n[ro.boot.rf_version]: [22]\n\nSo I guess rf_version 22 \u003d Op3t, A3003",
+      "parentUuid": "9a437d4f_365eac46",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
