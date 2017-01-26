@@ -24,13 +24,15 @@
 # Inherit from oppo-common
 -include device/oppo/common/BoardConfigCommon.mk
 
-TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3
-
 PLATFORM_PATH := device/oneplus/oneplus3
 
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 
 BOARD_VENDOR := oneplus
+
+# Assertions
+TARGET_BOARD_INFO_FILE ?= $(PLATFORM_PATH)/board-info.txt
+TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3
 
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
@@ -198,6 +200,7 @@ TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+BOARD_TRUSTZONE_PARTITION_SIZE := 2048
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
