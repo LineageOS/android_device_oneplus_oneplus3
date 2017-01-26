@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_4a93c4a3",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 5503
+      },
+      "writtenOn": "2017-01-26T16:10:20Z",
+      "side": 1,
+      "message": "This should be calculated at runtime in recovery_updater.cpp, see comments in 158454.",
+      "revId": "25440b6b176d935499273c4464cdbe433a037a87",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
