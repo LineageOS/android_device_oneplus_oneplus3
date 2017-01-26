@@ -46,6 +46,30 @@
       "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_365eac46",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 11221
+      },
+      "writtenOn": "2017-01-26T14:29:34Z",
+      "side": 1,
+      "message": "This is what I get on op3t:\n[ro.product.device]: [OnePlus3T]\n[ro.product.first_api_level]: [23]\n[ro.product.locale]: [en-US]\n[ro.product.manufacturer]: [OnePlus]\n[ro.product.model]: [ONEPLUS A3003]\n[ro.product.name]: [OnePlus3]",
+      "parentUuid": "9a437d4f_36a34ca0",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
