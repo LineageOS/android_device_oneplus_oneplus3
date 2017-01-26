@@ -22,6 +22,30 @@
       "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_36a34ca0",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 8328
+      },
+      "writtenOn": "2017-01-26T13:14:41Z",
+      "side": 1,
+      "message": "In Settings it shows as \"ONEPLUS A3010\" for me",
+      "parentUuid": "9a437d4f_7699d46d",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "e6df5f7e9d58ad525c7ab600ebb80bd42236f761",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
