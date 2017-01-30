@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_dfd1a7ce",
+        "filename": "display/qdcm_calib_data_samsung_s6e3fa5_1080p_cmd_mode_dsi_panel.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8328
+      },
+      "writtenOn": "2017-01-30T14:52:55Z",
+      "side": 1,
+      "message": "on second thought, we want these Luts",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 11
+      },
+      "revId": "353fccdbd409da1744b62af2e3922d6b1c6c7453",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
