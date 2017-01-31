@@ -22,6 +22,30 @@
       "revId": "8c4b64f8448d52821391a486f345bc5e2df35f98",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_b7aba788",
+        "filename": "system.prop",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-01-31T13:18:48Z",
+      "side": 1,
+      "message": "libwvn.so or libwvm.so?",
+      "parentUuid": "9a437d4f_654eaec3",
+      "range": {
+        "startLine": 39,
+        "startChar": 69,
+        "endLine": 39,
+        "endChar": 100
+      },
+      "revId": "8c4b64f8448d52821391a486f345bc5e2df35f98",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
