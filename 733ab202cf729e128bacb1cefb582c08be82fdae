@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_d7cceb37",
+        "filename": "overlay/packages/apps/Snap/res/values/config.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-01-31T13:44:31Z",
+      "side": 1,
+      "message": "op3t really need this?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 54
+      },
+      "revId": "733ab202cf729e128bacb1cefb582c08be82fdae",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
