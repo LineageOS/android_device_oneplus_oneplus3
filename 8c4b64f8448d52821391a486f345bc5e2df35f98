@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_654eaec3",
+        "filename": "system.prop",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 16984
+      },
+      "writtenOn": "2017-01-31T13:14:16Z",
+      "side": 1,
+      "message": "what about this? Last time I checked v4.2 needed libwvn.so in hal3 mode",
+      "range": {
+        "startLine": 39,
+        "startChar": 69,
+        "endLine": 39,
+        "endChar": 100
+      },
+      "revId": "8c4b64f8448d52821391a486f345bc5e2df35f98",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
