@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_972543ad",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 16426
+      },
+      "writtenOn": "2017-01-31T11:22:06Z",
+      "side": 1,
+      "message": "Missing OnePlus3t stuff?",
+      "range": {
+        "startLine": 35,
+        "startChar": 28,
+        "endLine": 35,
+        "endChar": 45
+      },
+      "revId": "03c8f454e674db914803caff6c0daddb3ef66cc5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
