@@ -93,6 +93,14 @@ on boot
     chown system radio /proc/touchpanel/double_tap_enable
     chmod 0660 /proc/touchpanel/double_tap_enable
 
+    chown root system /proc/touchpanel/up_swipe_enable
+    chmod 0660 /proc/touchpanel/up_swipe_enable
+    chown root system /proc/touchpanel/down_swipe_enable
+    chmod 0660 /proc/touchpanel/down_swipe_enable
+    chown root system /proc/touchpanel/left_swipe_enable
+    chmod 0660 /proc/touchpanel/left_swipe_enable
+    chown root system /proc/touchpanel/right_swipe_enable
+    chmod 0660 /proc/touchpanel/right_swipe_enable
     chown root system /proc/touchpanel/double_swipe_enable
     chmod 0660 /proc/touchpanel/double_swipe_enable
     chown root system /proc/touchpanel/up_arrow_enable
@@ -103,8 +111,12 @@ on boot
     chmod 0660 /proc/touchpanel/left_arrow_enable
     chown root system /proc/touchpanel/right_arrow_enable
     chmod 0660 /proc/touchpanel/right_arrow_enable
+    chown root system /proc/touchpanel/letter_m_enable
+    chmod 0660 /proc/touchpanel/letter_m_enable
     chown root system /proc/touchpanel/letter_o_enable
     chmod 0660 /proc/touchpanel/letter_o_enable
+    chown root system /proc/touchpanel/letter_w_enable
+    chmod 0660 /proc/touchpanel/letter_w_enable
 
     # Buttons
     chown root system /proc/s1302/key_rep
