@@ -1,0 +1,27 @@
+type remosaic_daemon, domain;
+type remosaic_daemon_exec, exec_type, file_type;
+
+init_daemon_domain(remosaic_daemon)
+
+allow remosaic_daemon system_file:file execute_no_trans;
+
+binder_call(remosaic_daemon, servicemanager);
+
+allow system_app remosaic_daemon:binder { call };
+
+allow remosaic_daemon remosaic_service:service_manager { add find };
+
+allow servicemanager remosaic_daemon:dir {search read open};
+allow servicemanager remosaic_daemon:file {read open getattr};
+allow servicemanager remosaic_daemon:process {getattr};
+
+allow remosaic_daemon mm-qcamerad:fd { use };
+allow remosaic_daemon mediaserver:fd { use };
+allow remosaic_daemon cameraserver:fd { use };
+
+allow remosaic_daemon gpu_device:chr_file {open read write ioctl};
+
+allow remosaic_daemon camera_data_file:dir { getattr search };
+allow remosaic_daemon camera_data_file:file { open read write ioctl getattr};
+
+allow remosaic_daemon ion_device:chr_file { open read write ioctl};
