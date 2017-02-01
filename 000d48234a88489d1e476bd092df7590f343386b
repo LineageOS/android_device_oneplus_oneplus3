@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_be0ffce0",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-02-01T09:39:20Z",
+      "side": 1,
+      "message": "IIRC, at least on gemini, only these 2 props return something if you grep the whole system dump.",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 26
+      },
+      "revId": "000d48234a88489d1e476bd092df7590f343386b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
