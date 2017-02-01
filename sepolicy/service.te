@@ -1,1 +1,2 @@
 type ifaadaemon_service,          service_manager_type;
+type remosaic_service, service_manager_type;
