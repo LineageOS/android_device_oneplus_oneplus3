@@ -22,6 +22,29 @@
       "revId": "000d48234a88489d1e476bd092df7590f343386b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_995d72ec",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-02-01T14:44:13Z",
+      "side": 1,
+      "message": "This line is added by another patch, remove it. I\u0027m not sure about the others but I guess there\u0027s no need to add \u003d0 props",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 30
+      },
+      "revId": "000d48234a88489d1e476bd092df7590f343386b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
