@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Ortam ekranı</string>
+  <string name="ambient_display_summary">Bildirim geldiğinde cihazı uyandır</string>
+  <string name="always_enabled_title">Her zaman etkin</string>
+  <string name="always_enabled_summary">Ekran kapalıyken sensör hareketlerini dinle</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Eğrilik sensörü</string>
+  <string name="pick_up_title">Kaldır</string>
+  <string name="pick_up_summary">Telefonu kaldırınca bildirimleri göster</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Yakınlık sensörü</string>
+  <string name="hand_wave_gesture_title">El sallama</string>
+  <string name="hand_wave_gesture_summary">El sallayınca bildirimleri aç</string>
+  <string name="pocket_gesture_title">Cep</string>
+  <string name="pocket_gesture_summary">Cepten çıkarınca bildirimleri göster</string>
   <!-- Help text -->
+  <string name="dlg_ok">TAMAM</string>
+  <string name="doze_settings_help_title">Yardım</string>
+  <string name="doze_settings_help_text">Doze özelliği çalışmak için sensörleri kullanır. Seçilen sensör yalnızca cihaz bildirim aldığında etkinleştirilir, pil kullanımını azaltmaya yardımcı olur. Seçilen sensörü ekran kapanır kapanmaz etkinleştirebilirsiniz ancak bu yüksek pil kullanımına neden olur.</string>
 </resources>
