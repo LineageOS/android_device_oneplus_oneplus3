@@ -49,7 +49,7 @@ const int CPU_SENSORS[] = {4, 6, 9, 11};
 #define BATTERY_SHUTDOWN_THRESHOLD    60
 // device/oneplus/oneplus3/configs/thermal-engine.conf
 #define SKIN_THROTTLING_THRESHOLD     47
-#define SKIN_SHUTDOWN_THRESHOLD       65
+#define SKIN_SHUTDOWN_THRESHOLD       60
 #define VR_THROTTLED_BELOW_MIN        58
 
 #define GPU_LABEL                     "GPU"
