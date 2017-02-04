@@ -8,10 +8,6 @@
     "target_path": "kernel/oneplus/msm8996"
   },
   {
-    "repository": "android_packages_resources_devicesettings",
-    "target_path": "packages/resources/devicesettings"
-  },
-  {
     "repository": "android_vendor_nxp-nfc_opensource_frameworks",
     "target_path": "vendor/nxp-nfc/opensource/frameworks"
   },
