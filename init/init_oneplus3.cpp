@@ -110,17 +110,31 @@ void vendor_load_properties() {
     property_get("ro.boot.rf_version", rf_version, NULL);
 
     if (strstr(rf_version, "11") || strstr(rf_version, "31")) {
-        /* China / America */
+        /* China / North America model */
         load_op3("ONEPLUS A3000");
+        property_set("ro.telephony.default_network", "22");
     } else if (strstr(rf_version, "21")) {
-        /* Asia / Europe */
+        /* Europe / Asia model */
         load_op3("ONEPLUS A3003");
-    } else if (strstr(rf_version, "12") || strstr(rf_version, "32")) {
-        /* China / America */
+        property_set("ro.telephony.default_network", "9");
+    } else if (strstr(rf_version, "12")) {
+        /* China model */
         load_op3t("ONEPLUS A3010");
+        property_set("ro.telephony.default_network", "22");
+        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.force_on_dc", "true");
     } else if (strstr(rf_version, "22")) {
-        /* Asia / Europe */
+        /* Europe / Asia model */
         load_op3t("ONEPLUS A3003");
+        property_set("ro.telephony.default_network", "9");
+    } else if (strstr(rf_version, "32")) {
+        /* North America model */
+        load_op3t("ONEPLUS A3000");
+        property_set("ro.telephony.default_network", "22");
+        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.force_on_dc", "true");
+    } else {
+        INFO("%s: unexcepted rf version!\n", __func__);
     }
 
     init_alarm_boot_properties();
