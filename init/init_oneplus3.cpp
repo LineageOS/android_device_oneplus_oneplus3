@@ -1,5 +1,6 @@
 /*
    Copyright (c) 2016, The CyanogenMod Project
+             (c) 2017, The LineageOS Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -27,12 +28,13 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string>
 
-#include <cutils/properties.h>
 #include "vendor_init.h"
+#include "property_service.h"
 #include "log.h"
 #include "util.h"
 
@@ -105,22 +107,36 @@ void load_op3t(const char *model) {
 }
 
 void vendor_load_properties() {
-    char rf_version[PROP_VALUE_MAX];
+    std::string rf_version = property_get("ro.boot.rf_version");
 
-    property_get("ro.boot.rf_version", rf_version, NULL);
-
-    if (strstr(rf_version, "11") || strstr(rf_version, "31")) {
-        /* China / America */
+    if (rf_version == "11" || rf_version == "31") {
+        /* China / North America model */
         load_op3("ONEPLUS A3000");
-    } else if (strstr(rf_version, "21")) {
-        /* Asia / Europe */
+        property_set("ro.telephony.default_network", "22");
+        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.force_on_dc", "true");
+    } else if (rf_version == "21") {
+        /* Europe / Asia model */
         load_op3("ONEPLUS A3003");
-    } else if (strstr(rf_version, "12") || strstr(rf_version, "32")) {
-        /* China / America */
+        property_set("ro.telephony.default_network", "9");
+    } else if (rf_version == "12") {
+        /* China model */
         load_op3t("ONEPLUS A3010");
-    } else if (strstr(rf_version, "22")) {
-        /* Asia / Europe */
+        property_set("ro.telephony.default_network", "22");
+        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.force_on_dc", "true");
+    } else if (rf_version == "22") {
+        /* Europe / Asia model */
         load_op3t("ONEPLUS A3003");
+        property_set("ro.telephony.default_network", "9");
+    } else if (rf_version == "32") {
+        /* North America model */
+        load_op3t("ONEPLUS A3000");
+        property_set("ro.telephony.default_network", "22");
+        property_set("telephony.lteOnCdmaDevice", "1");
+        property_set("persist.radio.force_on_dc", "true");
+    } else {
+        INFO("%s: unexcepted rf version!\n", __func__);
     }
 
     init_alarm_boot_properties();
