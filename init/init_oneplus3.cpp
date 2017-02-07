@@ -112,15 +112,19 @@ void vendor_load_properties() {
     if (strstr(rf_version, "11") || strstr(rf_version, "31")) {
         /* China / America */
         load_op3("ONEPLUS A3000");
+        property_set("ro.telephony.default_network", "22");
     } else if (strstr(rf_version, "21")) {
         /* Asia / Europe */
         load_op3("ONEPLUS A3003");
+        property_set("ro.telephony.default_network", "9");
     } else if (strstr(rf_version, "12") || strstr(rf_version, "32")) {
         /* China / America */
         load_op3t("ONEPLUS A3010");
+        property_set("ro.telephony.default_network", "22");
     } else if (strstr(rf_version, "22")) {
         /* Asia / Europe */
         load_op3t("ONEPLUS A3003");
+        property_set("ro.telephony.default_network", "9");
     }
 
     init_alarm_boot_properties();
