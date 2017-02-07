@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Hiển thị môi trường xung quanh</string>
+  <string name="ambient_display_summary">Đánh thức màn hình khi nhận thông báo</string>
+  <string name="always_enabled_title">Luôn luôn bật</string>
+  <string name="always_enabled_summary">Theo dõi các sự kiện cảm biến ngay khi màn hình tắt</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Cảm biến nghiêng</string>
+  <string name="pick_up_title">Nhấc lên</string>
+  <string name="pick_up_summary">Kích hoạt thông báo khi thiết bị được nhấc lên</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Cảm biến tiệm cận</string>
+  <string name="hand_wave_gesture_title">Vẫy tay</string>
+  <string name="hand_wave_gesture_summary">Kích hoạt thông báo lúc vẫy tay</string>
+  <string name="pocket_gesture_title">Bỏ túi</string>
+  <string name="pocket_gesture_summary">Kích hoạt thông báo khi lấy ra khỏi túi</string>
   <!-- Help text -->
+  <string name="dlg_ok">OK</string>
+  <string name="doze_settings_help_title">Trợ giúp</string>
+  <string name="doze_settings_help_text">Các tính năng này sử dụng các sự kiện cảm biến để khởi chạy kích hoạt một thông báo doze. Các cảm biến được chọn chỉ được kích hoạt khi thiết bị nhận một thông báo, điều này giúp giảm thiểu việc sử dụng pin. Ngoài ra còn có một tùy chọn để kích hoạt các cảm biến được chọn ngay khi màn hình tắt, điều này sẽ gây ra việc sử dụng pin cao hơn.</string>
 </resources>

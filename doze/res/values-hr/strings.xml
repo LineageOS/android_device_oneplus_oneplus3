@@ -13,22 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">Ambijentni zaslon</string>
-  <string name="ambient_display_summary">Probudi zaslon kada primite obavijesti</string>
+  <string name="ambient_display_title">Ambijentalni zaslon</string>
+  <string name="ambient_display_summary">Buđenje zaslona kada primite obavijest</string>
   <string name="always_enabled_title">Uvijek omogući</string>
-  <string name="always_enabled_summary">Praćenje senzora čim se zaslon isključi</string>
+  <string name="always_enabled_summary">Senzori će pratiti događaje čim se zaslon isključi</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Senzor nagiba</string>
   <string name="pick_up_title">Podizanje</string>
-  <string name="pick_up_summary">Prikazuj obavijesti kada je uređaj podignut</string>
+  <string name="pick_up_summary">Pulsiranje obavijesti kad se uređaj podigne</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">Senzor blizine</string>
   <string name="hand_wave_gesture_title">Zamah rukom</string>
-  <string name="hand_wave_gesture_summary">Prikaz obavijesti na zamah rukom</string>
+  <string name="hand_wave_gesture_summary">Pulsiranje obavijesti na zamah rukom</string>
   <string name="pocket_gesture_title">Džep</string>
-  <string name="pocket_gesture_summary">Prikaz obavijesti kada izvadite uređaj iz džepa</string>
+  <string name="pocket_gesture_summary">Pulsiranje obavijesti kad izvadite mobitel iz džepa</string>
   <!-- Help text -->
-  <string name="dlg_ok">OK</string>
+  <string name="dlg_ok">U redu</string>
   <string name="doze_settings_help_title">Pomoć</string>
-  <string name="doze_settings_help_text">Te značajke koriste događaje senzora za pokretanje pulsiranja obavijesti. Odabrani senzor je omogućen jedino kada uređaj primi obavijest, to pomaže smanjenju potrošnje baterije. Tu je i opcija omogućenja odabranog senzora čim se zaslon isključi, to će uzrokovati veću potrošnju baterije.</string>
+  <string name="doze_settings_help_text">Ove značajke koriste se događajima senzora za pokretanje \"doze\" pulsiranja obavijesti. Odabrani senzor je omogućen jedino kada uređaj primi obavijest. To pomaže smanjenju potrošnje baterije. Tu je i opcija odabranog senzora čim se zaslon isključi. To će uzrokovati veću potrošnju baterije.</string>
 </resources>
