@@ -1,6 +1,5 @@
 # Alipay
 bin/ifaadaemon
--framework/org.ifaa.android.manager.jar|f754a81d6ddb6e1927d063802e40925ec6d8e885
 lib/libteeclientjni.so
 lib64/libteeclientjni.so
 

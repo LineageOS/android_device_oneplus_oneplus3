@@ -103,7 +103,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# Alipay / WeChat
+# Alipay
+PRODUCT_PACKAGES += \
+    org.ifaa.android.manager
+
 PRODUCT_BOOT_JARS += \
     org.ifaa.android.manager
 
