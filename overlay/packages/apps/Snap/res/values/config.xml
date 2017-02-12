@@ -32,9 +32,6 @@
         <item>placeholder</item>
     </string-array>
 
-    <!-- Opens front camera using openLegacy() and forces api v1 -->
-    <bool name="front_camera_open_legacy">false</bool>
-
     <!-- Restart preview for back camera onPictureTaken -->
     <bool name="back_camera_restart_preview_onPictureTaken">true</bool>
 
