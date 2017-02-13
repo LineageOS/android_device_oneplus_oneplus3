@@ -69,6 +69,7 @@
         <item>astronomy:astronomy</item>
         <item>photography:photography</item>
         <item>basic:basic</item>
+        <item>srgb:srgb</item>
     </string-array>
 
     <!-- Should we filter any display modes which are unampped? -->
