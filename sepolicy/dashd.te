@@ -15,7 +15,7 @@ binder_service(dashd)
 binder_call(dashd, system_server)
 
 # Write to state file.
-allow dashd sysfs:file write;
+allow dashd sysfs:file rw_file_perms;
 
 ###
 ### dashd: charger mode
