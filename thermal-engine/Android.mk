@@ -2,7 +2,8 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_COPY_HEADERS_TO := thermal-engine
-LOCAL_COPY_HEADERS := ./thermal_client.h
+LOCAL_MODULE:=thermal-engine
 
-include $(BUILD_COPY_HEADERS)
+LOCAL_EXPORT_C_INCLUDE_DIRS:=$(LOCAL_PATH)
+
+include $(BUILD_HEADER_LIBRARY)
