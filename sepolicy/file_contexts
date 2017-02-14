@@ -20,6 +20,7 @@
 /dev/dash                                                       u:object_r:input_device:s0
 /sys/devices/soc/.*ssusb/power_supply/usb(/.*)?                 u:object_r:sysfs_usb_supply:s0
 
+/sys/devices/soc/qpnp-fg-[0-9a-f]+/power_supply/bms/battery_4p4v_present u:object_r:sysfs_batteryinfo:s0
 /sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/capacity u:object_r:sysfs_batteryinfo:s0
 /sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/current_now u:object_r:sysfs_batteryinfo:s0
 /sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/voltage_now u:object_r:sysfs_batteryinfo:s0
