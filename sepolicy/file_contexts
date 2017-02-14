@@ -24,6 +24,7 @@
 /sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/current_now u:object_r:sysfs_batteryinfo:s0
 /sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/voltage_now u:object_r:sysfs_batteryinfo:s0
 /sys/devices/soc/qpnp-smbcharger-[0-9a-f]+/power_supply/battery/temp u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/qpnp-fg-[0-9a-f]+/power_supply/bms/battery_4p4v_present u:object_r:sysfs_batteryinfo:s0
 
 /sys/kernel/debug/msm_core(/.*)?                                u:object_r:debugfs_msm_core:s0
 
