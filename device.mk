@@ -302,6 +302,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.msm8996
 
+# Substratum OMS themes
+PRODUCT_PACKAGES += \
+    masquerade
+
 # Wifi
 PRODUCT_PACKAGES += \
     ipacm \
