@@ -1,0 +1,1 @@
+allow radio qcom_ims_prop:property_service set;

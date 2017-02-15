@@ -1,2 +1,3 @@
 persist.sys.diag.max.size  u:object_r:diag_prop:s0
 oem.device.imeicache       u:object_r:diag_prop:s0
+net.lte.ims.data.enabled   u:object_r:qcom_ims_prop:s0
