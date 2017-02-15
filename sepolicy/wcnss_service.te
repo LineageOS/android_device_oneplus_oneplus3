@@ -4,8 +4,9 @@ allow wcnss_service self:capability {
     dac_override
     net_raw
 };
-r_dir_file(wcnss_service, sdcardfs);
+allow wcnss_service sdcardfs:dir create_dir_perms;
+allow wcnss_service sdcardfs:file create_file_perms;
+allow wcnss_service media_rw_data_file:dir create_dir_perms;
+allow wcnss_service media_rw_data_file:file create_file_perms;
 r_dir_file(wcnss_service, media_rw_data_file);
-allow wcnss_service sdcardfs:file append;
-allow wcnss_service media_rw_data_file:file append;
 get_prop(wcnss_service, diag_prop);
