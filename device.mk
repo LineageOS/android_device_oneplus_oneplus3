@@ -100,6 +100,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=3072 \
     ro.hwui.text_large_cache_height=2048
 
+# aptX
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.bt.enableAptXHD=true
+
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
