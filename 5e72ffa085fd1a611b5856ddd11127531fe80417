@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa5d592f_bf4a8b53",
+        "filename": "overlay/frameworks/base/packages/SettingsLib/res/values/arrays.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-02-16T13:39:38Z",
+      "side": 1,
+      "message": "I think you need to keep the original copyright header:\n\n** Copyright 2015 The Android Open Source Project\n\nAnd eventually add ours.",
+      "range": {
+        "startLine": 5,
+        "startChar": 3,
+        "endLine": 5,
+        "endChar": 39
+      },
+      "revId": "5e72ffa085fd1a611b5856ddd11127531fe80417",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
