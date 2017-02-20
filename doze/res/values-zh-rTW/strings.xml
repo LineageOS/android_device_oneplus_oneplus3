@@ -18,17 +18,17 @@
   <string name="always_enabled_title">一律啟用</string>
   <string name="always_enabled_summary">當螢幕關閉時監聽感應器事件</string>
   <!-- Tilt sensor -->
-  <string name="tilt_sensor_title">傾側感應器</string>
+  <string name="tilt_sensor_title">傾斜感應器</string>
   <string name="pick_up_title">拿起</string>
-  <string name="pick_up_summary">拿起裝置時閃爍呼吸燈</string>
+  <string name="pick_up_summary">拿起裝置時顯示通知</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">接近感應器</string>
   <string name="hand_wave_gesture_title">揮手</string>
-  <string name="hand_wave_gesture_summary">揮手時閃爍呼吸燈</string>
+  <string name="hand_wave_gesture_summary">揮手時顯示通知</string>
   <string name="pocket_gesture_title">口袋</string>
-  <string name="pocket_gesture_summary">從口袋中取出時閃爍呼吸燈</string>
+  <string name="pocket_gesture_summary">從口袋中取出時顯示通知</string>
   <!-- Help text -->
   <string name="dlg_ok">確定</string>
   <string name="doze_settings_help_title">説明</string>
-  <string name="doze_settings_help_text">這些功能使用各種感應器來感測即可觸發閃爍呼吸燈，所選的感應器僅在裝置收到通知時才被啟動，達致減低耗電量。此外還有一個選項可以在每當螢幕關閉時馬上啟動感應器，當然這會消耗更多的電量。</string>
+  <string name="doze_settings_help_text">這些功能使用各種感應器來感測即可觸發休眠顯示通知，所選的感應器僅在裝置收到通知時才被啟動，達致減低耗電量。此外還有一個選項可以在每當螢幕關閉時馬上啟動感應器，當然這會消耗更多的電量。</string>
 </resources>
