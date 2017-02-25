@@ -22,5 +22,7 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_CFLAGS += -Wno-unused-parameter
 LOCAL_MODULE := vr.msm8996
 LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_OWNER := qcom
+LOCAL_PROPRIETARY_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
