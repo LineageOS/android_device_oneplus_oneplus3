@@ -63,9 +63,9 @@ etc/firmware/rampatch_tlv_1.3.tlv
 etc/firmware/rampatch_tlv_2.1.tlv
 etc/firmware/rampatch_tlv_3.0.tlv
 etc/firmware/rampatch_tlv_3.2.tlv
-vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so|b03772672144d4b750a5672c2922aded93bb0512
-vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so|d12efedab3681f5419ba9b79275e5993c95c0285
-vendor/lib/libaptXScheduler.so|6a0a2d564fde8434018b9840ce81d976b4d4ab28
+vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so|892e44c1bb20353001f2a492b0d707dc4c62d74b7d8587c902f7d514dd5da30f
+vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so|ba3c4f77f9c23f31a47423612394c79a0b42940797d9eb514614b03acd54284a
+vendor/lib/libaptXScheduler.so|cd4259333338a4ecff3972bae28ba8a3469b1de859cbe23e8f7904eca4d15185
 vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
@@ -302,7 +302,7 @@ etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
-framework/qti-telephony-common.jar|02fbc79f309af1c9ccfb1401cbd898138faf0848
+framework/qti-telephony-common.jar|554d66a971b4f886b0082a5a9079f2c4b55ea0a3b7ec94304bfa66640a0f7e32
 framework/QtiTelephonyServicelibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
