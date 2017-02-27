@@ -28,7 +28,6 @@ qcom.hw.aac.encoder=true
 
 # Bluetooth
 bt.max.hfpclient.connections=1
-persist.bt.enableAptXHD=true
 qcom.bluetooth.soc=rome
 
 # Camera
