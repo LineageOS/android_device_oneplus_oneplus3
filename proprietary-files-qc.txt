@@ -63,9 +63,6 @@ etc/firmware/rampatch_tlv_1.3.tlv
 etc/firmware/rampatch_tlv_2.1.tlv
 etc/firmware/rampatch_tlv_3.0.tlv
 etc/firmware/rampatch_tlv_3.2.tlv
-vendor/lib/libaptX-1.0.0-rel-Android21-ARMv7A.so|b03772672144d4b750a5672c2922aded93bb0512
-vendor/lib/libaptXHD-1.0.0-rel-Android21-ARMv7A.so|d12efedab3681f5419ba9b79275e5993c95c0285
-vendor/lib/libaptXScheduler.so|6a0a2d564fde8434018b9840ce81d976b4d4ab28
 vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
