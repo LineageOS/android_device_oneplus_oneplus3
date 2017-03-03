@@ -16,7 +16,7 @@ use.voice.path.for.pcm.voip=true
 audio.offload.multiaac.enable=true
 audio.offload.gapless.enabled=true
 audio.safx.pbe.enabled=true
-audio.parser.ip.buffer.size=262144
+audio.parser.ip.buffer.size=0
 audio.dolby.ds2.enabled=false
 audio.dolby.ds2.hardbypass=false
 audio.offload.passthrough=false
@@ -26,6 +26,9 @@ af.fast_track_multiplier=1
 audio_hal.period_size=160
 qcom.hw.aac.encoder=true
 
+# Battery
+ro.cutoff_voltage_mv=3250
+
 # Bluetooth
 bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=rome
@@ -34,7 +37,6 @@ qcom.bluetooth.soc=rome
 persist.camera.imglib.fddsp=1
 persist.camera.llc=1
 persist.camera.llnoise=1
-camera.hal1.packagelist=com.skype.raider,com.whatsapp,com.tencent.mm,com.google.android.GoogleCamera
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
@@ -45,12 +47,12 @@ config.foss.path=/system/etc/FOSSConfig.xml
 
 # CNE
 persist.cne.feature=1
+persist.dpm.feature=11
 
 # Data modules
 ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
-persist.data.iwlan.enable=true
 
 # Fingerprint
 persist.qfp=false
@@ -72,6 +74,10 @@ persist.sys.wfd.virtual=0
 sdm.perf_hint_window=50
 persist.hwc.enable_vds=1
 sdm.debug.disable_rotator_split=1
+
+# IMS
+persist.volte_enabled_by_hw=1
+persist.data.iwlan.enable=true
 
 # NFC
 ro.nfc.port=I2C
@@ -101,7 +107,6 @@ persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
 persist.radio.multisim.config=dsds
-persist.volte_enabled_by_hw=1
 persist.radio.data_ltd_sys_ind=1
 ro.telephony.call_ring.multiple=false
 persist.radio.apm_sim_not_pwdn=1
