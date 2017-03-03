@@ -289,9 +289,23 @@ vendor/lib/libchromatix_s5k3p8sp_postproc.so
 
 # Camera postprocessing
 bin/remosaic_daemon
+etc/fsync_db.config
+etc/GyroOffset_db.config
+etc/oneplus3T_vstab_db_1080p_video_0.config
+etc/oneplus3T_vstab_db_1080p_video_1.config
+etc/oneplus3T_vstab_db_720p_video_0.config
+etc/oneplus3T_vstab_db_720p_video_1.config
+etc/oneplus3_vstab_db_1080p_video_0.config
+etc/oneplus3_vstab_db_1080p_video_1.config
+etc/oneplus3_vstab_db_720p_video_0.config
+etc/oneplus3_vstab_db_720p_video_1.config
 lib/lib_oneplus_facebeauty.so
 lib/lib_oneplus_md.so
 lib/libFNVfbEngineHAL.so
+lib/libmms_gyro_vstab.so
+lib/libmms_gyro_vstab_auth.so
+lib/libmms_hal_vstab.so
+lib/libmms_warper_vstab.so
 lib/libmorpho_image_stab4.so
 lib/libmorpho_video_refiner.so
 lib/libop_calib3d.so
@@ -335,6 +349,7 @@ lib/libopcamera_crypt.so
 lib/libopcamera_native_modules.so
 lib/libopcamera.so
 lib/libopcameralib.so
+lib/libSensorManagerHAL.so
 lib/qpd_dspcl_v2.bin
 lib/TC_Bayer_Converter_v6_core_opt.bin
 vendor/lib/libremosaic_daemon.so
@@ -455,10 +470,10 @@ etc/firmware/a530_zap.b02
 etc/firmware/a530_zap.elf
 etc/firmware/a530_zap.mdt
 etc/firmware/a530_zap-pro.b00|8fbe425d7edcc44808e010495b1256de9dc97623
-etc/firmware/a530_zap-pro.b01|f39652e03aa74031ea9de05a462ae1dcd2808705
+etc/firmware/a530_zap-pro.b01|5ffdb46bd3777cdbf9d32931351bca48a43298b6
 etc/firmware/a530_zap-pro.b02|657ce04bbb8cc88ccead7c22ed1e3ca1776c7518
-etc/firmware/a530_zap-pro.elf|ed2d518c51238dbe4531a5947993d89980b3d59b
-etc/firmware/a530_zap-pro.mdt|46309907cd5df915baf0578c546120b91dfdd81a
+etc/firmware/a530_zap-pro.elf|cc4d3d069594731b1c8711a50d3d3493808c1e91
+etc/firmware/a530_zap-pro.mdt|8c67d20a1761632707674d5241608689bf5a72ce
 etc/firmware/a530v1_pfp.fw
 etc/firmware/a530v1_pm4.fw
 etc/firmware/a530v2_seq.fw2
