@@ -1,29 +1,28 @@
 # Audio
-ro.qc.sdk.audio.ssr=false
+af.fast_track_multiplier=1
+audio_hal.period_size=192
 ro.qc.sdk.audio.fluencetype=fluence
 persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=true
 tunnel.audio.encode=false
-media.aac_51_output_enabled=true
-audio.offload.buffer.size.kb=32
+audio.offload.buffer.size.kb=64
 audio.offload.video=true
-audio.offload.pcm.16bit.enable=false
+audio.offload.pcm.16bit.enable=true
 audio.offload.pcm.24bit.enable=true
-audio.offload.track.enable=false
+audio.offload.track.enable=true
 audio.deep_buffer.media=true
+audio.heap.size.multiplier=7
 use.voice.path.for.pcm.voip=true
 audio.offload.multiaac.enable=true
-audio.offload.gapless.enabled=true
-audio.safx.pbe.enabled=true
-audio.parser.ip.buffer.size=0
 audio.dolby.ds2.enabled=false
 audio.dolby.ds2.hardbypass=false
+audio.offload.multiple.enabled=false
 audio.offload.passthrough=false
-audio.offload.multiple.enabled=true
-audio.offload.min.duration.secs=30
-af.fast_track_multiplier=1
-audio_hal.period_size=160
+ro.qc.sdk.audio.ssr=false
+audio.offload.gapless.enabled=true
+audio.safx.pbe.enabled=true
+audio.parser.ip.buffer.size=262144
 qcom.hw.aac.encoder=true
 
 # Battery
