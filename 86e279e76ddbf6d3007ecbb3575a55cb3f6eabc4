@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba57610f_5d36f704",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-03-14T01:23:48Z",
+      "side": 1,
+      "message": "Looks like the 160 -\u003e 192 changing fixed corrupted sound",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 25
+      },
+      "revId": "86e279e76ddbf6d3007ecbb3575a55cb3f6eabc4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
