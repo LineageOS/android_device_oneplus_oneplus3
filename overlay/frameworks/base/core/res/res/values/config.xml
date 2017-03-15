@@ -30,6 +30,8 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
+        <item>1</item>
+        <item>4</item>
         <item>45</item>
         <item>1025</item>
         <item>1480</item>
@@ -42,6 +44,8 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>3</item>
+        <item>7</item>
         <item>11</item>
         <item>26</item>
         <item>60</item>
@@ -50,9 +54,12 @@
         <item>255</item>
     </integer-array>
 
-    <!-- OOS brightness tweaks -->
-    <integer name="config_autoBrightnessBrighteningLightFastDebounce">500</integer>
-    <integer name="config_autoBrightnessBrighteningLightDebounce">1000</integer>
+    <!-- Stability requirements in milliseconds for accepting a new brightness level.  This is used
+         for debouncing the light sensor.  Different constants are used to debounce the light sensor
+         when adapting to brighter or darker environments.  This parameter controls how quickly
+         brightness changes occur in response to an observed change in light level that exceeds the
+         hysteresis threshold. -->
+    <integer name="config_autoBrightnessBrighteningLightDebounce">2000</integer>
     <integer name="config_autoBrightnessDarkeningLightDebounce">4000</integer>
 
     <!-- Minimum screen brightness allowed by the power manager. -->
