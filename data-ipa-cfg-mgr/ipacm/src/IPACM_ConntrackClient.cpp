@@ -169,10 +169,18 @@ int IPACM_ConntrackClient::IPA_Conntrack_Filters_Ignore_Bridge_Addrs
 	uint32_t ipv4_addr;
 	struct ifreq ifr;
 
+	if(strlen(IPACM_Iface::ipacmcfg->ipa_virtual_iface_name) >= sizeof(ifr.ifr_name))
+	{
+		IPACMERR("interface name overflows: len %d\n",
+			strlen(IPACM_Iface::ipacmcfg->ipa_virtual_iface_name));
+		close(fd);
+		return -1;
+	}
+
 	/* retrieve bridge interface ipv4 address */
 	memset(&ifr, 0, sizeof(struct ifreq));
 	ifr.ifr_addr.sa_family = AF_INET;
-	(void)strncpy(ifr.ifr_name, IPACM_Iface::ipacmcfg->ipa_virtual_iface_name, sizeof(ifr.ifr_name));
+	(void)strlcpy(ifr.ifr_name, IPACM_Iface::ipacmcfg->ipa_virtual_iface_name, sizeof(ifr.ifr_name));
 	IPACMDBG("bridge interface name (%s)\n", ifr.ifr_name);
 
 	ret = ioctl(fd, SIOCGIFADDR, &ifr);
