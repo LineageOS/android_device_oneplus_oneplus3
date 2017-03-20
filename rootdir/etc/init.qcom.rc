@@ -1090,8 +1090,7 @@ service logdumpd /system/bin/logcat -b all -v threadtime -D -w /dev/block/bootde
 on property:ro.logdumpd.enabled=1
     start logdumpd
 
-on property:vold.decrypt=trigger_restart_min_framework
-    start time_daemon
-
-on property:vold.decrypt=trigger_restart_framework
-    restart time_daemon
+service time_daemon /system/bin/time_daemon
+    class main
+    user root
+    group root
