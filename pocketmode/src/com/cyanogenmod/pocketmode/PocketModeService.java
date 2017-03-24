@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2016 The CyanogenMod Project
+ *               2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +25,13 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 
+import org.cyanogenmod.internal.util.FileUtils;
+
 public class PocketModeService extends Service {
     private static final String TAG = "PocketModeService";
     private static final boolean DEBUG = false;
+
+    private static final String FP_WAKEUP_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_wakeup";
 
     private ProximitySensor mProximitySensor;
 
@@ -66,7 +71,10 @@ public class PocketModeService extends Service {
 
     private void onDisplayOff() {
         if (DEBUG) Log.d(TAG, "Display off");
-        mProximitySensor.enable();
+        if (FileUtils.isFileReadable(FP_WAKEUP_NODE) &&
+                FileUtils.readOneLine(FP_WAKEUP_NODE).equals("1")) {
+            mProximitySensor.enable();
+        }
     }
 
     private BroadcastReceiver mScreenStateReceiver = new BroadcastReceiver() {
