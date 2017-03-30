@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The CyanogenMod Project
+<!--
+     Copyright (C) 2015-2016 The CyanogenMod Project
+                   2017 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,13 +16,8 @@
      limitations under the License.
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="DozeSettings" parent="@android:style/Theme.Material.Settings">
-        <item name="android:windowActionBar">false</item>
-        <item name="preferenceTheme">@style/DozePreferenceTheme</item>
-    </style>
-
-    <style name="DozePreferenceTheme" parent="@android:style/Theme.Material.Settings">
-        <item name="dropdownPreferenceStyle">@style/Preference.DropDown.Material</item>
+    <style name="Theme.Main" parent="@android:style/Theme.Material.Settings">
+        <item name="preferenceTheme">@android:style/Theme.Material.Settings</item>
     </style>
 
     <style name="ThemeOverlay.SwitchBar" parent="@android:style/ThemeOverlay">
@@ -30,5 +27,4 @@
     <style name="ThemeOverlay.SwitchBar.Secondary" parent="@android:style/ThemeOverlay">
         <item name="android:colorAccent">@color/system_secondary_color</item>
     </style>
-
 </resources>

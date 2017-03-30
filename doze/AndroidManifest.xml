@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2015-2016 The CyanogenMod Project
+                   2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyanogenmod.settings.doze"
     android:versionCode="1"
@@ -7,7 +23,6 @@
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="cyanogenmod.permission.MANAGE_REMOTE_PREFERENCES" />
 
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
@@ -19,32 +34,25 @@
         android:label="@string/device_settings_app_name"
         android:persistent="true">
 
-        <receiver android:name="com.cyanogenmod.settings.doze.DozeReceiver">
+        <receiver android:name=".BootCompletedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="cyanogenmod.intent.action.UPDATE_PREFERENCE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
 
-        <service android:name="com.cyanogenmod.settings.doze.DozeService"
+        <service android:name=".DozeService"
                  android:permission="OneplusDozeService">
         </service>
 
         <activity
-            android:name=".DozeSettings"
+            android:name=".DozeSettingsActivity"
             android:label="@string/ambient_display_title"
-            android:theme="@style/DozeSettings">
+            android:theme="@style/Theme.Main">
             <intent-filter>
                 <action android:name="org.cyanogenmod.settings.device.DOZE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <meta-data
-                android:name="org.cyanogenmod.settings.summary.receiver"
-                android:value="com.cyanogenmod.settings.doze.DozeReceiver" />
-            <meta-data
-                android:name="org.cyanogenmod.settings.summary.key"
-                android:value="doze_device_settings" />
         </activity>
 
     </application>
