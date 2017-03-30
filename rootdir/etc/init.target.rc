@@ -82,6 +82,9 @@ mkdir /data/vendor/camera 0770 camera camera
     # Create oemnvitems for RIL
     mkdir /data/oemnvitems 0771 radio radio
 
+    # NFC local data and nfcee xml storage
+    mkdir /data/vendor/nfc 0770 nfc nfc
+
 on property:init.svc.bootanim=running
     write /sys/class/leds/wled/brightness 4095
 
