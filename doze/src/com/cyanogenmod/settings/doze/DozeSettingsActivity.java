@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2016 The CyanogenMod Project
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2015-2016 The CyanogenMod Project
+ *               2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.cyanogenmod.settings.doze;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
-public class DozeSettings extends SettingsDrawerActivity {
+public class DozeSettingsActivity extends SettingsDrawerActivity {
 
     private static final String TAG_DOZE = "doze";
 
@@ -31,17 +31,18 @@ public class DozeSettings extends SettingsDrawerActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.doze);
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction().replace(R.id.content_frame,
                 new DozeSettingsFragment(), TAG_DOZE).commit();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 }
