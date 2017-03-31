@@ -689,12 +689,12 @@ static int ipa_nl_decode_nlmsg
 
 				/* Add IPACM support for ECM plug-in/plug_out */
 				/*--------------------------------------------------------------------------
-                                   Check if the interface is running.If its a RTM_NEWLINK and the interface
-                                    is running then it means that its a link up event
-                                ---------------------------------------------------------------------------*/
-                                if((msg_ptr->nl_link_info.metainfo.ifi_flags & IFF_RUNNING) &&
-                                   (msg_ptr->nl_link_info.metainfo.ifi_flags & IFF_LOWER_UP))
-                                {
+                   Check if the interface is running.If its a RTM_NEWLINK and the interface
+                    is running then it means that its a link up event
+                ---------------------------------------------------------------------------*/
+                if((msg_ptr->nl_link_info.metainfo.ifi_flags & IFF_RUNNING) &&
+                   (msg_ptr->nl_link_info.metainfo.ifi_flags & IFF_LOWER_UP))
+                {
 
 					data_fid = (ipacm_event_data_fid *)malloc(sizeof(ipacm_event_data_fid));
 					if(data_fid == NULL)
@@ -712,17 +712,17 @@ static int ipa_nl_decode_nlmsg
 					}
 					IPACMDBG("Got a usb link_up event (Interface %s, %d) \n", dev_name, msg_ptr->nl_link_info.metainfo.ifi_index);
 
-                                        /*--------------------------------------------------------------------------
-                                           Post LAN iface (ECM) link up event
-                                         ---------------------------------------------------------------------------*/
-                                        evt_data.event = IPA_USB_LINK_UP_EVENT;
+                    /*--------------------------------------------------------------------------
+                       Post LAN iface (ECM) link up event
+                     ---------------------------------------------------------------------------*/
+                    evt_data.event = IPA_USB_LINK_UP_EVENT;
 					evt_data.evt_data = data_fid;
-					IPACM_EvtDispatcher::PostEvt(&evt_data);
 					IPACMDBG_H("Posting usb IPA_LINK_UP_EVENT with if index: %d\n",
 										 data_fid->if_index);
-                                }
-                                else if(!(msg_ptr->nl_link_info.metainfo.ifi_flags & IFF_LOWER_UP))
-                                {
+					IPACM_EvtDispatcher::PostEvt(&evt_data);
+                }
+                else if (!(msg_ptr->nl_link_info.metainfo.ifi_flags & IFF_LOWER_UP))
+				{
 					data_fid = (ipacm_event_data_fid *)malloc(sizeof(ipacm_event_data_fid));
 					if(data_fid == NULL)
 					{
@@ -744,10 +744,10 @@ static int ipa_nl_decode_nlmsg
 					---------------------------------------------------------------------------*/
 					evt_data.event = IPA_LINK_DOWN_EVENT;
 					evt_data.evt_data = data_fid;
-					IPACM_EvtDispatcher::PostEvt(&evt_data);
 					IPACMDBG_H("Posting usb IPA_LINK_DOWN_EVENT with if index: %d\n",
 										 data_fid->if_index);
-                                }
+					IPACM_EvtDispatcher::PostEvt(&evt_data);
+				}
 			}
 			break;
 
