@@ -44,12 +44,12 @@ const int CPU_SENSORS[] = {4, 6, 9, 11};
 
 //qcom, therm-reset-temp
 #define CPU_SHUTDOWN_THRESHOLD        115
-//qcom, limit-temp
-#define CPU_THROTTLING_THRESHOLD      60
+//qcom,freq-mitigation-temp
+#define CPU_THROTTLING_THRESHOLD      95
 #define BATTERY_SHUTDOWN_THRESHOLD    60
 // device/oneplus/oneplus3/configs/thermal-engine.conf
 #define SKIN_THROTTLING_THRESHOLD     47
-#define SKIN_SHUTDOWN_THRESHOLD       70
+#define SKIN_SHUTDOWN_THRESHOLD       65
 #define VR_THROTTLED_BELOW_MIN        58
 
 #define GPU_LABEL                     "GPU"
@@ -114,7 +114,7 @@ static ssize_t get_cpu_temperatures(temperature_t *list, size_t size) {
         }
         // tsens_tz_sensor[4,6,9,11]: temperature in decidegrees Celsius.
         ssize_t result = read_temperature(CPU_SENSORS[cpu], DEVICE_TEMPERATURE_CPU, CPU_LABEL[cpu],
-                0.1, CPU_THROTTLING_THRESHOLD, CPU_SHUTDOWN_THRESHOLD, UNKNOWN_TEMPERATURE,
+                0.1, CPU_THROTTLING_THRESHOLD, CPU_SHUTDOWN_THRESHOLD, CPU_THROTTLING_THRESHOLD,
                 &list[cpu]);
         if (result != 0) {
             return result;
