@@ -176,6 +176,10 @@ on boot
     write /sys/bus/msm_subsys/devices/subsys4/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys5/restart_level "related"
 
+    # Update touchscreen and keypad firmware
+    write /sys/bus/i2c/devices/12-0020/tp_fw_update 0
+    write /proc/s1302/fw_update 0
+
 # msm specific files that need to be created on /data
 on post-fs-data
     #Create directories for Fingerprint
