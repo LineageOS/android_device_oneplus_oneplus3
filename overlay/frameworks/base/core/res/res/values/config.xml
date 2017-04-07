@@ -415,4 +415,7 @@
         <item>"/system/framework/arm64/boot-core-libart.oat"</item>
    </string-array>
 
+    <!-- Call removeCient in cancelAuthentification after stop to
+        avoid 3s delay for certain fpc HALs -->
+    <bool name="config_fingerprintRemoveClientOnCancel">true</bool>
 </resources>
