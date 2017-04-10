@@ -103,4 +103,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <impl level="generic"></impl>
         <version>2.1</version>
     </hal>
+    <hal format="hidl">
+        <name>android.hardware.power</name>
+        <transport>passthrough</transport>
+        <impl level="generic"></impl>
+        <version>1.0</version>
+    </hal>
 </manifest>
