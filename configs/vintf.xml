@@ -43,6 +43,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <transport arch="32+64">passthrough</transport>
         <impl level="generic"></impl>
         <version>2.0</version>
+        <interface>
+            <name>ISoundTriggerHw</name>
+            <instance>sound_trigger.primary</instance>
+        </interface>
     </hal>
     <!-- video omx hal -->
     <hal format="hidl">
@@ -87,6 +91,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <transport arch="32+64">toggled</transport>
         <impl level="generic"></impl>
         <version>2.4</version>
+        <interface>
+            <name>ICameraProvider</name>
+            <instance>legacy/0</instance>
+        </interface>
     </hal>
     <!-- bluetooth -->
     <hal format="hidl">
