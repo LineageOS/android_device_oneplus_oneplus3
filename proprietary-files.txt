@@ -24,7 +24,7 @@ etc/camera/imx179_chromatix.xml
 etc/camera/imx298_chromatix.xml
 etc/camera/s5k3p8_chromatix.xml
 etc/camera/s5k3p8sp_chromatix.xml
-lib/hw/camera.msm8996.so
+lib/hw/camera.msm8996.so|5be2c7f0a0f1281eaa755d57d004529b2a0d0bd9
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libqomx_core.so
