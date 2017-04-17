@@ -177,6 +177,7 @@ const char CameraParameters::LIGHTFX_HDR[] = "high-dynamic-range";
 // OnePlus
 const char CameraParameters::CLIENT_PACKAGE_NAME[] = "client-package-name";
 const char CameraParameters::KEY_SUPPORTED_VIDEO_SIZES_60FPS[] = "support-60fps-video-sizes";
+char gClientPackageName[50] = "com.oneplus.camera";
 
 #ifdef CAMERA_PARAMETERS_EXTRA_C
 CAMERA_PARAMETERS_EXTRA_C
@@ -267,6 +268,8 @@ void CameraParameters::set(const char *key, const char *value)
         mMap.replaceValueFor(String8("hdr-need-1x"), String8("false"));
     }
 #endif
+    // Explicitly set CameraParameters::CLIENT_PACKAGE_NAME to OnePlus Camera
+    mMap.replaceValueFor(String8("client-package-name"), String8("com.oneplus.camera"));
 
     mMap.replaceValueFor(String8(key), String8(value));
 }
