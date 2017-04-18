@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a4e6583_54949a36",
+        "filename": "camera/CameraParameters.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-04-18T08:01:38Z",
+      "side": 1,
+      "message": "I guess you want to replace this with gClientPackageName.",
+      "range": {
+        "startLine": 269,
+        "startChar": 57,
+        "endLine": 269,
+        "endChar": 86
+      },
+      "revId": "f60363783c64b3b1e46648d5a4ec0876855cae18",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
