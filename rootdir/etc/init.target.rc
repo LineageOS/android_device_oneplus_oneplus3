@@ -249,14 +249,14 @@ service qvrd /system/vendor/bin/qvrservice
     socket qvrservice stream 0666 system system
 
 #Start up peripheral manager
-service per_mgr /system/bin/pm-service
+service per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
-service per_proxy /system/bin/pm-proxy
+service per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system
