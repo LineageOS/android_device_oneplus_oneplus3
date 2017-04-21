@@ -423,7 +423,7 @@ vendor/lib/libmmcamera_isp_sub_module.so
 
 # Fingerprint sensor
 bin/qfp-daemon
-lib64/hw/fingerprint.msm8996.so
+lib64/hw/fingerprint.msm8996.so|f631187de9c0dfab7598bafcbc327406863dffa9
 lib64/lib_fpc_tac_shared.so
 vendor/lib64/libqfp-service.so
 vendor/lib64/qfp.wakeup.so
@@ -468,10 +468,10 @@ etc/firmware/a530_zap.b02
 etc/firmware/a530_zap.elf
 etc/firmware/a530_zap.mdt
 etc/firmware/a530_zap-pro.b00|8fbe425d7edcc44808e010495b1256de9dc97623
-etc/firmware/a530_zap-pro.b01|69658ff9f4c587ad06fcbbeb830f7ce39fbca6a5
+etc/firmware/a530_zap-pro.b01|f6d1454e1924052503ce761735686b00f3f958e3
 etc/firmware/a530_zap-pro.b02|657ce04bbb8cc88ccead7c22ed1e3ca1776c7518
-etc/firmware/a530_zap-pro.elf|954351c91bd67b45c439ed6dcb9830ce4f63a156
-etc/firmware/a530_zap-pro.mdt|123edf156f7c6bfcd405abc481bcd070b81cfc6f
+etc/firmware/a530_zap-pro.elf|9ab2acb5fa9e08affe94ffe03312563a4ff56763
+etc/firmware/a530_zap-pro.mdt|84b1349cd931bf5e19a1c734e7e30370d4fe4ebb
 etc/firmware/a530v1_pfp.fw
 etc/firmware/a530v1_pm4.fw
 etc/firmware/a530v2_seq.fw2
