@@ -94,16 +94,16 @@ void load_op3(const char *model) {
     property_set("ro.product.model", model);
     property_set("ro.build.product", "OnePlus3");
     property_set("ro.product.device", "OnePlus3");
-    property_set("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 30 dev-keys");
-    property_set("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3:7.1.1/NMF26F/03061309:user/release-keys");
+    property_set("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 38 dev-keys");
+    property_set("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3:7.1.1/NMF26F/03102120:user/release-keys");
 }
 
 void load_op3t(const char *model) {
     property_set("ro.product.model", model);
     property_set("ro.build.product", "OnePlus3");
     property_set("ro.product.device", "OnePlus3T");
-    property_set("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 37 dev-keys");
-    property_set("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:7.1.1/NMF26F/03061311:user/release-keys");
+    property_set("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 22 dev-keys");
+    property_set("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:7.1.1/NMF26F/03102130:user/release-keys");
 }
 
 void vendor_load_properties() {
