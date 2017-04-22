@@ -8,6 +8,8 @@ vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
 vendor/lib64/libadsp_default_listener.so
 vendor/lib64/libadsprpc.so
+vendor/lib64/libfastcvadsp_stub.so
+vendor/lib64/libfastcvopt.so
 
 # ADSP modules
 vendor/lib/rfsa/adsp/libadsp_fd_skel.so
@@ -48,6 +50,9 @@ vendor/lib64/libacdbrtac.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
 vendor/lib64/libaudiodevarb.so
+vendor/lib64/soundfx/libqcbassboost.so
+vendor/lib64/soundfx/libqcreverb.so
+vendor/lib64/soundfx/libqcvirt.so
 
 # Bluetooth
 bin/btnvtool
@@ -104,12 +109,14 @@ vendor/lib/libcne.so
 vendor/lib/libcneapiclient.so
 vendor/lib/libcneqmiutils.so
 vendor/lib/libvendorconn.so
+vendor/lib/libwms.so
 vendor/lib/libwqe.so
 vendor/lib/libxml.so
 vendor/lib64/libcne.so
 vendor/lib64/libcneapiclient.so
 vendor/lib64/libcneqmiutils.so
 vendor/lib64/libvendorconn.so
+vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
@@ -158,10 +165,14 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 
 # GPS
 bin/loc_launcher
+bin/xtwifi-client
+bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
+etc/cacert_location.pem
+etc/xtra_root_cert.pem
 framework/com.qti.location.sdk.jar
 framework/com.qualcomm.location.vzw_library.jar
 framework/izat.xt.srv.jar
@@ -181,6 +192,7 @@ vendor/lib64/libevent_observer.so
 vendor/lib64/libflp.so
 vendor/lib64/libgdtap.so
 vendor/lib64/libgeofence.so
+vendor/lib64/libizat_client_api.so
 vendor/lib64/libizat_core.so
 vendor/lib64/liblbs_core.so
 vendor/lib64/libloc_ext.so
@@ -306,7 +318,6 @@ vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
 vendor/lib/libidl.so
 vendor/lib/libqcci_legacy.so
-vendor/lib/libqcmaputils.so
 vendor/lib/libqdi.so
 vendor/lib/libqdp.so
 vendor/lib/libqmi_cci.so
@@ -317,16 +328,12 @@ vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmi.so
 vendor/lib/libqmiservices.so
-vendor/lib/libqti-wl.so
-vendor/lib/libquipc_os_api.so
 vendor/lib/libsmemlog.so
-vendor/lib/libvqzip.so
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
 vendor/lib64/libidl.so
 vendor/lib64/libqcci_legacy.so
-vendor/lib64/libqcmaputils.so
 vendor/lib64/libqdi.so
 vendor/lib64/libqdp.so
 vendor/lib64/libqmi_cci.so
@@ -337,8 +344,6 @@ vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmi.so
 vendor/lib64/libqmiservices.so
-vendor/lib64/libqti-wl.so
-vendor/lib64/libquipc_os_api.so
 vendor/lib64/libsmemlog.so
 
 # Radio
@@ -447,6 +452,11 @@ bin/time_daemon
 vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
+
+# Voice fingerprint
+bin/qvop-daemon
+vendor/lib/libqvop-service.so
+vendor/lib64/libqvop-service.so
 
 # Widevine
 vendor/lib/libwvdrm_L3.so
