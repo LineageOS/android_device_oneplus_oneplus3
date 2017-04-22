@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a4e6583_9d2b4eeb",
+        "filename": "camera/CameraParameters.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 11221
+      },
+      "writtenOn": "2017-04-22T06:50:12Z",
+      "side": 1,
+      "message": "Perhaps this is better?\n\n  const char gClientPackageName[] \u003d \"com.oneplus.camera\";",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 51
+      },
+      "revId": "834718edc6ab09033797ca25b83a335b5f025906",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a4e6583_7d309256",
+        "filename": "camera/CameraParameters.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 11221
+      },
+      "writtenOn": "2017-04-22T06:50:12Z",
+      "side": 1,
+      "message": "And this here then:\n\n  String8(gClientPackageName)",
+      "range": {
+        "startLine": 269,
+        "startChar": 57,
+        "endLine": 269,
+        "endChar": 86
+      },
+      "revId": "834718edc6ab09033797ca25b83a335b5f025906",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
