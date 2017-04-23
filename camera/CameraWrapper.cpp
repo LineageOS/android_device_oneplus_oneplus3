@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015, The CyanogenMod Project
+ *           (C) 2017, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +48,7 @@ static struct hw_module_methods_t camera_module_methods = {
 camera_module_t HAL_MODULE_INFO_SYM = {
     .common = {
          .tag = HARDWARE_MODULE_TAG,
-         .module_api_version = CAMERA_MODULE_API_VERSION_2_3,
+         .module_api_version = CAMERA_MODULE_API_VERSION_2_4,
          .hal_api_version = HARDWARE_HAL_API_VERSION,
          .id = CAMERA_HARDWARE_MODULE_ID,
          .name = "OnePlus 3 Camera Wrapper",
@@ -61,7 +62,7 @@ camera_module_t HAL_MODULE_INFO_SYM = {
     .set_callbacks = camera_set_callbacks,
     .get_vendor_tag_ops = camera_get_vendor_tag_ops,
     .open_legacy = camera_open_legacy,
-    .set_torch_mode = NULL,
+    .set_torch_mode = camera_set_torch_mode,
     .init = NULL,
     .reserved = {0},
 };
@@ -165,5 +166,19 @@ static int camera_open_legacy(const struct hw_module_t* module, const char* id, 
     
     ALOGV("%s: rv = %d", __FUNCTION__, rv);
     
+    return rv;
+}
+
+static int camera_set_torch_mode(const char* camera_id, bool on)
+{
+    int rv = -EINVAL;
+
+    ALOGV("%s", __FUNCTION__);
+    if (check_vendor_module())
+        return 0;
+
+    rv = gVendorModule->set_torch_mode(camera_id, on);
+    ALOGV("%s: rv = %d", __FUNCTION__, rv);
+
     return rv;
 }
