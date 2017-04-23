@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015, The CyanogenMod Project
+ *           (C) 2017, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,6 +83,9 @@ static char * camera2_fixup_setparams(int id __unused, const char * settings)
     ALOGV("%s: Original parameters:", __FUNCTION__);
     params.dump();
 #endif
+
+    // Explicitly set CameraParameters::CLIENT_PACKAGE_NAME to OnePlus Camera
+    params.set(android::CameraParameters::CLIENT_PACKAGE_NAME, "com.oneplus.camera");
 
     android::String8 strParams = params.flatten();
     char *ret = strdup(strParams.string());
