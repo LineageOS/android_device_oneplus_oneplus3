@@ -426,7 +426,7 @@ int camera2_device_open(const hw_module_t* module, const char* name,
         memset(camera2_device, 0, sizeof(*camera2_device));
         camera2_device->id = cameraid;
 
-        rv = gVendorModule->common.methods->open((const hw_module_t*)gVendorModule, name, (hw_device_t**)&(camera2_device->vendor));
+        rv = gVendorModule->open_legacy((const hw_module_t*)gVendorModule, name, CAMERA_DEVICE_API_VERSION_1_0, (hw_device_t**)&(camera2_device->vendor));
         if (rv)
         {
             ALOGE("vendor camera open fail");
