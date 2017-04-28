@@ -13,7 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">Індикація подій</string>
+  <string name="ambient_display_title">Ambient дисплей</string>
   <string name="ambient_display_summary">Вмикати екран, коли ви отримали сповіщення</string>
   <string name="always_enabled_title">Завжди ввімкнено</string>
   <string name="always_enabled_summary">Відстежувати події сенсора одразу після відключення екрану</string>

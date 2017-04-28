@@ -13,8 +13,8 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">Ambient visning</string>
-  <string name="ambient_display_summary">Våkne skjermen når du får varsler</string>
+  <string name="ambient_display_title">Omgivelsesskjerm</string>
+  <string name="ambient_display_summary">Vekke skjermen når du mottar varsler</string>
   <string name="always_enabled_title">Alltid aktivere</string>
   <string name="always_enabled_summary">Lete etter sensor aktivitet etter at skjermen slår seg av</string>
   <!-- Tilt sensor -->

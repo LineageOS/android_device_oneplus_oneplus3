@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Pantalla ambiente</string>
+  <string name="ambient_display_summary">Esconsueña la pantalla al recibir avisos</string>
+  <string name="always_enabled_title">Habilitar siempres</string>
+  <string name="always_enabled_summary">Ta sollerte pa colos eventos del sensor namái s\'apague la pantalla</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">Sensor d\'inclinación</string>
+  <string name="pick_up_title">Coyer</string>
+  <string name="pick_up_summary">Avisos llatentes al coyer el teléfonu</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">Sensor de proximidá</string>
+  <string name="hand_wave_gesture_title">Pasar la mano</string>
+  <string name="hand_wave_gesture_summary">Avisos llatentes al pasar la mano</string>
+  <string name="pocket_gesture_title">Bolsiellu</string>
+  <string name="pocket_gesture_summary">Avisos llatentes al sacar del bolsiellu</string>
   <!-- Help text -->
+  <string name="dlg_ok">Aceutar</string>
+  <string name="doze_settings_help_title">Ayuda</string>
+  <string name="doze_settings_help_text">Estes carauterístiques usen el sensor d\'eventos pa llanzar un avisu doze. El sensor esbilláu namái s\'habilita cuando\'l preséu recibe un avisu, esto ayuda a amenorgar l\'usu de batería. Tamién hai una opción p\'habilitar el sensor escoyíu namái s\'apague la pantalla, esto causará un usu más altu de batería.</string>
 </resources>

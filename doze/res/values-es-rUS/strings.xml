@@ -14,7 +14,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">Pantalla ambiente</string>
-  <string name="ambient_display_summary">Activar pantalla al recibir notificaciones</string>
+  <string name="ambient_display_summary">Encender pantalla al recibir notificaciones</string>
   <string name="always_enabled_title">Siempre activado</string>
   <string name="always_enabled_summary">Activar eventos del sensor al apagar la pantalla</string>
   <!-- Tilt sensor -->

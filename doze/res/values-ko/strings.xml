@@ -13,7 +13,22 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">절전 모드 자동 해제</string>
+  <string name="ambient_display_summary">알림을 받으면 화면 켜기</string>
+  <string name="always_enabled_title">항상 켜짐</string>
+  <string name="always_enabled_summary">화면이 꺼진 뒤 센서 이벤트를 수신합니다</string>
   <!-- Tilt sensor -->
+  <string name="tilt_sensor_title">기울기 센서</string>
+  <string name="pick_up_title">기기 들기</string>
+  <string name="pick_up_summary">기기를 들면 알림 표시</string>
   <!-- Proximity sensor -->
+  <string name="priximity_sensor_title">근접 센서</string>
+  <string name="hand_wave_gesture_title">손 흔들기</string>
+  <string name="hand_wave_gesture_summary">손을 좌우로 흔들면 알림 표시</string>
+  <string name="pocket_gesture_title">주머니</string>
+  <string name="pocket_gesture_summary">주머니에서 꺼내면 알림 표시</string>
   <!-- Help text -->
+  <string name="dlg_ok">확인</string>
+  <string name="doze_settings_help_title">도움말</string>
+  <string name="doze_settings_help_text">해당 기능은 잠자기 모드 알림 깜빡임을 시작하기 위해 센서 이벤트를 사용합니다. 선택된 센서는 알림을 받았을 때만 작동하며, 이는 배터리 사용량을 줄이는 데 도움이 됩니다. 화면이 꺼지면 선택된 센서를 활성화시키는 옵션도 있으며, 이는 배터리 사용량 증가의 원인이 될 수 있습니다.</string>
 </resources>
