@@ -25,7 +25,7 @@ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
-<manifest version="1.0">
+<manifest version="1.0" type="device">
     <hal format="hidl">
         <name>android.hardware.audio</name>
         <transport arch="32+64">passthrough</transport>
@@ -152,7 +152,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </hal>
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
-        <transport arch="32+64">toggled</transport>
+        <transport>hwbinder</transport>
         <impl level="generic"></impl>
         <version>2.4</version>
         <interface>
@@ -163,7 +163,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <!-- bluetooth -->
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
-        <transport arch="32+64">toggled</transport>
+        <transport>hwbinder</transport>
         <impl level="generic"></impl>
         <version>1.0</version>
     </hal>
