@@ -173,4 +173,40 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <impl level="generic"></impl>
         <version>1.0</version>
     </hal>
+   <!-- RIL -->
+   <hal format="hidl">
+       <name>android.hardware.radio</name>
+       <transport>hwbinder</transport>
+       <impl level="generic"></impl>
+       <version>1.0</version>
+    <interface>
+       <name>IRadio</name>
+       <instance>slot1</instance>
+       <instance>slot2</instance>
+    </interface>
+   </hal>
+   <!-- RIL OEM HOOK -->
+   <hal format="hidl">
+       <name>android.hardware.radio.deprecated</name>
+       <transport>hwbinder</transport>
+       <impl level="generic"></impl>
+       <version>1.0</version>
+    <interface>
+       <name>IOemHook</name>
+       <instance>slot1</instance>
+       <instance>slot2</instance>
+    </interface>
+   </hal>
+   <!-- RIL AUDIO HAL -->
+   <hal format="hidl">
+       <name>vendor.qti.qcril.am</name>
+       <transport>hwbinder</transport>
+       <impl level="generic"></impl>
+       <version>1.0</version>
+       <interface>
+           <name>IQcRilAudio</name>
+           <instance>slot1</instance>
+           <instance>slot2</instance>
+       </interface>
+   </hal>
 </manifest>
