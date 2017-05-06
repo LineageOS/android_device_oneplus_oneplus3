@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a486d77_d63bcee9",
+        "filename": "rootdir/etc/init.target.rc",
+        "patchSetId": 25
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2017-05-06T17:21:07Z",
+      "side": 1,
+      "message": "This is in section \"on boot\", not in \"on post-fs-data\". It\u0027s only looking like this here, because the \"on boot\" is hidden in the patchmskipped lines.",
+      "revId": "8835354576fa78c781bd7de1fa93976ce0012ad6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
