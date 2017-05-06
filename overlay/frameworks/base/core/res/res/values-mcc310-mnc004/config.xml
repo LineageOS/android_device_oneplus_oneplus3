@@ -57,12 +57,4 @@
         <item>SUPL_ES=1</item>
     </string-array>
 
-    <!-- Entitlement APP provisioning for Tethering -->
-    <string-array translatable="false" name="config_mobile_hotspot_provision_app">
-        <item>com.google.android.carrierentitlement</item>
-        <item>com.google.android.carrierentitlement.CarrierEntitlementActivity</item>
-    </string-array>
-    <string translatable="false" name="config_mobile_hotspot_provision_app_no_ui">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK</string>
-    <string translatable="false" name="config_mobile_hotspot_provision_response">com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT</string>
-
 </resources>

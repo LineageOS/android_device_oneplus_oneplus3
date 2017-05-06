@@ -64,17 +64,4 @@
     <!-- Sprint need a 3s delay for 3way call -->
     <integer name="config_cdma_3waycall_flash_delay">300</integer>
 
-
-    <!-- Entitlement APP provisioning for Tethering -->
-    <string-array translatable="false" name="config_mobile_hotspot_provision_app">
-        <item>com.google.android.carrierentitlement</item>
-        <item>com.google.android.carrierentitlement.CarrierEntitlementActivity</item>
-    </string-array>
-    <string translatable="false" name="config_mobile_hotspot_provision_app_no_ui">
-         com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK
-    </string>
-    <string translatable="false" name="config_mobile_hotspot_provision_response">
-         com.google.android.carrierentitlement.SILENT_ENTITLEMENT_CHECK_RESULT
-    </string>
-
 </resources>
