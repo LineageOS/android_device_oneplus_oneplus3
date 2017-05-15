@@ -453,11 +453,6 @@ vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
 vendor/lib64/libTimeService.so
 
-# Voice fingerprint
-bin/qvop-daemon
-vendor/lib/libqvop-service.so
-vendor/lib64/libqvop-service.so
-
 # Widevine
 vendor/lib/libwvdrm_L3.so
 vendor/lib/libWVStreamControlAPI_L3.so
