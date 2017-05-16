@@ -15,4 +15,6 @@
  * limitations under the License.
  */
 
-const char *_ZN7android18gClientPackageNameE;
+namespace android {
+    char gClientPackageName[50] = {'0'};
+}
