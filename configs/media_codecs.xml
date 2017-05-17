@@ -133,20 +133,6 @@ Only the three quirks included above are recognized at this point:
             <Limit name="bitrate" range="1-100000000" />
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
-          <!-- vt-version, upper 16 bit major version lower 16 bit minor version -->
-            <Limit name="vt-version" value="65537" />
-            <Limit name="vt-low-latency" value="1" />
-            <Limit name="vt-max-instances" value="16" />
-            <Limit name="vt-max-temporal-layer-count" value="3" />
-            <Limit name="vt-max-ref-frames" value="9" />
-            <Limit name="vt-max-ltr-frames" value="3" />
-            <Limit name="vt-max-level" value="52" />
-            <Limit name="vt-ratecontrol" value="0" />
-            <Limit name="vt-slice-control-modes-bitmask" value="15" />
-            <Limit name="vt-max-macroblock-processing-rate" value="972000" />
-            <Limit name="vt-down-scale-factor" value="8" />
-            <Limit name="vt-min-scale-factor" value="1" />
-            <Limit name="vt-slice-hdr-spacing" value="1" />
             <Feature name="intra-refresh" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.mpeg4" type="video/mp4v-es" >
@@ -211,11 +197,6 @@ Only the three quirks included above are recognized at this point:
             <Limit name="blocks-per-second" min="1" max="1958400" />
             <Limit name="bitrate" range="1-100000000" />
             <Limit name="frame-rate" range="1-240" />
-            <Limit name="vt-version" value="65537" />
-            <Limit name="vt-low-latency" value="1" />
-            <Limit name="vt-max-macroblock-processing-rate" value="972000" />
-            <Limit name="vt-max-level" value="52" />
-            <Limit name="vt-max-instances" value="16" />
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
         </MediaCodec>
