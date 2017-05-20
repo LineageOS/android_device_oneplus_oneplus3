@@ -32,10 +32,4 @@
         <item>placeholder</item>
     </string-array>
 
-    <!-- Opens back camera using openLegacy() and forces api v1 -->
-    <bool name="back_camera_open_legacy">false</bool>
-
-    <!-- Opens front camera using openLegacy() and forces api v1 -->
-    <bool name="front_camera_open_legacy">false</bool>
-
 </resources>

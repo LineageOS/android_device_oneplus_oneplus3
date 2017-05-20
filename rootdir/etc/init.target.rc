@@ -208,7 +208,7 @@ on boot
     chmod 660 /sys/class/leds/blue/start_idx
     chmod 660 /sys/class/leds/rgb/rgb_blink
 
-    setprop persist.camera.HAL3.enabled 0
+    setprop persist.camera.HAL3.enabled 1
 
 #start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
