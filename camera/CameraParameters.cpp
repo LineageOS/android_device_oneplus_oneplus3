@@ -174,6 +174,10 @@ const char CameraParameters::FOCUS_MODE_CONTINUOUS_PICTURE[] = "continuous-pictu
 const char CameraParameters::LIGHTFX_LOWLIGHT[] = "low-light";
 const char CameraParameters::LIGHTFX_HDR[] = "high-dynamic-range";
 
+// OnePlus
+const char CameraParameters::CLIENT_PACKAGE_NAME[] = "client-package-name";
+const char CameraParameters::KEY_SUPPORTED_VIDEO_SIZES_60FPS[] = "support-60fps-video-sizes";
+
 #ifdef CAMERA_PARAMETERS_EXTRA_C
 CAMERA_PARAMETERS_EXTRA_C
 #endif
