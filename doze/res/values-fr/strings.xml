@@ -30,4 +30,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Aide</string>
+  <string name="doze_settings_help_text">Ces fonctionnalités utilisent les événements d\'un capteur pour lancer une impulsion de réveil partiel. Le capteur choisi n’est activé que lorsque l’appareil reçoit une notification, afin de réduire l’utilisation de la batterie. Une autre option permet d\'activer le capteur choisi dès que l’écran s’éteint, au prix d\'une utilisation plus importante de la batterie.</string>
 </resources>

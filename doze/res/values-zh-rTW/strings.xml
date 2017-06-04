@@ -22,7 +22,7 @@
   <string name="pick_up_title">拿起</string>
   <string name="pick_up_summary">拿起裝置時顯示通知</string>
   <!-- Proximity sensor -->
-  <string name="priximity_sensor_title">接近感應器</string>
+  <string name="priximity_sensor_title">距離感應器</string>
   <string name="hand_wave_gesture_title">揮手</string>
   <string name="hand_wave_gesture_summary">揮手時顯示通知</string>
   <string name="pocket_gesture_title">口袋</string>

@@ -13,6 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ambient_display_title">Omgivningsskärm</string>
   <string name="ambient_display_summary">Väck skärmen när du tar emot notifikationer</string>
   <string name="always_enabled_title">Alltid aktiverad</string>
   <!-- Tilt sensor -->

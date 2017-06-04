@@ -20,13 +20,13 @@
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">倾斜传感器</string>
   <string name="pick_up_title">拿起</string>
-  <string name="pick_up_summary">当拿起设备时闪烁通知灯</string>
+  <string name="pick_up_summary">拿起或放下时唤醒屏幕</string>
   <!-- Proximity sensor -->
   <string name="priximity_sensor_title">距离传感器</string>
   <string name="hand_wave_gesture_title">挥手</string>
-  <string name="hand_wave_gesture_summary">挥手时闪烁通知灯</string>
+  <string name="hand_wave_gesture_summary">挥手时唤醒屏幕</string>
   <string name="pocket_gesture_title">口袋</string>
-  <string name="pocket_gesture_summary">从口袋中拿出时闪烁通知灯</string>
+  <string name="pocket_gesture_summary">从口袋中拿出时唤醒屏幕</string>
   <!-- Help text -->
   <string name="dlg_ok">确定</string>
   <string name="doze_settings_help_title">帮助</string>
