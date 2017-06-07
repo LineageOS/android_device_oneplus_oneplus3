@@ -2239,8 +2239,8 @@
         <ctl name="SLIM RX3 MUX" value="AIF4_PB" />
         <ctl name="SLIM_6_RX Channels" value="Two" />
         <!-- #ifdef VENDOR_EDIT-->
-        <!-- guoguangyi@MultiMedia,2016/4/7,use 24bits to get rid of 16bits innate noise  -->
-        <ctl name="SLIM_0_RX Format" value="S24_LE" />
+        <!-- LF@MultiMedia,2017/3/14,use 24bits to get rid of 16bits innate noise  -->
+        <ctl name="SLIM_6_RX Format" value="S24_LE" />
         <!-- #endif VENDOR_EDIT-->
         <ctl name="RX INT1_2 MUX" value="RX2" />
         <ctl name="RX INT2_2 MUX" value="RX3" />
