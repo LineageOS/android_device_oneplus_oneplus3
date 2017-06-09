@@ -524,7 +524,7 @@ service tlocd /system/bin/tloc_daemon
     user system
     group drmrpc gps net_raw
 
-service energy-awareness /system/bin/energy-awareness
+service energy-awareness /system/vendor/bin/energy-awareness
     class main
     user root
     group system
