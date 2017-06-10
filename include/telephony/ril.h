@@ -72,16 +72,8 @@ extern "C" {
  *                    RIL_REQUEST_SET_CARRIER_RESTRICTIONS and
  *                    RIL_UNSOL_PCO_DATA
  */
-#if defined(USE_RIL_VERSION_10)
-#define RIL_VERSION 10
-#define LAST_IMPRECISE_RIL_VERSION 10
-#elif defined(USE_RIL_VERSION_11)
-#define RIL_VERSION 11
-#define LAST_IMPRECISE_RIL_VERSION 11
-#else
 #define RIL_VERSION 12
 #define LAST_IMPRECISE_RIL_VERSION 12 // Better self-documented name
-#endif
 #define RIL_VERSION_MIN 6 /* Minimum RIL_VERSION supported */
 
 #define CDMA_ALPHA_INFO_BUFFER_LENGTH 64
@@ -1732,18 +1724,29 @@ typedef struct {
 /* Tx Power Levels */
 #define RIL_NUM_TX_POWER_LEVELS     5
 
+/**
+ * Aggregate modem activity information
+ */
 typedef struct {
 
-  /* period (in ms) when modem is power collapsed */
+  /* total time (in ms) when modem is in a low power or
+   * sleep state
+   */
   uint32_t sleep_mode_time_ms;
 
-  /* period (in ms) when modem is awake and in idle mode*/
+  /* total time (in ms) when modem is awake but neither
+   * the transmitter nor receiver are active/awake */
   uint32_t idle_mode_time_ms;
 
-  /* period (in ms) for which Tx is active */
+  /* total time (in ms) during which the transmitter is active/awake,
+   * subdivided by manufacturer-defined device-specific
+   * contiguous increasing ranges of transmit power between
+   * 0 and the transmitter's maximum transmit power.
+   */
   uint32_t tx_mode_time_ms[RIL_NUM_TX_POWER_LEVELS];
 
-  /* period (in ms) for which Rx is active */
+  /* total time (in ms) for which receiver is active/awake and
+   * the transmitter is inactive */
   uint32_t rx_mode_time_ms;
 } RIL_ActivityStatsInfo;
 
@@ -5146,11 +5149,11 @@ typedef struct {
 /**
  * RIL_REQUEST_GET_ACTIVITY_INFO
  *
- * Get modem activity statisitics info.
+ * Get modem activity information for power consumption estimation.
  *
- * There can be multiple RIL_REQUEST_GET_ACTIVITY_INFO calls to modem.
- * Once the response for the request is sent modem will clear
- * current statistics information.
+ * Request clear-on-read statistics information that is used for
+ * estimating the per-millisecond power consumption of the cellular
+ * modem.
  *
  * "data" is null
  * "response" is const RIL_ActivityStatsInfo *
@@ -5162,82 +5165,6 @@ typedef struct {
  * GENERIC_FAILURE
  */
 #define RIL_REQUEST_GET_ACTIVITY_INFO 135
-
-/**
- * RIL_REQUEST_SIM_GET_ATR
- *
- * Get the ATR from SIM Card
- *
- * Only valid when radio state is "RADIO_STATE_ON"
- *
- * "data" is const int *
- * ((const int *)data)[0] contains the slot index on the SIM from which ATR is requested.
- *
- * "response" is a const char * containing the ATR, See ETSI 102.221 8.1 and ISO/IEC 7816 3
- *
- * Valid errors:
- *
- * SUCCESS
- * RADIO_NOT_AVAILABLE (radio resetting)
- * GENERIC_FAILURE
- */
-#define RIL_REQUEST_SIM_GET_ATR 136
-
-/**
- * RIL_REQUEST_CAF_SIM_OPEN_CHANNEL_WITH_P2
- *
- * Open a new logical channel and select the given application. This command
- * reflects TS 27.007 "open logical channel" operation (+CCHO). This request
- * also specifies the P2 parameter.
- *
- * "data" is a const RIL_CafOpenChannelParam *
- *
- * "response" is int *
- * ((int *)data)[0] contains the session id of the logical channel.
- * ((int *)data)[1] onwards may optionally contain the select response for the
- *     open channel command with one byte per integer.
- *
- * Valid errors:
- *  SUCCESS
- *  RADIO_NOT_AVAILABLE
- *  GENERIC_FAILURE
- *  MISSING_RESOURCE
- *  NO_SUCH_ELEMENT
- */
-#define RIL_REQUEST_CAF_SIM_OPEN_CHANNEL_WITH_P2 137
-
-/**
- * RIL_REQUEST_GET_ADN_RECORD
- *
- * Requests ADN count record of the SIM card
- *
- * "data" is NULL
- *
- * "response" is const int *
- * ((int *)data)[0] is the max adn count.
- * ((int *)data)[1] is the valid adn count.
- * ((int *)data)[2] is the max email count.
- * ((int *)data)[3] is the max anr count.
- *
- * Valid errors:
- *  SUCCESS
- *  GENERIC_FAILURE
- */
-#define RIL_REQUEST_GET_ADN_RECORD 138
-
-/**
- * RIL_REQUEST_UPDATE_ADN_RECORD
- *
- * Requests ADN count of the the SIM card
- *
- * "data" is RIL_AdnRecordInfo *
- *
- * "response" is const int *
- *
- * Valid errors:
- *  Must never fail
- */
-#define RIL_REQUEST_UPDATE_ADN_RECORD 139
 
 /**
  * RIL_REQUEST_SET_CARRIER_RESTRICTIONS
@@ -5270,7 +5197,7 @@ typedef struct {
  *  RIL_E_RADIO_NOT_AVAILABLE
  *  RIL_E_REQUEST_NOT_SUPPORTED
  */
-#define RIL_REQUEST_SET_CARRIER_RESTRICTIONS 140
+#define RIL_REQUEST_SET_CARRIER_RESTRICTIONS 136
 
 /**
  * RIL_REQUEST_GET_CARRIER_RESTRICTIONS
@@ -5288,7 +5215,82 @@ typedef struct {
  *  RIL_E_RADIO_NOT_AVAILABLE
  *  RIL_E_REQUEST_NOT_SUPPORTED
  */
-#define RIL_REQUEST_GET_CARRIER_RESTRICTIONS 141
+#define RIL_REQUEST_GET_CARRIER_RESTRICTIONS 137
+/**
+ * RIL_REQUEST_SIM_GET_ATR
+ *
+ * Get the ATR from SIM Card
+ *
+ * Only valid when radio state is "RADIO_STATE_ON"
+ *
+ * "data" is const int *
+ * ((const int *)data)[0] contains the slot index on the SIM from which ATR is requested.
+ *
+ * "response" is a const char * containing the ATR, See ETSI 102.221 8.1 and ISO/IEC 7816 3
+ *
+ * Valid errors:
+ *
+ * SUCCESS
+ * RADIO_NOT_AVAILABLE (radio resetting)
+ * GENERIC_FAILURE
+ */
+#define RIL_REQUEST_SIM_GET_ATR 138
+
+/**
+ * RIL_REQUEST_CAF_SIM_OPEN_CHANNEL_WITH_P2
+ *
+ * Open a new logical channel and select the given application. This command
+ * reflects TS 27.007 "open logical channel" operation (+CCHO). This request
+ * also specifies the P2 parameter.
+ *
+ * "data" is a const RIL_CafOpenChannelParam *
+ *
+ * "response" is int *
+ * ((int *)data)[0] contains the session id of the logical channel.
+ * ((int *)data)[1] onwards may optionally contain the select response for the
+ *     open channel command with one byte per integer.
+ *
+ * Valid errors:
+ *  SUCCESS
+ *  RADIO_NOT_AVAILABLE
+ *  GENERIC_FAILURE
+ *  MISSING_RESOURCE
+ *  NO_SUCH_ELEMENT
+ */
+#define RIL_REQUEST_CAF_SIM_OPEN_CHANNEL_WITH_P2 139
+
+/**
+ * RIL_REQUEST_GET_ADN_RECORD
+ *
+ * Requests ADN count record of the SIM card
+ *
+ * "data" is NULL
+ *
+ * "response" is const int *
+ * ((int *)data)[0] is the max adn count.
+ * ((int *)data)[1] is the valid adn count.
+ * ((int *)data)[2] is the max email count.
+ * ((int *)data)[3] is the max anr count.
+ *
+ * Valid errors:
+ *  SUCCESS
+ *  GENERIC_FAILURE
+ */
+#define RIL_REQUEST_GET_ADN_RECORD 140
+
+/**
+ * RIL_REQUEST_UPDATE_ADN_RECORD
+ *
+ * Requests ADN count of the the SIM card
+ *
+ * "data" is RIL_AdnRecordInfo *
+ *
+ * "response" is const int *
+ *
+ * Valid errors:
+ *  Must never fail
+ */
+#define RIL_REQUEST_UPDATE_ADN_RECORD 141
 
 /***********************************************************************/
 
@@ -5905,26 +5907,6 @@ typedef struct {
  */
 #define RIL_UNSOL_LCEDATA_RECV 1045
 
-/**
- * RIL_UNSOL_RESPONSE_ADN_INIT_DONE
- *
- * Called when the ADN has already init done,
- *
- * "data" is NULL.
- *
- */
-#define RIL_UNSOL_RESPONSE_ADN_INIT_DONE 1046
-
-/**
- * RIL_UNSOL_RESPONSE_ADN_RECORDS
- *
- * Called when there is a group of ADN record report,
- *
- * "data" is the RIL_ADN structure.
- *
- */
-#define RIL_UNSOL_RESPONSE_ADN_RECORDS 1047
-
  /**
   * RIL_UNSOL_PCO_DATA
   *
@@ -5936,7 +5918,26 @@ typedef struct {
   * "data" is the RIL_PCO_Data structure.
   *
   */
-#define RIL_UNSOL_PCO_DATA 1049
+#define RIL_UNSOL_PCO_DATA 1046
+/**
+ * RIL_UNSOL_RESPONSE_ADN_INIT_DONE
+ *
+ * Called when the ADN has already init done,
+ *
+ * "data" is NULL.
+ *
+ */
+#define RIL_UNSOL_RESPONSE_ADN_INIT_DONE 1047
+
+/**
+ * RIL_UNSOL_RESPONSE_ADN_RECORDS
+ *
+ * Called when there is a group of ADN record report,
+ *
+ * "data" is the RIL_ADN structure.
+ *
+ */
+#define RIL_UNSOL_RESPONSE_ADN_RECORDS 1048
 
 /***********************************************************************/
 
