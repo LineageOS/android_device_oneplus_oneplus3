@@ -61,7 +61,6 @@ on post-fs-data
     mkdir /data/misc/seemp 0700 system system
     mkdir /data/usf 0700 system system
     mkdir /data/misc/tloc/ 0700 system drmrpc
-    mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/audio_pp 0771 media audio
 
@@ -236,11 +235,6 @@ service fps_hal /system/vendor/bin/fingerprint.qcom
     class late_start
     user system
     group system input
-
-service qvop-daemon /system/bin/qvop-daemon
-    class late_start
-    user system
-    group system drmrpc
 
 service qvrd /system/vendor/bin/qvrservice
     class late_start
