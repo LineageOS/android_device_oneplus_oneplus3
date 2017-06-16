@@ -301,6 +301,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.msm8996
 
+# Unified device props
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
+    ro.build.product \
+    ro.product.model \
+    ro.product.device \
+    ro.build.description \
+    ro.build.fingerprint
+
 # Wifi
 PRODUCT_PACKAGES += \
     ipacm \
