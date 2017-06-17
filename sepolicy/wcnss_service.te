@@ -1,6 +1,4 @@
 allow wcnss_service self:capability {
-    setgid
-    setuid
     dac_override
     net_raw
 };
