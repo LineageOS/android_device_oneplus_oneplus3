@@ -366,7 +366,7 @@ etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
-framework/qti-telephony-common.jar|02fbc79f309af1c9ccfb1401cbd898138faf0848
+framework/qti-telephony-common.jar|3cea332c3cc179fae5691763c8e55027cc76ffc8
 framework/QtiTelephonyServicelibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
