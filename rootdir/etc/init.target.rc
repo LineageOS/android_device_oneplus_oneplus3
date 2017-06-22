@@ -38,6 +38,10 @@ on fs
     chmod 0771 /mnt/vendor/persist
     mkdir /mnt/vendor/persist/data 0700 system system
     mkdir /mnt/vendor/persist/bms 0700 root system
+    mkdir /mnt/vendor/persist/rfs 0770 root system
+    mkdir /mnt/vendor/persist/hlos_rfs 0770 root system
+    chmod 0770 /mnt/vendor/persist/rfs
+    chmod 0770 /mnt/vendor/persist/hlos_rfs
     restorecon_recursive /mnt/vendor/persist
 
 on init
