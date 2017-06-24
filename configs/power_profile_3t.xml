@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="Android">
+    <item name="none">0</item>
+    <item name="screen.on">51</item>
+    <item name="screen.full">120</item>
+    <item name="bluetooth.active">17</item>
+    <item name="bluetooth.on">0.6</item>
+    <item name="wifi.on">2.7</item>
+    <item name="wifi.active">165</item>
+    <item name="wifi.scan">107</item>
+    <item name="dsp.audio">33</item>
+    <item name="dsp.video">89</item>
+    <item name="camera.flashlight">79</item>
+    <item name="camera.avg">470</item>
+    <item name="radio.active">118</item>
+    <item name="radio.scanning">1</item>
+    <item name="gps.on">36</item>
+    <array name="radio.on">
+        <value>3</value>
+        <value>2</value>
+    </array>
+    <array name="cpu.clusters.cores">
+        <value>2</value>
+        <value>2</value>
+    </array>
+    <array name="cpu.speeds.cluster0">
+        <value>307200</value>
+        <value>384000</value>
+        <value>460800</value>
+        <value>537600</value>
+        <value>614400</value>
+        <value>691200</value>
+        <value>768000</value>
+        <value>844800</value>
+        <value>902400</value>
+        <value>979200</value>
+        <value>1056000</value>
+        <value>1132800</value>
+        <value>1209600</value>
+        <value>1286400</value>
+        <value>1363200</value>
+        <value>1440000</value>
+        <value>1516800</value>
+        <value>1593600</value>
+        <value>2188800</value>
+    </array>
+    <array name="cpu.speeds.cluster1">
+        <value>307200</value>
+        <value>384000</value>
+        <value>460800</value>
+        <value>537600</value>
+        <value>614400</value>
+        <value>691200</value>
+        <value>748800</value>
+        <value>825600</value>
+        <value>902400</value>
+        <value>979200</value>
+        <value>1056000</value>
+        <value>1132800</value>
+        <value>1209600</value>
+        <value>1286400</value>
+        <value>1363200</value>
+        <value>1440000</value>
+        <value>1516800</value>
+        <value>1593600</value>
+        <value>1670400</value>
+        <value>1747200</value>
+        <value>1824000</value>
+        <value>1900800</value>
+        <value>1977600</value>
+        <value>2054400</value>
+        <value>2150400</value>
+        <value>2246400</value>
+        <value>2342400</value>
+    </array>
+    <array name="cpu.active.cluster0">
+        <value>45</value>
+        <value>52</value>
+        <value>56</value>
+        <value>62</value>
+        <value>68</value>
+        <value>77</value>
+        <value>79</value>
+        <value>95</value>
+        <value>104</value>
+        <value>118</value>
+        <value>131</value>
+        <value>147</value>
+        <value>163</value>
+        <value>182</value>
+        <value>199</value>
+        <value>223</value>
+        <value>243</value>
+        <value>268</value>
+        <value>268</value>
+    </array>
+    <array name="cpu.active.cluster1">
+        <value>47</value>
+        <value>53</value>
+        <value>60</value>
+        <value>64</value>
+        <value>71</value>
+        <value>78</value>
+        <value>82</value>
+        <value>93</value>
+        <value>105</value>
+        <value>116</value>
+        <value>131</value>
+        <value>145</value>
+        <value>162</value>
+        <value>180</value>
+        <value>198</value>
+        <value>218</value>
+        <value>240</value>
+        <value>260</value>
+        <value>278</value>
+        <value>304</value>
+        <value>336</value>
+        <value>368</value>
+        <value>410</value>
+        <value>453</value>
+        <value>522</value>
+        <value>591</value>
+        <value>684</value>
+    </array>
+    <item name="cpu.idle">4.5</item>
+    <item name="cpu.awake">12</item>
+    <item name="battery.capacity">3400</item>
+    <array name="wifi.batchedscan">
+        <value>.0002</value>
+        <value>.002</value>
+        <value>.02</value>
+        <value>.2</value>
+        <value>2</value>
+    </array>
+</device>
