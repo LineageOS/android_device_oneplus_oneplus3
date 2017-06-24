@@ -275,6 +275,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm8996
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/power_profile_3t.xml:system/etc/power_profile_3t.xml
+
 # QMI
 PRODUCT_PACKAGES += \
     libjson
