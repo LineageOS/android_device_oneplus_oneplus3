@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <device name="Android">
     <item name="none">0</item>
-    <item name="screen.on">68</item>
+    <item name="screen.on">51</item>
     <item name="screen.full">218</item>
     <item name="bluetooth.active">17</item>
     <item name="bluetooth.on">0.6</item>
@@ -11,9 +11,9 @@
     <item name="dsp.audio">37.7</item>
     <item name="dsp.video">56</item>
     <item name="camera.flashlight">100</item>
-    <item name="camera.avg">548</item>
+    <item name="camera.avg">690</item>
     <item name="radio.active">133</item>
-    <item name="radio.scanning">67</item>
+    <item name="radio.scanning">1</item>
     <item name="gps.on">60</item>
     <array name="radio.on">
         <value>3</value>
@@ -113,8 +113,8 @@
         <value>559</value>
         <value>655</value>
     </array>
-    <item name="cpu.idle">4.1</item>
-    <item name="cpu.awake">16</item>
+    <item name="cpu.idle">4.9</item>
+    <item name="cpu.awake">8</item>
     <item name="battery.capacity">3000</item>
     <array name="wifi.batchedscan">
         <value>.0002</value>
@@ -123,4 +123,6 @@
         <value>.2</value>
         <value>2</value>
     </array>
+    <allow-in-power-save package="com.google.android.gms" />
+    <allow-in-data-usage-save package="com.google.android.gms" />
 </device>
