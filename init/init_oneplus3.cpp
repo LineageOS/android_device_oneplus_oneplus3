@@ -116,6 +116,7 @@ void load_op3t(const char *model) {
     property_override("ro.product.device", "OnePlus3T");
     property_override("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 73 dev-keys");
     property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:7.1.1/NMF26F/06151930:user/release-keys");
+    property_set("ro.power_profile.override", "power_profile_3t");
 }
 
 void vendor_load_properties() {
