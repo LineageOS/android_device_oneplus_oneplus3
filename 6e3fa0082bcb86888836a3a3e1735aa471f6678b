@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da87b5cf_1436f852",
+        "filename": "bluetooth/bdroid_buildcfg.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 11801
+      },
+      "writtenOn": "2017-06-24T01:20:48Z",
+      "side": 1,
+      "message": "why not add a default case to return \"\"? makes no difference, but it would all be in the switch statement then",
+      "parentUuid": "",
+      "revId": "6e3fa0082bcb86888836a3a3e1735aa471f6678b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
