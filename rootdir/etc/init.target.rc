@@ -347,7 +347,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
 #    oneshot
 #
 
-service adsprpcd /system/bin/adsprpcd
+service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
