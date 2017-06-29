@@ -243,7 +243,7 @@ service qvrd /system/vendor/bin/qvrservice
 service per_mgr /system/bin/pm-service
     class core
     user system
-    group system net_raw
+    group system
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
@@ -294,7 +294,7 @@ service qseecomd /system/bin/qseecomd
    class core
    user root
    group root
-writepid /dev/cpuset/system-background/tasks
+   writepid /dev/cpuset/system-background/tasks
 
 service gamed /system/vendor/bin/gamed
    class main
