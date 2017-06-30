@@ -126,7 +126,7 @@ Only the three quirks included above are recognized at this point:
             <Quirk name="requires-allocate-on-input-ports" />
             <Quirk name="requires-allocate-on-output-ports" />
             <Quirk name="requires-loaded-to-idle-after-allocation" />
-            <Limit name="size" min="96x64" max="4096x2160" />
+            <Limit name="size" min="96x96" max="4096x2160" />
             <Limit name="alignment" value="2x2" />
             <Limit name="block-size" value="16x16" />
             <Limit name="blocks-per-second" min="1" max="979200" />
@@ -134,6 +134,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
             <Feature name="intra-refresh" />
+            <Feature name="can-swap-width-height" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.mpeg4" type="video/mp4v-es" >
             <Quirk name="requires-allocate-on-input-ports" />
@@ -199,6 +200,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
+            <Feature name="can-swap-width-height" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.avc.secure" type="video/avc" >
             <Quirk name="requires-allocate-on-input-ports" />
