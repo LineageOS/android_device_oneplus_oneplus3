@@ -36,9 +36,10 @@ on early-init
     mkdir /dsp 0771 media media
 
 on fs
-    wait /dev/block/bootdevice
-    mount_all fstab.qcom
-    swapon_all fstab.qcom
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    mount_all /vendor/etc/fstab.qcom
+    swapon_all /vendor/etc/fstab.qcom
 
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
@@ -220,13 +221,13 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     writepid /dev/cpuset/system-background/tasks
 
 #fingerprint service
-service fingerprintd /system/bin/fingerprintd
+service fingerprintd /system/vendor/bin/fingerprintd
     class late_start
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service qfp-daemon /system/bin/qfp-daemon
+service qfp-daemon /system/vendor/bin/qfp-daemon
     class late_start
     user system
     group system drmrpc diag input
@@ -306,18 +307,18 @@ service gamed /system/vendor/bin/gamed
    disabled
    socket gamed seqpacket 0640 system system
 
-service seempd /system/bin/seempd
+service seempd /system/vendor/bin/seempd
    class late_start
    user system
    group system
    socket seempdw dgram 0666 system system
 
-service secotad /system/bin/secotad
+service secotad /system/vendor/bin/secotad
    class late_start
    user system
    group system
 
-#service mpdecision /system/bin/mpdecision --avg_comp
+#service mpdecision /system/vendor/bin/mpdecision --avg_comp
 #   user root
 #   disabled
 #
@@ -346,73 +347,77 @@ service thermal-engine /system/vendor/bin/thermal-engine
 #    class core
 #    oneshot
 #
+service time_daemon /system/vendor/bin/time_daemon
+   class late_start
+   user root
+   group root
 
 service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
 
-service audiod /system/bin/audiod
+service audiod /system/vendor/bin/audiod
    class late_start
    user system
    group system
 
 
-service usf_tester /system/bin/usf_tester
+service usf_tester /system/vendor/bin/usf_tester
     user system
     group system inet
     disabled
     oneshot
 
-service usf_epos /system/bin/usf_epos
+service usf_epos /system/vendor/bin/usf_epos
     class main
     user system
     group system inet
     disabled
     oneshot
 
-service usf_gesture /system/bin/usf_gesture
+service usf_gesture /system/vendor/bin/usf_gesture
     user system
     group system inet
     disabled
     oneshot
 
-service usf_sync_gesture /system/bin/usf_sync_gesture
+service usf_sync_gesture /system/vendor/bin/usf_sync_gesture
     user system
     group system inet audio
     disabled
     oneshot
 
-service usf_p2p /system/bin/usf_p2p
+service usf_p2p /system/vendor/bin/usf_p2p
     user system
     group system inet
     disabled
     oneshot
 
-service usf_hovering /system/bin/usf_hovering
+service usf_hovering /system/vendor/bin/usf_hovering
     user system
     group system inet
     disabled
     oneshot
 
-service usf_proximity /system/bin/usf_proximity
+service usf_proximity /system/vendor/bin/usf_proximity
     class late_start
     user system
     group system inet audio
 
-service usf_pairing /system/bin/usf_pairing
+service usf_pairing /system/vendor/bin/usf_pairing
     user system
     group system inet
     disabled
     oneshot
 
-service usf_sw_calib /system/bin/usf_sw_calib
+service usf_sw_calib /system/vendor/bin/usf_sw_calib
     user system
     group system inet
     disabled
     oneshot
 
-service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
+service usf-post-boot /system/vendor/bin/sh /system/etc/usf_post_boot.sh
     class late_start
     user root
     disabled
@@ -473,13 +478,13 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
    start imscmservice
 
-service dts_configurator /system/bin/dts_configurator
+service dts_configurator /system/vendor/bin/dts_configurator
     class late_start
     user system
     group system media audio
     oneshot
 
-service dtseagleservice /system/bin/dts_eagle_service
+service dtseagleservice /system/vendor/bin/dts_eagle_service
     class late_start
     user system
     group audio media
@@ -542,12 +547,12 @@ on charger
     mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
     start hvdcp_opti
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKLG
+service dhcpcd_eth0 /system/vendor/bin/dhcpcd -ABKLG
 	class late_start
 	disabled
 	oneshot
 
-service iprenew_eth0 /system/bin/dhcpcd -n
+service iprenew_eth0 /system/vendor/bin/dhcpcd -n
 	class late_start
 	disabled
 	oneshot

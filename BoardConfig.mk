@@ -28,6 +28,7 @@ PLATFORM_PATH := device/oneplus/oneplus3
 
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_VENDOR := oneplus
 
 # Assertions
@@ -219,6 +220,10 @@ USE_SENSOR_MULTI_HAL := true
 
 # Timeservice
 BOARD_USES_QC_TIME_SERVICES := true
+
+# Treble
+#PRODUCT_FULL_TREBLE_OVERRIDE := true
+PRODUCT_VENDOR_MOVE_ENABLED := true
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
