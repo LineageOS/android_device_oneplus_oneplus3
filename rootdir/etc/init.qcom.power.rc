@@ -1,3 +1,10 @@
+on init
+    # Disable UFS powersaving
+    write /sys/devices/soc/624000.ufshc/clkscale_enable 0
+    write /sys/devices/soc/624000.ufshc/clkgate_enable 0
+    write /sys/devices/soc/624000.ufshc/624000.ufshc:ufs_variant/pm_qos_enable 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled Y
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
@@ -96,6 +103,11 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/governor "mem_latency"
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 10
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
+
+    # Enable UFS powersaving
+    write /sys/devices/soc/624000.ufshc/clkscale_enable 1
+    write /sys/devices/soc/624000.ufshc/clkgate_enable 1
+    write /sys/devices/soc/624000.ufshc/624000.ufshc:ufs_variant/pm_qos_enable 1
 
     # Enable all LPMs by default
     # This will enable C4, D4, D3, E4 and M3 LPMs
