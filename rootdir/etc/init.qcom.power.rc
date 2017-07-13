@@ -1,3 +1,10 @@
+on init
+    # Disable UFS powersaving
+    write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 0
+    write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 0
+    write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled Y
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
@@ -97,6 +104,11 @@ on enable-low-power
     write /sys/class/devfreq/soc:qcom,memlat-cpu2/polling_interval 10
     write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
+    # Enable UFS powersaving
+    write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
+    write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
+    write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 1
+
     # Enable all LPMs by default
     # This will enable C4, D4, D3, E4 and M3 LPMs
     write /sys/module/lpm_levels/parameters/sleep_disabled "N"
@@ -125,6 +137,11 @@ on charger
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/msm_thermal/core_control/cpus_offlined 14
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    # Enable UFS powersaving
+    write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
+    write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
+    write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 1
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     start dashd
 
