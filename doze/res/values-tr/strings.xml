@@ -13,7 +13,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="ambient_display_title">Ortam ekranı</string>
+  <string name="ambient_display_title">Bildirim ekranı</string>
   <string name="ambient_display_summary">Bildirim geldiğinde cihazı uyandır</string>
   <string name="always_enabled_title">Her zaman etkin</string>
   <string name="always_enabled_summary">Ekran kapalıyken sensör hareketlerini dinle</string>
@@ -30,5 +30,5 @@
   <!-- Help text -->
   <string name="dlg_ok">TAMAM</string>
   <string name="doze_settings_help_title">Yardım</string>
-  <string name="doze_settings_help_text">Doze özelliği çalışmak için sensörleri kullanır. Seçilen sensör yalnızca cihaz bildirim aldığında etkinleştirilir, pil kullanımını azaltmaya yardımcı olur. Seçilen sensörü ekran kapanır kapanmaz etkinleştirebilirsiniz ancak bu yüksek pil kullanımına neden olur.</string>
+  <string name="doze_settings_help_text">Bu özellik bildirim ekranını başlatmak için sensörleri kullanır. Seçilen sensör yalnızca cihaz bildirim aldığında etkinleştirilir, pil kullanımını azaltmaya yardımcı olur. Ekran kapandığında seçilen sensörü etkinleştirmek için bir seçenek de vardır, fakat bu daha yüksek pil kullanımına neden olur.</string>
 </resources>
