@@ -48,4 +48,11 @@ bool _ZN7qcamera15isOneplusCameSHIM(const void *)
     return true;
 }
 
+// bool qcamera::QCameraParameters::is3p8spLowLight(qcamera::QCameraParameters *this)
+// _ZN7qcamera17QCameraParameters15is3p8spLowLightEv
+bool _ZN7qcamera17QCameraParameters15is3p8spLowLigSHIM(const void *)
+{
+    return true;
+}
+
 }
