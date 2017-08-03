@@ -533,7 +533,7 @@ service energy-awareness /system/vendor/bin/energy-awareness
     group system
     oneshot
 
-service hvdcp_opti /system/bin/hvdcp_opti
+service hvdcp_opti /system/vendor/bin/hvdcp_opti
     class main
     user root
     group root
