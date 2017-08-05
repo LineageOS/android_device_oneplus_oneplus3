@@ -12,6 +12,9 @@
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.4-service\.oneplus3       u:object_r:hal_camera_default_exec:s0
 
+# Ril
+/data/oemnvitems(/.*)?                                          u:object_r:vendor_radio_data_file:s0
+
 # Sys files
 /sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc:s0
 /sys/devices/soc/soc:fpc_fpc1020/proximity_state                u:object_r:sysfs_fpc:s0

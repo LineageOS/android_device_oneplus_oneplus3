@@ -79,6 +79,9 @@ on post-fs-data
 #Create folder for mm-qcamera-daemon
 mkdir /data/vendor/camera 0770 camera camera
 
+    # Create oemnvitems for RIL
+    mkdir /data/oemnvitems 0771 radio radio
+
 on property:init.svc.bootanim=running
     write /sys/class/leds/wled/brightness 4095
 
