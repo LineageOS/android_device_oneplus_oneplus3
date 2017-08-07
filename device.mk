@@ -231,10 +231,6 @@ PRODUCT_PACKAGES += \
     android.hardware.health@1.0-convert \
     android.hardware.health@1.0-service
 
-# HIDL
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/manifest.xml:system/vendor/manifest.xml
-
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
