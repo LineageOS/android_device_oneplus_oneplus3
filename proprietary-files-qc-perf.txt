@@ -1,6 +1,6 @@
 # Perf
 bin/iop
-vendor/bin/perfd
+vendor/bin/perfd|3d2f67a60bf53dd9a741aab2575ba0e88fbe9f44
 vendor/etc/perf-profile0.conf
 vendor/etc/perf-profile1.conf
 vendor/etc/perf-profile2.conf
@@ -10,7 +10,9 @@ vendor/etc/perf-profile5.conf
 vendor/etc/perf-profile6.conf
 vendor/lib/libqti-iop-client.so
 vendor/lib/libqti-iop.so
-vendor/lib/libqti-perfd-client.so
+vendor/lib/libqti-perfd-client.so|431d27d88279c31e084e2a6b0da41a05876df6d2
+vendor/lib/libqti-util.so|5badf4f90ebcb850c8f0d08ad1ffb34d481ee8b4
 vendor/lib64/libqti-iop-client.so
 vendor/lib64/libqti-iop.so
-vendor/lib64/libqti-perfd-client.so
+vendor/lib64/libqti-perfd-client.so|71145ceeb0e65ae7996a5e28ecbaf9fe2577192c
+vendor/lib64/libqti-util.so|5f5af2020dfab9dd866d63dd8269b987ccf35123
