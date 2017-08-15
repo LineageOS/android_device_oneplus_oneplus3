@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+     Copyright (C) 2017 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<Powerhint>
+	<Hint type="0x0F00"> <!--sustained performance-->
+        <Resource opcode="0x40804000" value="0x4B9"/>   <!-- B CPU - Cluster max freq ~1.2 GHz -->
+        <Resource opcode="0x40804100" value="0x4B9"/>   <!-- L CPU - Cluster max freq ~1.2 Ghz -->
+        <Resource opcode="0x42C24000" value="0x85"/>    <!-- GPU - min freq 133 Mhz -->
+        <Resource opcode="0x42C20000" value="0x13B"/>   <!-- GPU - max freq 315 Mhz -->
+    </Hint>
+	<Hint type="0x1000"> <!--vr mode-->
+        <Resource opcode="0x40800000" value="0x5A0"/>   <!-- B CPU - Cluster min freq ~1.4 Ghz -->
+        <Resource opcode="0x40800100" value="0x5A0"/>   <!-- L CPU - Cluster min freq ~1.4 Ghz -->
+        <Resource opcode="0x40804000" value="0x5A0"/>   <!-- B CPU - Cluster max freq ~1.4 Ghz -->
+        <Resource opcode="0x40804100" value="0x5A0"/>   <!-- L CPU - Cluster max freq ~1.4 Ghz -->
+        <Resource opcode="0x42C24000" value="0x1FE"/>   <!-- GPU - min freq 510 Mhz -->
+        <Resource opcode="0x42C20000" value="0x1FE"/>   <!-- GPU - max freq 510 Mhz -->
+        <Resource opcode="0x42C28000" value="0x1E4F"/>  <!-- GPUBW freq 775 Mhz-->
+    </Hint>
+	<Hint type="0x1001"> <!--vr mode sustained performance-->
+        <Resource opcode="0x40800000" value="0x4B9"/>   <!-- B CPU - Cluster min freq ~1.2 Ghz -->
+        <Resource opcode="0x40800100" value="0x4B9"/>   <!-- L CPU - Cluster min freq ~1.2 Ghz -->
+        <Resource opcode="0x40804000" value="0x4B9"/>   <!-- B CPU - Cluster max freq ~1.2 Ghz -->
+        <Resource opcode="0x40804100" value="0x4B9"/>   <!-- L CPU - Cluster max freq ~1.2 Ghz -->
+        <Resource opcode="0x42C24000" value="0x13B"/>   <!-- GPU - min freq 315 Mhz -->
+        <Resource opcode="0x42C20000" value="0x13B"/>   <!-- GPU - max freq 315 Mhz -->
+        <Resource opcode="0x42C28000" value="0x1E4F"/>  <!-- GPUBW freq 775 Mhz -->
+    </Hint>
+</Powerhint>
