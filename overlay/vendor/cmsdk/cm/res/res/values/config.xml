@@ -70,6 +70,7 @@
         <item>photography:photography</item>
         <item>basic:basic</item>
         <item>srgb:srgb</item>
+        <item>dci_p3:dci_p3</item>
     </string-array>
 
     <!-- Should we filter any display modes which are unampped? -->
