@@ -27,8 +27,10 @@
 #include <time.h>
 #include <unistd.h>
 
+#include <string>
+#include <vector>
+
 #include "edify/expr.h"
-#include "updater/install.h"
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
@@ -162,9 +164,8 @@ err_ret:
 }
 
 /* verify_modem("MODEM_VERSION") */
-Value * VerifyModemFn(const char *name, State *state, int argc, Expr *argv[]) {
+Value* VerifyModemFn(const char *name, State *state, const std::vector<std::unique_ptr<Expr>>& argv) {
     char current_modem_version[MODEM_VER_BUF_LEN];
-    char* modem_version;
     int ret;
     struct tm tm1, tm2;
 
@@ -174,24 +175,24 @@ Value * VerifyModemFn(const char *name, State *state, int argc, Expr *argv[]) {
                 "%s() failed to read current MODEM build time-stamp: %d", name, ret);
     }
 
-    memset(&tm1, 0, sizeof(tm));
-    strptime(current_modem_version, "%Y-%m-%d %H:%M:%S", &tm1);
-
-    ret = ReadArgs(state, argv, 1, &modem_version);
-    if (ret < 0) {
+    std::vector<std::string> args;
+    if (!ReadArgs(state, argv, &args)) {
         return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
     }
 
-    uiPrintf(state, "Checking for MODEM build time-stamp %s\n", modem_version);
+    memset(&tm1, 0, sizeof(tm));
+    strptime(current_modem_version, "%Y-%m-%d %H:%M:%S", &tm1);
 
-    memset(&tm2, 0, sizeof(tm));
-    strptime(modem_version, "%Y-%m-%d %H:%M:%S", &tm2);
+    for (auto &modem_version : args) {
+        memset(&tm2, 0, sizeof(tm));
+        uiPrintf(state, "Checking for MODEM build time-stamp %s\n", modem_version.c_str());
+        strptime(modem_version.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
 
-    if (mktime(&tm1) >= mktime(&tm2)) {
-        ret = 1;
+        if (mktime(&tm1) >= mktime(&tm2)) {
+            ret = 1;
+            break;
+        }
     }
-
-    free(modem_version);
 
     return StringValue(strdup(ret ? "1" : "0"));
 }
