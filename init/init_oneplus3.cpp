@@ -106,16 +106,16 @@ void load_op3(const char *model) {
     property_override("ro.product.model", model);
     property_override("ro.build.product", "OnePlus3");
     property_override("ro.product.device", "OnePlus3");
-    property_override("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 74 dev-keys");
-    property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3:7.1.1/NMF26F/07151600:user/release-keys");
+    property_override("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 82 dev-keys");
+    property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3:7.1.1/NMF26F/08101100:user/release-keys");
 }
 
 void load_op3t(const char *model) {
     property_override("ro.product.model", model);
     property_override("ro.build.product", "OnePlus3");
     property_override("ro.product.device", "OnePlus3T");
-    property_override("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 60 dev-keys");
-    property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:7.1.1/NMF26F/07151930:user/release-keys");
+    property_override("ro.build.description", "OnePlus3-user 7.1.1 NMF26F 69 dev-keys");
+    property_override("ro.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:7.1.1/NMF26F/08101230:user/release-keys");
     property_set("ro.power_profile.override", "power_profile_3t");
 }
 
