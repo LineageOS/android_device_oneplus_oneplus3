@@ -2,4 +2,6 @@ allow wcnss_service self:capability {
     dac_override
     net_raw
 };
+allow wcnss_service shell_exec:file { execute execute_no_trans r_file_perms };
+allow wcnss_service toolbox_exec:file getattr;
 get_prop(wcnss_service, diag_prop);
