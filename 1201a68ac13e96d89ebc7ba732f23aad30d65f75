@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "230cba8f_3af369db",
+        "filename": "extract-files.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 10444
+      },
+      "writtenOn": "2017-09-01T12:21:49Z",
+      "side": 1,
+      "message": "CM_ROOT -\u003e LINEAGE_ROOT?\n\n;)",
+      "revId": "1201a68ac13e96d89ebc7ba732f23aad30d65f75",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af8bf831_92e79bba",
+        "filename": "setup-makefiles.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 10444
+      },
+      "writtenOn": "2017-09-01T12:21:49Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1201a68ac13e96d89ebc7ba732f23aad30d65f75",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
