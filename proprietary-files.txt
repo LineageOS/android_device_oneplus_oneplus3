@@ -301,6 +301,7 @@ etc/oneplus3T_vstab_db_720p_video_0.config
 etc/oneplus3T_vstab_db_720p_video_1.config
 lib/lib_oneplus_facebeauty.so
 lib/lib_oneplus_md.so
+lib/lib_oneplus_watermark.so
 lib/libFNVfbEngineHAL.so
 lib/libmms_gyro_vstab_auth.so
 lib/libmms_gyro_vstab.so
@@ -468,10 +469,10 @@ etc/firmware/a530_zap.b02
 etc/firmware/a530_zap.elf
 etc/firmware/a530_zap.mdt
 etc/firmware/a530_zap-pro.b00|8fbe425d7edcc44808e010495b1256de9dc97623
-etc/firmware/a530_zap-pro.b01|5a5bb86917732a0559902f854d9692cf0ba2bd4a
+etc/firmware/a530_zap-pro.b01|777297caa346f89a3bafef22e329ff2f9f413b23
 etc/firmware/a530_zap-pro.b02|657ce04bbb8cc88ccead7c22ed1e3ca1776c7518
-etc/firmware/a530_zap-pro.elf|2881e9ecb047b9ebc8e8ae97bff7418c0ca1a98b
-etc/firmware/a530_zap-pro.mdt|d64abab6f1107f18a264b8b0645f20f0beef9428
+etc/firmware/a530_zap-pro.elf|9a08ee0d2fea7a9dfee88aaa4db45087bd567cbc
+etc/firmware/a530_zap-pro.mdt|d1a277911f012e3483467e0009e10d903f7ae444
 etc/firmware/a530v1_pfp.fw
 etc/firmware/a530v1_pm4.fw
 etc/firmware/a530v2_seq.fw2
