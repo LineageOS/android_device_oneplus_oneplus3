@@ -27,7 +27,7 @@
 #
 #
 
-import init.qcom.power.rc
+import /vendor/etc/init/hw/init.qcom.power.rc
 
 on early-init
     mkdir /firmware 0771 system system
@@ -41,6 +41,12 @@ on fs
     mount_all /vendor/etc/fstab.qcom
     swapon_all /vendor/etc/fstab.qcom
 
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+
+    wait /dev/block/bootdevice/by-name/persist
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist noatime nosuid nodev barrier=1
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
@@ -65,6 +71,15 @@ on post-fs-data
     mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/audio_pp 0771 media audio
 
+   # Add a cpuset for the camera daemon
+   # We want all cores for camera
+   mkdir /dev/cpuset/camera-daemon
+   write /dev/cpuset/camera-daemon/cpus 0-3
+   write /dev/cpuset/camera-daemon/mems 0
+   chown cameraserver cameraserver /dev/cpuset/camera-daemon
+   chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+   chmod 0660 /dev/cpuset/camera-daemon/tasks
+
 #Create folder for mm-qcamera-daemon
 mkdir /data/vendor/camera 0770 camera camera
 
@@ -88,11 +103,8 @@ on boot
     # Sensors
     chmod 0775 /persist/sensors
     chmod 0664 /persist/sensors/sensors_settings
+    mkdir /persist/sensors/registry/registry root system
     chown system root /persist/sensors/sensors_settings
-    chmod 0664 /persist/sensors/gyro_sensitity_cal
-    chown system root /persist/sensors/gyro_sensitity_cal
-    mkdir /data/misc/sensors
-    chmod 0775 /data/misc/sensors
     start sensors
 
     # Touchscreen
@@ -217,7 +229,7 @@ on boot
     setprop persist.camera.HAL3.enabled 1
 
 #start camera server as daemon
-service qcamerasvr /vendor/bin/mm-qcamera-daemon
+service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
@@ -250,7 +262,7 @@ service qvrd /system/vendor/bin/qvrservice
 service per_mgr /vendor/bin/pm-service
     class core
     user system
-    group system
+    group system net_raw
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
@@ -497,13 +509,6 @@ service dtseagleservice /system/vendor/bin/dts_eagle_service
 on property:init.svc.dts_configurator=stopped
     start dtseagleservice
 
-service ppd /system/vendor/bin/mm-pp-dpps
-    class late_start
-    user system
-    group system graphics
-    socket pps stream 0660 system system
-    disabled
-
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
@@ -560,6 +565,13 @@ service iprenew_eth0 /system/vendor/bin/dhcpcd -n
 	class late_start
 	disabled
 	oneshot
+
+service ppd /vendor/bin/mm-pp-dpps
+    class late_start
+    user system
+    group system graphics
+    socket pps stream 0660 system system
+    disabled
 
 service dashd /sbin/dashd
     class core
