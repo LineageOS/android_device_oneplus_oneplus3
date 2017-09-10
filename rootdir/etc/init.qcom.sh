@@ -1,5 +1,6 @@
-#!/system/bin/sh
-# Copyright (c) 2009-2017, The Linux Foundation. All rights reserved.
+#! /vendor/bin/sh
+
+# Copyright (c) 2009-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -80,26 +81,38 @@ start_vm_bms()
 
 start_msm_irqbalance_8939()
 {
-	if [ -f /system/bin/msm_irqbalance ]; then
+	if [ -f /system/vendor/bin/msm_irqbalance ]; then
 		case "$platformid" in
-		    "239" | "293" | "294" | "295" | "304" | "313" | "338")
-			start msm_irqbalance;;
+		    "239" | "293" | "294" | "295" | "304" | "313")
+			start vendor.msm_irqbalance;;
+		esac
+	fi
+}
+
+start_msm_irqbalance660()
+{
+	if [ -f /vendor/bin/msm_irqbalance ]; then
+		case "$platformid" in
+		    "317" | "324" | "325" | "326" | "345" | "346")
+			start vendor.msm_irqbalance;;
+		    "318" | "327")
+			start vendor.msm_irqbl_sdm630;;
 		esac
 	fi
 }
 
 start_msm_irqbalance()
 {
-	if [ -f /system/bin/msm_irqbalance ]; then
-		start msm_irqbalance
+	if [ -f /vendor/bin/msm_irqbalance ]; then
+		start vendor.msm_irqbalance
 	fi
 }
 
 start_copying_prebuilt_qcril_db()
 {
-    if [ -f /system/vendor/qcril.db -a ! -f /data/misc/radio/qcril.db ]; then
-        cp /system/vendor/qcril.db /data/misc/radio/qcril.db
-        chown -h radio.radio /data/misc/radio/qcril.db
+    if [ -f /vendor/radio/qcril_database/qcril.db -a ! -f /data/vendor/radio/qcril.db ]; then
+        cp /vendor/radio/qcril_database/qcril.db /data/vendor/radio/qcril.db
+        chown -h radio.radio /data/vendor/radio/qcril.db
     fi
 }
 
@@ -168,6 +181,39 @@ case "$target" in
         esac
         start_charger_monitor
         ;;
+    "sdm660")
+        if [ -f /sys/devices/soc0/soc_id ]; then
+             soc_id=`cat /sys/devices/soc0/soc_id`
+        else
+             soc_id=`cat /sys/devices/system/soc/soc0/id`
+        fi
+
+        if [ -f /sys/devices/soc0/hw_platform ]; then
+             hw_platform=`cat /sys/devices/soc0/hw_platform`
+        else
+             hw_platform=`cat /sys/devices/system/soc/soc0/hw_platform`
+        fi
+
+        case "$soc_id" in
+             "317" | "324" | "325" | "326" | "318" | "327" )
+                  case "$hw_platform" in
+                       "Surf")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "MTP")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "RCM")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
+                  esac
+                  ;;
+       esac
+        start_msm_irqbalance660
+        ;;
     "apq8084")
         platformvalue=`cat /sys/devices/soc0/hw_platform`
         case "$platformvalue" in
@@ -219,7 +265,7 @@ case "$target" in
                   ;;
         esac
         ;;
-    "msm8994" | "msm8992" | "msm8998")
+    "msm8994" | "msm8992" | "msm8998" | "apq8098_latv" | "sdm845")
         start_msm_irqbalance
         ;;
     "msm8996")
@@ -271,6 +317,9 @@ case "$target" in
                        "RCM")
                                     setprop qemu.hw.mainkeys 0
                                     ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
                   esac
                   ;;
        esac
@@ -300,6 +349,9 @@ case "$target" in
                        "RCM")
                                     setprop qemu.hw.mainkeys 0
                                     ;;
+                       "QRD")
+                                    setprop qemu.hw.mainkeys 0
+                                    ;;
                   esac
                   ;;
        esac
@@ -310,34 +362,34 @@ esac
 # Copy qcril.db if needed for RIL
 #
 start_copying_prebuilt_qcril_db
-echo 1 > /data/misc/radio/db_check_done
+echo 1 > /data/vendor/radio/db_check_done
 
 #
 # Make modem config folder and copy firmware config to that folder for RIL
 #
 #ifdef VENDOR_EDIT
 # modify the source path to /system/etc/firmware/mbn_ota/ , hanqingpu, 20151119
-##if [ -f /data/misc/radio/ver_info.txt ]; then
-##    prev_version_info=`cat /data/misc/radio/ver_info.txt`
+##if [ -f /data/vendor/radio/ver_info.txt ]; then
+##    prev_version_info=`cat /data/vendor/radio/ver_info.txt`
 ##else
 ##    prev_version_info=""
 ##fi
 
 ##cur_version_info=`cat /firmware/verinfo/ver_info.txt`
 ##if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
-rm -rf /data/misc/radio/modem_config
-mkdir /data/misc/radio/modem_config
-chmod 770 /data/misc/radio/modem_config
-##    cp -r /firmware/image/modem_pr/mcfg/configs/* /data/misc/radio/modem_config
-cp -r /system/etc/firmware/mbn_ota/* /data/misc/radio/modem_config
-chown -hR radio.radio /data/misc/radio/modem_config
-##    cp /firmware/verinfo/ver_info.txt /data/misc/radio/ver_info.txt
-##    chown radio.radio /data/misc/radio/ver_info.txt
+    rm -rf /data/vendor/radio/modem_config
+    mkdir /data/vendor/radio/modem_config
+    chmod 770 /data/vendor/radio/modem_config
+##    cp -r /firmware/image/modem_pr/mcfg/configs/* /data/vendor/radio/modem_config
+    cp -r /system/etc/firmware/mbn_ota/* /data/vendor/radio/modem_config
+    chown -hR radio.radio /data/vendor/radio/modem_config
+##    cp /firmware/verinfo/ver_info.txt /data/vendor/radio/ver_info.txt
+##    chown radio.radio /data/vendor/radio/ver_info.txt
 ##fi
-##cp /firmware/image/modem_pr/mbn_ota.txt /data/misc/radio/modem_config
-##chown radio.radio /data/misc/radio/modem_config/mbn_ota.txt
+##cp /firmware/image/modem_pr/mbn_ota.txt /data/vendor/radio/modem_config
+##chown radio.radio /data/vendor/radio/modem_config/mbn_ota.txt
 #endif /*VENDOR_EDIT*/
-echo 1 > /data/misc/radio/copy_complete
+echo 1 > /data/vendor/radio/copy_complete
 
 #check build variant for printk logging
 #current default minimum boot-time-default
