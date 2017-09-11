@@ -28,14 +28,22 @@
 
 <mixer>
     <!-- These are the initial mixer settings -->
-    <ctl name="LSM1 MUX" value="None" />
-    <ctl name="LSM2 MUX" value="None" />
-    <ctl name="LSM3 MUX" value="None" />
-    <ctl name="LSM4 MUX" value="None" />
-    <ctl name="LSM5 MUX" value="None" />
-    <ctl name="LSM6 MUX" value="None" />
-    <ctl name="LSM7 MUX" value="None" />
-    <ctl name="LSM8 MUX" value="None" />
+    <ctl name="LSM1 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM2 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM3 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM4 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM5 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM6 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM7 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM8 Mixer SLIMBUS_5_TX" value="0" />
+    <ctl name="LSM1 Port" value="None" />
+    <ctl name="LSM2 Port" value="None" />
+    <ctl name="LSM3 Port" value="None" />
+    <ctl name="LSM4 Port" value="None" />
+    <ctl name="LSM5 Port" value="None" />
+    <ctl name="LSM6 Port" value="None" />
+    <ctl name="LSM7 Port" value="None" />
+    <ctl name="LSM8 Port" value="None" />
     <ctl name="SLIMBUS_5_TX LSM Function" value="None" />
     <ctl name="MADONOFF Switch" value="0" />
     <ctl name="MAD Input" value="DMIC1" />
@@ -51,36 +59,44 @@
 
     <path name="listen-voice-wakeup-1">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM1 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM1 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM1 Mixer SLIMBUS_5_TX" value="1" />
     </path>
 
     <path name="listen-voice-wakeup-2">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM2 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM2 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM2 Mixer SLIMBUS_5_TX" value="1" />
     </path>
     <path name="listen-voice-wakeup-3">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM3 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM3 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM3 Mixer SLIMBUS_5_TX" value="1" />
     </path>
     <path name="listen-voice-wakeup-4">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM4 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM4 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM4 Mixer SLIMBUS_5_TX" value="1" />
     </path>
     <path name="listen-voice-wakeup-5">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM5 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM5 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM5 Mixer SLIMBUS_5_TX" value="1" />
     </path>
     <path name="listen-voice-wakeup-6">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM6 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM6 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM6 Mixer SLIMBUS_5_TX" value="1" />
     </path>
     <path name="listen-voice-wakeup-7">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM7 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM7 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM7 Mixer SLIMBUS_5_TX" value="1" />
     </path>
     <path name="listen-voice-wakeup-8">
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
-        <ctl name="LSM8 MUX" value="SLIMBUS_5_TX" />
+        <ctl name="LSM8 Port" value="SLIMBUS_5_TX" />
+        <ctl name="LSM8 Mixer SLIMBUS_5_TX" value="1" />
     </path>
 
     <path name="listen-cpe-handset-mic">
