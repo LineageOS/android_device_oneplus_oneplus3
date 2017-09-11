@@ -1,5 +1,5 @@
 # ADSP
-bin/adsprpcd
+bin/adsprpcd:vendor/bin/adsprpcd
 vendor/lib/libadsp_default_listener.so
 vendor/lib/libadsp_hvx_callback_skel.so
 vendor/lib/libadsp_hvx_stub.so
@@ -55,9 +55,9 @@ vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
 
 # Bluetooth
-bin/btnvtool
-bin/hci_qcomm_init
-bin/wcnss_filter
+bin/btnvtool:vendor/bin/btnvtool
+bin/hci_qcomm_init:vendor/bin/hci_qcomm_init
+bin/wcnss_filter:vendor/bin/wcnss_filter
 etc/firmware/nvm_tlv_1.3.bin
 etc/firmware/nvm_tlv_2.1.bin
 etc/firmware/nvm_tlv_3.0.bin
@@ -75,7 +75,7 @@ vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
 # CNE
-bin/cnd
+bin/cnd:vendor/bin/cnd
 etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
 etc/cne/wqeclient/ATT/ATT_profile1.xml
@@ -121,7 +121,7 @@ vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
 # DPM
-bin/dpmd
+bin/dpmd:vendor/bin/dpmQmiMgr
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
 etc/permissions/com.qti.dpmframework.xml
@@ -142,7 +142,7 @@ vendor/lib64/libdpmnsrm.so
 vendor/lib64/libdpmtcm.so
 
 # DRM
-bin/qseecomd
+bin/qseecomd:vendor/bin/qseecomd
 vendor/bin/qseeproxydaemon
 vendor/lib/libQSEEComAPI.so
 vendor/lib64/lib-sec-disp.so
@@ -164,9 +164,9 @@ vendor/lib/hw/gatekeeper.msm8996.so
 vendor/lib64/hw/gatekeeper.msm8996.so
 
 # GPS
-bin/loc_launcher
-bin/xtwifi-client
-bin/xtwifi-inet-agent
+bin/loc_launcher:vendor/bin/loc_launcher
+bin/xtwifi-client:vendor/bin/xtwifi-client
+bin/xtwifi-inet-agent:vendor/bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml
@@ -293,12 +293,12 @@ vendor/lib64/libconnctrl.so
 vendor/lib64/libQtiTether.so
 
 # Perf
-bin/energy-awareness
-bin/msm_irqbalance
+bin/energy-awareness:vendor/bin/energy-awareness
+bin/msm_irqbalance:vendor/bin/msm_irqbalance
 
 # Peripheral manager
-bin/pm-proxy
-bin/pm-service
+bin/pm-proxy:vendor/bin/pm-proxy
+bin/pm-service:vendor/bin/pm-service
 vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
@@ -310,7 +310,7 @@ vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
 
 # QMI
-bin/irsc_util
+bin/irsc_util:vendor/bin/irsc_util
 etc/permissions/qti_permissions.xml
 vendor/bin/pd-mapper
 vendor/lib/libdiag.so
@@ -352,11 +352,11 @@ vendor/lib64/libsmemlog.so
 -app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
-bin/ipacm-diag
-bin/netmgrd
-bin/radish
-bin/rmt_storage
-bin/tftp_server
+bin/ipacm-diag:vendor/bin/ipacm-diag
+bin/netmgrd:vendor/bin/netmgrd
+bin/radish:vendor/bin/radish
+bin/rmt_storage:vendor/bin/rmt_storage
+bin/tftp_server:vendor/bin/tftp_server
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/permissions/embms.xml
@@ -386,10 +386,10 @@ vendor/lib64/libsystem_health_mon.so
 vendor/qcril.db
 
 # Radio - IMS
-bin/ims_rtp_daemon
-bin/imscmservice
-bin/imsdatadaemon
-bin/imsqmidaemon
+bin/ims_rtp_daemon:vendor/bin/ims_rtp_daemon
+bin/imscmservice:vendor/bin/imscmservice
+bin/imsdatadaemon:vendor/bin/imsdatadaemon
+bin/imsqmidaemon:vendor/bin/imsqmidaemon
 etc/permissions/imscm.xml
 etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar
@@ -422,7 +422,7 @@ vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
 
 # Sensors
-bin/sensors.qcom
+bin/sensors.qcom:vendor/bin/sensors.qcom
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor_reg.so
 vendor/lib/libsensor_thresh.so
@@ -446,7 +446,7 @@ vendor/lib64/libthermalioctl.so
 
 # Time services
 -app/TimeService/TimeService.apk
-bin/time_daemon
+bin/time_daemon:vendor/bin/time_daemon
 -vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
 -vendor/lib64/libtime_genoff.so
@@ -458,5 +458,5 @@ vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wifi
-bin/cnss_diag
-bin/cnss-daemon
+bin/cnss_diag:vendor/bin/cnss_diag
+bin/cnss-daemon:vendor/bin/cnss-daemon

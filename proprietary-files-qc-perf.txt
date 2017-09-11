@@ -1,5 +1,5 @@
 # Perf
-bin/iop
+bin/iop:vendor/bin/iop
 vendor/bin/perfd|01f3154ec4e8bbfc726cbda152689693b91cba71
 vendor/etc/perf-profile0.conf
 vendor/etc/perf-profile1.conf
