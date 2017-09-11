@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- Copyright (c) 2014,2016 The Linux Foundation. All rights reserved.         -->
+<!-- Copyright (c) 2014, 2016, The Linux Foundation. All rights reserved.   -->
 <!--                                                                        -->
 <!-- Redistribution and use in source and binary forms, with or without     -->
 <!-- modification, are permitted provided that the following conditions are -->
@@ -30,8 +30,8 @@
         <device name="SND_DEVICE_IN_HDMI_MIC" acdb_id="16"/>
         <device name="SND_DEVICE_IN_SPEAKER_MIC_NS" acdb_id="41"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="43"/>
-        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15" />
-        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124" />
+        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="15" />
     </acdb_ids>
     <bit_width_configs>
