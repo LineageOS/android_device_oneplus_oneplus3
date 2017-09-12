@@ -31,6 +31,7 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <fcntl.h>
+#include <android-base/logging.h>
 #include <android-base/properties.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
@@ -58,7 +59,7 @@ static int read_file2(const char *fname, char *data, int max_size)
 
     fd = open(fname, O_RDONLY);
     if (fd < 0) {
-        ERROR("failed to open '%s'\n", fname);
+        LOG(ERROR) << "failed to open '" << fname << "'";
         return 0;
     }
 
@@ -155,7 +156,7 @@ void vendor_load_properties() {
         property_set("persist.radio.force_on_dc", "true");
         break;
     default:
-        INFO("%s: unexcepted rf version!\n", __func__);
+        LOG(ERROR) << __func__ << ": unexcepted rf version!";
     }
 
     init_alarm_boot_properties();
