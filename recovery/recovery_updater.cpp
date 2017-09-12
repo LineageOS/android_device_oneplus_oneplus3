@@ -27,6 +27,8 @@
 #include <time.h>
 #include <unistd.h>
 
+#include <android-base/logging.h>
+
 #include <string>
 #include <vector>
 
@@ -185,7 +187,7 @@ Value* VerifyModemFn(const char *name, State *state, const std::vector<std::uniq
 
     for (auto &modem_version : args) {
         memset(&tm2, 0, sizeof(tm));
-        uiPrintf(state, "Checking for MODEM build time-stamp %s\n", modem_version.c_str());
+        LOG(INFO) << "Checking for MODEM build time-stamp " << modem_version;
         strptime(modem_version.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
 
         if (mktime(&tm1) >= mktime(&tm2)) {
