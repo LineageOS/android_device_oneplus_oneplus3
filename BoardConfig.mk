@@ -190,7 +190,6 @@ DEVICE_MATRIX_FILE   := $(PLATFORM_PATH)/configs/compatibility_matrix.xml
 TARGET_USES_MEDIA_EXTENSIONS := true
 
 # NFC
-TARGET_USES_NQ_NFC := true
 BOARD_NFC_CHIPSET := pn548
 
 # Partitions
