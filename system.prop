@@ -72,6 +72,7 @@ persist.sys.wfd.virtual=0
 sdm.perf_hint_window=50
 persist.hwc.enable_vds=1
 sdm.debug.disable_rotator_split=1
+sdm.debug.disable_skip_validate=1
 
 # IMS
 persist.volte_enabled_by_hw=1
