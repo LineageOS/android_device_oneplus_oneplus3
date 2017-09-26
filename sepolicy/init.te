@@ -1,1 +1,4 @@
 allow init proc_touchpanel:file rw_file_perms;
+
+# required for LD_SHIM_LIBS
+allow init { domain -lmkd -crash_dump }:process noatsecure;
