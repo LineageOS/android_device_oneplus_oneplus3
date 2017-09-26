@@ -45,11 +45,11 @@ const int CPU_SENSORS[] = {4, 6, 9, 11};
 //qcom, therm-reset-temp
 #define CPU_SHUTDOWN_THRESHOLD        115
 //qcom, limit-temp
-#define CPU_THROTTLING_THRESHOLD      60
-#define BATTERY_SHUTDOWN_THRESHOLD    60
+#define CPU_THROTTLING_THRESHOLD      115
+#define BATTERY_SHUTDOWN_THRESHOLD    115
 // device/oneplus/oneplus3/configs/thermal-engine.conf
-#define SKIN_THROTTLING_THRESHOLD     47
-#define SKIN_SHUTDOWN_THRESHOLD       70
+#define SKIN_THROTTLING_THRESHOLD     115
+#define SKIN_SHUTDOWN_THRESHOLD       115
 #define VR_THROTTLED_BELOW_MIN        58
 
 #define GPU_LABEL                     "GPU"
