@@ -310,6 +310,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
     $(LOCAL_PATH)/seccomp/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy
 
+# Net
+PRODUCT_PACKAGES += \
+    android.system.net.netd@1.0 \
+    netutils-wrapper-1.0
+
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
