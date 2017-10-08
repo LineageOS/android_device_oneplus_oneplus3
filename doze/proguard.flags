@@ -3,6 +3,6 @@
 }
 
 -keep class ** extends android.support.v14.preference.PreferenceFragment
--keep class com.cyanogenmod.settings.doze.* {
+-keep class org.lineageos.settings.doze.* {
   *;
 }
