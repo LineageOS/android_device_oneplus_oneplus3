@@ -33,7 +33,7 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:textAppearance="@android:style/TextAppearance.Material.Title"
-        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAlignment="viewStart" />
 
     <Switch
@@ -42,6 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@null"
-        android:theme="@style/ThemeOverlay.SwitchBar" />
+        android:theme="@style/Theme.Main.SwitchBar" />
 
 </LinearLayout>
