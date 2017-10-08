@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.cyanogenmod.pocketmode;
+package org.lineageos.pocketmode;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -25,7 +25,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.util.Log;
 
-import org.cyanogenmod.internal.util.FileUtils;
+import org.lineageos.internal.util.FileUtils;
 
 public class PocketModeService extends Service {
     private static final String TAG = "PocketModeService";
