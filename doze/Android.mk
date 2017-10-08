@@ -30,8 +30,6 @@ LOCAL_AAPT_FLAGS := --auto-add-overlay \
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
-include frameworks/base/packages/SettingsLib/common.mk
-
 include $(BUILD_PACKAGE)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
