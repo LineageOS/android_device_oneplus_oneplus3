@@ -471,7 +471,7 @@ service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
    group radio diag inet log
    disabled
 
-service imsrcsservice /system/vendor/bin/imsrcsd
+service vendor.imsrcsservice /system/vendor/bin/imsrcsd
    class main
    user system
    group radio diag inet log
@@ -480,7 +480,7 @@ service imsrcsservice /system/vendor/bin/imsrcsd
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
-   start imsrcsservice
+   start vendor.imsrcsservice
 
 service dts_configurator /system/vendor/bin/dts_configurator
     class late_start
