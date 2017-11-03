@@ -35,6 +35,8 @@ on early-init
     symlink /data/tombstones /tombstones
     mkdir /dsp 0771 media media
 
+    export LD_SHIM_LIBS /system/lib/libcamera_client.so|libcamera_parameters_shim.so
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
