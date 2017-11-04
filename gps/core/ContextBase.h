@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2017, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -34,6 +34,7 @@
 #include <MsgTask.h>
 #include <LocApiBase.h>
 #include <LBSProxyBase.h>
+#include <loc_cfg.h>
 
 #define MAX_XTRA_SERVER_URL_LENGTH 256
 
@@ -105,6 +106,8 @@ class LocAdapterBase;
 class ContextBase {
     static LBSProxyBase* getLBSProxy(const char* libName);
     LocApiBase* createLocApi(LOC_API_ADAPTER_EVENT_MASK_T excludedMask);
+    static const loc_param_s_type mGps_conf_table[];
+    static const loc_param_s_type mSap_conf_table[];
 protected:
     const LBSProxyBase* mLBSProxy;
     const MsgTask* mMsgTask;
@@ -135,6 +138,7 @@ public:
     static loc_gps_cfg_s_type mGps_conf;
     static loc_sap_cfg_s_type mSap_conf;
 
+    void readConfig();
     static uint32_t getCarrierCapabilities();
 
 };

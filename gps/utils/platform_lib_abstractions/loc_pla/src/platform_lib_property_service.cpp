@@ -25,13 +25,13 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#include "platform_lib_property_service.h"
-
 #ifdef USE_GLIB
 #include <loc_stub_property_service.h>
 #else
 #include <cutils/properties.h>
 #endif /* USE_GLIB */
+
+#include "platform_lib_property_service.h"
 
 int platform_lib_abstraction_property_get(const char *key, char *value, const char *default_value)
 {

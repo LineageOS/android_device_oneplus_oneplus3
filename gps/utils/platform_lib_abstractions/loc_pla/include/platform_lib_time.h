@@ -31,5 +31,6 @@
 
 #include <stdint.h>
 int64_t platform_lib_abstraction_elapsed_millis_since_boot();
+int64_t platform_lib_abstraction_elapsed_micros_since_boot();
 
 #endif /* __PLATFORM_LIB_TIME_H__ */

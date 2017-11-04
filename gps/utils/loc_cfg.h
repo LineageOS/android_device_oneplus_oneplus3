@@ -56,10 +56,10 @@ typedef struct
 {
   const char                    *param_name;
   void                          *param_ptr;
-  uint8_t                       *param_set;   /* was this value set by config file? */
+  uint8_t                       *param_set;   /* indicate value set by config file */
   char                           param_type;  /* 'n' for number,
                                                  's' for string,
-                                                 'f' for float */
+                                                 'f' for double */
 } loc_param_s_type;
 
 /*=============================================================================
