@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, 2016-2017The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,7 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#define LOG_NDDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_LocAdapterBase"
 
 #include <dlfcn.h>
@@ -50,6 +50,16 @@ LocAdapterBase::LocAdapterBase(const LOC_API_ADAPTER_EVENT_MASK_T mask,
     mLocApi->addAdapter(this);
 }
 
+uint32_t LocAdapterBase::mSessionIdCounter(1);
+
+uint32_t LocAdapterBase::generateSessionId()
+{
+    if (++mSessionIdCounter == 0xFFFFFFFF)
+        mSessionIdCounter = 1;
+
+     return mSessionIdCounter;
+}
+
 void LocAdapterBase::handleEngineUpEvent()
 {
     if (mLocAdapterProxyBase) {
@@ -65,46 +75,45 @@ void LocAdapterBase::handleEngineDownEvent()
 }
 
 void LocAdapterBase::
-    reportPosition(UlpLocation &location,
-                   GpsLocationExtended &locationExtended,
-                   void* locationExt,
-                   enum loc_sess_status status,
-                   LocPosTechMask loc_technology_mask) {
-    if (mLocAdapterProxyBase == NULL ||
-        !mLocAdapterProxyBase->reportPosition(location,
-                                              locationExtended,
-                                              status,
-                                              loc_technology_mask)) {
+    reportPositionEvent(const UlpLocation& location,
+                        const GpsLocationExtended& locationExtended,
+                        enum loc_sess_status status,
+                        LocPosTechMask loc_technology_mask,
+                        bool /*fromUlp*/) {
+    if (mLocAdapterProxyBase != NULL) {
+        mLocAdapterProxyBase->reportPositionEvent((UlpLocation&)location,
+                                                   (GpsLocationExtended&)locationExtended,
+                                                   status,
+                                                   loc_technology_mask);
+    } else {
         DEFAULT_IMPL()
     }
 }
 
 void LocAdapterBase::
-    reportSv(GnssSvStatus &svStatus,
-             GpsLocationExtended &locationExtended,
-             void* svExt)
+    reportSvEvent(const GnssSvNotification& /*svNotify*/, bool /*fromUlp*/)
 DEFAULT_IMPL()
 
 void LocAdapterBase::
-    reportSvMeasurement(GnssSvMeasurementSet &svMeasurementSet)
+    reportSvMeasurementEvent(GnssSvMeasurementSet &/*svMeasurementSet*/)
 DEFAULT_IMPL()
 
 void LocAdapterBase::
-    reportSvPolynomial(GnssSvPolynomial &svPolynomial)
+    reportSvPolynomialEvent(GnssSvPolynomial &/*svPolynomial*/)
 DEFAULT_IMPL()
 
 void LocAdapterBase::
-    reportStatus(GpsStatusValue status)
+    reportStatus(LocGpsStatusValue /*status*/)
 DEFAULT_IMPL()
 
 
 void LocAdapterBase::
-    reportNmea(const char* nmea, int length)
+    reportNmeaEvent(const char* /*nmea*/, size_t /*length*/, bool /*fromUlp*/)
 DEFAULT_IMPL()
 
 bool LocAdapterBase::
-    reportXtraServer(const char* url1, const char* url2,
-                     const char* url3, const int maxlength)
+    reportXtraServer(const char* /*url1*/, const char* /*url2*/,
+                     const char* /*url3*/, const int /*maxlength*/)
 DEFAULT_IMPL(false)
 
 bool LocAdapterBase::
@@ -120,15 +129,15 @@ bool LocAdapterBase::
 DEFAULT_IMPL(false)
 
 bool LocAdapterBase::
-    requestATL(int connHandle, AGpsType agps_type)
+    requestATL(int /*connHandle*/, LocAGpsType /*agps_type*/)
 DEFAULT_IMPL(false)
 
 bool LocAdapterBase::
-    releaseATL(int connHandle)
+    releaseATL(int /*connHandle*/)
 DEFAULT_IMPL(false)
 
 bool LocAdapterBase::
-    requestSuplES(int connHandle)
+    requestSuplES(int /*connHandle*/)
 DEFAULT_IMPL(false)
 
 bool LocAdapterBase::
@@ -140,10 +149,16 @@ bool LocAdapterBase::
 DEFAULT_IMPL(false)
 
 bool LocAdapterBase::
-    requestNiNotify(GpsNiNotification &notify, const void* data)
+    requestNiNotifyEvent(const GnssNiNotification &/*notify*/, const void* /*data*/)
 DEFAULT_IMPL(false)
 
 void LocAdapterBase::
-    reportGnssMeasurementData(GnssData &gnssMeasurementData)
+    reportGnssMeasurementDataEvent(const GnssMeasurementsNotification& /*measurements*/,
+                                   int /*msInWeek*/)
 DEFAULT_IMPL()
+
+bool LocAdapterBase::
+    reportWwanZppFix(LocGpsLocation &/*zppLoc*/)
+DEFAULT_IMPL(false)
+
 } // namespace loc_core

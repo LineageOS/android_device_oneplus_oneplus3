@@ -29,7 +29,6 @@
 #ifndef __PLATFORM_LIB_INCLUDES_H__
 #define __PLATFORM_LIB_INCLUDES_H__
 
-#include "platform_lib_android_runtime.h"
 #include "platform_lib_gettid.h"
 #include "platform_lib_log_util.h"
 #include "platform_lib_macros.h"

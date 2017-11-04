@@ -31,6 +31,8 @@
 #include <loc_stub_time.h>
 #else
 #include <utils/SystemClock.h>
+#include <utils/Timers.h>
+
 #endif /* USE_GLIB */
 
 int64_t platform_lib_abstraction_elapsed_millis_since_boot()
@@ -41,7 +43,17 @@ int64_t platform_lib_abstraction_elapsed_millis_since_boot()
 
 #else
 
-    return android::elapsedRealtime();
+    //return android::nanoseconds_to_microseconds(systemTime(SYSTEM_TIME_BOOTTIME))/1000;
+    return nanoseconds_to_microseconds(systemTime(SYSTEM_TIME_BOOTTIME))/1000;
+#endif
+}
+int64_t platform_lib_abstraction_elapsed_micros_since_boot()
+{
+#ifdef USE_GLIB
+    return elapsedMicrosSinceBoot();
 
+#else
+    //return android::nanoseconds_to_microseconds(systemTime(SYSTEM_TIME_BOOTTIME));
+    return nanoseconds_to_microseconds(systemTime(SYSTEM_TIME_BOOTTIME));
 #endif
 }

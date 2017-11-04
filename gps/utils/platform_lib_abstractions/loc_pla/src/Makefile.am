@@ -5,7 +5,6 @@ AM_CFLAGS = \
      -fno-short-enums
 
 h_sources = \
-    ../include/platform_lib_android_runtime.h \
     ../include/platform_lib_gettid.h \
     ../include/platform_lib_includes.h \
     ../include/platform_lib_log_util.h \
@@ -18,7 +17,6 @@ library_includedir = $(pkgincludedir)
 library_include_HEADERS = $(h_sources)
 
 libloc_pla_la_SOURCES = \
-    platform_lib_android_runtime.cpp \
     platform_lib_gettid.cpp \
     platform_lib_log_util.cpp \
     platform_lib_property_service.cpp \
@@ -27,11 +25,11 @@ libloc_pla_la_SOURCES = \
 
 if USE_GLIB
 libloc_pla_la_CFLAGS = -DUSE_GLIB $(AM_CFLAGS) @GLIB_CFLAGS@
-libloc_pla_la_LDFLAGS = -lstdc++ -lpthread @GLIB_LIBS@ -shared -version-info 1:0:0
+libloc_pla_la_LDFLAGS = -lstdc++ -Wl,-z,defs -lpthread @GLIB_LIBS@ -shared -version-info 1:0:0
 libloc_pla_la_CPPFLAGS = -DUSE_GLIB $(AM_CFLAGS) $(AM_CPPFLAGS) @GLIB_CFLAGS@
 else
 libloc_pla_la_CFLAGS = $(AM_CFLAGS)
-libloc_pla_la_LDFLAGS = -lpthread -shared -version-info 1:0:0
+libloc_pla_la_LDFLAGS = -Wl,-z,defs -lpthread -shared -version-info 1:0:0
 libloc_pla_la_CPPFLAGS = $(AM_CFLAGS) $(AM_CPPFLAGS)
 endif
 
