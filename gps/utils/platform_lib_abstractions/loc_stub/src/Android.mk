@@ -1,3 +1,4 @@
+ifneq ($(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE),)
 ifneq ($(BUILD_TINY_ANDROID),true)
 #Compile this library only for builds with the latest modem image
 
@@ -30,20 +31,19 @@ LOCAL_LDFLAGS += -Wl,--export-dynamic
 LOCAL_C_INCLUDES:= \
     $(LOCAL_PATH)/../include \
 
-
-LOCAL_COPY_HEADERS_TO:= libloc_stub/
-LOCAL_COPY_HEADERS:= \
-        ../include/loc_stub_android_runtime.h \
-        ../include/loc_stub_gettid.h \
-        ../include/loc_stub_property_service.h \
-        ../include/loc_stub_sched_policy.h \
-        ../include/loc_stub_time.h
-
 LOCAL_MODULE := libloc_stub
-
+LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib
+LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_PRELINK_MODULE := false
-
+LOCAL_CFLAGS += $(GNSS_CFLAGS)
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libloc_stub_headers
+LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/../include
+include $(BUILD_HEADER_LIBRARY)
+
 endif # not BUILD_TINY_ANDROID
+endif # BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE

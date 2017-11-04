@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011-2014, 2016-2017 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,7 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#define LOG_NDDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_DualCtx"
 
 #include <cutils/sched_policy.h>
@@ -44,8 +44,7 @@ LocDualContext::mFgExclMask = 0;
 // excluded events for background clients
 const LOC_API_ADAPTER_EVENT_MASK_T
 LocDualContext::mBgExclMask =
-    (LOC_API_ADAPTER_BIT_PARSED_POSITION_REPORT |
-     LOC_API_ADAPTER_BIT_SATELLITE_REPORT |
+    (LOC_API_ADAPTER_BIT_SATELLITE_REPORT |
      LOC_API_ADAPTER_BIT_NMEA_1HZ_REPORT |
      LOC_API_ADAPTER_BIT_NMEA_POSITION_REPORT |
      LOC_API_ADAPTER_BIT_IOCTL_REPORT |

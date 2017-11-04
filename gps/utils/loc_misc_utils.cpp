@@ -26,14 +26,14 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
+#define LOG_NDEBUG 0
+#define LOG_TAG "LocSvc_misc_utils"
 #include <stdio.h>
 #include <string.h>
 #include <platform_lib_log_util.h>
 #include <loc_misc_utils.h>
 #include <ctype.h>
 
-#define LOG_NDDEBUG 0
-#define LOG_TAG "LocSvc_misc_utils"
 
 int loc_util_split_string(char *raw_string, char **split_strings_ptr,
                           int max_num_substrings, char delimiter)

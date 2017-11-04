@@ -44,7 +44,7 @@ SIDE EFFECTS
    N/A
 
 ===========================================================================*/
-int set_sched_policy(int tid, SchedPolicy policy)
+int set_sched_policy(int /*tid*/, SchedPolicy /*policy*/)
 {
     return 0;
 }
