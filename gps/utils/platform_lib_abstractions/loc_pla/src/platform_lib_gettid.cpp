@@ -30,6 +30,12 @@
 
 #ifdef USE_GLIB
 #include <loc_stub_gettid.h>
+
+#include <errno.h>
+const char* getprogname() {
+    return program_invocation_short_name;
+}
+
 #else
 #include <unistd.h>
 #endif /* USE_GLIB */

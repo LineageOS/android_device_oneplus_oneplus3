@@ -26,6 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "platform_lib_log_util.h"
+#include "platform_lib_macros.h"
 
 char * get_timestamp(char *str, unsigned long buf_size)
 {
@@ -40,3 +41,38 @@ char * get_timestamp(char *str, unsigned long buf_size)
   return str;
 }
 
+// Below are the location conf file paths
+#ifdef __ANDROID__
+
+#define LOC_PATH_GPS_CONF_STR      "/vendor/etc/gps.conf"
+#define LOC_PATH_IZAT_CONF_STR     "/vendor/etc/izat.conf"
+#define LOC_PATH_FLP_CONF_STR      "/vendor/etc/flp.conf"
+#define LOC_PATH_LOWI_CONF_STR     "/vendor/etc/lowi.conf"
+#define LOC_PATH_SAP_CONF_STR      "/vendor/etc/sap.conf"
+#define LOC_PATH_APDR_CONF_STR     "/vendor/etc/apdr.conf"
+#define LOC_PATH_XTWIFI_CONF_STR   "/vendor/etc/xtwifi.conf"
+#define LOC_PATH_QUIPC_CONF_STR    "/vendor/etc/quipc.conf"
+
+#else
+
+#define LOC_PATH_GPS_CONF_STR      "/etc/gps.conf"
+#define LOC_PATH_IZAT_CONF_STR     "/etc/izat.conf"
+#define LOC_PATH_FLP_CONF_STR      "/etc/flp.conf"
+#define LOC_PATH_LOWI_CONF_STR     "/etc/lowi.conf"
+#define LOC_PATH_SAP_CONF_STR      "/etc/sap.conf"
+#define LOC_PATH_APDR_CONF_STR     "/etc/apdr.conf"
+#define LOC_PATH_XTWIFI_CONF_STR   "/etc/xtwifi.conf"
+#define LOC_PATH_QUIPC_CONF_STR    "/etc/quipc.conf"
+
+#endif // __ANDROID__
+
+// Reference below arrays wherever needed to avoid duplicating
+// same conf path string over and again in location code.
+const char LOC_PATH_GPS_CONF[]    = LOC_PATH_GPS_CONF_STR;
+const char LOC_PATH_IZAT_CONF[]   = LOC_PATH_IZAT_CONF_STR;
+const char LOC_PATH_FLP_CONF[]    = LOC_PATH_FLP_CONF_STR;
+const char LOC_PATH_LOWI_CONF[]   = LOC_PATH_LOWI_CONF_STR;
+const char LOC_PATH_SAP_CONF[]    = LOC_PATH_SAP_CONF_STR;
+const char LOC_PATH_APDR_CONF[]   = LOC_PATH_APDR_CONF_STR;
+const char LOC_PATH_XTWIFI_CONF[] = LOC_PATH_XTWIFI_CONF_STR;
+const char LOC_PATH_QUIPC_CONF[]  = LOC_PATH_QUIPC_CONF_STR;

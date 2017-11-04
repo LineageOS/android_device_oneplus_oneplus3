@@ -29,8 +29,9 @@
 #include "loc_stub_time.h"
 #include <stdlib.h>
 #include <sys/time.h>
+#include <time.h>
 
-int64_t systemTime(int clock)
+int64_t systemTime(int /*clock*/)
 {
     struct timeval t;
     t.tv_sec = t.tv_usec = 0;
@@ -38,9 +39,17 @@ int64_t systemTime(int clock)
     return t.tv_sec*1000000LL + t.tv_usec;
 }
 
+int64_t elapsedMicrosSinceBoot()
+{
+    struct timespec ts;
+    int64_t time_ms = 0;
+    clock_gettime(CLOCK_BOOTTIME, &ts);
+    time_ms += (ts.tv_sec * 1000000000LL);     /* Seconds to nanoseconds */
+    time_ms += ts.tv_nsec;   /* Add Nanoseconds  */
+    return time_ms;
+}
 
 int64_t elapsedMillisSinceBoot()
 {
-    int64_t t_us = systemTime(0);
-    return (int64_t) t_us / 1000LL;
+    return (int64_t) (elapsedMicrosSinceBoot() /1000000LL);
 }

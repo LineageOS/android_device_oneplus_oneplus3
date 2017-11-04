@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -30,9 +30,7 @@
 #define ULP_PROXY_BASE_H
 
 #include <gps_extended.h>
-
-struct FlpExtLocation_s;
-struct FlpExtBatchOptions;
+#include <LocationAPI.h>
 
 namespace loc_core {
 
@@ -54,24 +52,18 @@ public:
         return false;
     }
 
-    inline virtual bool reportPosition(UlpLocation &location,
-                                       GpsLocationExtended &locationExtended,
-                                       void* locationExt,
+    inline virtual bool reportPosition(const UlpLocation &location,
+                                       const GpsLocationExtended &locationExtended,
                                        enum loc_sess_status status,
                                        LocPosTechMask loc_technology_mask) {
         (void)location;
         (void)locationExtended;
-        (void)locationExt;
         (void)status;
         (void)loc_technology_mask;
         return false;
     }
-    inline virtual bool reportSv(GnssSvStatus &svStatus,
-                                 GpsLocationExtended &locationExtended,
-                                 void* svExt) {
-        (void)svStatus;
-        (void)locationExtended;
-        (void)svExt;
+    inline virtual bool reportSv(const GnssSvNotification& svNotify) {
+        (void)svNotify;
         return false;
     }
     inline virtual bool reportSvMeasurement(GnssSvMeasurementSet &svMeasurementSet) {
@@ -84,7 +76,7 @@ public:
        (void)svPolynomial;
        return false;
     }
-    inline virtual bool reportStatus(GpsStatusValue status) {
+    inline virtual bool reportStatus(LocGpsStatusValue status) {
 
         (void)status;
         return false;
@@ -97,23 +89,33 @@ public:
 
         (void)capabilities;
     }
-    inline virtual bool reportBatchingSession(FlpExtBatchOptions &options,
-                                              bool active) {
-
-        (void)options;
-        (void)active;
+    inline virtual bool reportBatchingSession(const LocationOptions& options, bool active)
+    {
+         (void)options;
+         (void)active;
+         return false;
+    }
+    inline virtual bool reportPositions(const UlpLocation* ulpLocations,
+                                        const GpsLocationExtended* extendedLocations,
+                                        const uint32_t* techMasks,
+                                        const size_t count)
+    {
+        (void)ulpLocations;
+        (void)extendedLocations;
+        (void)techMasks;
+        (void)count;
         return false;
     }
-    inline virtual bool reportPositions(const struct FlpExtLocation_s* locations,
-                                        int32_t number_of_locations) {
-        (void)locations;
-        (void)number_of_locations;
-        return false;
-    }
-    inline virtual bool reportDeleteAidingData(GpsAidingData aidingData)
+    inline virtual bool reportDeleteAidingData(LocGpsAidingData aidingData)
     {
        (void)aidingData;
        return false;
+    }
+    inline virtual bool reportNmea(const char* nmea, int length)
+    {
+        (void)nmea;
+        (void)length;
+        return false;
     }
 };
 

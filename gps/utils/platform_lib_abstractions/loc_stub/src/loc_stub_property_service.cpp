@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int property_get(const char *key, char * value, const char *default_value)
+int property_get(const char *key, char * value, const char */*default_value*/)
 {
     /* This will disable gps interface
        value[0] = '1';

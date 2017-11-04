@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2014, 2016-2017 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -51,22 +51,25 @@ protected:
         mLocAdapterBase->updateEvtMask(event,isEnabled);
     }
 
+    inline uint32_t generateSessionId() {
+        return mLocAdapterBase->generateSessionId();
+    }
 public:
     inline ContextBase* getContext() const {
         return mLocAdapterBase->getContext();
     }
+
     inline virtual void handleEngineUpEvent() {};
     inline virtual void handleEngineDownEvent() {};
-    inline virtual bool reportPosition(UlpLocation &location,
-                                       GpsLocationExtended &locationExtended,
-                                       enum loc_sess_status status,
-                                       LocPosTechMask loc_technology_mask) {
+    inline virtual void reportPositionEvent(UlpLocation &location,
+                                            GpsLocationExtended &locationExtended,
+                                            enum loc_sess_status status,
+                                            LocPosTechMask loc_technology_mask) {
 
         (void)location;
         (void)locationExtended;
         (void)status;
         (void)loc_technology_mask;
-        return false;
     }
 };
 
