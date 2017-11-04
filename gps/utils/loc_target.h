@@ -34,7 +34,6 @@
 #define TARGET_APQ_SA        TARGET_SET(GNSS_GSS, NO_SSC)
 #define TARGET_NO_GNSS       TARGET_SET(GNSS_NONE, NO_SSC)
 #define TARGET_MSM_NO_SSC    TARGET_SET(GNSS_MSM, NO_SSC)
-#define TARGET_QCA1530       TARGET_SET(GNSS_QCA1530, NO_SSC)
 #define TARGET_AUTO          TARGET_SET(GNSS_AUTO, NO_SSC)
 #define TARGET_UNKNOWN       TARGET_SET(GNSS_UNKNOWN, NO_SSC)
 #define getTargetGnssType(target)  (target>>1)
@@ -69,7 +68,6 @@ typedef enum {
     GNSS_MSM,
     GNSS_GSS,
     GNSS_MDM,
-    GNSS_QCA1530,
     GNSS_AUTO,
     GNSS_UNKNOWN
 }GNSS_TARGET;

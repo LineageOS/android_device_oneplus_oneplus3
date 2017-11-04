@@ -30,7 +30,7 @@
 
 namespace android {
 
-pthread_t AndroidRuntime::createJavaThread(const char* name,
+pthread_t AndroidRuntime::createJavaThread(const char* /*name*/,
     void (*start)(void *), void* arg)
 {
     pthread_t threadId = 0;
