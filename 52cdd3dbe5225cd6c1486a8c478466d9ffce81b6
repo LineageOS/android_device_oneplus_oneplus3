@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3eb0885_d5c7b1c5",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-11-05T10:27:45Z",
+      "side": 1,
+      "message": "This should go under #Power, while you are at it.",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 63
+      },
+      "revId": "52cdd3dbe5225cd6c1486a8c478466d9ffce81b6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
