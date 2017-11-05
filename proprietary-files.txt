@@ -2,21 +2,22 @@
 bin/ifaadaemon
 lib/libteeclientjni.so
 lib64/libteeclientjni.so
+lib64/libteeclientjniv2.so
+-priv-app/IFAAService/IFAAService.apk
 
 # Audio
 etc/firmware/tfa98xx.cnt
 
 # Audio ACDB
-etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
-etc/acdbdata/MTP/MTP_General_cal.acdb:vendor/etc/acdbdata/MTP/MTP_General_cal.acdb
-etc/acdbdata/MTP/MTP_Global_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
-etc/acdbdata/MTP/MTP_Handset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Handset_cal.acdb
-etc/acdbdata/MTP/MTP_Hdmi_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
-etc/acdbdata/MTP/MTP_Headset_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
-etc/acdbdata/MTP/MTP_Speaker_cal.acdb:vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_General_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_Global_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_Handset_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
+vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
 # Camera
-bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
 etc/camera/camera_config.xml
 etc/camera/csidtg_camera.xml
 etc/camera/csidtg_chromatix.xml
@@ -24,10 +25,12 @@ etc/camera/imx179_chromatix.xml
 etc/camera/imx298_chromatix.xml
 etc/camera/s5k3p8_chromatix.xml
 etc/camera/s5k3p8sp_chromatix.xml
-lib/hw/camera.msm8996.so|5436367b66115f5fe358cb49084177ce919be740
-lib/libmmcamera_interface.so
-lib/libmmjpeg_interface.so
 lib/libqomx_core.so
+lib/libtrueportrait.so
+vendor/lib/hw/camera.msm8996.so
+vendor/lib/libmmcamera_interface.so
+vendor/lib/libmmjpeg_interface.so
+vendor/bin/mm-qcamera-daemon
 vendor/lib/libchromaflash.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
@@ -97,7 +100,6 @@ vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
-vendor/lib/libmmcamera_ppeiscore.so
 vendor/lib/libmmcamera_quadracfa.so
 vendor/lib/libmmcamera_s5k3p8.so
 vendor/lib/libmmcamera_s5k3p8sp_m24c64s_eeprom.so
@@ -138,7 +140,6 @@ vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so
 vendor/lib/libSonyIMX298PdafLibrary.so
-vendor/lib/libtrueportrait.so
 vendor/lib/libubifocus.so
 
 # Camera actuators
@@ -288,7 +289,6 @@ vendor/lib/libchromatix_s5k3p8sp_isp_4608x3456_30fps_video.so
 vendor/lib/libchromatix_s5k3p8sp_postproc.so
 
 # Camera postprocessing
-bin/remosaic_daemon
 etc/fsync_db.config
 etc/GyroOffset_db.config
 etc/oneplus3_vstab_db_1080p_video_0.config
@@ -353,6 +353,7 @@ lib/libopcameralib.so
 lib/libSensorManagerHAL.so
 lib/qpd_dspcl_v2.bin
 lib/TC_Bayer_Converter_v6_core_opt.bin
+vendor/bin/remosaic_daemon
 vendor/lib/libremosaic_daemon.so
 vendor/lib/libremosaic_tuning.so
 vendor/lib/libremosaiclib.so
@@ -372,6 +373,7 @@ etc/firmware/cpp_firmware_v1_12_0.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_5_0.fw
+etc/firmware/cpp_firmware_v1_5_1.fw
 etc/firmware/cpp_firmware_v1_5_2.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
@@ -423,11 +425,8 @@ vendor/lib/libmmcamera_isp_sub_module.so
 -sbin/dashd:rootfs
 
 # Fingerprint sensor
-bin/qfp-daemon:vendor/bin/qfp-daemon
 lib64/hw/fingerprint.msm8996.so
 lib64/lib_fpc_tac_shared.so
-vendor/lib64/libqfp-service.so
-vendor/lib64/qfp.wakeup.so
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
@@ -436,48 +435,51 @@ vendor/firmware/libpn548ad_fw.so
 lib64/libparam.so
 
 # Radio - MBN
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mbn_ota.txt:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mbn_ota.txt
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_CMCC_Volte_OpenMkt-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_CMCC_Volte_OpenMkt-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_CU_OpenMkt-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_CU_OpenMkt-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_EE-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_EE-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_MTNL_BSNL.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_MTNL_BSNL.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_OEM_NoCDMA-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_OEM_NoCDMA-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_OEM_Test-VoLTE.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_OEM_Test-VoLTE.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_Reliance-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_Reliance-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_UK-VoLTE.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_UK-VoLTE.mbn
-etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_YTL-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_YTL-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw/mbn_ota.txt:vendor/etc/firmware/mbn_ota/mcfg_sw/mbn_ota.txt
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_ATT-VoLTE.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_ATT-VoLTE.mbn
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CMCC_Volte_OpenMkt-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CMCC_Volte_OpenMkt-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CT_OpenMkt-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CT_OpenMkt-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CU_OpenMkt-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CU_OpenMkt-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_OEM_CDMA-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_OEM_CDMA-Commercial.mbn
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_OEM_Test-VoLTE.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_OEM_Test-VoLTE.mbn
-etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_TMO-Commercial.mbn:vendor/etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_TMO-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mbn_ota.txt
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_Airtel-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_CMCC_Volte_OpenMkt-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_CU_OpenMkt-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_EE-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_Elisa-VoLTE.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_H3G-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_MTNL_BSNL.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_OEM_NoCDMA-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_OEM_Test-VoLTE.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_Reliance-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_UK-VoLTE.mbn
+etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mcfg_sw_YTL-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw/mbn_ota.txt
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_ATT-VoLTE.mbn
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CMCC_Volte_OpenMkt-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CT_OpenMkt-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_CU_OpenMkt-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_OEM_CDMA-Commercial.mbn
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_OEM_Test-VoLTE.mbn
+etc/firmware/mbn_ota/mcfg_sw/mcfg_sw_TMO-Commercial.mbn
 
 # Sensors
-etc/sensors/hals.conf:vendor/etc/sensors/hals.conf
-etc/sensors/sensor_def_qcomdev.conf:vendor/etc/sensors/sensor_def_qcomdev.conf
+vendor/etc/sensors/hals.conf
+vendor/etc/sensors/sensor_def_qcomdev.conf
 
 # Signed graphics firmware
-etc/firmware/a530_gpmu.fw2
-etc/firmware/a530_pfp.fw
-etc/firmware/a530_pm4.fw
-etc/firmware/a530_zap.b00
-etc/firmware/a530_zap.b01
-etc/firmware/a530_zap.b02
-etc/firmware/a530_zap.elf
-etc/firmware/a530_zap.mdt
-etc/firmware/a530_zap-pro.b00|8fbe425d7edcc44808e010495b1256de9dc97623
-etc/firmware/a530_zap-pro.b01|777297caa346f89a3bafef22e329ff2f9f413b23
-etc/firmware/a530_zap-pro.b02|657ce04bbb8cc88ccead7c22ed1e3ca1776c7518
-etc/firmware/a530_zap-pro.elf|9a08ee0d2fea7a9dfee88aaa4db45087bd567cbc
-etc/firmware/a530_zap-pro.mdt|d1a277911f012e3483467e0009e10d903f7ae444
-etc/firmware/a530v1_pfp.fw
-etc/firmware/a530v1_pm4.fw
-etc/firmware/a530v2_seq.fw2
-etc/firmware/a530v3_gpmu.fw2
-etc/firmware/a530v3_seq.fw2
+vendor/firmware/a530_gpmu.fw2
+vendor/firmware/a530_pfp.fw
+vendor/firmware/a530_pm4.fw
+vendor/firmware/a530_zap.b00
+vendor/firmware/a530_zap.b01
+vendor/firmware/a530_zap.b02
+vendor/firmware/a530_zap.elf
+vendor/firmware/a530_zap.mdt
+vendor/firmware/a530_zap-pro.b00|8fbe425d7edcc44808e010495b1256de9dc97623
+vendor/firmware/a530_zap-pro.b01|6574e237bf9a2bc29242b09776e888e26875e7f1
+vendor/firmware/a530_zap-pro.b02|657ce04bbb8cc88ccead7c22ed1e3ca1776c7518
+vendor/firmware/a530_zap-pro.elf|595270e6b73d8c201572aecbc987381651ef23e6
+vendor/firmware/a530_zap-pro.mdt|1548f0065b7cbced9c3aec5a04be30d1e607139d
+vendor/firmware/a530v1_pfp.fw
+vendor/firmware/a530v1_pm4.fw
+vendor/firmware/a530v2_seq.fw2
+vendor/firmware/a530v3_gpmu.fw2
+vendor/firmware/a530v3_seq.fw2
 
 # TP firmware
 etc/firmware/tp/fw_synaptics_15801.img
