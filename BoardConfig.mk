@@ -28,7 +28,6 @@ PLATFORM_PATH := device/oneplus/oneplus3
 
 TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 BOARD_VENDOR := oneplus
 
 # Assertions
