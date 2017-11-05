@@ -239,10 +239,10 @@ service qfp-daemon /system/vendor/bin/qfp-daemon
     user system
     group system drmrpc diag input
 
-service fps_hal /system/vendor/bin/fingerprint.qcom
-    class late_start
-    user system
-    group system input
+#service fps_hal /system/vendor/bin/fingerprint.qcom
+#    class late_start
+#    user system
+#    group system input
 
 service qvrd /system/vendor/bin/qvrservice
     class late_start
