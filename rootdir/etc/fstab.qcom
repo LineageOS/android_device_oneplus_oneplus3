@@ -7,7 +7,7 @@
 
 #<src>                                  <mnt_point>       <type>  <mnt_flags and options>                     <fs_mgr_flags>
 #/dev/block/bootdevice/by-name/system    /system           ext4    ro,barrier=1,discard                                wait,verify
-/dev/block/bootdevice/by-name/userdata  /data             f2fs    noatime,nosuid,nodev,inline_xattr,data_flush        wait,encryptable=footer,quota
+/dev/block/bootdevice/by-name/userdata  /data             f2fs    noatime,nosuid,nodev,discard,nodiratime             wait,encryptable=footer,quota
 /dev/block/bootdevice/by-name/userdata  /data             ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,discard  wait,encryptable=footer,quota
 /dev/block/bootdevice/by-name/misc      /misc             emmc    defaults                                            defaults
 /dev/block/bootdevice/by-name/cache     /cache            f2fs    noatime,nosuid,nodev,inline_xattr,flush_merge,data_flush  wait
