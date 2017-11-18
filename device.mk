@@ -135,6 +135,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_output_policy.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio_output_policy.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/audio/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/listen_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/listen_platform_info.xml \
     $(LOCAL_PATH)/audio/mixer_paths_tasha.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tasha.xml \
     $(LOCAL_PATH)/audio/sound_trigger_mixer_paths_wcd9330.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sound_trigger_mixer_paths_wcd9330.xml \
@@ -184,6 +185,7 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
+    libbt-vendor \
     android.hardware.bluetooth@1.0-service \
     android.hardware.bluetooth@1.0-impl
 
@@ -198,7 +200,9 @@ PRODUCT_PACKAGES += \
     camera.device@1.0-impl \
     camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service
+    android.hardware.camera.provider@2.4-service \
+    vendor.qti.hardware.camera.device@1.0 \
+    vendor.qti.hardware.camera.device@1.0_vendor
 
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
@@ -212,7 +216,9 @@ PRODUCT_PACKAGES += \
     gralloc.msm8996 \
     hwcomposer.msm8996 \
     memtrack.msm8996 \
+    libdisplayconfig \
     liboverlay \
+    libqdMetaData.system \
     libtinyxml \
     android.hardware.graphics.allocator@2.0-impl \
     android.hardware.graphics.allocator@2.0-service \
@@ -247,7 +253,6 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
-    fingerprintd \
     OneplusPocketMode \
     android.hardware.biometrics.fingerprint@2.1-service
 
@@ -297,8 +302,8 @@ PRODUCT_COPY_FILES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/fpc1020.kl:system/usr/keylayout/fpc1020.kl \
-    $(LOCAL_PATH)/keylayout/synaptics.kl:system/usr/keylayout/synaptics.kl
+    $(LOCAL_PATH)/keylayout/fpc1020.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/fpc1020.kl \
+    $(LOCAL_PATH)/keylayout/synaptics.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/synaptics.kl
 
 # Keymaster HAL
 PRODUCT_PACKAGES += \
@@ -372,7 +377,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/powerhint.xml:system/etc/powerhint.xml
+    $(LOCAL_PATH)/configs/powerhint.xml:system/etc/powerhint.xml \
+    $(LOCAL_PATH)/configs/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml \
 
 # QMI
 PRODUCT_PACKAGES += \
@@ -407,7 +413,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    sensors.msm8996 \
+    android.hardware.sensors@1.0-impl \
     android.hardware.sensors@1.0-service
 
 # Thermal
