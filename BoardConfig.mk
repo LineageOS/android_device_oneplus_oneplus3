@@ -222,9 +222,6 @@ include device/qcom/sepolicy/sepolicy.mk
 
 #BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
 
-# Timeservice
-BOARD_USES_QC_TIME_SERVICES := true
-
 # Treble
 #PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
