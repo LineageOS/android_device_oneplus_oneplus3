@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "616a913e_789e8847",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-11-20T09:17:31Z",
+      "side": 1,
+      "message": "This is misleading. It\u0027s the reason why I got confused.",
+      "range": {
+        "startLine": 9,
+        "startChar": 45,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "ba17731fef47dd12ba2ab58cd782d2a247ee0187",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
