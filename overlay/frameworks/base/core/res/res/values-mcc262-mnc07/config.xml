@@ -21,7 +21,4 @@
      for different hardware and product builds. -->
 <resources>
     <bool name="config_sms_force_7bit_encoding">true</bool>
-    <string-array translatable="false" name="config_default_vm_number">
-        <item>+491793000333</item>
-    </string-array>
 </resources>
