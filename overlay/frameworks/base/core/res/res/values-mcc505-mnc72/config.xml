@@ -20,9 +20,5 @@
 <!-- These resources are around just to allow their values to be customized
      for different hardware and product builds. -->
 <resources>
-    <string-array translatable="false" name="config_default_vm_number">
-        <item>+61101</item>
-    </string-array>
-
     <bool name="config_auto_attach_data_on_creation">false</bool>
 </resources>
