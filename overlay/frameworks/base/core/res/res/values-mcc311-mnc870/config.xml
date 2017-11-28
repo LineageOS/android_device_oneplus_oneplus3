@@ -59,7 +59,4 @@
         <item>SUPL_ES=0</item>
     </string-array>
 
-    <!-- Sprint need a 3s delay for 3way call -->
-    <integer name="config_cdma_3waycall_flash_delay">300</integer>
-
 </resources>
