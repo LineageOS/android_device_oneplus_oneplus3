@@ -24,6 +24,6 @@
     <bool name="show_cmas_settings">true</bool>
     <!-- Whether to enable channel 50 settings (Brazil) -->
     <bool name="show_brazil_settings">true</bool>
-    <!-- Whether to enable channel 50 and 60 settings (India)
-    <bool name="show_india_settings">true</bool> -->
+    <!-- Whether to enable channel 50 and 60 settings (India) -->
+    <!--bool name="show_india_settings">true</bool-->
 </resources>
