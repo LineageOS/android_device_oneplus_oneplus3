@@ -15,3 +15,6 @@ genfscon proc /s1302                                u:object_r:proc_touchpanel:s
 
 # Tri-state key
 genfscon proc /tri-state-key                        u:object_r:proc_touchpanel:s0
+
+# USB
+genfscon sysfs /devices/soc/6a00000.ssusb/6a00000.dwc3/gadget/lun0/     u:object_r:sysfs_android_usb:s0
