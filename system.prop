@@ -17,7 +17,8 @@ persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
 # Start in global mode
-#ro.telephony.default_network=10
+ro.telephony.default_network=22
+persist.radio.force_on_dc=true
 
 debug.sf.enable_hwc_vds=1
 debug.sf.hw=1
