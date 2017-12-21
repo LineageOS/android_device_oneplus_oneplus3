@@ -193,31 +193,19 @@ on boot
     chown system system /sys/class/leds/blue/blink
     chown system system /sys/class/leds/green/blink
 
-    chown system system /sys/class/leds/red/blink
-    chown system system /sys/class/leds/blue/blink
-    chown system system /sys/class/leds/green/blink
     chown system system /sys/class/leds/red/ramp_step_ms
     chown system system /sys/class/leds/blue/ramp_step_ms
     chown system system /sys/class/leds/green/ramp_step_ms
+
     chown system system /sys/class/leds/red/duty_pcts
     chown system system /sys/class/leds/blue/duty_pcts
     chown system system /sys/class/leds/green/duty_pcts
+
     chown system system /sys/class/leds/red/start_idx
     chown system system /sys/class/leds/blue/start_idx
     chown system system /sys/class/leds/green/start_idx
 
     chown system system /sys/class/leds/rgb/rgb_blink
-
-    chmod 660 /sys/class/leds/red/ramp_step_ms
-    chmod 660 /sys/class/leds/green/ramp_step_ms
-    chmod 660 /sys/class/leds/blue/ramp_step_ms
-    chmod 660 /sys/class/leds/red/duty_pcts
-    chmod 660 /sys/class/leds/green/duty_pcts
-    chmod 660 /sys/class/leds/blue/duty_pcts
-    chmod 660 /sys/class/leds/red/start_idx
-    chmod 660 /sys/class/leds/green/start_idx
-    chmod 660 /sys/class/leds/blue/start_idx
-    chmod 660 /sys/class/leds/rgb/rgb_blink
 
     setprop persist.camera.HAL3.enabled 1
 
