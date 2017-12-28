@@ -338,17 +338,23 @@ etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 lib/vendor.display.color@1.0.so
 lib/vendor.display.postproc@1.0.so
+lib/vendor.qti.hardware.qdutils_disp@1.0.so|a3686a9e8523506305237e3398a16467b00d43d5
 lib64/vendor.display.color@1.0.so
 lib64/vendor.display.postproc@1.0.so
+lib64/vendor.qti.hardware.qdutils_disp@1.0.so|6758be5776f8df423a90567d69ef34dadd8df5aa
 -vendor/app/colorservice/colorservice.apk
 vendor/bin/hw/vendor.display.color@1.0-service
+vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti|0ed4f41dd0868e12c57ef0ecf493dafa6885ace2
 vendor/bin/mm-pp-dpps
 vendor/etc/init/vendor.display.color@1.0-service.rc
+vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc|69d9cbc54f8ac0a0fb010f92bfa7de5981d643cf
 vendor/lib/vendor.display.color@1.0_vendor.so
 vendor/lib/vendor.display.postproc@1.0_vendor.so
+vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|f81718cf0d998f833b4867a8708a06e1b42d7743
 vendor/lib64/libdisp-aba.so
 vendor/lib64/vendor.display.color@1.0_vendor.so
 vendor/lib64/vendor.display.postproc@1.0_vendor.so
+vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|43fb66efb33dd44e298506d54a0c1a4e3bfdd105
 
 # QMI
 etc/permissions/qti_libpermissions.xml
