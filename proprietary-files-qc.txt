@@ -504,6 +504,6 @@ vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wifi
-bin/cnss-daemon
+bin/cnss-daemon:vendor/bin/cnss-daemon
 vendor/bin/cnss_diag
 vendor/lib64/vendor.qti.hardware.wifi.supplicant@1.0_vendor.so
