@@ -74,6 +74,8 @@ vendor/bin/wcnss_filter
 vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
 vendor/lib/libbtnv.so
 vendor/lib64/com.qualcomm.qti.bluetooth_audio@1.0_vendor.so
+vendor/lib64/libaptX_encoder.so
+vendor/lib64/libaptXHD_encoder.so
 vendor/lib64/libbtnv.so
 
 # CNE
@@ -503,4 +505,5 @@ vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wifi
 bin/cnss-daemon
+vendor/bin/cnss_diag
 vendor/lib64/vendor.qti.hardware.wifi.supplicant@1.0_vendor.so
