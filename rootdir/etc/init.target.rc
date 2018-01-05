@@ -569,3 +569,9 @@ service remosaic_daemon /vendor/bin/remosaic_daemon
     class late_start
     user camera
     writepid /dev/cpuset/system-background/tasks
+
+service wifi-mac-generator /vendor/bin/wifi-mac-generator
+    class late_start
+    user wifi
+    group wifi
+    oneshot

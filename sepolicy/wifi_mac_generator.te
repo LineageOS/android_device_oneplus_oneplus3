@@ -1,0 +1,10 @@
+type wifi_mac_generator, domain;
+type wifi_mac_generator_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(wifi_mac_generator)
+
+allow wifi_mac_generator vendor_radio_data_file:dir { search };
+allow wifi_mac_generator vendor_radio_data_file:file { r_file_perms };
+
+allow wifi_mac_generator persist_file:dir { search };
+allow wifi_mac_generator persist_file:file { rw_file_perms };

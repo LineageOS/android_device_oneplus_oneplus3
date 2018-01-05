@@ -475,7 +475,8 @@ PRODUCT_PACKAGES += \
     wifilogd \
     wpa_supplicant \
     wpa_supplicant.conf \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi@1.0-service \
+    wifi-mac-generator
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \
