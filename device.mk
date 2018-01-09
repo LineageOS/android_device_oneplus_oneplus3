@@ -187,6 +187,7 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
+    bt-mac-generator \
     libbt-vendor \
     android.hardware.bluetooth@1.0-service \
     android.hardware.bluetooth@1.0-impl

@@ -1,0 +1,12 @@
+type bt_mac_generator, domain;
+type bt_mac_generator_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(bt_mac_generator)
+
+allow bt_mac_generator vendor_radio_data_file:dir { search };
+allow bt_mac_generator vendor_radio_data_file:file { r_file_perms };
+
+allow bt_mac_generator bluetooth_data_file:dir { rw_dir_perms };
+allow bt_mac_generator bluetooth_data_file:file { create_file_perms };
+
+set_prop(bt_mac_generator, bluetooth_prop)

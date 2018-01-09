@@ -27,3 +27,4 @@
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
 /(vendor|system/vendor)/bin/remosaic_daemon                     u:object_r:remosaic_daemon_exec:s0
 /(vendor|system/vendor)/bin/wifi-mac-generator                  u:object_r:wifi_mac_generator_exec:s0
+/(vendor|system/vendor)/bin/bt-mac-generator                    u:object_r:bt_mac_generator_exec:s0
