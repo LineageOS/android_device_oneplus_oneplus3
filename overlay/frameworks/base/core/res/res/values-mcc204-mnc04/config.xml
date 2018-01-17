@@ -21,11 +21,6 @@
      for different hardware and product builds. -->
 <resources>
 
-    <string-array translatable="false" name="config_default_vm_number">
-        <!-- VZW -->
-        <item>*86;BAE0000000000000</item>
-    </string-array>
-
     <!-- Use ERI text for network name on CDMA LTE -->
     <bool name="config_LTE_eri_for_network_name">false</bool>
 
