@@ -20,10 +20,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- If enabled, capacitive keys will only light up when pressed.
-         Otherwise, the buttons will light up whenever the user interacts with the device -->
-    <bool name="config_buttonLightOnKeypressOnly">true</bool>
+         Otherwise, the buttons will light up whenever the user interacts with the device
+    <bool name="config_buttonLightOnKeypressOnly">true</bool> -->
 
-    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
+    <!-- <bool name="config_deviceHasVariableButtonBrightness">true</bool> -->
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveNotificationLed">true</bool>
@@ -31,8 +31,8 @@
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
     <bool name="config_intrusiveBatteryLed">true</bool>
 
-    <!-- Whether notify fingerprint client of successful cancelled authentication -->
-    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool>
+    <!-- Whether notify fingerprint client of successful cancelled authentication
+    <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool> -->
 
     <!-- Enable blur support -->
     <bool name="config_uiBlurEnabled">true</bool>
