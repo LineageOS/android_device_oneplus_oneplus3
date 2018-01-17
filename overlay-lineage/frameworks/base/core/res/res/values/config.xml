@@ -34,7 +34,4 @@
     <!-- Whether notify fingerprint client of successful cancelled authentication
     <bool name="config_notifyClientOnFingerprintCancelSuccess">true</bool> -->
 
-    <!-- Enable blur support -->
-    <bool name="config_uiBlurEnabled">true</bool>
-
 </resources>
