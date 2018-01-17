@@ -40,7 +40,6 @@ persist.vendor.qti.inputopts.movetouchslop=0.6
 # system props for the cne module
 #
 persist.cne.feature=1
-persist.vendor.dpm.feature=0
 
 #system prop for enabling/disabling Android XLAT
 persist.net.doxlat=false
