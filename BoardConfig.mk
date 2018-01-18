@@ -203,6 +203,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 
 # Power
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
+TARGET_WLAN_POWER_STAT := "/d/wlan_wcnss/power_stats"
 
 # RIL
 TARGET_RIL_VARIANT := caf
