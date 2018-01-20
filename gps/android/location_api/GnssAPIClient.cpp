@@ -278,7 +278,9 @@ void GnssAPIClient::onCapabilitiesCb(LocationCapabilitiesMask capabilitiesMask)
     LOC_LOGD("%s]: (%02x)", __FUNCTION__, capabilitiesMask);
     mLocationCapabilitiesMask = capabilitiesMask;
     mLocationCapabilitiesCached = true;
-    if (mGnssCbIface != nullptr) {
+    sp<IGnssCallback> gnssCbIface = mGnssCbIface;
+
+    if (gnssCbIface != nullptr) {
         uint32_t data = 0;
         if ((capabilitiesMask & LOCATION_CAPABILITIES_TIME_BASED_TRACKING_BIT) ||
                 (capabilitiesMask & LOCATION_CAPABILITIES_TIME_BASED_BATCHING_BIT) ||
@@ -293,13 +295,13 @@ void GnssAPIClient::onCapabilitiesCb(LocationCapabilitiesMask capabilitiesMask)
             data |= IGnssCallback::Capabilities::MSB;
         if (capabilitiesMask & LOCATION_CAPABILITIES_GNSS_MSA_BIT)
             data |= IGnssCallback::Capabilities::MSA;
-        auto r = mGnssCbIface->gnssSetCapabilitesCb(data);
+        auto r = gnssCbIface->gnssSetCapabilitesCb(data);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssSetCapabilitesCb description=%s",
                 __func__, r.description().c_str());
         }
     }
-    if (mGnssCbIface != nullptr) {
+    if (gnssCbIface != nullptr) {
         IGnssCallback::GnssSystemInfo gnssInfo;
         if (capabilitiesMask & LOCATION_CAPABILITIES_DEBUG_NMEA_BIT) {
             gnssInfo.yearOfHw = 2017;
@@ -309,7 +311,7 @@ void GnssAPIClient::onCapabilitiesCb(LocationCapabilitiesMask capabilitiesMask)
             gnssInfo.yearOfHw = 2015;
         }
         LOC_LOGV("%s:%d] set_system_info_cb (%d)", __FUNCTION__, __LINE__, gnssInfo.yearOfHw);
-        auto r = mGnssCbIface->gnssSetSystemInfoCb(gnssInfo);
+        auto r = gnssCbIface->gnssSetSystemInfoCb(gnssInfo);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssSetSystemInfoCb description=%s",
                 __func__, r.description().c_str());
@@ -320,10 +322,12 @@ void GnssAPIClient::onCapabilitiesCb(LocationCapabilitiesMask capabilitiesMask)
 void GnssAPIClient::onTrackingCb(Location location)
 {
     LOC_LOGD("%s]: (flags: %02x)", __FUNCTION__, location.flags);
-    if (mGnssCbIface != nullptr) {
+    sp<IGnssCallback> gnssCbIface = mGnssCbIface;
+
+    if (gnssCbIface != nullptr) {
         GnssLocation gnssLocation;
         convertGnssLocation(location, gnssLocation);
-        auto r = mGnssCbIface->gnssLocationCb(gnssLocation);
+        auto r = gnssCbIface->gnssLocationCb(gnssLocation);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssLocationCb description=%s",
                 __func__, r.description().c_str());
@@ -334,8 +338,9 @@ void GnssAPIClient::onTrackingCb(Location location)
 void GnssAPIClient::onGnssNiCb(uint32_t id, GnssNiNotification gnssNiNotification)
 {
     LOC_LOGD("%s]: (id: %d)", __FUNCTION__, id);
+    sp<IGnssNiCallback> gnssNiCbIface = mGnssNiCbIface;
 
-    if (mGnssNiCbIface == nullptr) {
+    if (gnssNiCbIface == nullptr) {
         LOC_LOGE("%s]: mGnssNiCbIface is nullptr", __FUNCTION__);
         return;
     }
@@ -400,16 +405,18 @@ void GnssAPIClient::onGnssNiCb(uint32_t id, GnssNiNotification gnssNiNotificatio
         notificationGnss.notificationIdEncoding =
             IGnssNiCallback::GnssNiEncodingType::ENC_SUPL_UCS2;
 
-    mGnssNiCbIface->niNotifyCb(notificationGnss);
+    gnssNiCbIface->niNotifyCb(notificationGnss);
 }
 
 void GnssAPIClient::onGnssSvCb(GnssSvNotification gnssSvNotification)
 {
     LOC_LOGD("%s]: (count: %zu)", __FUNCTION__, gnssSvNotification.count);
-    if (mGnssCbIface != nullptr) {
+    sp<IGnssCallback> gnssCbIface = mGnssCbIface;
+
+    if (gnssCbIface != nullptr) {
         IGnssCallback::GnssSvStatus svStatus;
         convertGnssSvStatus(gnssSvNotification, svStatus);
-        auto r = mGnssCbIface->gnssSvStatusCb(svStatus);
+        auto r = gnssCbIface->gnssSvStatusCb(svStatus);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssSvStatusCb description=%s",
                 __func__, r.description().c_str());
@@ -419,10 +426,12 @@ void GnssAPIClient::onGnssSvCb(GnssSvNotification gnssSvNotification)
 
 void GnssAPIClient::onGnssNmeaCb(GnssNmeaNotification gnssNmeaNotification)
 {
-    if (mGnssCbIface != nullptr) {
+    sp<IGnssCallback> gnssCbIface = mGnssCbIface;
+
+    if (gnssCbIface != nullptr) {
         android::hardware::hidl_string nmeaString;
         nmeaString.setToExternal(gnssNmeaNotification.nmea, gnssNmeaNotification.length);
-        auto r = mGnssCbIface->gnssNmeaCb(
+        auto r = gnssCbIface->gnssNmeaCb(
             static_cast<GnssUtcTime>(gnssNmeaNotification.timestamp), nmeaString);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssNmeaCb nmea=%s length=%zu description=%s", __func__,
@@ -434,13 +443,15 @@ void GnssAPIClient::onGnssNmeaCb(GnssNmeaNotification gnssNmeaNotification)
 void GnssAPIClient::onStartTrackingCb(LocationError error)
 {
     LOC_LOGD("%s]: (%d)", __FUNCTION__, error);
-    if (error == LOCATION_ERROR_SUCCESS && mGnssCbIface != nullptr) {
-        auto r = mGnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::ENGINE_ON);
+    sp<IGnssCallback> gnssCbIface = mGnssCbIface;
+
+    if (error == LOCATION_ERROR_SUCCESS && gnssCbIface != nullptr) {
+        auto r = gnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::ENGINE_ON);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssStatusCb ENGINE_ON description=%s",
                 __func__, r.description().c_str());
         }
-        r = mGnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::SESSION_BEGIN);
+        r = gnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::SESSION_BEGIN);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssStatusCb SESSION_BEGIN description=%s",
                 __func__, r.description().c_str());
@@ -451,13 +462,15 @@ void GnssAPIClient::onStartTrackingCb(LocationError error)
 void GnssAPIClient::onStopTrackingCb(LocationError error)
 {
     LOC_LOGD("%s]: (%d)", __FUNCTION__, error);
-    if (error == LOCATION_ERROR_SUCCESS && mGnssCbIface != nullptr) {
-        auto r = mGnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::SESSION_END);
+    sp<IGnssCallback> gnssCbIface = mGnssCbIface;
+
+    if (error == LOCATION_ERROR_SUCCESS && gnssCbIface != nullptr) {
+        auto r = gnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::SESSION_END);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssStatusCb SESSION_END description=%s",
                 __func__, r.description().c_str());
         }
-        r = mGnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::ENGINE_OFF);
+        r = gnssCbIface->gnssStatusCb(IGnssCallback::GnssStatusValue::ENGINE_OFF);
         if (!r.isOk()) {
             LOC_LOGE("%s] Error from gnssStatusCb ENGINE_OFF description=%s",
                 __func__, r.description().c_str());

@@ -87,70 +87,6 @@ typedef enum {
     AGPS_NOTIFICATION_TYPE_FOR_ACTIVE_SUBSCRIBERS
 } AgpsNotificationType;
 
-/* Framework AGNSS interface
- * This interface is defined in IAGnssCallback provided by
- * Android Framework.
- * Must be kept in sync with that interface. */
-namespace AgpsFrameworkInterface {
-
-    /** AGNSS type **/
-    enum AGnssType : uint8_t {
-        TYPE_SUPL         = 1,
-        TYPE_C2K          = 2
-    };
-
-    enum AGnssStatusValue : uint8_t {
-        /** GNSS requests data connection for AGNSS. */
-        REQUEST_AGNSS_DATA_CONN  = 1,
-        /** GNSS releases the AGNSS data connection. */
-        RELEASE_AGNSS_DATA_CONN  = 2,
-        /** AGNSS data connection initiated */
-        AGNSS_DATA_CONNECTED     = 3,
-        /** AGNSS data connection completed */
-        AGNSS_DATA_CONN_DONE     = 4,
-        /** AGNSS data connection failed */
-        AGNSS_DATA_CONN_FAILED   = 5
-    };
-
-    /*
-     * Represents the status of AGNSS augmented to support IPv4.
-     */
-    struct AGnssStatusIpV4 {
-        AGnssType type;
-        AGnssStatusValue status;
-        /*
-         * 32-bit IPv4 address.
-         */
-        unsigned int ipV4Addr;
-    };
-
-    /*
-     * Represents the status of AGNSS augmented to support IPv6.
-     */
-    struct AGnssStatusIpV6 {
-        AGnssType type;
-        AGnssStatusValue status;
-        /*
-         * 128-bit IPv6 address.
-         */
-        unsigned char ipV6Addr[16];
-    };
-
-    /*
-     * Callback with AGNSS(IpV4) status information.
-     *
-     * @param status Will be of type AGnssStatusIpV4.
-     */
-    typedef void (*AgnssStatusIpV4Cb)(AGnssStatusIpV4 status);
-
-    /*
-     * Callback with AGNSS(IpV6) status information.
-     *
-     * @param status Will be of type AGnssStatusIpV6.
-     */
-    typedef void (*AgnssStatusIpV6Cb)(AGnssStatusIpV6 status);
-}
-
 /* Classes in this header */
 class AgpsSubscriber;
 class AgpsManager;
@@ -342,8 +278,7 @@ public:
 
     /* Register callbacks */
     void registerCallbacks(
-            AgpsFrameworkInterface::AgnssStatusIpV4Cb
-                                                frameworkStatusV4Cb,
+            AgnssStatusIpV4Cb                   frameworkStatusV4Cb,
 
             AgpsAtlOpenStatusCb                 atlOpenStatusCb,
             AgpsAtlCloseStatusCb                atlCloseStatusCb,
@@ -382,9 +317,8 @@ public:
     void reportDataCallClosed();
 
     /* Process incoming framework data call events */
-    void reportAtlOpenSuccess(
-            AGpsExtType agpsType, char* apnName, int apnLen,
-            LocApnIpType ipType);
+    void reportAtlOpenSuccess(AGpsExtType agpsType, char* apnName, int apnLen,
+            AGpsBearerType bearerType);
     void reportAtlOpenFailed(AGpsExtType agpsType);
     void reportAtlClosed(AGpsExtType agpsType);
 
@@ -392,7 +326,7 @@ public:
     void handleModemSSR();
 
 protected:
-    AgpsFrameworkInterface::AgnssStatusIpV4Cb mFrameworkStatusV4Cb;
+    AgnssStatusIpV4Cb     mFrameworkStatusV4Cb;
 
     AgpsAtlOpenStatusCb   mAtlOpenStatusCb;
     AgpsAtlCloseStatusCb  mAtlCloseStatusCb;

@@ -228,7 +228,7 @@ static void agpsDataConnOpen(
 
     if (NULL != gGnssAdapter) {
         gGnssAdapter->dataConnOpenCommand(
-                agpsType, apnName, apnLen, ipType);
+                agpsType, apnName, apnLen, (AGpsBearerType)ipType);
     }
 }
 static void agpsDataConnClosed(AGpsExtType agpsType) {

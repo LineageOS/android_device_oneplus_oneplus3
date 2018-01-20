@@ -51,9 +51,9 @@ struct GnssInterface {
     void (*injectLocation)(double latitude, double longitude, float accuracy);
     void (*injectTime)(int64_t time, int64_t timeReference, int32_t uncertainty);
     void (*agpsInit)(const AgpsCbInfo& cbInfo);
-    void (*agpsDataConnOpen)(short agpsType, const char* apnName, int apnLen, int ipType);
-    void (*agpsDataConnClosed)(short agpsType);
-    void (*agpsDataConnFailed)(short agpsType);
+    void (*agpsDataConnOpen)(AGpsExtType agpsType, const char* apnName, int apnLen, int ipType);
+    void (*agpsDataConnClosed)(AGpsExtType agpsType);
+    void (*agpsDataConnFailed)(AGpsExtType agpsType);
     void (*getDebugReport)(GnssDebugReport& report);
     void (*updateConnectionStatus)(bool connected, uint8_t type);
 };

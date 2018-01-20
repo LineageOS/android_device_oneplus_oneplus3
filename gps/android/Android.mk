@@ -52,7 +52,9 @@ include $(BUILD_SHARED_LIBRARY)
 BUILD_GNSS_HIDL_SERVICE := true
 ifneq ($(BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET), true)
 ifneq ($(LW_FEATURE_SET),true)
+ifneq ($(TARGET_HAS_LOW_RAM),true)
 BUILD_GNSS_HIDL_SERVICE := false
+endif # TARGET_HAS_LOW_RAM
 endif # LW_FEATURE_SET
 endif # BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET
 
@@ -61,6 +63,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := android.hardware.gnss@1.0-service-qti
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR_EXECUTABLES)
 LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_VENDOR_MODULE := true
+LOCAL_MODULE_OWNER := qti
 LOCAL_INIT_RC := android.hardware.gnss@1.0-service-qti.rc
 LOCAL_SRC_FILES := \
     service.cpp \

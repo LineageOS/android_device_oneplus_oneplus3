@@ -143,7 +143,7 @@ typedef struct {
 
 
 /** AGPS type */
-typedef int16_t AGpsExtType;
+typedef int8_t AGpsExtType;
 #define LOC_AGPS_TYPE_INVALID       -1
 #define LOC_AGPS_TYPE_ANY           0
 #define LOC_AGPS_TYPE_SUPL          1
@@ -156,10 +156,10 @@ typedef int16_t AGpsExtType;
 #define SSID_BUF_SIZE (32+1)
 
 typedef int16_t AGpsBearerType;
-#define AGPS_APN_BEARER_INVALID    -1
-#define AGPS_APN_BEARER_IPV4        0
-#define AGPS_APN_BEARER_IPV6        1
-#define AGPS_APN_BEARER_IPV4V6      2
+#define AGPS_APN_BEARER_INVALID     0
+#define AGPS_APN_BEARER_IPV4        1
+#define AGPS_APN_BEARER_IPV6        2
+#define AGPS_APN_BEARER_IPV4V6      3
 
 typedef enum {
     AGPS_CB_PRIORITY_LOW  = 1,
@@ -1237,6 +1237,50 @@ typedef struct
     bool                   e911Mode; /* If in E911 emergency */
     Gnss_Srn_MacAddr_Type  macAddrType; /* SRN AP MAC Address type */
 } GnssSrnDataReq;
+
+/*
+ * Represents the status of AGNSS augmented to support IPv4.
+ */
+struct AGnssExtStatusIpV4 {
+    AGpsExtType type;
+    LocAGpsStatusValue status;
+    /*
+     * 32-bit IPv4 address.
+     */
+    uint32_t ipV4Addr;
+};
+
+/*
+ * Represents the status of AGNSS augmented to support IPv6.
+ */
+struct AGnssExtStatusIpV6 {
+    AGpsExtType type;
+    LocAGpsStatusValue status;
+    /*
+     * 128-bit IPv6 address.
+     */
+    uint8_t ipV6Addr[16];
+};
+
+/*
+ * Callback with AGNSS(IpV4) status information.
+ *
+ * @param status Will be of type AGnssExtStatusIpV4.
+ */
+typedef void (*AgnssStatusIpV4Cb)(AGnssExtStatusIpV4 status);
+
+/*
+ * Callback with AGNSS(IpV6) status information.
+ *
+ * @param status Will be of type AGnssExtStatusIpV6.
+ */
+typedef void (*AgnssStatusIpV6Cb)(AGnssExtStatusIpV6 status);
+
+/* Constructs for interaction with loc_net_iface library */
+typedef void (*LocAgpsOpenResultCb)(bool isSuccess, AGpsExtType agpsType, const char* apn,
+        AGpsBearerType bearerType, void* userDataPtr);
+
+typedef void (*LocAgpsCloseResultCb)(bool isSuccess, AGpsExtType agpsType, void* userDataPtr);
 
 
 #ifdef __cplusplus

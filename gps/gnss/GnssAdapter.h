@@ -199,10 +199,10 @@ public:
     uint32_t* gnssUpdateConfigCommand(GnssConfig config);
     uint32_t gnssDeleteAidingDataCommand(GnssAidingData& data);
 
+    void initDefaultAgpsCommand();
     void initAgpsCommand(const AgpsCbInfo& cbInfo);
-    void dataConnOpenCommand(
-            AGpsExtType agpsType,
-            const char* apnName, int apnLen, LocApnIpType ipType);
+    void dataConnOpenCommand(AGpsExtType agpsType,
+            const char* apnName, int apnLen, AGpsBearerType bearerType);
     void dataConnClosedCommand(AGpsExtType agpsType);
     void dataConnFailedCommand(AGpsExtType agpsType);
 
@@ -217,6 +217,8 @@ public:
     uint32_t getPowerVoteId() { return mPowerVoteId; }
     bool resolveInAddress(const char* hostAddress, struct in_addr* inAddress);
     virtual bool isInSession() { return !mTrackingSessions.empty(); }
+    void initDefaultAgps();
+
     /* ==== REPORTS ======================================================================== */
     /* ======== EVENTS ====(Called from QMI/ULP Thread)===================================== */
     virtual void reportPositionEvent(const UlpLocation& ulpLocation,
