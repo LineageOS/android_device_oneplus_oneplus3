@@ -142,6 +142,7 @@ vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
 
 # DPM
+bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
 etc/init/dpmd.rc
