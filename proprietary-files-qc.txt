@@ -367,7 +367,6 @@ vendor/lib/libvqzip.so
 
 # Perf
 vendor/bin/energy-awareness
-vendor/bin/msm_irqbalance
 
 # Peripheral manager
 vendor/bin/pm-proxy
