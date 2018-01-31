@@ -6,3 +6,5 @@ allow vendor_init {
 }:dir { create search getattr open read setattr ioctl write add_name remove_name rmdir relabelfrom };
 
 allow vendor_init proc_touchpanel:file write;
+
+set_prop(vendor_init, thermal_prop)

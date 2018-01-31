@@ -212,6 +212,11 @@ service thermal-engine /system/vendor/bin/thermal-engine -c ${sys.qcom.thermalcf
    socket thermal-recv-passive-client stream 0666 system system
    writepid /dev/cpuset/system-background/tasks
 
+# reset thermal-engine when framework dies in VR mode
+on property:init.svc.zygote=restarting && property:sys.qcom.thermalcfg=/vendor/etc/thermal-engine-vr.conf
+   setprop sys.qcom.thermalcfg "/vendor/etc/thermal-engine.conf"
+   restart thermal-engine
+
 #service security-check1 /sbin/security_boot_check system
 #    class core
 #    oneshot
