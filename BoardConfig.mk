@@ -144,6 +144,9 @@ TARGET_USES_HWC2 := true
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_QCOM_DISPLAY_BSP := true
 
+# DRM
+TARGET_ENABLE_MEDIADRM_64 := true
+
 # Enable dexpreopt to speed boot time
 ifeq ($(HOST_OS),linux)
   ifneq ($(TARGET_BUILD_VARIANT),eng)
