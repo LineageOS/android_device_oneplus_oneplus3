@@ -3,5 +3,5 @@ allow wcnss_service self:capability {
     net_raw
 };
 allow wcnss_service shell_exec:file { execute execute_no_trans r_file_perms };
-allow wcnss_service toolbox_exec:file getattr;
+allow wcnss_service toolbox_exec:file rx_file_perms;
 get_prop(wcnss_service, diag_prop);
