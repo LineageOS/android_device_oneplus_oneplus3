@@ -311,10 +311,11 @@ on post-fs-data
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
     #Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 0755 root system
+    chmod 2755 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
     rm /data/system/perfd/default_values
-    start perfd
 
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
@@ -355,9 +356,7 @@ on post-fs-data
 service perfd /system/vendor/bin/perfd
    class main
    user root
-   group root readproc
-   disabled
-   socket perfd seqpacket 0666 root system
+   group root system
    writepid /dev/cpuset/system-background/tasks
 
 service iop /system/bin/iop
