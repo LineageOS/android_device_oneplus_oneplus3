@@ -420,7 +420,7 @@ vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
 
 # DASH
--sbin/dashd:rootfs
+-sbin/dashd;rootfs
 
 # Fingerprint sensor
 bin/qfp-daemon
