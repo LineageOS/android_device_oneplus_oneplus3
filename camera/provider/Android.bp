@@ -23,7 +23,6 @@ cc_binary {
     shared_libs: [
         "libhidlbase",
         "libhidltransport",
-        "libbinder",
         "liblog",
         "libutils",
         "android.hardware.camera.device@1.0",
