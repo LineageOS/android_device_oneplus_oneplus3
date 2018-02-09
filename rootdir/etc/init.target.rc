@@ -565,7 +565,7 @@ service ifaadaemon /system/bin/ifaadaemon
     group system
     writepid /dev/cpuset/system-background/tasks
 
-service remosaic_daemon /system/bin/remosaic_daemon
+service remosaic_daemon /vendor/bin/remosaic_daemon
     class late_start
     user camera
     writepid /dev/cpuset/system-background/tasks
