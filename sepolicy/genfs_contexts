@@ -1,4 +1,5 @@
+genfscon debugfs /rmt_storage u:object_r:debugfs_rmt:s0
+
 genfscon proc /touchpanel    u:object_r:proc_touchpanel:s0
 genfscon proc /s1302         u:object_r:proc_touchpanel:s0
 genfscon proc /tri-state-key u:object_r:proc_touchpanel:s0
-genfscon proc /stat          u:object_r:proc_stat:s0

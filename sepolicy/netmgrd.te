@@ -1,3 +1,0 @@
-allow netmgrd diag_prop:property_service set;
-allow netmgrd net_data_file:file create_file_perms;
-get_prop(netmgrd, diag_prop);

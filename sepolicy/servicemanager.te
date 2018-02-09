@@ -1,3 +1,0 @@
-allow servicemanager ifaadaemon:dir r_dir_perms;
-allow servicemanager ifaadaemon:file r_file_perms;
-allow servicemanager ifaadaemon:process getattr;
