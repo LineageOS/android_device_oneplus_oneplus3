@@ -1,2 +1,1 @@
-allow location diag_prop:file r_file_perms;
-set_prop(location, diag_prop);
+get_prop(location, diag_prop);

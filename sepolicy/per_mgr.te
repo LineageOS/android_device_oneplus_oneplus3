@@ -1,2 +1,0 @@
-allow per_mgr vfat:file r_file_perms;
-allow per_mgr self:capability net_raw;
