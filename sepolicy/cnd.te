@@ -1,2 +1,2 @@
-allow cnd diag_prop:property_service set;
 get_prop(cnd, diag_prop);
+allow cnd system_wpa_socket:sock_file unlink;

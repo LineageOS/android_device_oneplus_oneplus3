@@ -30,10 +30,7 @@
 import /vendor/etc/init/hw/init.qcom.power.rc
 
 on early-init
-    mkdir /firmware 0771 system system
-    mkdir /bt_firmware 0771 system system
     symlink /data/tombstones /tombstones
-    mkdir /dsp 0771 media media
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -242,7 +239,7 @@ service qvrd /system/vendor/bin/qvrservice
 service per_mgr /vendor/bin/pm-service
     class core
     user system
-    group system net_raw
+    group system
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
@@ -259,9 +256,9 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service mdm_launcher /system/bin/sh init.mdm.sh
-     class core
-     oneshot
+#service mdm_launcher /system/bin/sh init.mdm.sh
+#     class core
+#     oneshot
 
 service mdm_helper /system/bin/mdm_helper
      class core
@@ -556,6 +553,7 @@ service ppd /vendor/bin/mm-pp-dpps
 service dashd /sbin/dashd
     class core
     critical
+    seclabel u:r:dashd:s0
     group root system
     writepid /dev/cpuset/system-background/tasks
 
