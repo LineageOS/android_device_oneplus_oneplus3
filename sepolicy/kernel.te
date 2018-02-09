@@ -1,3 +1,0 @@
-allow kernel vfat:file open;
-allow kernel self:capability { dac_read_search dac_override };
-allow kernel self:socket create;

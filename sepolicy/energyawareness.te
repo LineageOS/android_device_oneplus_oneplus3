@@ -1,2 +1,0 @@
-allow energyawareness debugfs_msm_core:file rw_file_perms;
-allow energyawareness debugfs_msm_core:dir r_dir_perms;

@@ -1,1 +1,1 @@
-set_prop(qti, diag_prop)
+get_prop(qti, diag_prop);

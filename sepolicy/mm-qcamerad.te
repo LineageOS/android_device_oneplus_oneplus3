@@ -1,7 +1,6 @@
-allow mm-qcamerad camera_prop:property_service set;
-allow mm-qcamerad permission_service:service_manager find;
-allow mm-qcamerad mpctl_socket:sock_file write;
-get_prop(mm-qcamerad, diag_prop);
-
-allow mm-qcamerad remosaic_service:service_manager find;
-binder_call(mm-qcamerad, remosaic_daemon);
+allow mm-qcamerad camera_data_file:sock_file { create unlink };
+allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
+allow mm-qcamerad sensorservice_service:service_manager find;
+binder_call(mm-qcamerad, servicemanager);
+binder_use(mm-qcamerad);
+set_prop(mm-qcamerad, diag_prop);

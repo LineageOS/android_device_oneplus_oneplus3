@@ -1,5 +1,5 @@
 type ifaadaemon, domain;
-type ifaadaemon_exec, exec_type, file_type;
+type ifaadaemon_exec, exec_type, vendor_file_type, file_type;
 
 #Allow for transition from init domain to ifaadaemon
 init_daemon_domain(ifaadaemon)
@@ -7,14 +7,9 @@ init_daemon_domain(ifaadaemon)
 #Allow ifaadaemon to use Binder IPC
 binder_use(ifaadaemon)
 
-#Allow servicemanager to interact with ifaadaemon
-binder_call(ifaadaemon, servicemanager)
-
-#Allow alipay_app to interact with ifaadaemon
-binder_call(ifaadaemon, alipay_app)
-
-#Mark ifaadaemon as a Binder service domain
-binder_service(ifaadaemon)
+#Allow IFAAService to interact with ifaadaemon
+allow platform_app ifaadaemon_service:service_manager find;
+binder_call(platform_app, ifaadaemon)
 
 #Allow ifaadaemon to be registered with service manager
 allow ifaadaemon ifaadaemon_service:service_manager add;
