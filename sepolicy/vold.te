@@ -1,2 +1,0 @@
-allow vold proc_touchpanel:dir r_dir_perms;
-allow vold system_block_device:blk_file getattr;
