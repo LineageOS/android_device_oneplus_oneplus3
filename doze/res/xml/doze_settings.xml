@@ -17,8 +17,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:key="tilt_sensor"
-        android:title="@string/tilt_sensor_title">
+        android:key="pickup_sensor"
+        android:title="@string/pickup_sensor_title">
 
         <SwitchPreference
             android:key="gesture_pick_up"
