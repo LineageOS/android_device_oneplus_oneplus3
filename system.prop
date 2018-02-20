@@ -64,9 +64,6 @@ persist.mm.enable.prefetch=true
 # Additional i/p buffer in case of encoder DCVS
 vidc.enc.dcvs.extra-buff-count=2
 
-# Set default power mode to low power for encoder
-vendor.vidc.debug.perf.mode=2
-
 # disable PQ feature by default
 vendor.vidc.enc.disable.pq=true
 
