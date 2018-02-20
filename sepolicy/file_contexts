@@ -17,6 +17,8 @@
 /sys/devices/soc/soc:fpc_fpc1020/proximity_state                u:object_r:sysfs_fpc:s0
 /sys/devices/soc/soc:fpc_fpc1020/report_home                    u:object_r:sysfs_fpc:s0
 /sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                    u:object_r:sysfs_leds:s0
+/sys/devices/virtual/graphics/fb0/dci_p3                        u:object_r:sysfs_livedisplay:s0
+/sys/devices/virtual/graphics/fb0/srgb                          u:object_r:sysfs_livedisplay:s0
 
 # Binaries
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0

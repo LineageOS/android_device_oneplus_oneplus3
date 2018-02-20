@@ -1,3 +1,4 @@
 type debugfs_rmt, debugfs_type, fs_type;
 type proc_touchpanel, fs_type;
 type sysfs_fpc, sysfs_type, fs_type;
+type sysfs_livedisplay, sysfs_type, fs_type;
