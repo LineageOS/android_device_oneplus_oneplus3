@@ -316,7 +316,8 @@ PRODUCT_PACKAGES += \
 
 # LiveDisplay native
 PRODUCT_PACKAGES += \
-    libjni_livedisplay
+    libjni_livedisplay \
+    vendor.lineage.livedisplay@1.0-service
 
 # Media
 PRODUCT_COPY_FILES += \
