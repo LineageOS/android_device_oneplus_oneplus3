@@ -159,6 +159,7 @@ endif
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
+TARGET_KERNEL_HAVE_EXFAT := true
 
 # GPS
 USE_DEVICE_SPECIFIC_GPS := true
