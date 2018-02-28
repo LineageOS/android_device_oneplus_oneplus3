@@ -51,10 +51,6 @@
     <!-- For high brightness mode -->
     <integer name="config_outdoorAmbientLux">20000</integer>
 
-    <!-- Disable this by default, since it's actually using the QC FOSS algorithm for
-         OLED displays and can cause a bit of discoloration. Reinvestigate after tuning -->
-    <bool name="config_defaultCABC">false</bool>
-
     <!-- Turn on LiveDisplay auto mode by default -->
     <integer name="config_defaultLiveDisplayMode">2</integer>
 
