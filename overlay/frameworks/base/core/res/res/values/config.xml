@@ -365,13 +365,13 @@
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
         <item>"/system/framework/arm64/boot-framework.oat"</item>
-        <item>"/system/framework/arm64/boot-framework.vdex"</item>
+        <item>"/system/framework/boot-framework.vdex"</item>
         <item>"/system/framework/oat/arm64/services.odex"</item>
         <item>"/system/framework/oat/arm64/services.vdex"</item>
         <item>"/system/framework/arm64/boot.oat"</item>
-        <item>"/system/framework/arm64/boot.vdex"</item>
+        <item>"/system/framework/boot.vdex"</item>
         <item>"/system/framework/arm64/boot-core-libart.oat"</item>
-        <item>"/system/framework/arm64/boot-core-libart.vdex"</item>
+        <item>"/system/framework/boot-core-libart.vdex"</item>
     </string-array>
 
     <!-- If this is true, device supports Sustained Performance Mode. -->
