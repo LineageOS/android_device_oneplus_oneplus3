@@ -98,7 +98,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.vendor.shutdown.waittime=500 \
     ro.build.shutdown_timeout=0 \
     ro.frp.pst=/dev/block/bootdevice/by-name/config \
-    persist.radio.multisim.config=dsds
+    persist.radio.multisim.config=dsds \
+    rild.libpath=/system/vendor/lib64/libril-qc-qmi-1.so
 
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
