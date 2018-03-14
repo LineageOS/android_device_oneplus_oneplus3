@@ -47,6 +47,7 @@
 #include <LocAdapterBase.h>
 #include <DataItemId.h>
 #include <DataItemsFactoryProxy.h>
+#include <DataItemConcreteTypesBase.h>
 
 using namespace loc_core;
 
@@ -201,8 +202,8 @@ void XtraSystemStatusObserver::notify(const list<IDataItemCore*>& dlist)
                 {
                     case NETWORKINFO_DATA_ITEM_ID:
                     {
-                        SystemStatusNetworkInfo* networkInfo =
-                                reinterpret_cast<SystemStatusNetworkInfo*>(each);
+                        NetworkInfoDataItemBase* networkInfo =
+                                static_cast<NetworkInfoDataItemBase*>(each);
                         mXtraSysStatObj->updateConnectionStatus(networkInfo->mConnected,
                                 networkInfo->mType);
                     }
@@ -210,14 +211,16 @@ void XtraSystemStatusObserver::notify(const list<IDataItemCore*>& dlist)
 
                     case TAC_DATA_ITEM_ID:
                     {
-                        SystemStatusTac* tac = reinterpret_cast<SystemStatusTac*>(each);
+                        TacDataItemBase* tac =
+                                 static_cast<TacDataItemBase*>(each);
                         mXtraSysStatObj->updateTac(tac->mValue);
                     }
                     break;
 
                     case MCCMNC_DATA_ITEM_ID:
                     {
-                        SystemStatusMccMnc* mccmnc = reinterpret_cast<SystemStatusMccMnc*>(each);
+                        MccmncDataItemBase* mccmnc =
+                                static_cast<MccmncDataItemBase*>(each);
                         mXtraSysStatObj->updateMccMnc(mccmnc->mValue);
                     }
                     break;
