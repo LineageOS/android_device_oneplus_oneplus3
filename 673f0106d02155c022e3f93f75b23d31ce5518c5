@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f78260d5_8b8b9e07",
+        "filename": "sepolicy/hal_fingerprint_default.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2018-03-14T12:49:14Z",
+      "side": 1,
+      "message": "r_dir_file(hal_fingerprint_default, proc_touchpanel)",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 64
+      },
+      "revId": "673f0106d02155c022e3f93f75b23d31ce5518c5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
