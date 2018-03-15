@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -622,13 +622,6 @@ int IPACM_Iface::query_iface_property(void)
 		}
 	}
 
-	/* Add Natting iface to IPACM_Config if there is  Rx/Tx property */
-	if (rx_prop != NULL || tx_prop != NULL)
-	{
-		IPACMDBG_H(" Has rx/tx properties registered for iface %s, add for NATTING \n", dev_name);
-        IPACM_Iface::ipacmcfg->AddNatIfaces(dev_name);
-	}
-
 	close(fd);
 	return res;
 }
@@ -937,6 +930,12 @@ int IPACM_Iface::init_fl_rule(ipa_ip_type iptype)
 		}
 	}
 
+	/* Add Natting iface to IPACM_Config if there is  Rx/Tx property */
+	if (rx_prop != NULL || tx_prop != NULL)
+	{
+		IPACMDBG_H(" Has rx/tx properties registered for iface %s, add for NATTING for ip-family %d \n", dev_name, iptype);
+		IPACM_Iface::ipacmcfg->AddNatIfaces(dev_name, iptype);
+	}
 
 fail:
 	free(m_pFilteringTable);

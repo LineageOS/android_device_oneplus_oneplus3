@@ -471,6 +471,9 @@ Return<void> HAL::setDataLimit
         fl.setResult(res.success, res.errMsg);
     } else {
         RET ipaReturn = mIPA->setQuota(upstream.c_str(), limit);
+        if(ipaReturn == RET::FAIL_TRY_AGAIN) {
+            ipaReturn = RET::SUCCESS;
+        }
         BoolResult res = ipaResultToBoolResult(ipaReturn);
         hidl_cb(res.success, res.errMsg);
         fl.setResult(res.success, res.errMsg);

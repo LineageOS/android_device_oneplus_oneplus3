@@ -1,5 +1,5 @@
 /* 
-Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -123,6 +123,7 @@ void* MessageQueue::Process(void *param)
 	MessageQueue *MsgQueueExternal = NULL;
 	Message *item = NULL;
 	param = NULL;
+	const char *eventName = NULL;
 
 	IPACMDBG("MessageQueue::Process()\n");
 
@@ -154,8 +155,12 @@ void* MessageQueue::Process(void *param)
 			item = MsgQueueExternal->dequeue();
 			if(item)
 			{
-				IPACMDBG("Get event %s from external queue.\n",
-					IPACM_Iface::ipacmcfg->getEventName(item->evt.data.event));
+				eventName = IPACM_Iface::ipacmcfg->getEventName(item->evt.data.event);
+				if (eventName != NULL)
+				{
+					IPACMDBG("Get event %s from external queue.\n",
+							eventName);
+				}
 			}
 		}
 		else

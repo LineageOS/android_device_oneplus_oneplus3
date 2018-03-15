@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -524,7 +524,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 		if(ipa_interface_index == ipa_if_num)
 		{
 			IPACMDBG_H("Received IPA_DOWNSTREAM_ADD event.\n");
-			if(is_downstream_set[data->prefix.iptype] == false)
+			if(data->prefix.iptype < IPA_IP_MAX && is_downstream_set[data->prefix.iptype] == false)
 			{
 				IPACMDBG_H("Add downstream for IP iptype %d.\n", data->prefix.iptype);
 				is_downstream_set[data->prefix.iptype] = true;
@@ -856,7 +856,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 		if (rx_prop != NULL || tx_prop != NULL)
 		{
 			IPACMDBG_H(" Has rx/tx properties registered for iface %s, add for NATTING \n", dev_name);
-			IPACM_Iface::ipacmcfg->AddNatIfaces(dev_name);
+			IPACM_Iface::ipacmcfg->AddNatIfaces(dev_name, IPA_IP_MAX);
 		}
 
 		if (m_is_guest_ap == true && (IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].wlan_mode == FULL))

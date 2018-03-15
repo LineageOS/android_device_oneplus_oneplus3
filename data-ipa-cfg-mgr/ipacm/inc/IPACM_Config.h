@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -46,7 +46,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef struct
 {
-  char iface_name[IPA_IFACE_NAME_LEN];
+	char iface_name[IPA_IFACE_NAME_LEN];
+	bool v4_up;
+	bool v6_up;
 }NatIfaces;
 
 /* for IPACM rm dependency use*/
@@ -230,11 +232,11 @@ public:
 
 	void DelRmDepend(ipa_rm_resource_name rm1);
 
-	int AddNatIfaces(char *dev_name);
+	int AddNatIfaces(char *dev_name, ipa_ip_type ip_type);
 
 	int DelNatIfaces(char *dev_name);
 
-	int CheckNatIfaces(const char *dev_name);
+	int CheckNatIfaces(const char *dev_name, ipa_ip_type ip_type);
 
 	inline void SetQmapId(uint8_t id)
 	{
