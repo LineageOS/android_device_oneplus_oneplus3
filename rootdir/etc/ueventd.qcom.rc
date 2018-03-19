@@ -291,5 +291,8 @@
 /dev/block/platform/soc/c0c4000.sdhci/by-name/frp       0600   system     system
 /dev/block/platform/soc/1d84000.ufshc/by-name/frp       0600   system     system
 
+# Add device block for FRP with soc.0
+/dev/block/platform/soc.0/7824900.sdhci/by-name/config    0600   system     system
+
 # Kmsg device
 /dev/kmsg                                               0620   root       system

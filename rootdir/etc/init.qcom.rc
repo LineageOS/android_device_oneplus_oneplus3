@@ -430,7 +430,10 @@ service qcomsysd /system/vendor/bin/qcom-system-daemon
     disabled
 
 on property:persist.vendor.qcomsysd.enabled=1
-    start qcomsysd
+    enable qcomsysd
+
+on property:persist.vendor.qcomsysd.enabled=0
+    stop qcomsysd
 
 service ssr_setup /system/vendor/bin/ssr_setup
     oneshot
@@ -535,7 +538,7 @@ service cnd /system/vendor/bin/cnd
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
-    group system
+    group radio system
 
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
