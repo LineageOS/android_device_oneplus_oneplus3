@@ -146,7 +146,7 @@ ro.hwui.text_large_cache_width=3072
 ro.hwui.text_large_cache_height=2048
 
 #default usb composition
-#persist.sys.usb.config=diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
+persist.sys.usb.config=diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
 
 #property to enable VDS WFD solution
 persist.hwc.enable_vds=1
