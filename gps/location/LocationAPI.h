@@ -308,9 +308,8 @@ typedef enum {
 } GnssSuplMode;
 
 typedef enum {
-    BATCHING_MODE_ROUTINE = 0,   // positions are reported when batched positions memory is full
-    BATCHING_MODE_TRIP,          // positions are reported when a certain distance is covered
-    BATCHING_MODE_NO_AUTO_REPORT // no report of positions automatically, instead queried on demand
+    BATCHING_MODE_ROUTINE = 0,
+    BATCHING_MODE_TRIP
 } BatchingMode;
 
 typedef enum {

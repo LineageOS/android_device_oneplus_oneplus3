@@ -30,7 +30,7 @@
 #ifndef MEASUREMENT_API_CLINET_H
 #define MEASUREMENT_API_CLINET_H
 
-#include <mutex>
+
 #include <android/hardware/gnss/1.0/IGnssMeasurement.h>
 #include <android/hardware/gnss/1.0/IGnssMeasurementCallback.h>
 #include <LocationAPIClientBase.h>
@@ -63,7 +63,7 @@ public:
 
 private:
     sp<IGnssMeasurementCallback> mGnssMeasurementCbIface;
-    std::mutex mMutex;
+
     bool mTracking;
 };
 

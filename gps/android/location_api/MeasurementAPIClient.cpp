@@ -66,9 +66,7 @@ MeasurementAPIClient::measurementSetCallback(const sp<IGnssMeasurementCallback>&
 {
     LOC_LOGD("%s]: (%p)", __FUNCTION__, &callback);
 
-    mMutex.lock();
     mGnssMeasurementCbIface = callback;
-    mMutex.unlock();
 
     LocationCallbacks locationCallbacks;
     memset(&locationCallbacks, 0, sizeof(LocationCallbacks));
@@ -118,14 +116,10 @@ void MeasurementAPIClient::onGnssMeasurementsCb(
     LOC_LOGD("%s]: (count: %zu active: %zu)",
             __FUNCTION__, gnssMeasurementsNotification.count, mTracking);
     if (mTracking) {
-        mMutex.lock();
-        auto gnssMeasurementCbIface(mGnssMeasurementCbIface);
-        mMutex.unlock();
-
-        if (gnssMeasurementCbIface != nullptr) {
+        if (mGnssMeasurementCbIface != nullptr) {
             IGnssMeasurementCallback::GnssData gnssData;
             convertGnssData(gnssMeasurementsNotification, gnssData);
-            auto r = gnssMeasurementCbIface->GnssMeasurementCb(gnssData);
+            auto r = mGnssMeasurementCbIface->GnssMeasurementCb(gnssData);
             if (!r.isOk()) {
                 LOC_LOGE("%s] Error from GnssMeasurementCb description=%s",
                     __func__, r.description().c_str());

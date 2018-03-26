@@ -39,9 +39,7 @@
 
 namespace loc_core
 {
-SystemStatusOsObserver::SystemStatusOsObserver(
-    SystemStatus* systemstatus, const MsgTask* msgTask) :
-    mSystemStatus(systemstatus),
+SystemStatusOsObserver::SystemStatusOsObserver(const MsgTask* msgTask) :
     mAddress("SystemStatusOsObserver"),
     mClientIndex(IndexFactory<IDataItemObserver*, DataItemId> :: createClientIndex()),
     mDataItemIndex(IndexFactory<IDataItemObserver*, DataItemId> :: createDataItemIndex())
@@ -368,11 +366,11 @@ void SystemStatusOsObserver::notify(const list<IDataItemCore*>& dlist)
 
         // Copy contents into the newly created data item
         di->copy(each);
-
+        dataItemList.push_back(di);
         // Request systemstatus to record this dataitem in its cache
-        if (mSystemStatus->eventDataItemNotify(di)) {
-            // add this dataitem if updated from last one
-            dataItemList.push_back(di);
+        SystemStatus* systemstatus = SystemStatus::getInstance(mContext.mMsgTask);
+        if(nullptr != systemstatus) {
+            systemstatus->eventDataItemNotify(di);
         }
     }
 

@@ -195,7 +195,7 @@ public:
     uint32_t locAPIStopSession(uint32_t id);
     uint32_t locAPIUpdateSessionOptions(uint32_t id, uint32_t sessionMode,
             LocationOptions& options);
-    uint32_t locAPIGetBatchedLocations(uint32_t id, size_t count);
+    void locAPIGetBatchedLocations(uint32_t id, size_t count);
 
     uint32_t locAPIAddGeofences(size_t count, uint32_t* ids,
             GeofenceOption* options, GeofenceInfo* data);
@@ -381,10 +381,7 @@ private:
     class StartTrackingRequest : public LocationAPIRequest {
     public:
         StartTrackingRequest(LocationAPIClientBase& API) : mAPI(API) {}
-        inline void onResponse(LocationError error, uint32_t id) {
-            if (error != LOCATION_ERROR_SUCCESS) {
-                mAPI.removeSession(id);
-            }
+        inline void onResponse(LocationError error, uint32_t /*id*/) {
             mAPI.onStartTrackingCb(error);
         }
         LocationAPIClientBase& mAPI;
@@ -414,10 +411,7 @@ private:
     class StartBatchingRequest : public LocationAPIRequest {
     public:
         StartBatchingRequest(LocationAPIClientBase& API) : mAPI(API) {}
-        inline void onResponse(LocationError error, uint32_t id) {
-            if (error != LOCATION_ERROR_SUCCESS) {
-                mAPI.removeSession(id);
-            }
+        inline void onResponse(LocationError error, uint32_t /*id*/) {
             mAPI.onStartBatchingCb(error);
         }
         LocationAPIClientBase& mAPI;
@@ -471,7 +465,13 @@ private:
     public:
         RemoveGeofencesRequest(LocationAPIClientBase& API) : mAPI(API) {}
         inline void onCollectiveResponse(size_t count, LocationError* errors, uint32_t* sessions) {
-            // No need to handle collectiveResponse, cbs already notified
+            uint32_t *ids = (uint32_t*)malloc(sizeof(uint32_t) * count);
+            for (size_t i = 0; i < count; i++) {
+                ids[i] = mAPI.mGeofenceBiDict.getId(sessions[i]);
+                mAPI.mGeofenceBiDict.rmBySession(sessions[i]);
+            }
+            mAPI.onRemoveGeofencesCb(count, errors, ids);
+            free(ids);
         }
         LocationAPIClientBase& mAPI;
     };

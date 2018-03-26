@@ -40,7 +40,6 @@
 #include <DataItemsFactoryProxy.h>
 #include <SystemStatus.h>
 #include <SystemStatusOsObserver.h>
-#include <DataItemConcreteTypesBase.h>
 
 namespace loc_core
 {
@@ -151,7 +150,6 @@ private:
         eAgcGlo = 20,
         eAgcBds = 21,
         eAgcGal = 22,
-        eMax0 = eAgcGal,
         eLeapSeconds = 23,
         eLeapSecUnc = 24,
         eMax
@@ -188,7 +186,7 @@ public:
         : SystemStatusNmeaBase(str_in, len_in)
     {
         memset(&mM1, 0, sizeof(mM1));
-        if (mField.size() <= eMax0) {
+        if (mField.size() < eMax) {
             LOC_LOGE("PQWM1parser - invalid size=%zu", mField.size());
             mM1.mTimeValid = 0;
             return;
@@ -215,10 +213,8 @@ public:
         mM1.mAgcGlo = atof(mField[eAgcGlo].c_str());
         mM1.mAgcBds = atof(mField[eAgcBds].c_str());
         mM1.mAgcGal = atof(mField[eAgcGal].c_str());
-        if (mField.size() > eLeapSecUnc) {
-            mM1.mLeapSeconds = atoi(mField[eLeapSeconds].c_str());
-            mM1.mLeapSecUnc = atoi(mField[eLeapSecUnc].c_str());
-        }
+        mM1.mLeapSeconds = atoi(mField[eLeapSeconds].c_str());
+        mM1.mLeapSecUnc = atoi(mField[eLeapSecUnc].c_str());
     }
 
     inline SystemStatusPQWM1& get() { return mM1;} //getparser
@@ -693,7 +689,7 @@ SystemStatusTimeAndClock::SystemStatusTimeAndClock(const SystemStatusPQWM1& nmea
 {
 }
 
-bool SystemStatusTimeAndClock::equals(const SystemStatusTimeAndClock& peer)
+bool SystemStatusTimeAndClock::equals(SystemStatusTimeAndClock& peer)
 {
     if ((mGpsWeek != peer.mGpsWeek) ||
         (mGpsTowMs != peer.mGpsTowMs) ||
@@ -733,7 +729,7 @@ SystemStatusXoState::SystemStatusXoState(const SystemStatusPQWM1& nmea) :
 {
 }
 
-bool SystemStatusXoState::equals(const SystemStatusXoState& peer)
+bool SystemStatusXoState::equals(SystemStatusXoState& peer)
 {
     if (mXoState != peer.mXoState) {
         return false;
@@ -769,7 +765,7 @@ SystemStatusRfAndParams::SystemStatusRfAndParams(const SystemStatusPQWM1& nmea) 
 {
 }
 
-bool SystemStatusRfAndParams::equals(const SystemStatusRfAndParams& peer)
+bool SystemStatusRfAndParams::equals(SystemStatusRfAndParams& peer)
 {
     if ((mPgaGain != peer.mPgaGain) ||
         (mGpsBpAmpI != peer.mGpsBpAmpI) ||
@@ -819,7 +815,7 @@ SystemStatusErrRecovery::SystemStatusErrRecovery(const SystemStatusPQWM1& nmea) 
 {
 }
 
-bool SystemStatusErrRecovery::equals(const SystemStatusErrRecovery& peer)
+bool SystemStatusErrRecovery::equals(SystemStatusErrRecovery& peer)
 {
     if (mRecErrorRecovery != peer.mRecErrorRecovery) {
         return false;
@@ -849,7 +845,7 @@ SystemStatusInjectedPosition::SystemStatusInjectedPosition(const SystemStatusPQW
 {
 }
 
-bool SystemStatusInjectedPosition::equals(const SystemStatusInjectedPosition& peer)
+bool SystemStatusInjectedPosition::equals(SystemStatusInjectedPosition& peer)
 {
     if ((mEpiValidity != peer.mEpiValidity) ||
         (mEpiLat != peer.mEpiLat) ||
@@ -890,7 +886,7 @@ SystemStatusBestPosition::SystemStatusBestPosition(const SystemStatusPQWP2& nmea
 {
 }
 
-bool SystemStatusBestPosition::equals(const SystemStatusBestPosition& peer)
+bool SystemStatusBestPosition::equals(SystemStatusBestPosition& peer)
 {
     if ((mBestLat != peer.mBestLat) ||
         (mBestLon != peer.mBestLon) ||
@@ -932,7 +928,7 @@ SystemStatusXtra::SystemStatusXtra(const SystemStatusPQWP3& nmea) :
 {
 }
 
-bool SystemStatusXtra::equals(const SystemStatusXtra& peer)
+bool SystemStatusXtra::equals(SystemStatusXtra& peer)
 {
     if ((mXtraValidMask != peer.mXtraValidMask) ||
         (mGpsXtraAge != peer.mGpsXtraAge) ||
@@ -980,7 +976,7 @@ SystemStatusEphemeris::SystemStatusEphemeris(const SystemStatusPQWP4& nmea) :
 {
 }
 
-bool SystemStatusEphemeris::equals(const SystemStatusEphemeris& peer)
+bool SystemStatusEphemeris::equals(SystemStatusEphemeris& peer)
 {
     if ((mGpsEpheValid != peer.mGpsEpheValid) ||
         (mGloEpheValid != peer.mGloEpheValid) ||
@@ -1026,7 +1022,7 @@ SystemStatusSvHealth::SystemStatusSvHealth(const SystemStatusPQWP5& nmea) :
 {
 }
 
-bool SystemStatusSvHealth::equals(const SystemStatusSvHealth& peer)
+bool SystemStatusSvHealth::equals(SystemStatusSvHealth& peer)
 {
     if ((mGpsUnknownMask != peer.mGpsUnknownMask) ||
         (mGloUnknownMask != peer.mGloUnknownMask) ||
@@ -1081,7 +1077,7 @@ SystemStatusPdr::SystemStatusPdr(const SystemStatusPQWP6& nmea) :
 {
 }
 
-bool SystemStatusPdr::equals(const SystemStatusPdr& peer)
+bool SystemStatusPdr::equals(SystemStatusPdr& peer)
 {
     if (mFixInfoMask != peer.mFixInfoMask) {
         return false;
@@ -1107,7 +1103,7 @@ SystemStatusNavData::SystemStatusNavData(const SystemStatusPQWP7& nmea)
     }
 }
 
-bool SystemStatusNavData::equals(const SystemStatusNavData& peer)
+bool SystemStatusNavData::equals(SystemStatusNavData& peer)
 {
     for (uint32_t i=0; i<SV_ALL_NUM; i++) {
         if ((mNav[i].mType != peer.mNav[i].mType) ||
@@ -1139,7 +1135,7 @@ SystemStatusPositionFailure::SystemStatusPositionFailure(const SystemStatusPQWS1
 {
 }
 
-bool SystemStatusPositionFailure::equals(const SystemStatusPositionFailure& peer)
+bool SystemStatusPositionFailure::equals(SystemStatusPositionFailure& peer)
 {
     if ((mFixInfoMask != peer.mFixInfoMask) ||
         (mHepeLimit != peer.mHepeLimit)) {
@@ -1160,7 +1156,7 @@ void SystemStatusPositionFailure::dump()
 /******************************************************************************
  SystemStatusLocation
 ******************************************************************************/
-bool SystemStatusLocation::equals(const SystemStatusLocation& peer)
+bool SystemStatusLocation::equals(SystemStatusLocation& peer)
 {
     if ((mLocation.gpsLocation.latitude != peer.mLocation.gpsLocation.latitude) ||
         (mLocation.gpsLocation.longitude != peer.mLocation.gpsLocation.longitude) ||
@@ -1217,7 +1213,7 @@ IOsObserver* SystemStatus::getOsObserver()
 }
 
 SystemStatus::SystemStatus(const MsgTask* msgTask) :
-    mSysStatusObsvr(this, msgTask),
+    mSysStatusObsvr(msgTask),
     mConnected(false)
 {
     int result = 0;
@@ -1239,76 +1235,206 @@ SystemStatus::SystemStatus(const MsgTask* msgTask) :
 
     mCache.mPositionFailure.clear();
 
-    mCache.mAirplaneMode.clear();
-    mCache.mENH.clear();
-    mCache.mGPSState.clear();
-    mCache.mNLPStatus.clear();
-    mCache.mWifiHardwareState.clear();
-    mCache.mNetworkInfo.clear();
-    mCache.mRilServiceInfo.clear();
-    mCache.mRilCellInfo.clear();
-    mCache.mServiceStatus.clear();
-    mCache.mModel.clear();
-    mCache.mManufacturer.clear();
-    mCache.mAssistedGps.clear();
-    mCache.mScreenState.clear();
-    mCache.mPowerConnectState.clear();
-    mCache.mTimeZoneChange.clear();
-    mCache.mTimeChange.clear();
-    mCache.mWifiSupplicantStatus.clear();
-    mCache.mShutdownState.clear();
-    mCache.mTac.clear();
-    mCache.mMccMnc.clear();
-    mCache.mBtDeviceScanDetail.clear();
-    mCache.mBtLeDeviceScanDetail.clear();
-
     EXIT_LOG_WITH_ERROR ("%d",result);
+}
+
+/******************************************************************************
+ SystemStatus - M1 functions
+******************************************************************************/
+bool SystemStatus::setTimeAndCLock(const SystemStatusPQWM1& nmea)
+{
+    SystemStatusTimeAndClock s(nmea);
+    if (!mCache.mTimeAndClock.empty() && mCache.mTimeAndClock.back().equals(s)) {
+        mCache.mTimeAndClock.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mTimeAndClock.push_back(s);
+        if (mCache.mTimeAndClock.size() > maxTimeAndClock) {
+            mCache.mTimeAndClock.erase(mCache.mTimeAndClock.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setXoState(const SystemStatusPQWM1& nmea)
+{
+    SystemStatusXoState s(nmea);
+    if (!mCache.mXoState.empty() && mCache.mXoState.back().equals(s)) {
+        mCache.mXoState.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mXoState.push_back(s);
+        if (mCache.mXoState.size() > maxXoState) {
+            mCache.mXoState.erase(mCache.mXoState.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setRfAndParams(const SystemStatusPQWM1& nmea)
+{
+    SystemStatusRfAndParams s(nmea);
+    if (!mCache.mRfAndParams.empty() && mCache.mRfAndParams.back().equals(s)) {
+        mCache.mRfAndParams.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mRfAndParams.push_back(s);
+        if (mCache.mRfAndParams.size() > maxRfAndParams) {
+            mCache.mRfAndParams.erase(mCache.mRfAndParams.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setErrRecovery(const SystemStatusPQWM1& nmea)
+{
+    SystemStatusErrRecovery s(nmea);
+    if (!mCache.mErrRecovery.empty() && mCache.mErrRecovery.back().equals(s)) {
+        mCache.mErrRecovery.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mErrRecovery.push_back(s);
+        if (mCache.mErrRecovery.size() > maxErrRecovery) {
+            mCache.mErrRecovery.erase(mCache.mErrRecovery.begin());
+        }
+    }
+    return true;
+}
+
+/******************************************************************************
+ SystemStatus - Px functions
+******************************************************************************/
+bool SystemStatus::setInjectedPosition(const SystemStatusPQWP1& nmea)
+{
+    SystemStatusInjectedPosition s(nmea);
+    if (!mCache.mInjectedPosition.empty() && mCache.mInjectedPosition.back().equals(s)) {
+        mCache.mInjectedPosition.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mInjectedPosition.push_back(s);
+        if (mCache.mInjectedPosition.size() > maxInjectedPosition) {
+            mCache.mInjectedPosition.erase(mCache.mInjectedPosition.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setBestPosition(const SystemStatusPQWP2& nmea)
+{
+    SystemStatusBestPosition s(nmea);
+    if (!mCache.mBestPosition.empty() && mCache.mBestPosition.back().equals(s)) {
+        mCache.mBestPosition.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mBestPosition.push_back(s);
+        if (mCache.mBestPosition.size() > maxBestPosition) {
+            mCache.mBestPosition.erase(mCache.mBestPosition.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setXtra(const SystemStatusPQWP3& nmea)
+{
+    SystemStatusXtra s(nmea);
+    if (!mCache.mXtra.empty() && mCache.mXtra.back().equals(s)) {
+        mCache.mXtra.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mXtra.push_back(s);
+        if (mCache.mXtra.size() > maxXtra) {
+            mCache.mXtra.erase(mCache.mXtra.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setEphemeris(const SystemStatusPQWP4& nmea)
+{
+    SystemStatusEphemeris s(nmea);
+    if (!mCache.mEphemeris.empty() && mCache.mEphemeris.back().equals(s)) {
+        mCache.mEphemeris.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mEphemeris.push_back(s);
+        if (mCache.mEphemeris.size() > maxEphemeris) {
+            mCache.mEphemeris.erase(mCache.mEphemeris.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setSvHealth(const SystemStatusPQWP5& nmea)
+{
+    SystemStatusSvHealth s(nmea);
+    if (!mCache.mSvHealth.empty() && mCache.mSvHealth.back().equals(s)) {
+        mCache.mSvHealth.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mSvHealth.push_back(s);
+        if (mCache.mSvHealth.size() > maxSvHealth) {
+            mCache.mSvHealth.erase(mCache.mSvHealth.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setPdr(const SystemStatusPQWP6& nmea)
+{
+    SystemStatusPdr s(nmea);
+    if (!mCache.mPdr.empty() && mCache.mPdr.back().equals(s)) {
+        mCache.mPdr.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mPdr.push_back(s);
+        if (mCache.mPdr.size() > maxPdr) {
+            mCache.mPdr.erase(mCache.mPdr.begin());
+        }
+    }
+    return true;
+}
+
+bool SystemStatus::setNavData(const SystemStatusPQWP7& nmea)
+{
+    SystemStatusNavData s(nmea);
+    if (!mCache.mNavData.empty() && mCache.mNavData.back().equals(s)) {
+        mCache.mNavData.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mNavData.push_back(s);
+        if (mCache.mNavData.size() > maxNavData) {
+            mCache.mNavData.erase(mCache.mNavData.begin());
+        }
+    }
+    return true;
+}
+
+/******************************************************************************
+ SystemStatus - Sx functions
+******************************************************************************/
+bool SystemStatus::setPositionFailure(const SystemStatusPQWS1& nmea)
+{
+    SystemStatusPositionFailure s(nmea);
+    if (!mCache.mPositionFailure.empty() && mCache.mPositionFailure.back().equals(s)) {
+        mCache.mPositionFailure.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mPositionFailure.push_back(s);
+        if (mCache.mPositionFailure.size() > maxPositionFailure) {
+            mCache.mPositionFailure.erase(mCache.mPositionFailure.begin());
+        }
+    }
+    return true;
 }
 
 /******************************************************************************
  SystemStatus - storing dataitems
 ******************************************************************************/
-template <typename TYPE_SYSTEMSTATUS_ITEM, typename TYPE_REPORT, typename TYPE_ITEMBASE>
-bool SystemStatus::setItemBaseinReport(TYPE_REPORT& report, const TYPE_ITEMBASE& s)
+bool SystemStatus::setNetworkInfo(IDataItemCore* dataitem)
 {
-    TYPE_SYSTEMSTATUS_ITEM sout(s);
-    return setIteminReport(report, sout);
-}
+    SystemStatusNetworkInfo* data = reinterpret_cast<SystemStatusNetworkInfo*>(dataitem);
+    SystemStatusNetworkInfo s(data->mType,data->mTypeName,data->mSubTypeName,
+                              data->mAvailable,data->mConnected,data->mRoaming);
+    s.dump();
+    mConnected = data->mConnected;
 
-template <typename TYPE_REPORT, typename TYPE_ITEM>
-bool SystemStatus::setIteminReport(TYPE_REPORT& report, const TYPE_ITEM& s)
-{
-    if (!report.empty() && report.back().equals(s)) {
-        // there is no change - just update reported timestamp
-        report.back().mUtcReported = s.mUtcReported;
-        return false;
-    }
-
-    // first event or updated
-    report.push_back(s);
-    if (report.size() > s.maxItem) {
-        report.erase(report.begin());
+    if (!mCache.mNetworkInfo.empty() && mCache.mNetworkInfo.back().equals(s)) {
+        mCache.mNetworkInfo.back().mUtcReported = s.mUtcReported;
+    } else {
+        mCache.mNetworkInfo.push_back(s);
+        if (mCache.mNetworkInfo.size() > maxNetworkInfo) {
+            mCache.mNetworkInfo.erase(mCache.mNetworkInfo.begin());
+        }
     }
     return true;
-}
-
-template <typename TYPE_REPORT, typename TYPE_ITEM>
-void SystemStatus::setDefaultIteminReport(TYPE_REPORT& report, const TYPE_ITEM& s)
-{
-    report.push_back(s);
-    if (report.size() > s.maxItem) {
-        report.erase(report.begin());
-    }
-}
-
-template <typename TYPE_REPORT, typename TYPE_ITEM>
-void SystemStatus::getIteminReport(TYPE_REPORT& reportout, const TYPE_ITEM& c) const
-{
-    reportout.clear();
-    if (c.size() >= 1) {
-        reportout.push_back(c.back());
-        reportout.back().dump();
-    }
 }
 
 /******************************************************************************
@@ -1319,6 +1445,17 @@ void SystemStatus::getIteminReport(TYPE_REPORT& reportout, const TYPE_ITEM& c) c
 
 @return     true when successfully done
 ******************************************************************************/
+static uint32_t cnt = 0;
+static uint32_t cnt_m1 = 0;
+static uint32_t cnt_p1 = 0;
+static uint32_t cnt_p2 = 0;
+static uint32_t cnt_p3 = 0;
+static uint32_t cnt_p4 = 0;
+static uint32_t cnt_p5 = 0;
+static uint32_t cnt_p6 = 0;
+static uint32_t cnt_p7 = 0;
+static uint32_t cnt_s1 = 0;
+
 bool SystemStatus::setNmeaString(const char *data, uint32_t len)
 {
     bool ret = false;
@@ -1334,46 +1471,59 @@ bool SystemStatus::setNmeaString(const char *data, uint32_t len)
     // parse the received nmea strings here
     if      (0 == strncmp(data, "$PQWM1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
         SystemStatusPQWM1 s = SystemStatusPQWM1parser(buf, len).get();
-        ret |= setIteminReport(mCache.mTimeAndClock, SystemStatusTimeAndClock(s));
-        ret |= setIteminReport(mCache.mXoState, SystemStatusXoState(s));
-        ret |= setIteminReport(mCache.mRfAndParams, SystemStatusRfAndParams(s));
-        ret |= setIteminReport(mCache.mErrRecovery, SystemStatusErrRecovery(s));
+        ret  = setTimeAndCLock(s);
+        ret |= setXoState(s);
+        ret |= setRfAndParams(s);
+        ret |= setErrRecovery(s);
+        cnt_m1++;
     }
     else if (0 == strncmp(data, "$PQWP1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mInjectedPosition,
-                SystemStatusInjectedPosition(SystemStatusPQWP1parser(buf, len).get()));
+        ret = setInjectedPosition(SystemStatusPQWP1parser(buf, len).get());
+        cnt_p1++;
     }
     else if (0 == strncmp(data, "$PQWP2", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mBestPosition,
-                SystemStatusBestPosition(SystemStatusPQWP2parser(buf, len).get()));
+        ret = setBestPosition(SystemStatusPQWP2parser(buf, len).get());
+        cnt_p2++;
     }
     else if (0 == strncmp(data, "$PQWP3", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mXtra,
-                SystemStatusXtra(SystemStatusPQWP3parser(buf, len).get()));
+        ret = setXtra(SystemStatusPQWP3parser(buf, len).get());
+        cnt_p3++;
     }
     else if (0 == strncmp(data, "$PQWP4", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mEphemeris,
-                SystemStatusEphemeris(SystemStatusPQWP4parser(buf, len).get()));
+        ret = setEphemeris(SystemStatusPQWP4parser(buf, len).get());
+        cnt_p4++;
     }
     else if (0 == strncmp(data, "$PQWP5", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mSvHealth,
-                SystemStatusSvHealth(SystemStatusPQWP5parser(buf, len).get()));
+        ret = setSvHealth(SystemStatusPQWP5parser(buf, len).get());
+        cnt_p5++;
     }
     else if (0 == strncmp(data, "$PQWP6", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mPdr,
-                SystemStatusPdr(SystemStatusPQWP6parser(buf, len).get()));
+        ret = setPdr(SystemStatusPQWP6parser(buf, len).get());
+        cnt_p6++;
     }
     else if (0 == strncmp(data, "$PQWP7", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mNavData,
-                SystemStatusNavData(SystemStatusPQWP7parser(buf, len).get()));
+        ret = setNavData(SystemStatusPQWP7parser(buf, len).get());
+        cnt_p7++;
     }
     else if (0 == strncmp(data, "$PQWS1", SystemStatusNmeaBase::NMEA_MINSIZE)) {
-        ret = setIteminReport(mCache.mPositionFailure,
-                SystemStatusPositionFailure(SystemStatusPQWS1parser(buf, len).get()));
+        ret = setPositionFailure(SystemStatusPQWS1parser(buf, len).get());
+        cnt_s1++;
     }
     else {
         // do nothing
     }
+    cnt++;
+    LOC_LOGV("setNmeaString: cnt=%d M:%d 1:%d 2:%d 3:%d 4:%d 5:%d 6:%d 7:%d S:%d",
+             cnt,
+             cnt_m1,
+             cnt_p1,
+             cnt_p2,
+             cnt_p3,
+             cnt_p4,
+             cnt_p5,
+             cnt_p6,
+             cnt_p7,
+             cnt_s1);
 
     pthread_mutex_unlock(&mMutexSystemStatus);
     return ret;
@@ -1389,18 +1539,22 @@ bool SystemStatus::setNmeaString(const char *data, uint32_t len)
 bool SystemStatus::eventPosition(const UlpLocation& location,
                                  const GpsLocationExtended& locationEx)
 {
-    bool ret = false;
-    pthread_mutex_lock(&mMutexSystemStatus);
-
-    ret = setIteminReport(mCache.mLocation, SystemStatusLocation(location, locationEx));
+    SystemStatusLocation s(location, locationEx);
+    if (!mCache.mLocation.empty() && mCache.mLocation.back().equals(s)) {
+        mCache.mLocation.back().mUtcReported = s.mUtcReported;
+    }
+    else {
+        mCache.mLocation.push_back(s);
+        if (mCache.mLocation.size() > maxLocation) {
+            mCache.mLocation.erase(mCache.mLocation.begin());
+        }
+    }
     LOC_LOGV("eventPosition - lat=%f lon=%f alt=%f speed=%f",
-             location.gpsLocation.latitude,
-             location.gpsLocation.longitude,
-             location.gpsLocation.altitude,
-             location.gpsLocation.speed);
-
-    pthread_mutex_unlock(&mMutexSystemStatus);
-    return ret;
+             s.mLocation.gpsLocation.latitude,
+             s.mLocation.gpsLocation.longitude,
+             s.mLocation.gpsLocation.altitude,
+             s.mLocation.gpsLocation.speed);
+    return true;
 }
 
 /******************************************************************************
@@ -1408,109 +1562,19 @@ bool SystemStatus::eventPosition(const UlpLocation& location,
 
 @param[In]  DataItem
 
-@return     true when info is updatated
+@return     true when successfully done
 ******************************************************************************/
 bool SystemStatus::eventDataItemNotify(IDataItemCore* dataitem)
 {
-    bool ret = false;
     pthread_mutex_lock(&mMutexSystemStatus);
     switch(dataitem->getId())
     {
-        case AIRPLANEMODE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusAirplaneMode>(mCache.mAirplaneMode,
-                    *(static_cast<AirplaneModeDataItemBase*>(dataitem)));
-            break;
-        case ENH_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusENH>(mCache.mENH,
-                    *(static_cast<ENHDataItemBase*>(dataitem)));
-            break;
-        case GPSSTATE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusGpsState>(mCache.mGPSState,
-                    *(static_cast<GPSStateDataItemBase*>(dataitem)));
-            break;
-        case NLPSTATUS_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusNLPStatus>(mCache.mNLPStatus,
-                    *(static_cast<NLPStatusDataItemBase*>(dataitem)));
-            break;
-        case WIFIHARDWARESTATE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusWifiHardwareState>(mCache.mWifiHardwareState,
-                    *(static_cast<WifiHardwareStateDataItemBase*>(dataitem)));
-            break;
         case NETWORKINFO_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusNetworkInfo>(mCache.mNetworkInfo,
-                    *(static_cast<NetworkInfoDataItemBase*>(dataitem)));
-            break;
-        case RILSERVICEINFO_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusServiceInfo>(mCache.mRilServiceInfo,
-                    *(static_cast<RilServiceInfoDataItemBase*>(dataitem)));
-            break;
-        case RILCELLINFO_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusRilCellInfo>(mCache.mRilCellInfo,
-                    *(static_cast<RilCellInfoDataItemBase*>(dataitem)));
-            break;
-        case SERVICESTATUS_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusServiceStatus>(mCache.mServiceStatus,
-                    *(static_cast<ServiceStatusDataItemBase*>(dataitem)));
-            break;
-        case MODEL_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusModel>(mCache.mModel,
-                    *(static_cast<ModelDataItemBase*>(dataitem)));
-            break;
-        case MANUFACTURER_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusManufacturer>(mCache.mManufacturer,
-                    *(static_cast<ManufacturerDataItemBase*>(dataitem)));
-            break;
-        case ASSISTED_GPS_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusAssistedGps>(mCache.mAssistedGps,
-                    *(static_cast<AssistedGpsDataItemBase*>(dataitem)));
-            break;
-        case SCREEN_STATE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusScreenState>(mCache.mScreenState,
-                    *(static_cast<ScreenStateDataItemBase*>(dataitem)));
-            break;
-        case POWER_CONNECTED_STATE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusPowerConnectState>(mCache.mPowerConnectState,
-                    *(static_cast<PowerConnectStateDataItemBase*>(dataitem)));
-            break;
-        case TIMEZONE_CHANGE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusTimeZoneChange>(mCache.mTimeZoneChange,
-                    *(static_cast<TimeZoneChangeDataItemBase*>(dataitem)));
-            break;
-        case TIME_CHANGE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusTimeChange>(mCache.mTimeChange,
-                    *(static_cast<TimeChangeDataItemBase*>(dataitem)));
-            break;
-        case WIFI_SUPPLICANT_STATUS_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusWifiSupplicantStatus>(
-                    mCache.mWifiSupplicantStatus,
-                    *(static_cast<WifiSupplicantStatusDataItemBase*>(dataitem)));
-            break;
-        case SHUTDOWN_STATE_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusShutdownState>(mCache.mShutdownState,
-                    *(static_cast<ShutdownStateDataItemBase*>(dataitem)));
-            break;
-        case TAC_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusTac>(mCache.mTac,
-                    *(static_cast<TacDataItemBase*>(dataitem)));
-            break;
-        case MCCMNC_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusMccMnc>(mCache.mMccMnc,
-                    *(static_cast<MccmncDataItemBase*>(dataitem)));
-            break;
-        case BTLE_SCAN_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusBtDeviceScanDetail>(mCache.mBtDeviceScanDetail,
-                    *(static_cast<BtDeviceScanDetailsDataItemBase*>(dataitem)));
-            break;
-        case BT_SCAN_DATA_ITEM_ID:
-            ret = setItemBaseinReport<SystemStatusBtleDeviceScanDetail>(
-                    mCache.mBtLeDeviceScanDetail,
-                    *(static_cast<BtLeDeviceScanDetailsDataItemBase*>(dataitem)));
-            break;
-        default:
+            setNetworkInfo(dataitem);
             break;
     }
     pthread_mutex_unlock(&mMutexSystemStatus);
-    return ret;
+    return true;
 }
 
 /******************************************************************************
@@ -1527,45 +1591,74 @@ bool SystemStatus::getReport(SystemStatusReports& report, bool isLatestOnly) con
 
     if (isLatestOnly) {
         // push back only the latest report and return it
-        getIteminReport(report.mLocation, mCache.mLocation);
+        report.mLocation.clear();
+        if (mCache.mLocation.size() >= 1) {
+            report.mLocation.push_back(mCache.mLocation.back());
+            report.mLocation.back().dump();
+        }
 
-        getIteminReport(report.mTimeAndClock, mCache.mTimeAndClock);
-        getIteminReport(report.mXoState, mCache.mXoState);
-        getIteminReport(report.mRfAndParams, mCache.mRfAndParams);
-        getIteminReport(report.mErrRecovery, mCache.mErrRecovery);
+        report.mTimeAndClock.clear();
+        if (mCache.mTimeAndClock.size() >= 1) {
+            report.mTimeAndClock.push_back(mCache.mTimeAndClock.back());
+            report.mTimeAndClock.back().dump();
+        }
+        report.mXoState.clear();
+        if (mCache.mXoState.size() >= 1) {
+            report.mXoState.push_back(mCache.mXoState.back());
+            report.mXoState.back().dump();
+        }
+        report.mRfAndParams.clear();
+        if (mCache.mRfAndParams.size() >= 1) {
+            report.mRfAndParams.push_back(mCache.mRfAndParams.back());
+            report.mRfAndParams.back().dump();
+        }
+        report.mErrRecovery.clear();
+        if (mCache.mErrRecovery.size() >= 1) {
+            report.mErrRecovery.push_back(mCache.mErrRecovery.back());
+            report.mErrRecovery.back().dump();
+        }
 
-        getIteminReport(report.mInjectedPosition, mCache.mInjectedPosition);
-        getIteminReport(report.mBestPosition, mCache.mBestPosition);
-        getIteminReport(report.mXtra, mCache.mXtra);
-        getIteminReport(report.mEphemeris, mCache.mEphemeris);
-        getIteminReport(report.mSvHealth, mCache.mSvHealth);
-        getIteminReport(report.mPdr, mCache.mPdr);
-        getIteminReport(report.mNavData, mCache.mNavData);
+        report.mInjectedPosition.clear();
+        if (mCache.mInjectedPosition.size() >= 1) {
+            report.mInjectedPosition.push_back(mCache.mInjectedPosition.back());
+            report.mInjectedPosition.back().dump();
+        }
+        report.mBestPosition.clear();
+        if (mCache.mBestPosition.size() >= 1) {
+            report.mBestPosition.push_back(mCache.mBestPosition.back());
+            report.mBestPosition.back().dump();
+        }
+        report.mXtra.clear();
+        if (mCache.mXtra.size() >= 1) {
+            report.mXtra.push_back(mCache.mXtra.back());
+            report.mXtra.back().dump();
+        }
+        report.mEphemeris.clear();
+        if (mCache.mEphemeris.size() >= 1) {
+            report.mEphemeris.push_back(mCache.mEphemeris.back());
+            report.mEphemeris.back().dump();
+        }
+        report.mSvHealth.clear();
+        if (mCache.mSvHealth.size() >= 1) {
+            report.mSvHealth.push_back(mCache.mSvHealth.back());
+            report.mSvHealth.back().dump();
+        }
+        report.mPdr.clear();
+        if (mCache.mPdr.size() >= 1) {
+            report.mPdr.push_back(mCache.mPdr.back());
+            report.mPdr.back().dump();
+        }
+        report.mNavData.clear();
+        if (mCache.mNavData.size() >= 1) {
+            report.mNavData.push_back(mCache.mNavData.back());
+            report.mNavData.back().dump();
+        }
 
-        getIteminReport(report.mPositionFailure, mCache.mPositionFailure);
-
-        getIteminReport(report.mAirplaneMode, mCache.mAirplaneMode);
-        getIteminReport(report.mENH, mCache.mENH);
-        getIteminReport(report.mGPSState, mCache.mGPSState);
-        getIteminReport(report.mNLPStatus, mCache.mNLPStatus);
-        getIteminReport(report.mWifiHardwareState, mCache.mWifiHardwareState);
-        getIteminReport(report.mNetworkInfo, mCache.mNetworkInfo);
-        getIteminReport(report.mRilServiceInfo, mCache.mRilServiceInfo);
-        getIteminReport(report.mRilCellInfo, mCache.mRilCellInfo);
-        getIteminReport(report.mServiceStatus, mCache.mServiceStatus);
-        getIteminReport(report.mModel, mCache.mModel);
-        getIteminReport(report.mManufacturer, mCache.mManufacturer);
-        getIteminReport(report.mAssistedGps, mCache.mAssistedGps);
-        getIteminReport(report.mScreenState, mCache.mScreenState);
-        getIteminReport(report.mPowerConnectState, mCache.mPowerConnectState);
-        getIteminReport(report.mTimeZoneChange, mCache.mTimeZoneChange);
-        getIteminReport(report.mTimeChange, mCache.mTimeChange);
-        getIteminReport(report.mWifiSupplicantStatus, mCache.mWifiSupplicantStatus);
-        getIteminReport(report.mShutdownState, mCache.mShutdownState);
-        getIteminReport(report.mTac, mCache.mTac);
-        getIteminReport(report.mMccMnc, mCache.mMccMnc);
-        getIteminReport(report.mBtDeviceScanDetail, mCache.mBtDeviceScanDetail);
-        getIteminReport(report.mBtLeDeviceScanDetail, mCache.mBtLeDeviceScanDetail);
+        report.mPositionFailure.clear();
+        if (mCache.mPositionFailure.size() >= 1) {
+            report.mPositionFailure.push_back(mCache.mPositionFailure.back());
+            report.mPositionFailure.back().dump();
+        }
     }
     else {
         // copy entire reports and return them
@@ -1585,30 +1678,6 @@ bool SystemStatus::getReport(SystemStatusReports& report, bool isLatestOnly) con
         report.mNavData.clear();
 
         report.mPositionFailure.clear();
-
-        report.mAirplaneMode.clear();
-        report.mENH.clear();
-        report.mGPSState.clear();
-        report.mNLPStatus.clear();
-        report.mWifiHardwareState.clear();
-        report.mNetworkInfo.clear();
-        report.mRilServiceInfo.clear();
-        report.mRilCellInfo.clear();
-        report.mServiceStatus.clear();
-        report.mModel.clear();
-        report.mManufacturer.clear();
-        report.mAssistedGps.clear();
-        report.mScreenState.clear();
-        report.mPowerConnectState.clear();
-        report.mTimeZoneChange.clear();
-        report.mTimeChange.clear();
-        report.mWifiSupplicantStatus.clear();
-        report.mShutdownState.clear();
-        report.mTac.clear();
-        report.mMccMnc.clear();
-        report.mBtDeviceScanDetail.clear();
-        report.mBtLeDeviceScanDetail.clear();
-
         report = mCache;
     }
 
@@ -1627,45 +1696,61 @@ bool SystemStatus::setDefaultReport(void)
 {
     pthread_mutex_lock(&mMutexSystemStatus);
 
-    setDefaultIteminReport(mCache.mLocation, SystemStatusLocation());
+    mCache.mLocation.push_back(SystemStatusLocation());
+    if (mCache.mLocation.size() > maxLocation) {
+        mCache.mLocation.erase(mCache.mLocation.begin());
+    }
 
-    setDefaultIteminReport(mCache.mTimeAndClock, SystemStatusTimeAndClock());
-    setDefaultIteminReport(mCache.mXoState, SystemStatusXoState());
-    setDefaultIteminReport(mCache.mRfAndParams, SystemStatusRfAndParams());
-    setDefaultIteminReport(mCache.mErrRecovery, SystemStatusErrRecovery());
+    mCache.mTimeAndClock.push_back(SystemStatusTimeAndClock());
+    if (mCache.mTimeAndClock.size() > maxTimeAndClock) {
+        mCache.mTimeAndClock.erase(mCache.mTimeAndClock.begin());
+    }
+    mCache.mXoState.push_back(SystemStatusXoState());
+    if (mCache.mXoState.size() > maxXoState) {
+        mCache.mXoState.erase(mCache.mXoState.begin());
+    }
+    mCache.mRfAndParams.push_back(SystemStatusRfAndParams());
+    if (mCache.mRfAndParams.size() > maxRfAndParams) {
+        mCache.mRfAndParams.erase(mCache.mRfAndParams.begin());
+    }
+    mCache.mErrRecovery.push_back(SystemStatusErrRecovery());
+    if (mCache.mErrRecovery.size() > maxErrRecovery) {
+        mCache.mErrRecovery.erase(mCache.mErrRecovery.begin());
+    }
 
-    setDefaultIteminReport(mCache.mInjectedPosition, SystemStatusInjectedPosition());
-    setDefaultIteminReport(mCache.mBestPosition, SystemStatusBestPosition());
-    setDefaultIteminReport(mCache.mXtra, SystemStatusXtra());
-    setDefaultIteminReport(mCache.mEphemeris, SystemStatusEphemeris());
-    setDefaultIteminReport(mCache.mSvHealth, SystemStatusSvHealth());
-    setDefaultIteminReport(mCache.mPdr, SystemStatusPdr());
-    setDefaultIteminReport(mCache.mNavData, SystemStatusNavData());
+    mCache.mInjectedPosition.push_back(SystemStatusInjectedPosition());
+    if (mCache.mInjectedPosition.size() > maxInjectedPosition) {
+        mCache.mInjectedPosition.erase(mCache.mInjectedPosition.begin());
+    }
+    mCache.mBestPosition.push_back(SystemStatusBestPosition());
+    if (mCache.mBestPosition.size() > maxBestPosition) {
+        mCache.mBestPosition.erase(mCache.mBestPosition.begin());
+    }
+    mCache.mXtra.push_back(SystemStatusXtra());
+    if (mCache.mXtra.size() > maxXtra) {
+        mCache.mXtra.erase(mCache.mXtra.begin());
+    }
+    mCache.mEphemeris.push_back(SystemStatusEphemeris());
+    if (mCache.mEphemeris.size() > maxEphemeris) {
+        mCache.mEphemeris.erase(mCache.mEphemeris.begin());
+    }
+    mCache.mSvHealth.push_back(SystemStatusSvHealth());
+    if (mCache.mSvHealth.size() > maxSvHealth) {
+        mCache.mSvHealth.erase(mCache.mSvHealth.begin());
+    }
+    mCache.mPdr.push_back(SystemStatusPdr());
+    if (mCache.mPdr.size() > maxPdr) {
+        mCache.mPdr.erase(mCache.mPdr.begin());
+    }
+    mCache.mNavData.push_back(SystemStatusNavData());
+    if (mCache.mNavData.size() > maxNavData) {
+        mCache.mNavData.erase(mCache.mNavData.begin());
+    }
 
-    setDefaultIteminReport(mCache.mPositionFailure, SystemStatusPositionFailure());
-
-    setDefaultIteminReport(mCache.mAirplaneMode, SystemStatusAirplaneMode());
-    setDefaultIteminReport(mCache.mENH, SystemStatusENH());
-    setDefaultIteminReport(mCache.mGPSState, SystemStatusGpsState());
-    setDefaultIteminReport(mCache.mNLPStatus, SystemStatusNLPStatus());
-    setDefaultIteminReport(mCache.mWifiHardwareState, SystemStatusWifiHardwareState());
-    setDefaultIteminReport(mCache.mNetworkInfo, SystemStatusNetworkInfo());
-    setDefaultIteminReport(mCache.mRilServiceInfo, SystemStatusServiceInfo());
-    setDefaultIteminReport(mCache.mRilCellInfo, SystemStatusRilCellInfo());
-    setDefaultIteminReport(mCache.mServiceStatus, SystemStatusServiceStatus());
-    setDefaultIteminReport(mCache.mModel, SystemStatusModel());
-    setDefaultIteminReport(mCache.mManufacturer, SystemStatusManufacturer());
-    setDefaultIteminReport(mCache.mAssistedGps, SystemStatusAssistedGps());
-    setDefaultIteminReport(mCache.mScreenState, SystemStatusScreenState());
-    setDefaultIteminReport(mCache.mPowerConnectState, SystemStatusPowerConnectState());
-    setDefaultIteminReport(mCache.mTimeZoneChange, SystemStatusTimeZoneChange());
-    setDefaultIteminReport(mCache.mTimeChange, SystemStatusTimeChange());
-    setDefaultIteminReport(mCache.mWifiSupplicantStatus, SystemStatusWifiSupplicantStatus());
-    setDefaultIteminReport(mCache.mShutdownState, SystemStatusShutdownState());
-    setDefaultIteminReport(mCache.mTac, SystemStatusTac());
-    setDefaultIteminReport(mCache.mMccMnc, SystemStatusMccMnc());
-    setDefaultIteminReport(mCache.mBtDeviceScanDetail, SystemStatusBtDeviceScanDetail());
-    setDefaultIteminReport(mCache.mBtLeDeviceScanDetail, SystemStatusBtleDeviceScanDetail());
+    mCache.mPositionFailure.push_back(SystemStatusPositionFailure());
+    if (mCache.mPositionFailure.size() > maxPositionFailure) {
+        mCache.mPositionFailure.erase(mCache.mPositionFailure.begin());
+    }
 
     pthread_mutex_unlock(&mMutexSystemStatus);
     return true;
@@ -1685,8 +1770,15 @@ bool SystemStatus::eventConnectionStatus(bool connected, uint8_t type)
 
         // send networkinof dataitem to systemstatus observer clients
         SystemStatusNetworkInfo s(type, "", "", false, connected, false);
+        IDataItemCore *networkinfo =
+                DataItemsFactoryProxy::createNewDataItem(NETWORKINFO_DATA_ITEM_ID);
+        if (nullptr == networkinfo) {
+            LOC_LOGE("Unable to create dataitemd");
+            return false;
+        }
+        networkinfo->copy(&s);
         list<IDataItemCore*> dl(0);
-        dl.push_back(&s);
+        dl.push_back(networkinfo);
         mSysStatusObsvr.notify(dl);
     }
     return true;

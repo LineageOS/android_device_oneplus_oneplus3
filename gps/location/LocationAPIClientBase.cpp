@@ -393,20 +393,14 @@ uint32_t LocationAPIClientBase::locAPIStartSession(uint32_t id, uint32_t session
                 trackingSession = mLocationAPI->startTracking(locationOptions);
                 LOC_LOGI("%s:%d] start new session: %d", __FUNCTION__, __LINE__, trackingSession);
                 mRequestQueues[REQUEST_SESSION].push(new StartTrackingRequest(*this));
-            } else {
+            } else if ((sessionMode == SESSION_MODE_ON_FULL) ||
+                       (sessionMode == SESSION_MODE_ON_TRIP_COMPLETED)) {
                 // Fill in the batch mode
                 BatchingOptions batchOptions = {};
                 batchOptions.size = sizeof(BatchingOptions);
-                switch (sessionMode) {
-                case SESSION_MODE_ON_FULL:
-                    batchOptions.batchingMode = BATCHING_MODE_ROUTINE;
-                    break;
-                case SESSION_MODE_ON_TRIP_COMPLETED:
+                batchOptions.batchingMode = BATCHING_MODE_ROUTINE;
+                if (sessionMode == SESSION_MODE_ON_TRIP_COMPLETED) {
                     batchOptions.batchingMode = BATCHING_MODE_TRIP;
-                    break;
-                default:
-                    batchOptions.batchingMode = BATCHING_MODE_NO_AUTO_REPORT;
-                    break;
                 }
 
                 batchingSession = mLocationAPI->startBatching(locationOptions, batchOptions);
@@ -415,7 +409,8 @@ uint32_t LocationAPIClientBase::locAPIStartSession(uint32_t id, uint32_t session
                 mRequestQueues[REQUEST_SESSION].push(new StartBatchingRequest(*this));
             }
 
-            uint32_t session = ((sessionMode != SESSION_MODE_ON_FIX) ?
+            uint32_t session = ((sessionMode == SESSION_MODE_ON_FULL ||
+                    (sessionMode == SESSION_MODE_ON_TRIP_COMPLETED)) ?
                     batchingSession : trackingSession);
 
             SessionEntity entity;
@@ -450,9 +445,12 @@ uint32_t LocationAPIClientBase::locAPIStopSession(uint32_t id)
             if (sMode == SESSION_MODE_ON_FIX) {
                 mRequestQueues[REQUEST_SESSION].push(new StopTrackingRequest(*this));
                 mLocationAPI->stopTracking(trackingSession);
-            } else {
+            } else if ((sMode == SESSION_MODE_ON_FULL) ||
+                       (sMode == SESSION_MODE_ON_TRIP_COMPLETED)) {
                 mRequestQueues[REQUEST_SESSION].push(new StopBatchingRequest(*this));
                 mLocationAPI->stopBatching(batchingSession);
+            } else {
+                LOC_LOGE("%s:%d] unknown mode %d.", __FUNCTION__, __LINE__, sMode);
             }
 
             retVal = LOCATION_ERROR_SUCCESS;
@@ -486,7 +484,8 @@ uint32_t LocationAPIClientBase::locAPIUpdateSessionOptions(uint32_t id, uint32_t
                 mRequestQueues[REQUEST_SESSION].push(new UpdateTrackingOptionsRequest(*this));
                 if (sMode == SESSION_MODE_ON_FIX) {
                     mLocationAPI->updateTrackingOptions(trackingSession, options);
-                } else  {
+                } else if ((sMode == SESSION_MODE_ON_FULL) ||
+                           (sMode == SESSION_MODE_ON_TRIP_COMPLETED)) {
                     // stop batching
                     // batchingSession will be removed from mSessionBiDict soon,
                     // so we don't need to add a new request to mRequestQueues[REQUEST_SESSION].
@@ -498,23 +497,19 @@ uint32_t LocationAPIClientBase::locAPIUpdateSessionOptions(uint32_t id, uint32_t
                     trackingSession = mLocationAPI->startTracking(options);
                     LOC_LOGI("%s:%d] start new session: %d",
                             __FUNCTION__, __LINE__, trackingSession);
+                } else {
+                    LOC_LOGE("%s:%d] unknown mode %d", __FUNCTION__, __LINE__, sMode);
                 }
-            } else {
+            } else if ((sessionMode == SESSION_MODE_ON_FULL) ||
+                       (sessionMode == SESSION_MODE_ON_TRIP_COMPLETED)) {
                 // we only add an UpdateBatchingOptionsRequest to mRequestQueues[REQUEST_SESSION],
                 // even if this update request will stop tracking and then start batching.
                 mRequestQueues[REQUEST_SESSION].push(new UpdateBatchingOptionsRequest(*this));
                 BatchingOptions batchOptions = {};
                 batchOptions.size = sizeof(BatchingOptions);
-                switch (sessionMode) {
-                case SESSION_MODE_ON_FULL:
-                    batchOptions.batchingMode = BATCHING_MODE_ROUTINE;
-                    break;
-                case SESSION_MODE_ON_TRIP_COMPLETED:
-                    batchOptions.batchingMode = BATCHING_MODE_TRIP;
-                    break;
-                default:
-                    batchOptions.batchingMode = BATCHING_MODE_NO_AUTO_REPORT;
-                    break;
+                batchOptions.batchingMode = BATCHING_MODE_ROUTINE;
+                if (sessionMode == SESSION_MODE_ON_TRIP_COMPLETED) {
+                   batchOptions.batchingMode = BATCHING_MODE_TRIP;
                 }
 
                 if (sMode == SESSION_MODE_ON_FIX) {
@@ -529,13 +524,19 @@ uint32_t LocationAPIClientBase::locAPIUpdateSessionOptions(uint32_t id, uint32_t
                     LOC_LOGI("%s:%d] start new session: %d",
                             __FUNCTION__, __LINE__, batchingSession);
                     mRequestQueues[REQUEST_SESSION].setSession(batchingSession);
-                } else {
+                } else if ((sMode == SESSION_MODE_ON_FULL) ||
+                           (sMode == SESSION_MODE_ON_TRIP_COMPLETED)) {
                     mLocationAPI->updateBatchingOptions(batchingSession, options, batchOptions);
+                } else {
+                    LOC_LOGE("%s:%d] unknown mode %d", __FUNCTION__, __LINE__, sMode);
                 }
 
+            } else {
+                LOC_LOGE("%s:%d] unknown mode %d.", __FUNCTION__, __LINE__, sessionMode);
             }
 
-            uint32_t session = ((sessionMode != SESSION_MODE_ON_FIX) ?
+            uint32_t session = ((sessionMode == SESSION_MODE_ON_FULL) ||
+                    (sessionMode == SESSION_MODE_ON_TRIP_COMPLETED) ?
                     batchingSession : trackingSession);
 
             entity.trackingSession = trackingSession;
@@ -555,25 +556,22 @@ uint32_t LocationAPIClientBase::locAPIUpdateSessionOptions(uint32_t id, uint32_t
     return retVal;
 }
 
-uint32_t LocationAPIClientBase::locAPIGetBatchedLocations(uint32_t id, size_t count)
+void LocationAPIClientBase::locAPIGetBatchedLocations(uint32_t id, size_t count)
 {
-    uint32_t retVal = LOCATION_ERROR_GENERAL_FAILURE;
     pthread_mutex_lock(&mMutex);
     if (mLocationAPI) {
-        if (mSessionBiDict.hasId(id)) {
+        uint32_t session = 0;
+        session = mRequestQueues[REQUEST_SESSION].getSession();
+        if (session > 0) {
             SessionEntity entity = mSessionBiDict.getExtById(id);
             uint32_t batchingSession = entity.batchingSession;
             mRequestQueues[REQUEST_SESSION].push(new GetBatchedLocationsRequest(*this));
             mLocationAPI->getBatchedLocations(batchingSession, count);
-            retVal = LOCATION_ERROR_SUCCESS;
         }  else {
-            retVal = LOCATION_ERROR_ID_UNKNOWN;
-            LOC_LOGE("%s:%d] invalid session: %d.", __FUNCTION__, __LINE__, id);
+            LOC_LOGE("%s:%d] invalid session: %d.", __FUNCTION__, __LINE__, session);
         }
     }
     pthread_mutex_unlock(&mMutex);
-
-    return retVal;
 }
 
 uint32_t LocationAPIClientBase::locAPIAddGeofences(
@@ -615,22 +613,12 @@ void LocationAPIClientBase::locAPIRemoveGeofences(size_t count, uint32_t* ids)
 
         if (mRequestQueues[REQUEST_GEOFENCE].getSession() == GEOFENCE_SESSION_ID) {
             size_t j = 0;
-            uint32_t id_cb;
-            LocationError err;
             for (size_t i = 0; i < count; i++) {
                 sessions[j] = mGeofenceBiDict.getSession(ids[i]);
-                id_cb = ids[i];
                 if (sessions[j] > 0) {
-                    mGeofenceBiDict.rmBySession(sessions[j]);
-                    err = LOCATION_ERROR_SUCCESS;
-                    onRemoveGeofencesCb(1, &err, &id_cb);
                     j++;
-                } else {
-                    err = LOCATION_ERROR_ID_UNKNOWN;
-                    onRemoveGeofencesCb(1, &err, &id_cb);
                 }
             }
-
             if (j > 0) {
                 mRequestQueues[REQUEST_GEOFENCE].push(new RemoveGeofencesRequest(*this));
                 mLocationAPI->removeGeofences(j, sessions);
@@ -755,8 +743,38 @@ void LocationAPIClientBase::locAPIResumeGeofences(
 
 void LocationAPIClientBase::locAPIRemoveAllGeofences()
 {
-    std::vector<uint32_t> sessionsVec = mGeofenceBiDict.getAllSessions();
-    locAPIRemoveGeofences(sessionsVec.size(), &sessionsVec[0]);
+    pthread_mutex_lock(&mMutex);
+    if (mLocationAPI) {
+        std::vector<uint32_t> sessionsVec = mGeofenceBiDict.getAllSessions();
+        size_t count = sessionsVec.size();
+        uint32_t* sessions = (uint32_t*)malloc(sizeof(uint32_t) * count);
+        if (sessions == NULL) {
+            LOC_LOGE("%s:%d] Failed to allocate %zu bytes !",
+                    __FUNCTION__, __LINE__, sizeof(uint32_t) * count);
+            pthread_mutex_unlock(&mMutex);
+            return;
+        }
+
+        if (mRequestQueues[REQUEST_GEOFENCE].getSession() == GEOFENCE_SESSION_ID) {
+            size_t j = 0;
+            for (size_t i = 0; i < count; i++) {
+                sessions[j] = sessionsVec[i];
+                if (sessions[j] > 0) {
+                    j++;
+                }
+            }
+            if (j > 0) {
+                mRequestQueues[REQUEST_GEOFENCE].push(new RemoveGeofencesRequest(*this));
+                mLocationAPI->removeGeofences(j, sessions);
+            }
+        } else {
+            LOC_LOGE("%s:%d] invalid session: %d.", __FUNCTION__, __LINE__,
+                    mRequestQueues[REQUEST_GEOFENCE].getSession());
+        }
+
+        free(sessions);
+    }
+    pthread_mutex_unlock(&mMutex);
 }
 
 void LocationAPIClientBase::locAPIGnssNiResponse(uint32_t id, GnssNiResponse response)

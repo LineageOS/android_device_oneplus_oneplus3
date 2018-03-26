@@ -30,7 +30,7 @@
 #ifndef GNSS_API_CLINET_H
 #define GNSS_API_CLINET_H
 
-#include <mutex>
+
 #include <android/hardware/gnss/1.0/IGnss.h>
 #include <android/hardware/gnss/1.0/IGnssCallback.h>
 #include <android/hardware/gnss/1.0/IGnssNiCallback.h>
@@ -91,10 +91,11 @@ public:
 private:
     sp<IGnssCallback> mGnssCbIface;
     sp<IGnssNiCallback> mGnssNiCbIface;
-    std::mutex mMutex;
+
     LocationAPIControlClient* mControlClient;
     LocationCapabilitiesMask mLocationCapabilitiesMask;
     bool mLocationCapabilitiesCached;
+
     LocationOptions mLocationOptions;
 };
 
