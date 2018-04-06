@@ -34,25 +34,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">3</integer>
 
-    <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
-    <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
-    <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
-    <integer-array translatable="false" name="config_tether_upstream_types">
-        <item>1</item>
-        <item>4</item>
-        <item>7</item>
-        <item>9</item>
-    </integer-array>
-
-    <!-- String containing the apn value for tethering.  May be overriden by secure settings
-     TETHER_DUN_APN.  Value is a comma separated series of strings:
-     "name,apn,proxy,port,username,password,server,mmsc,mmsproxy,mmsport,mcc,mnc,auth,type"
-     note that empty fields can be ommitted: "name,apn,,,,,,,,,310,260,,DUN" -->
-    <string-array translatable="false" name="config_tether_apndata">
-        <item>T-Mobile Tethering,pcweb.tmobile.com,,,,,,,,,310,260,,DUN</item>
-        <item>[ApnSettingV3]MetroPCS Tethering,pcweb.metropcs.com,,,,,,,,,310,260,,DUN,,,true,0,,,,,,,gid,6D</item>
-    </string-array>
-
     <!-- Configure mobile tcp buffer sizes in the form:
          rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
          If no value is found for the rat-name in use, the system default will be applied.

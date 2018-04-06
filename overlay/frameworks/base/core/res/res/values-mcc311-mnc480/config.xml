@@ -41,16 +41,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">6</integer>
 
-    <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering -->
-    <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
-    <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
-    <integer-array translatable="false" name="config_tether_upstream_types">
-        <item>1</item>
-        <item>4</item>
-        <item>7</item>
-        <item>9</item>
-    </integer-array>
-
     <!-- Use ERI text for network name on CDMA LTE -->
     <bool name="config_LTE_eri_for_network_name">false</bool>
 
