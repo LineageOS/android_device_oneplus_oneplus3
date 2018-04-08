@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017 The LineageOS Project
+ *               2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.ContentObserver;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -87,21 +85,15 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
 
         boolean dozeEnabled = Utils.isDozeEnabled(getActivity());
 
-        mTextView = (TextView) view.findViewById(R.id.switch_text);
+        mTextView = view.findViewById(R.id.switch_text);
         mTextView.setText(getString(dozeEnabled ?
                 R.string.switch_bar_on : R.string.switch_bar_off));
 
         View switchBar = view.findViewById(R.id.switch_bar);
-        Switch switchWidget = (Switch) switchBar.findViewById(android.R.id.switch_widget);
+        Switch switchWidget = switchBar.findViewById(android.R.id.switch_widget);
         switchWidget.setChecked(dozeEnabled);
         switchWidget.setOnCheckedChangeListener(this);
-
-        switchBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchWidget.setChecked(!switchWidget.isChecked());
-            }
-        });
+        switchBar.setOnClickListener(v -> switchWidget.setChecked(!switchWidget.isChecked()));
     }
 
     @Override
@@ -137,12 +129,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
             return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.doze_settings_help_title)
                     .setMessage(R.string.doze_settings_help_text)
-                    .setNegativeButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    })
+                    .setNegativeButton(R.string.dialog_ok, (dialog, which) -> dialog.cancel())
                     .create();
         }
 
