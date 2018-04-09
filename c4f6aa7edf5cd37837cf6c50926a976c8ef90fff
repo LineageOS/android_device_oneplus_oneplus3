@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c661185c_583b0a37",
+        "filename": "doze/src/org/lineageos/settings/doze/DozeSettingsFragment.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2018-04-09T08:46:57Z",
+      "side": 1,
+      "message": "lambda expression? Is it supported without jack?",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 94
+      },
+      "revId": "c4f6aa7edf5cd37837cf6c50926a976c8ef90fff",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
