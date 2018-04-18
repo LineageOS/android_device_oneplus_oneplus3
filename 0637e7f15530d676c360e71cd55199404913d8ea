@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c38fe54_9082b3f3",
+        "filename": "device.mk",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-04-18T15:56:28Z",
+      "side": 1,
+      "message": "Isn\u0027t this being implicitly built while building vendor.lineage.livedisplay@1.0-service-sdm?",
+      "range": {
+        "startLine": 320,
+        "startChar": 4,
+        "endLine": 320,
+        "endChar": 40
+      },
+      "revId": "0637e7f15530d676c360e71cd55199404913d8ea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
