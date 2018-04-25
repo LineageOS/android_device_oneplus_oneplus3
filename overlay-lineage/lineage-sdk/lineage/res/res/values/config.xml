@@ -38,16 +38,6 @@
          pulsating and RGB control would set this config to 75. -->
     <integer name="config_deviceLightCapabilities">107</integer>
 
-    <!-- Color temperature settings for LiveDisplay. These were obtained by
-         measuring the display at various color balance levels. -->
-    <integer name="config_minColorTemperature">2500</integer>
-    <integer name="config_maxColorTemperature">25000</integer>
-
-    <!-- Corresponds to color balance level of zero, this is the native
-         display temperature -->
-    <integer name="config_dayColorTemperature">8000</integer>
-    <integer name="config_nightColorTemperature">5000</integer>
-
     <!-- For high brightness mode -->
     <integer name="config_outdoorAmbientLux">20000</integer>
 
