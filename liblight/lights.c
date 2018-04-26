@@ -2,6 +2,7 @@
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2014 The Linux Foundation. All rights reserved.
  * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -240,11 +241,27 @@ set_speaker_light_locked(struct light_device_t* dev,
 {
     int red, green, blue, blink;
     int onMS, offMS, stepDuration, pauseHi;
-    unsigned int colorRGB;
+    unsigned int alpha;
+    unsigned int colorRGB = state->color;
     char *duty;
 
     if(!dev) {
         return -1;
+    }
+
+    // Extract brightness from AARRGGBB
+    alpha = (colorRGB >> 24) & 0xff;
+
+    // Retrieve each of the RGB colors
+    red = (colorRGB >> 16) & 0xff;
+    green = (colorRGB >> 8) & 0xff;
+    blue = colorRGB & 0xff;
+
+    // Scale RGB colors if a brightness has been applied by the user
+    if (alpha != 0xff) {
+        red = (red * alpha) / 0xff;
+        green = (green * alpha) / 0xff;
+        blue = (blue * alpha) / 0xff;
     }
 
     switch (state->flashMode) {
@@ -259,15 +276,10 @@ set_speaker_light_locked(struct light_device_t* dev,
             break;
     }
 
-    colorRGB = state->color;
+    blink = onMS > 0 && offMS > 0;
 
     ALOGV("set_speaker_light_locked mode %d, colorRGB=%08X, onMS=%d, offMS=%d\n",
             state->flashMode, colorRGB, onMS, offMS);
-
-    red = (colorRGB >> 16) & 0xFF;
-    green = (colorRGB >> 8) & 0xFF;
-    blue = colorRGB & 0xFF;
-    blink = onMS > 0 && offMS > 0;
 
     // disable all blinking to start
     write_int(RGB_BLINK_FILE, 0);
@@ -359,35 +371,7 @@ set_light_notifications(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     pthread_mutex_lock(&g_lock);
-
-    unsigned int brightness;
-    unsigned int color;
-    unsigned int rgb[3];
-
     g_notification = *state;
-
-    // If a brightness has been applied by the user
-    brightness = (g_notification.color & 0xFF000000) >> 24;
-    if (brightness > 0 && brightness < 0xFF) {
-
-        // Retrieve each of the RGB colors
-        color = g_notification.color & 0x00FFFFFF;
-        rgb[0] = (color >> 16) & 0xFF;
-        rgb[1] = (color >> 8) & 0xFF;
-        rgb[2] = color & 0xFF;
-
-        // Apply the brightness level
-        if (rgb[0] > 0)
-            rgb[0] = (rgb[0] * brightness) / 0xFF;
-        if (rgb[1] > 0)
-            rgb[1] = (rgb[1] * brightness) / 0xFF;
-        if (rgb[2] > 0)
-            rgb[2] = (rgb[2] * brightness) / 0xFF;
-
-        // Update with the new color
-        g_notification.color = (rgb[0] << 16) + (rgb[1] << 8) + rgb[2];
-    }
-
     handle_speaker_light_locked(dev);
     pthread_mutex_unlock(&g_lock);
     return 0;
