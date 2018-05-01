@@ -17,4 +17,9 @@
 <resources>
     <!-- Button backlight -->
     <bool name="config_deviceHasVariableButtonBrightness">true</bool>
+
+    <!-- The list of boot modes which should be treated as normal mode. -->
+    <string-array name="config_additionalNormalBootModes" translatable="false">
+        <item>"reboot"</item>
+    </string-array>
 </resources>
