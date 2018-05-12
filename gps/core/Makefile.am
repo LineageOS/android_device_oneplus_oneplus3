@@ -19,6 +19,7 @@ libloc_core_la_h_sources = \
            LocAdapterProxyBase.h \
            data-items/DataItemId.h \
            data-items/IDataItemCore.h \
+           data-items/DataItemConcreteTypesBase.h \
            observer/IDataItemObserver.h \
            observer/IDataItemSubscription.h \
            observer/IFrameworkActionReq.h \
