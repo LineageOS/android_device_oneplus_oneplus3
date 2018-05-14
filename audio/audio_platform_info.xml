@@ -66,6 +66,12 @@
         <device name="SND_DEVICE_OUT_VOICE_LINE" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_FULL_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_VCO_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
+        <device name="SND_DEVICE_OUT_BT_SCO_WB" interface="AUX_PCM_RX "/>
+        <device name="SND_DEVICE_OUT_BT_SCO" interface="AUX_PCM_RX "/>
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_BT_SCO" backend="speaker-and-bt-sco" interface="QUAT_MI2S_RX-and-AUX_PCM_RX"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_BT_SCO_WB" backend="speaker-and-bt-sco-wb" interface="QUAT_MI2S_RX-and-AUX_PCM_RX"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_WSA_AND_BT_SCO" backend="wsa-speaker-and-bt-sco" interface="QUAT_MI2S_RX-and-AUX_PCM_RX"/>
+        <device name="SND_DEVICE_OUT_SPEAKER_WSA_AND_BT_SCO_WB" backend="wsa-speaker-and-bt-sco-wb" interface="QUAT_MI2S_RX-and-AUX_PCM_RX"/>
 
         <device name="SND_DEVICE_OUT_SPEAKER" backend="quat_i2s"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="quat_i2s"/>
