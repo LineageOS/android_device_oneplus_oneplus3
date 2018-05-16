@@ -375,24 +375,6 @@
         <item>"/system/framework/arm64/boot-core-libart.vdex"</item>
     </string-array>
 
-    <!-- Device configuration setting the minfree tunable in the lowmemorykiller in the kernel.
-         A high value will cause the lowmemorykiller to fire earlier, keeping more memory
-         in the file cache and preventing I/O thrashing, but allowing fewer processes to
-         stay in memory.  A low value will keep more processes in memory but may cause
-         thrashing if set too low.  Overrides the default value chosen by ActivityManager
-         based on screen size and total memory for the largest lowmemorykiller bucket, and
-         scaled proportionally to the smaller buckets.  -1 keeps the default. -->
-    <integer name="config_lowMemoryKillerMinFreeKbytesAbsolute">409600</integer>
-
-    <!-- Device configuration setting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
-         (if it exists).  A high value will increase the amount of memory that the kernel
-         tries to keep free, reducing allocation time and causing the lowmemorykiller to kill
-         earlier.  A low value allows more memory to be used by processes but may cause more
-         allocations to block waiting on disk I/O or lowmemorykiller.  Overrides the default
-         value chosen by ActivityManager based on screen size.  0 prevents keeping any extra
-         memory over what the kernel keeps by default.  -1 keeps the default. -->
-    <integer name="config_extraFreeKbytesAbsolute">40960</integer>
-
     <!-- If this is true, device supports Sustained Performance Mode. -->
     <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
