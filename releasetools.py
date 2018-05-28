@@ -29,9 +29,14 @@ def IncrementalOTA_Assertions(info):
 def AddModemAssertion(info, input_zip):
   android_info = input_zip.read("OTA/android-info.txt")
   m = re.search(r'require\s+version-modem\s*=\s*(.+)', android_info)
-  if m:
-    version = m.group(1).rstrip()
-    if len(version) and '*' not in version:
-      cmd = 'assert(op3.verify_modem("' + version + '") == "1");'
+  f = re.search(r'require\s+version-firmware\s*=\s*(.+)', android_info)
+  if m and f:
+    version_modem = m.group(1).rstrip()
+    version_firmware = f.group(1).rstrip()
+    if ((len(version_modem) and '*' not in version_modem) and \
+    (len(version_firmware) and '*' not in version_firmware)):
+      cmd = 'assert(op3.verify_modem("' + version_modem + '") == "1" || \
+abort("Error: This package requires firmware version ' + version_firmware + \
+' or newer. Please upgrade firmware and retry!"););'
       info.script.AppendExtra(cmd)
   return
