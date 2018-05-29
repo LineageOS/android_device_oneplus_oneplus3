@@ -28,7 +28,7 @@
 # Non A/B, non-split(no vendor.img) recovery.fstab variant.
 #device         mount point      fstype        [device2] [length=]
 
-/dev/block/bootdevice/by-name/system       /system         ext4    ro,barrier=1                                                    wait,verify
+/dev/block/bootdevice/by-name/system       /               ext4    ro,barrier=1                                                    wait,verify
 /dev/block/bootdevice/by-name/cache        /cache          f2fs    noatime,nosuid,nodev,inline_xattr,flush_merge,data_flush        wait,check
 /dev/block/bootdevice/by-name/cache        /cache          ext4    noatime,nosuid,nodev,barrier=1,data=ordered                     wait,check
 /dev/block/bootdevice/by-name/userdata     /data           f2fs    noatime,nosuid,nodev,inline_xattr,data_flush                    wait,check,encryptable=footer
