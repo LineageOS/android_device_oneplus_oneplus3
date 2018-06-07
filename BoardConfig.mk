@@ -1,5 +1,5 @@
 # Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017-2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -227,9 +227,15 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/hw/camera.msm8996.so|libcamera_shim.so \
     /system/lib/libcamera_client.so|libcamera_parameters_shim.so
 
+# Thermal
+USE_DEVICE_SPECIFIC_THERMAL := true
+
 # Treble
 #PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
+
+# Vr
+USE_DEVICE_SPECIFIC_VR := true
 
 # Wifi
 BOARD_HAS_QCOM_WLAN := true
