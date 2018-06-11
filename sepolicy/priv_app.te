@@ -1,0 +1,2 @@
+# allow to set custom picture in user profile
+allow priv_app system_app_data_file:file read;
