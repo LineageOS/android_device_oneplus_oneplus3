@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de86faa0_3aea1f42",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 19235
+      },
+      "writtenOn": "2018-06-13T07:45:22Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"OnePlus3T\"?",
+      "range": {
+        "startLine": 123,
+        "startChar": 43,
+        "endLine": 123,
+        "endChar": 51
+      },
+      "revId": "ec338d3af61de1e296e07a2df6878401fa57626f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
