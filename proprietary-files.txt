@@ -307,8 +307,6 @@ lib/libop_xphoto.so
 lib/libop_zlib.so
 lib/libopcamera_crypt.so
 lib/libopcamera_native_modules.so
-lib/libopcamera.so
-lib/libopcameralib.so
 lib/libSensorManagerHAL.so
 lib/qpd_dspcl_v2.bin
 lib/TC_Bayer_Converter_v6_core_opt.bin
