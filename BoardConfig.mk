@@ -224,8 +224,7 @@ BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-    /system/vendor/lib/hw/camera.msm8996.so|libcamera_shim.so \
-    /system/lib/libcamera_client.so|libcamera_parameters_shim.so
+    /vendor/lib/hw/camera.msm8996.so|libcamera_shim.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
