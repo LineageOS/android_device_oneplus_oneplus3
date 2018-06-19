@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -87,7 +87,7 @@ bool IPACM_Filtering::AddFilteringRule(struct ipa_ioc_add_flt_rule const *ruleTa
 	retval = ioctl(fd, IPA_IOC_ADD_FLT_RULE, ruleTable);
 	if (retval != 0)
 	{
-		IPACMERR("Failed adding Filtering rule %p\n", ruleTable);
+		IPACMERR("Failed adding Filtering rule %pK\n", ruleTable);
 		PERROR("unable to add filter rule:");
 
 		for (int cnt = 0; cnt < ruleTable->num_rules; cnt++)
@@ -110,7 +110,7 @@ bool IPACM_Filtering::AddFilteringRule(struct ipa_ioc_add_flt_rule const *ruleTa
 		}
 	}
 
-	IPACMDBG("Added Filtering rule %p\n", ruleTable);
+	IPACMDBG("Added Filtering rule %pK\n", ruleTable);
 	return true;
 }
 
@@ -138,10 +138,13 @@ bool IPACM_Filtering::AddFilteringRuleAfter(struct ipa_ioc_add_flt_rule_after co
 
 	if (retval != 0)
 	{
-		IPACMERR("Failed adding Filtering rule %p\n", ruleTable);
+		IPACMERR("Failed adding Filtering rule %pK\n", ruleTable);
 		return false;
 	}
-	IPACMDBG("Added Filtering rule %p\n", ruleTable);
+	IPACMDBG("Added Filtering rule %pK\n", ruleTable);
+#else
+	if (ruleTable)
+		IPACMERR("Not support adding Filtering rule %pK\n", ruleTable);
 #endif
 	return true;
 }
@@ -153,11 +156,11 @@ bool IPACM_Filtering::DeleteFilteringRule(struct ipa_ioc_del_flt_rule *ruleTable
 	retval = ioctl(fd, IPA_IOC_DEL_FLT_RULE, ruleTable);
 	if (retval != 0)
 	{
-		IPACMERR("Failed deleting Filtering rule %p\n", ruleTable);
+		IPACMERR("Failed deleting Filtering rule %pK\n", ruleTable);
 		return false;
 	}
 
-	IPACMDBG("Deleted Filtering rule %p\n", ruleTable);
+	IPACMDBG("Deleted Filtering rule %pK\n", ruleTable);
 	return true;
 }
 
@@ -447,7 +450,7 @@ bool IPACM_Filtering::AddWanDLFilteringRule(struct ipa_ioc_add_flt_rule const *r
 		ret = ioctl(fd_wwan_ioctl, WAN_IOC_ADD_FLT_RULE_EX, &qmi_rule_ex_msg);
 		if (ret != 0)
 		{
-			IPACMERR("Failed adding Filtering rule %p with ret %d\n ", &qmi_rule_ex_msg, ret);
+			IPACMERR("Failed adding Filtering rule %pK with ret %d\n ", &qmi_rule_ex_msg, ret);
 			close(fd_wwan_ioctl);
 			return false;
 		}
@@ -471,12 +474,12 @@ bool IPACM_Filtering::SendFilteringRuleIndex(struct ipa_fltr_installed_notif_req
 	ret = ioctl(fd_wwan_ioctl, WAN_IOC_ADD_FLT_RULE_INDEX, table);
 	if (ret != 0)
 	{
-		IPACMERR("Failed adding filtering rule index %p with ret %d\n", table, ret);
+		IPACMERR("Failed adding filtering rule index %pK with ret %d\n", table, ret);
 		close(fd_wwan_ioctl);
 		return false;
 	}
 
-	IPACMDBG("Added Filtering rule index %p\n", table);
+	IPACMDBG("Added Filtering rule index %pK\n", table);
 	close(fd_wwan_ioctl);
 	return true;
 }
@@ -517,7 +520,7 @@ bool IPACM_Filtering::ModifyFilteringRule(struct ipa_ioc_mdfy_flt_rule* ruleTabl
 	ret = ioctl(fd, IPA_IOC_MDFY_FLT_RULE, ruleTable);
 	if (ret != 0)
 	{
-		IPACMERR("Failed modifying filtering rule %p\n", ruleTable);
+		IPACMERR("Failed modifying filtering rule %pK\n", ruleTable);
 
 		for (i = 0; i < ruleTable->num_rules; i++)
 		{

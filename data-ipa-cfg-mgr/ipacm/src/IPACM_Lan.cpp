@@ -447,6 +447,18 @@ void IPACM_Lan::event_callback(ipa_cm_event_id event, void *param)
 						} else {
 							IPACMDBG_H("Wan_V6 haven't up yet\n");
 						}
+#else
+						/* check if Upstream was set before */
+						if (IPACM_Wan::isWanUP(ipa_if_num))
+						{
+							IPACMDBG_H("Upstream was set previously for ipv4, change is_upstream_set flag\n");
+							is_upstream_set[IPA_IP_v4] = true;
+						}
+						if (IPACM_Wan::isWanUP_V6(ipa_if_num))
+						{
+							IPACMDBG_H("Upstream was set previously for ipv6, change is_upstream_set flag\n");
+							is_upstream_set[IPA_IP_v6] = true;
+						}
 #endif
 						/* Post event to NAT */
 						if (data->iptype == IPA_IP_v4)
@@ -3250,7 +3262,8 @@ int IPACM_Lan::handle_uplink_filter_rule(ipacm_ext_prop *prop, ipa_ip_type iptyp
 
 #ifdef FEATURE_IPACM_HAL
 		/* add prefix equation in modem UL rules */
-		if(iptype == IPA_IP_v4 && flt_rule_entry.rule.eq_attrib.num_offset_meq_32 < IPA_IPFLTR_NUM_MEQ_32_EQNS)
+		if(iptype == IPA_IP_v4 && (flt_rule_entry.rule.eq_attrib.num_offset_meq_32 >= 0)
+			&& (flt_rule_entry.rule.eq_attrib.num_offset_meq_32 < IPA_IPFLTR_NUM_MEQ_32_EQNS))
 		{
 			flt_rule_entry.rule.eq_attrib.num_offset_meq_32++;
 			eq_index = flt_rule_entry.rule.eq_attrib.num_offset_meq_32 - 1;
@@ -3284,7 +3297,9 @@ int IPACM_Lan::handle_uplink_filter_rule(ipacm_ext_prop *prop, ipa_ip_type iptyp
 		}
 		else
 		{
-			if (flt_rule_entry.rule.eq_attrib.num_offset_meq_128 < IPA_IPFLTR_NUM_MEQ_128_EQNS)
+			if ((flt_rule_entry.rule.eq_attrib.num_offset_meq_128 >= 0) &&
+				(flt_rule_entry.rule.eq_attrib.num_offset_meq_128 
+					< IPA_IPFLTR_NUM_MEQ_128_EQNS))
 			{
 				flt_rule_entry.rule.eq_attrib.num_offset_meq_128++;
 				eq_index = flt_rule_entry.rule.eq_attrib.num_offset_meq_128 - 1;

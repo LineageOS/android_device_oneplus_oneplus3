@@ -114,6 +114,7 @@ private:
 
 	/* cache the add_downstream events if netdev is not ready */
 	framework_event_cache event_cache[MAX_EVENT_CACHE];
+	bool is_cache;
 
 	/* latest update cache entry */
 	int latest_cache_index;
