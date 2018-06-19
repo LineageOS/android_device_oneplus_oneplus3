@@ -309,6 +309,18 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 					} else {
 						IPACMDBG_H("Wan_V6 haven't up yet \n");
 					}
+#else
+					/* check if Upstream was set before */
+					if (IPACM_Wan::isWanUP(ipa_if_num))
+					{
+						IPACMDBG_H("Upstream was set previously for ipv4, change is_upstream_set flag\n");
+						is_upstream_set[IPA_IP_v4] = true;
+					}
+					if (IPACM_Wan::isWanUP_V6(ipa_if_num))
+					{
+						IPACMDBG_H("Upstream was set previously for ipv6, change is_upstream_set flag\n");
+						is_upstream_set[IPA_IP_v6] = true;
+					}
 #endif
 					/* checking if SW-RT_enable */
 					if (IPACM_Iface::ipacmcfg->ipa_sw_rt_enable == true)

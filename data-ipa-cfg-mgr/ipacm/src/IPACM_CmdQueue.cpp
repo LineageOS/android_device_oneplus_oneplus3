@@ -165,8 +165,12 @@ void* MessageQueue::Process(void *param)
 		}
 		else
 		{
-			IPACMDBG("Get event %s from internal queue.\n",
-				IPACM_Iface::ipacmcfg->getEventName(item->evt.data.event));
+			eventName = IPACM_Iface::ipacmcfg->getEventName(item->evt.data.event);
+			if (eventName != NULL)
+			{
+				IPACMDBG("Get event %s from internal queue.\n",
+					eventName);
+			}
 		}
 
 		if(item == NULL)
@@ -201,7 +205,7 @@ void* MessageQueue::Process(void *param)
 				return NULL;
 			}
 
-			IPACMDBG("Processing item %p event ID: %d\n",item,item->evt.data.event);
+			IPACMDBG("Processing item %pK event ID: %d\n",item,item->evt.data.event);
 			item->evt.callback_ptr(&item->evt.data);
 			delete item;
 			item = NULL;
