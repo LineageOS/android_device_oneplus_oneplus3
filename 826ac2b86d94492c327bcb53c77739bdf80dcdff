@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6548fc2a_18f007ae",
+        "filename": "overlay/packages/apps/CarrierConfig/res/xml/vendor.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2018-06-23T04:47:40Z",
+      "side": 1,
+      "message": "is vt unsupported?",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "826ac2b86d94492c327bcb53c77739bdf80dcdff",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
