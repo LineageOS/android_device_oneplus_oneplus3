@@ -1,6 +1,6 @@
 # Copyright (C) 2009 The Android Open Source Project
 # Copyright (c) 2011, The Linux Foundation. All rights reserved.
-# Copyright (C) 2017 The LineageOS Project
+# Copyright (C) 2017-2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,15 +19,15 @@ import common
 import re
 
 def FullOTA_Assertions(info):
-  AddModemAssertion(info)
+  AddModemAssertion(info, info.input_zip)
   return
 
 def IncrementalOTA_Assertions(info):
-  AddModemAssertion(info)
+  AddModemAssertion(info, info.target_zip)
   return
 
-def AddModemAssertion(info):
-  android_info = info.input_zip.read("OTA/android-info.txt")
+def AddModemAssertion(info, input_zip):
+  android_info = input_zip.read("OTA/android-info.txt")
   m = re.search(r'require\s+version-modem\s*=\s*(.+)', android_info)
   if m:
     version = m.group(1).rstrip()
