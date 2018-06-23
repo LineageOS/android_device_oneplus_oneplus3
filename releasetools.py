@@ -19,15 +19,16 @@ import common
 import re
 
 def FullOTA_Assertions(info):
-  AddModemAssertion(info)
+  android_info = info.input_zip.read("OTA/android-info.txt")
+  AddModemAssertion(info, android_info)
   return
 
 def IncrementalOTA_Assertions(info):
-  AddModemAssertion(info)
+  android_info = info.target_zip.read("OTA/android-info.txt")
+  AddModemAssertion(info, android_info)
   return
 
-def AddModemAssertion(info):
-  android_info = info.input_zip.read("OTA/android-info.txt")
+def AddModemAssertion(info, android_info):
   m = re.search(r'require\s+version-modem\s*=\s*(.+)', android_info)
   if m:
     version = m.group(1).rstrip()
