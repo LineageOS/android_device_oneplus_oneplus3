@@ -1134,6 +1134,14 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="ignore_reset_ut_capability_bool" value="true" />
     </carrier_config>
 
+    <carrier_config mcc="234" mnc="20">
+        <boolean name="carrier_volte_available_bool" value="true" />
+    </carrier_config>
+
+    <carrier_config mcc="234" mnc="94">
+        <boolean name="carrier_volte_available_bool" value="true" />
+    </carrier_config>
+
     <carrier_config mcc="262" mnc="02">
         <boolean name="carrier_volte_available_bool" value="true" />
     </carrier_config>
