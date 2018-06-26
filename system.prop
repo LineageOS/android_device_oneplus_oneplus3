@@ -132,19 +132,6 @@ ro.nfc.port=I2C
 #ro.vendor.at_library=libqti-at.so
 #sys.games.gt.prof=1
 
-#hwui properties
-ro.hwui.texture_cache_size=96
-ro.hwui.layer_cache_size=64
-ro.hwui.r_buffer_cache_size=12
-ro.hwui.path_cache_size=39
-ro.hwui.gradient_cache_size=1
-ro.hwui.drop_shadow_cache_size=7
-ro.hwui.texture_cache_flushrate=0.4
-ro.hwui.text_small_cache_width=2048
-ro.hwui.text_small_cache_height=2048
-ro.hwui.text_large_cache_width=3072
-ro.hwui.text_large_cache_height=2048
-
 #default usb composition
 #persist.sys.usb.config=diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
 
