@@ -28,6 +28,7 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 sdm.debug.disable_skip_validate=1
 debug.sf.recomputecrop=0
+ro.opengles.version=196610
 ro.sf.lcd_density=480
 
 #ifdef VENDOR_EDIT
@@ -131,19 +132,6 @@ ro.nfc.port=I2C
 #ro.vendor.gt_library=libqti-gt.so
 #ro.vendor.at_library=libqti-at.so
 #sys.games.gt.prof=1
-
-#hwui properties
-ro.hwui.texture_cache_size=96
-ro.hwui.layer_cache_size=64
-ro.hwui.r_buffer_cache_size=12
-ro.hwui.path_cache_size=39
-ro.hwui.gradient_cache_size=1
-ro.hwui.drop_shadow_cache_size=7
-ro.hwui.texture_cache_flushrate=0.4
-ro.hwui.text_small_cache_width=2048
-ro.hwui.text_small_cache_height=2048
-ro.hwui.text_large_cache_width=3072
-ro.hwui.text_large_cache_height=2048
 
 #default usb composition
 #persist.sys.usb.config=diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
