@@ -196,8 +196,6 @@ PRODUCT_PACKAGES += \
     Snap \
     libcamera_parameters_shim \
     libcamera_shim \
-    camera.device@1.0-impl \
-    camera.device@3.2-impl \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service.oneplus3 \
     vendor.qti.hardware.camera.device@1.0 \
