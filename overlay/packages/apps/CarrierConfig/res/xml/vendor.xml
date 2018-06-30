@@ -1392,6 +1392,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
     <carrier_config mcc="404" mnc="20">
         <boolean name="carrier_volte_available_bool" value="true" />
     </carrier_config>
+   
+   <carrier_config mcc="404" mnc="92">
+        <boolean name="carrier_volte_available_bool" value="true" />
+    </carrier_config>
 
     <carrier_config>
         <string-array name="ratchet_rat_families" num="3">
