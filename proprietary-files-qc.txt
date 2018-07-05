@@ -307,7 +307,7 @@ vendor/lib64/vendor.display.color@1.0_vendor.so|25c717f3004a5932dcbb2f55d5165c01
 vendor/lib64/vendor.display.postproc@1.0_vendor.so|503ef07fcfbbfcd8db096de79dfd822c8ada5e9b
 
 # QMI
-etc/permissions/qti_libpermissions.xml|ef3c88495f2f61a2d16e1445113a9d80f8db0e0a
+etc/permissions/qti_libpermissions.xml
 etc/permissions/qti_permissions.xml
 lib/libdiag_system.so
 lib/libqmi_cci_system.so

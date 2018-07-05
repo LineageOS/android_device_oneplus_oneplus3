@@ -58,7 +58,9 @@ extract "$MY_DIR"/proprietary-files.txt "$SRC"
 
 "$MY_DIR"/setup-makefiles.sh
 
-CAMERA_HAL="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/vendor/lib/hw/camera.msm8996.so
+DEVICE_BLOB_ROOT="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary
+
+CAMERA_HAL="$DEVICE_BLOB_ROOT"/vendor/lib/hw/camera.msm8996.so
 
 sed -i \
     -e 's/_ZN7qcamera17QCameraParameters16setQuadraCfaModeEjb/_ZN7qcamera17QCameraParameters16setQuadraCfaModSHIM/' \
@@ -69,3 +71,9 @@ sed -i \
     -e 's/_ZN7qcamera17QCameraParameters21handleSuperResoultionEv/_ZN7qcamera17QCameraParameters21handleSuperResoultiSHIM/' \
     -e 's/_ZN7qcamera17QCameraParameters17isSuperResoultionEv/_ZN7qcamera17QCameraParameters17isSuperResoultiSHIM/' \
     "$CAMERA_HAL"
+
+#
+# Correct android.hidl.manager@1.0-java jar name
+#
+sed -i "s|name=\"android.hidl.manager-V1.0-java|name=\"android.hidl.manager@1.0-java|g" \
+    "$DEVICE_BLOB_ROOT"/etc/permissions/qti_libpermissions.xml
