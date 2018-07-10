@@ -381,6 +381,9 @@
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
     </string-array>
 
+    <!-- Should the pinner service pin the Home application? -->
+    <bool name="config_pinnerHomeApp">true</bool>
+
     <!-- If this is true, device supports Sustained Performance Mode. -->
     <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
