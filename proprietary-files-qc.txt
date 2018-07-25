@@ -306,6 +306,15 @@ vendor/lib64/libsdm-disp-vndapis.so|0770a8dc3ab6b3f385be14cd25e8b89a0e780a2e
 vendor/lib64/vendor.display.color@1.0_vendor.so|25c717f3004a5932dcbb2f55d5165c010f7eac1a
 vendor/lib64/vendor.display.postproc@1.0_vendor.so|503ef07fcfbbfcd8db096de79dfd822c8ada5e9b
 
+# Power-off alarm - from gemini - OPR1.170623.032
+etc/permissions/vendor-qti-hardware-alarm.xml|99ea2b3abffc975fb9875b5b3befabfb6eead7b9
+-vendor/app/PowerOffAlarm/PowerOffAlarm.apk|080f691c8af2fadbd260d330a5e14eeaf7f3526b
+vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service|9e33f8c80c15d8bdbca978e097a5ca9d3be60b56
+vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc|c9877b6cae0353d5fdea5bc23dba77101b3d6980
+vendor/framework/vendor.qti.hardware.alarm-V1.0-java.jar|65dde9e64925d6059cbba7c6cc0e8e7bee55fd23
+vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so|149d5050710a41120f9cfe63d6902e6aa2b06ede
+vendor/lib64/vendor.qti.hardware.alarm@1.0.so|0d5f2b64acaf88a439f2783fb7560073d5a35cba
+
 # QMI
 etc/permissions/qti_libpermissions.xml
 etc/permissions/qti_permissions.xml
