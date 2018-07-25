@@ -1,1 +1,0 @@
-allow hal_livedisplay_default sysfs_livedisplay:file rw_file_perms;

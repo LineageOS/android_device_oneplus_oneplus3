@@ -1,1 +1,0 @@
-allow netutils_wrapper netmgrd:netlink_socket { write read create bind };
