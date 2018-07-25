@@ -1,3 +1,0 @@
-persist.sys.diag.max.size               u:object_r:diag_prop:s0
-oem.device.imeicache                    u:object_r:radio_prop:s0
-persist.vendor.camera.                  u:object_r:camera_prop:s0

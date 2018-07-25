@@ -1,1 +1,0 @@
-allow init proc_touchpanel:file rw_file_perms;

@@ -1,2 +1,0 @@
-type fpc1020_device, dev_type;
-type dash_device, dev_type;
