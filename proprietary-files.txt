@@ -305,6 +305,7 @@ lib/libop_ximgproc.so
 lib/libop_xobjdetect.so
 lib/libop_xphoto.so
 lib/libop_zlib.so
+lib/libopcamera.so
 lib/libopcamera_crypt.so
 lib/libopcamera_native_modules.so
 lib/libSensorManagerHAL.so
