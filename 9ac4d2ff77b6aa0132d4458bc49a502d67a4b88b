@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26e167c0_2be30ea5",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2018-08-05T09:24:14Z",
+      "side": 1,
+      "message": "I have build from 5.0.4 without readding libopcamera - so far I can\u0027t see any additional issues. Is it really needed?",
+      "range": {
+        "startLine": 308,
+        "startChar": 4,
+        "endLine": 308,
+        "endChar": 15
+      },
+      "revId": "9ac4d2ff77b6aa0132d4458bc49a502d67a4b88b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
