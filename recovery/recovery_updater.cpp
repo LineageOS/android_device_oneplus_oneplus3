@@ -27,12 +27,11 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <android-base/logging.h>
-
 #include <string>
 #include <vector>
 
 #include "edify/expr.h"
+#include "otautil/error_code.h"
 
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 
@@ -187,7 +186,6 @@ Value* VerifyModemFn(const char *name, State *state, const std::vector<std::uniq
 
     for (auto &modem_version : args) {
         memset(&tm2, 0, sizeof(tm));
-        LOG(INFO) << "Checking for MODEM build time-stamp " << modem_version;
         strptime(modem_version.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
 
         if (mktime(&tm1) >= mktime(&tm2)) {
