@@ -657,7 +657,7 @@ vendor/lib/libvqzip.so|70451e720fb3d5697cf440432c430e3e39e0ad71
 -vendor/lib64/libgpustats.so|a50ee23f3990405a8be9141108a400d8d22334fe
 
 # NFC firmware
-vendor/firmware/libpn548ad_fw.so
+vendor/firmware/libpn548ad_fw.so:vendor/lib/libpn548ad_fw.so
 
 # Perf
 vendor/bin/energy-awareness
