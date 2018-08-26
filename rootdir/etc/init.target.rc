@@ -569,28 +569,3 @@ service remosaic_daemon /vendor/bin/remosaic_daemon
     class late_start
     user camera
     writepid /dev/cpuset/system-background/tasks
-
-# such color
-on property:sys.rainbow.recovery=1
-    write /sys/class/leds/red/brightness 255
-    write /sys/class/leds/red/start_idx 0
-    write /sys/class/leds/red/duty_pcts "100,100,100,0,0,50,100"
-    write /sys/class/leds/red/pause_hi 0
-    write /sys/class/leds/red/pause_lo 0
-    write /sys/class/leds/red/ramp_step_ms 100
-    write /sys/class/leds/green/brightness 255
-    write /sys/class/leds/green/start_idx 7
-    write /sys/class/leds/green/duty_pcts "0,50,100,100,0,0,0"
-    write /sys/class/leds/green/pause_hi 0
-    write /sys/class/leds/green/pause_lo 0
-    write /sys/class/leds/green/ramp_step_ms 100
-    write /sys/class/leds/blue/brightness 255
-    write /sys/class/leds/blue/start_idx 14
-    write /sys/class/leds/blue/duty_pcts "0,0,0,0,100,100,100"
-    write /sys/class/leds/blue/pause_hi 0
-    write /sys/class/leds/blue/pause_lo 0
-    write /sys/class/leds/blue/ramp_step_ms 100
-    write /sys/class/leds/rgb/rgb_blink 1
-
-on property:sys.rainbow.recovery=0
-    write /sys/class/leds/rgb/rgb_blink 0
