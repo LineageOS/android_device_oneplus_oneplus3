@@ -26,6 +26,14 @@ vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
+# ANT+
+lib/com.qualcomm.qti.ant@1.0.so
+-lib/libantradio.so
+lib64/com.qualcomm.qti.ant@1.0.so
+-lib64/libantradio.so
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
+
 # Audio
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
@@ -40,10 +48,15 @@ vendor/lib/soundfx/libqcvirt.so
 vendor/lib/soundfx/libshoebox.so
 
 # Bluetooth
-vendor/bin/wcnss_filter|9a99d472b0c0f05c2a7bbfae065d535f4d89c46e
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
+vendor/bin/wcnss_filter
+vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
+vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/libaptX_encoder.so
 vendor/lib64/libaptXHD_encoder.so
+vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbtnv.so
+vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
 
 # CNE
 etc/cne/andsfCne.xml
