@@ -33,10 +33,12 @@ lib64/libteeclientjni.so
 lib64/libteeclientjniv2.so
 -priv-app/IFAAService/IFAAService.apk
 
-# ANT+
--lib/libantradio.so
-lib64/com.qualcomm.qti.ant@1.0.so
--lib64/libantradio.so
+# ANT+ (system) - from enchilada - PKQ1.180716.001
+-lib/libantradio.so|7506f2577f2f1068688b623ca85e432be9c3dac9
+lib64/com.qualcomm.qti.ant@1.0.so|199481b290856fb63f5c5bf6def426b43309becb
+-lib64/libantradio.so|fb958cb68c99c71455f969afdf96225f5110f0df
+
+# ANT+ (vendor)
 vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
 
