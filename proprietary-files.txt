@@ -645,9 +645,9 @@ vendor/lib64/libsdm-diag.so|87a4f764e894f16246c9a0d6e3f5885df76b750b
 vendor/lib64/libsdmextension.so|b26b05c09aac03153fdb6ece475cc5866f390e1d
 vendor/lib64/libtinyxml2_1.so|b225b16e689e7e4c26fc6144637f6b0c416063f8
 
-# Graphics (Vulkan)
-vendor/lib/hw/vulkan.msm8996.so
-vendor/lib64/hw/vulkan.msm8996.so
+# Graphics (Vulkan) - from marlin - PPR2.180905.006
+vendor/lib/hw/vulkan.msm8996.so|1e62d0727748c40269f7cb6b432bd03b56c7323d
+vendor/lib64/hw/vulkan.msm8996.so|1297229c8109c218737c9493b00a6904ce62c06b
 
 # Keystore
 vendor/lib/hw/keystore.msm8996.so
