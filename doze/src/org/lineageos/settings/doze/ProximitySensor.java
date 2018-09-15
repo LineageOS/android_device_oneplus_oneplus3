@@ -74,11 +74,11 @@ public class ProximitySensor implements SensorEventListener {
     private boolean shouldPulse(long timestamp) {
         long delta = timestamp - mInPocketTime;
 
-        if (Utils.handwaveGestureEnabled(mContext) && Utils.pocketGestureEnabled(mContext)) {
+        if (Utils.isHandwaveGestureEnabled(mContext) && Utils.isPocketGestureEnabled(mContext)) {
             return true;
-        } else if (Utils.handwaveGestureEnabled(mContext)) {
+        } else if (Utils.isHandwaveGestureEnabled(mContext)) {
             return delta < HANDWAVE_MAX_DELTA_NS;
-        } else if (Utils.pocketGestureEnabled(mContext)) {
+        } else if (Utils.isPocketGestureEnabled(mContext)) {
             return delta >= POCKET_MIN_DELTA_NS;
         }
         return false;
