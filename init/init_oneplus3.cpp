@@ -56,17 +56,17 @@ void property_override_dual(char const system_prop[], char const vendor_prop[], 
 }
 
 void load_op3(const char *model) {
-    property_override_dual("ro.product.model", "ro.vendor.product.model", model);
+    property_override_dual("ro.product.model", "ro.product.vendor.model", model);
     property_override("ro.build.product", "OnePlus3");
-    property_override_dual("ro.product.device", "ro.vendor.product.device", "OnePlus3");
+    property_override_dual("ro.product.device", "ro.product.vendor.device", "OnePlus3");
     property_override("ro.build.description", "OnePlus3-user 8.0.0 OPR1.170623.032 31 release-keys");
     property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "OnePlus/OnePlus3/OnePlus3:8.0.0/OPR1.170623.032/02281230:user/release-keys");
 }
 
 void load_op3t(const char *model) {
-    property_override_dual("ro.product.model", "ro.vendor.product.model", model);
+    property_override_dual("ro.product.model", "ro.product.vendor.model", model);
     property_override("ro.build.product", "OnePlus3");
-    property_override_dual("ro.product.device", "ro.vendor.product.device", "OnePlus3T");
+    property_override_dual("ro.product.device", "ro.product.vendor.device", "OnePlus3T");
     property_override("ro.build.description", "OnePlus3-user 8.0.0 OPR1.170623.032 31 release-keys");
     property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint", "OnePlus/OnePlus3/OnePlus3T:8.0.0/OPR1.170623.032/02281230:user/release-keys");
     property_set("ro.power_profile.override", "power_profile_3t");
