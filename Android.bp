@@ -1,0 +1,2 @@
+soong_namespace {
+}
