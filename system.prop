@@ -107,8 +107,6 @@ persist.vendor.data.mode=concurrent
 
 #system prop for Bluetooth SOC type
 vendor.bluetooth.soc=rome
-ro.bluetooth.library_name=libbluetooth_qti.so
-persist.vendor.btstack.enable.splita2dp=false
 
 #system props for time-services
 persist.timed.enable=true
