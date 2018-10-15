@@ -324,17 +324,7 @@ lib/rfsa/adsp/libmorpho_image_stabilizer4_hvx_skel.so
 lib/rfsa/adsp/libmorpho_video_denoiser_hvx_skel.so
 
 # Camera firmware
-etc/firmware/cpp_firmware_v1_1_1.fw
-etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_10_0.fw
-etc/firmware/cpp_firmware_v1_12_0.fw
-etc/firmware/cpp_firmware_v1_2_0.fw
-etc/firmware/cpp_firmware_v1_4_0.fw
-etc/firmware/cpp_firmware_v1_5_0.fw
-etc/firmware/cpp_firmware_v1_5_1.fw
-etc/firmware/cpp_firmware_v1_5_2.fw
-etc/firmware/cpp_firmware_v1_6_0.fw
-etc/firmware/cpp_firmware_v1_8_0.fw
 
 # Camera sensors
 vendor/lib/libmmcamera_isp_abf47.so

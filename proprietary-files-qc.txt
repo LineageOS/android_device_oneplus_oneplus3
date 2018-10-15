@@ -1,6 +1,5 @@
 # ADSP
 lib/libadsprpc.so
-lib64/libadsprpc.so
 vendor/bin/adsprpcd
 vendor/lib/libadsprpc.so
 vendor/lib/libfastcvadsp_stub.so
@@ -39,22 +38,9 @@ vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 vendor/lib/soundfx/libshoebox.so
-vendor/lib64/libacdb-fts.so
-vendor/lib64/libacdbloader.so
-vendor/lib64/libacdbrtac.so
-vendor/lib64/libadiertac.so
-vendor/lib64/libaudcal.so
-vendor/lib64/libqtigef.so
-vendor/lib64/soundfx/libqcbassboost.so
-vendor/lib64/soundfx/libqcreverb.so
-vendor/lib64/soundfx/libqcvirt.so
-vendor/lib64/soundfx/libshoebox.so
 
 # Bluetooth
-vendor/bin/btnvtool
-vendor/bin/hci_qcomm_init
 vendor/bin/wcnss_filter|9a99d472b0c0f05c2a7bbfae065d535f4d89c46e
-vendor/lib/libbtnv.so
 vendor/lib64/libaptX_encoder.so
 vendor/lib64/libaptXHD_encoder.so
 vendor/lib64/libbtnv.so
@@ -95,18 +81,6 @@ vendor/etc/cne/wqeclient/VZW/VZW_profile3.xml
 vendor/etc/cne/wqeclient/VZW/VZW_profile4.xml
 vendor/etc/cne/wqeclient/VZW/VZW_profile5.xml
 vendor/etc/cne/wqeclient/VZW/VZW_profile6.xml
-vendor/lib/com.quicinc.cne.api@1.0.so
-vendor/lib/com.quicinc.cne.constants@1.0.so
-vendor/lib/com.quicinc.cne.constants@2.0.so
-vendor/lib/com.quicinc.cne.server@1.0.so
-vendor/lib/com.quicinc.cne.server@2.0.so
-vendor/lib/libcne.so
-vendor/lib/libcneapiclient.so
-vendor/lib/libcneoplookup.so
-vendor/lib/libcneqmiutils.so
-vendor/lib/libwms.so
-vendor/lib/libwqe.so
-vendor/lib/libxml.so
 vendor/lib64/com.quicinc.cne.api@1.0.so
 vendor/lib64/com.quicinc.cne.constants@1.0.so
 vendor/lib64/com.quicinc.cne.constants@2.0.so
@@ -131,12 +105,6 @@ framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
 -priv-app/dpmserviceapp/dpmserviceapp.apk
-lib/com.qualcomm.qti.dpm.api@1.0.so
-lib/libdpmctmgr.so
-lib/libdpmfdmgr.so
-lib/libdpmframework.so
-lib/libdpmnsrm.so
-lib/libdpmtcm.so
 lib64/com.qualcomm.qti.dpm.api@1.0.so
 lib64/libdpmctmgr.so
 lib64/libdpmfdmgr.so
@@ -144,8 +112,6 @@ lib64/libdpmframework.so
 lib64/libdpmnsrm.so
 lib64/libdpmtcm.so
 vendor/bin/dpmQmiMgr
-vendor/lib/com.qualcomm.qti.dpm.api@1.0_vendor.so
-vendor/lib/libdpmqmihal.so
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0_vendor.so
 vendor/lib64/libdpmqmihal.so
 
@@ -168,16 +134,6 @@ vendor/lib64/libSecureUILib.so
 vendor/lib64/libssd.so
 vendor/lib64/libStDrvInt.so
 vendor/lib64/libtzdrmgenprov.so
-
-# DRM - Qualcomm Trusted Execution Enviornment
-lib/vendor.qti.hardware.qteeconnector@1.0.so
-lib64/vendor.qti.hardware.qteeconnector@1.0.so
-vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
-vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc
-vendor/lib/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
-vendor/lib/vendor.qti.hardware.qteeconnector@1.0_vendor.so
-vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
-vendor/lib64/vendor.qti.hardware.qteeconnector@1.0_vendor.so
 
 # Gatekeeper
 vendor/lib/hw/gatekeeper.msm8996.so
@@ -242,6 +198,7 @@ vendor/lib/libc2d30_bltlib.so|f04275a0cfb755a9d04678c3843224d11fb442c8
 vendor/lib/libc2d30-a5xx.so|0672672f3fb95eab090ea57553592991c13bc971
 vendor/lib/libCB.so|9d051c6214066172f57e29d80e7948b6e0afff90
 vendor/lib/libgsl.so|5ab1cc255bbbbed36b8d09a201dbaea141c795a4
+vendor/lib/libhdr_tm.so|9a7bd05a5ba74e53f3a573c13c9041bb376d309e
 vendor/lib/libllvm-glnext.so|49835c8210d973f882b7802dfb1678340c07bb33
 vendor/lib/libllvm-qcom.so|4110785a098f0da0d77417ae2fdde81185801ff8
 vendor/lib/libllvm-qgl.so|99253ceb83c5e57b288b06834ca3c73d41cda8a3
@@ -251,6 +208,11 @@ vendor/lib/libOpenCL.so|693a7a1cf8e725c84dabbacc0eb2df4fa65ab23a
 vendor/lib/librs_adreno_sha1.so|21fbfc3e9a664b133ce66cf677fff9db09c198fd
 vendor/lib/librs_adreno.so|e203398c6cc2a776b7fbde6f559c831f6caaa371
 vendor/lib/libRSDriver_adreno.so|7ac7282500005f8a220c65632246bd69fe13a7e3
+vendor/lib/libscalar.so|8756b4c1242a0e1afd3602d12ecf335af5fe0d23
+vendor/lib/libsdm-color.so|7991d70201ade56cda55a3cb2dbed49124ef2fd0
+vendor/lib/libsdm-diag.so|2fadf88301c2334727516c8592e69ca373831927
+vendor/lib/libsdmextension.so|3d1d520e8019501e01389378ecac1653819976ac
+vendor/lib/libtinyxml2_1.so|50037a87d430de88587c7466fc09e1c8ab254bf9
 vendor/lib64/egl/eglSubDriverAndroid.so|2c39ecac957b7ecc1441af8f8ccdd5ca3b3ead00
 vendor/lib64/egl/libEGL_adreno.so|19a25a1177b592eecf3ee2c0f57bd7854ce2612c
 vendor/lib64/egl/libGLESv1_CM_adreno.so|80443ccf296dac68915e686dab54938dfe4f6f5d
@@ -264,6 +226,7 @@ vendor/lib64/libc2d30_bltlib.so|308c848d5690e37edb7efb8bca4d2e60c77ded8d
 vendor/lib64/libc2d30-a5xx.so|eb319e3e40ff53e1be84455592b4c5129da53513
 vendor/lib64/libCB.so|3c77e2bf0f0093b86de0ffffc12e2fa6a7af456c
 vendor/lib64/libgsl.so|eb72f62dd6016cf7fa735c748db79bdfa07845e5
+vendor/lib64/libhdr_tm.so|b8d140f6ae4ac8e8c4f4762e7a44b85082b969df
 vendor/lib64/libllvm-glnext.so|907a9db4ee1e08429e8a599518b65f14ce3b9d73
 vendor/lib64/libllvm-qcom.so|737e1e087696742cd47d84b5d60ab65e32e7bc09
 vendor/lib64/libllvm-qgl.so|627de2b5fd310b8f37868701b8140e31bad6bc0d
@@ -273,34 +236,11 @@ vendor/lib64/libOpenCL.so|290d53b1700b27d645742b9a4a39fcefdad9456d
 vendor/lib64/librs_adreno_sha1.so|c719927929d9ba27c88b5c2466d14273a189fbb9
 vendor/lib64/librs_adreno.so|8a2a9d68fa050668bee4046d6e9bfcdcfb11401d
 vendor/lib64/libRSDriver_adreno.so|3adb8e0a0033e0f30e2057ed701b5e423cc19d93
-
-# Graphics (HDR) - from bardock-pro - OPM1.171019.011
-vendor/lib/libhdr_tm.so|9a7bd05a5ba74e53f3a573c13c9041bb376d309e
-vendor/lib64/libhdr_tm.so|b8d140f6ae4ac8e8c4f4762e7a44b85082b969df
-
-# Graphics (SDM) - from bardock-pro - OPM1.171019.011
-lib/libsdm-disp-apis.so|52fd2c3bd5d8e7d0181df6b48f367cd7b5e99a17
-lib64/libsdm-disp-apis.so|0ccaeceb8922a623fd6fba7461db763d03916646
-vendor/lib/libscalar.so|8756b4c1242a0e1afd3602d12ecf335af5fe0d23
-vendor/lib/libsdm-color.so|7991d70201ade56cda55a3cb2dbed49124ef2fd0
-vendor/lib/libsdm-diag.so|2fadf88301c2334727516c8592e69ca373831927
-vendor/lib/libsdm-disp-vndapis.so|7b55f05a829cbb1224cadbc525cd4b6531a782e8
-vendor/lib/libsdmextension.so|3d1d520e8019501e01389378ecac1653819976ac
-vendor/lib/libtinyxml2_1.so|50037a87d430de88587c7466fc09e1c8ab254bf9
 vendor/lib64/libscalar.so|94ebef877b7ea56e94d5749303dd832e3a013145
 vendor/lib64/libsdm-color.so|031e4ee4fd10edaac872aff27ec3ee24b5e16c1a
 vendor/lib64/libsdm-diag.so|e27a62468b4ba69f4b277ba0cde40045a717cd65
-vendor/lib64/libsdm-disp-vndapis.so|6e3badb9c989fe0a1a646c4c6e360d94839b123e
 vendor/lib64/libsdmextension.so|e71c53f1edf56dd8e8ead322caae4172f3163808
 vendor/lib64/libtinyxml2_1.so|8876b148e0246a770094b9abf7ee3e581d4ecd29
-
-# Graphics (qdutils HAL) - from bardock-pro - OPM1.171019.011
-lib/vendor.qti.hardware.qdutils_disp@1.0.so|a12b9e484ce9f7ab590b3fee91d320cba903badc
-lib64/vendor.qti.hardware.qdutils_disp@1.0.so|182817148907df624dcea5af27fd8d8256e02442
-vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti|90992c4c9a036a1964f6b90acd16fb3e5bb050ad
-vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc|69d9cbc54f8ac0a0fb010f92bfa7de5981d643cf
-vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|04bf21220673630ebaa4c8e7a84adbcdcf08f0dc
-vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0_vendor.so|d101774878c0374ad805d964c3d00c71b44456d9
 
 # Graphics (Vulkan)
 vendor/lib/hw/vulkan.msm8996.so
@@ -314,9 +254,6 @@ vendor/lib64/hw/keystore.msm8996.so
 vendor/lib/hw/sound_trigger.primary.msm8996.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
-vendor/lib/vendor.qti.voiceprint@1.0.so
-vendor/lib64/hw/sound_trigger.primary.msm8996.so
-vendor/lib64/vendor.qti.voiceprint@1.0.so
 
 # Media - from bardock-pro - OPM1.171019.011
 -vendor/lib/libgpustats.so|a071c887e20853c975d958fc9a20fc9060bf1c9a
@@ -348,21 +285,11 @@ vendor/lib/libperipheral_client.so
 vendor/lib64/libperipheral_client.so
 
 # Postprocessing - from bardock-pro - OPM1.171019.011
-etc/permissions/com.qti.snapdragon.sdk.display.xml|0bff16d681e75f203c1e11ff33afba82490e49b3
-framework/com.qti.snapdragon.sdk.display.jar|cc367fe3c3525bc580f0d3ab41e43190dcee60dc
-lib/libsd_sdk_display.so|35f948fad2633f8cf2c004655e1c24fa4a2b4eaf
-lib/vendor.display.color@1.0.so|3ace5cf91dd9686a2250dfb7c50f883f81f38b74
-lib/vendor.display.postproc@1.0.so|d6069ae2c43121117acf976c79b1ce59735cfe3b
-lib64/libsd_sdk_display.so|8b79762452896eaa9ff97b7ae72646bfcf06423d
-lib64/vendor.display.color@1.0.so|ecd9bfd4e7f416218c172481a7192328f5c2a48f
-lib64/vendor.display.postproc@1.0.so|67e865d2c463d36c8eda8528ef4f36462b973eef
 vendor/bin/hw/vendor.display.color@1.0-service|d425553ff762338a67e3d8b6b98db46357099657
 vendor/bin/mm-pp-dpps|25195ef9f617154420c9ce5d57499e671c4e6d6a
 vendor/etc/init/vendor.display.color@1.0-service.rc|5ad673f879b3685a0e79b5633437e5499cb94f48
-vendor/lib/libdisp-aba.so|1e3115378afe16e1150f5c9750c6c63dfff7de94
-vendor/lib/vendor.display.color@1.0_vendor.so|7ca706d322a38084ea2e6b103efe1acd33183400
-vendor/lib/vendor.display.postproc@1.0_vendor.so|a710a9d7f93892961ff71420fe222add0bfcf57e
 vendor/lib64/libdisp-aba.so|fc7f1b0104c05fb8b9bec65778542f3a79fec035
+vendor/lib64/libsdm-disp-vndapis.so|6e3badb9c989fe0a1a646c4c6e360d94839b123e
 vendor/lib64/vendor.display.color@1.0_vendor.so|25c717f3004a5932dcbb2f55d5165c010f7eac1a
 vendor/lib64/vendor.display.postproc@1.0_vendor.so|503ef07fcfbbfcd8db096de79dfd822c8ada5e9b
 
@@ -480,21 +407,13 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0_vendor.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 
 # Sensors
-lib/libsensor_reg.so
-lib/libsensor1.so
-lib64/libsensor_reg.so
-lib64/libsensor1.so
 vendor/bin/sensors.qcom
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_thresh.so
-vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor1.so
 vendor/lib/sensors.ssc.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_thresh.so
-vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor1.so
 vendor/lib64/sensors.ssc.so
 
