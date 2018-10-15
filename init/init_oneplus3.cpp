@@ -92,6 +92,7 @@ void init_alarm_boot_properties()
         if ((Trim(boot_reason) == "3" || reboot_reason == "true")
                 && Trim(power_off_alarm) == "1") {
             property_set("ro.alarm_boot", "true");
+            property_set("debug.sf.nobootanimation", "1");
         } else {
             property_set("ro.alarm_boot", "false");
         }
