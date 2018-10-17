@@ -424,7 +424,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
    </hal>
     <hal format="hidl" optional="true">
         <name>vendor.qti.data.factory</name>
-        <version>1.0</version>
+        <version>1.0-1</version>
         <interface>
             <name>IFactory</name>
             <instance>default</instance>
