@@ -26,17 +26,44 @@
          This integer should equal the sum of the corresponding value for each
          of the following capabilities present:
 
+         // Device has a color adjustable notification light.
          LIGHTS_RGB_NOTIFICATION_LED = 1
+
+         // Device has a color adjustable battery light.
          LIGHTS_RGB_BATTERY_LED = 2
+
          LIGHTS_MULTIPLE_NOTIFICATION_LED = 4 (deprecated)
+
+         // The notification light has adjustable pulsing capability.
          LIGHTS_PULSATING_LED = 8
+
+         // Device has a multi-segment battery light that is able to
+         // use the light brightness value to determine how many
+         // segments to show (in order to represent battery level).
          LIGHTS_SEGMENTED_BATTERY_LED = 16
+
+         // The notification light supports HAL adjustable brightness
+         // via the alpha channel.
+         // Note: if a device notification light supports LIGHTS_RGB_NOTIFICATION_LED
+         // then HAL support is not necessary for brightness control.  In this case,
+         // brightness support will be provided by lineage-sdk through the scaling of
+         // RGB color values.
          LIGHTS_ADJUSTABLE_NOTIFICATION_LED_BRIGHTNESS = 32
+
+         // Device has a battery light.
          LIGHTS_BATTERY_LED = 64
+
+         // The battery light supports HAL adjustable brightness via
+         // the alpha channel.
+         // Note: if a device battery light supports LIGHTS_RGB_BATTERY_LED then HAL
+         // support is not necessary for brightness control.  In this case,
+         // brightness support will be provided by lineage-sdk through the scaling of
+         // RGB color values.
+         LIGHTS_ADJUSTABLE_BATTERY_LED_BRIGHTNESS = 128
 
          For example, a device with notification and battery lights that supports
          pulsating and RGB control would set this config to 75. -->
-    <integer name="config_deviceLightCapabilities">107</integer>
+    <integer name="config_deviceLightCapabilities">75</integer>
 
     <!-- For high brightness mode -->
     <integer name="config_outdoorAmbientLux">20000</integer>
