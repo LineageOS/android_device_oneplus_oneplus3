@@ -27,7 +27,6 @@ vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
 # ANT+
-lib/com.qualcomm.qti.ant@1.0.so
 -lib/libantradio.so
 lib64/com.qualcomm.qti.ant@1.0.so
 -lib64/libantradio.so
@@ -54,7 +53,6 @@ vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/libaptX_encoder.so
 vendor/lib64/libaptXHD_encoder.so
-vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbtnv.so
 vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
 
@@ -186,7 +184,6 @@ vendor/lib64/libizat_core.so
 vendor/lib64/liblbs_core.so
 -vendor/lib64/libloc_api_v02.so
 vendor/lib64/libloc_ds_api.so
-vendor/lib64/libloc_externalDr.so
 vendor/lib64/liblocationservice_glue.so
 vendor/lib64/liblocationservice.so
 vendor/lib64/liblowi_client.so
@@ -215,8 +212,6 @@ vendor/lib/libhdr_tm.so|9f191fda6909c92b29ac15c3d2cbf65c2db94b13
 vendor/lib/libllvm-glnext.so|b9932c16410d953f83b2669d0803c9698bc7e734
 vendor/lib/libllvm-qcom.so|91d082fa47a5250d1750919ed4249b6420f8fbdc
 vendor/lib/libllvm-qgl.so|a0ad235c119cc3bffee3d9b4ab286de7a2ca016f
-vendor/lib/libmm-disp-apis.so|2ce644e3fc59af10df76ca98ac75e8514489d5e2
-vendor/lib/libmm-qdcm.so|82013fd722702f735ea107a7b2d03ef9c0f70045
 vendor/lib/libOpenCL.so|8d699bb6d1245596182b89d5f774fde09372fe61
 vendor/lib/librs_adreno_sha1.so|99fc07517cc53da463d7fa7c0ba3fbe5b4f6489d
 vendor/lib/librs_adreno.so|0df4614181bc30db84ec464e6ae1da60ac7d8763
@@ -243,8 +238,6 @@ vendor/lib64/libhdr_tm.so|9a61ddbece993d3329d337265f7be5278c237833
 vendor/lib64/libllvm-glnext.so|0e7966e0ebdd67b3ab4f08988ea9d4c86e420843
 vendor/lib64/libllvm-qcom.so|9c0be7c1e411d64246bed21d3fbe5788de589876
 vendor/lib64/libllvm-qgl.so|01ced139ad869422d9ddd844e650aa0a46f26c67
-vendor/lib64/libmm-disp-apis.so|772f21209154701dac8e143b26f42870b45d3e04
-vendor/lib64/libmm-qdcm.so|a3ba21337d710378d758666eb5cdc945bbe369ae
 vendor/lib64/libOpenCL.so|f040a46da08ecb13fb2b062aa9d28c44c0d7c16b
 vendor/lib64/librs_adreno_sha1.so|9f63632a043f2b82777d000dbef66e0d269995e5
 vendor/lib64/librs_adreno.so|ce5e17ec41d6c8ca61aff22f150a783d5d35aff6
@@ -281,7 +274,6 @@ vendor/lib/libOmxApeDec.so|011b5b20857ad1ae5ce3bf481ac6c71e176670c3
 vendor/lib/libOmxApeDecSw.so|95dd8b19b5c393bbc95a659a65d299211bc9d88f
 vendor/lib/libOmxEvrcDec.so|bc06bdcd812e012541dc59a53cae3f1b8fbca250
 vendor/lib/libOmxQcelp13Dec.so|25c7f4a214b9fb18e006bb3368c032a73e9fc729
-vendor/lib/libOmxVideoDSMode.so|169545ced7000f0950c006677c33537aaa70dcec
 vendor/lib/libOmxVpp.so|d30fd0f1cf73d2cae4acbd74a2e58223d521db4a
 vendor/lib/libOmxWmaDec.so|afeba1eb1da8992ba8cec897c7372e77f1e60a4b
 vendor/lib/libvpplibrary.so|1b74559eeaa6cb55e0dac65b94bae08279098b90
@@ -324,7 +316,6 @@ lib64/libdiag_system.so
 lib64/libqmi_cci_system.so
 vendor/bin/irsc_util
 vendor/lib/libdiag.so
-vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
 vendor/lib/libidl.so
 vendor/lib/libqcci_legacy.so
@@ -340,7 +331,6 @@ vendor/lib/libqmi.so
 vendor/lib/libqmiservices.so
 vendor/lib/libsmemlog.so
 vendor/lib64/libdiag.so
-vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
 vendor/lib64/libidl.so
 vendor/lib64/libqcci_legacy.so
@@ -381,6 +371,7 @@ vendor/etc/data/dsi_config.xml
 vendor/etc/data/netmgr_config.xml
 vendor/lib/libmdmdetect.so
 vendor/lib64/libconfigdb.so
+vendor/lib64/libdsi_netctrl.so
 vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
 vendor/lib64/libnetmgr.so
@@ -418,7 +409,6 @@ vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-imsdpl.so
-vendor/lib64/lib-imsqimf.so
 vendor/lib64/lib-imsSDP.so
 vendor/lib64/lib-rtpcommon.so
 vendor/lib64/lib-rtpcore.so
