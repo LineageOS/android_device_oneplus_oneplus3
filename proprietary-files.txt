@@ -25,6 +25,7 @@ etc/camera/imx179_chromatix.xml
 etc/camera/imx298_chromatix.xml
 etc/camera/s5k3p8_chromatix.xml
 etc/camera/s5k3p8sp_chromatix.xml
+lib/libmm-qcamera.so
 lib/libqomx_core.so
 lib/libtrueportrait.so
 vendor/bin/mm-qcamera-daemon
@@ -52,7 +53,6 @@ vendor/lib/libmmcamera_imglib.so
 vendor/lib/libmmcamera_imx179.so
 vendor/lib/libmmcamera_imx298.so
 vendor/lib/libmmcamera_interface.so
-vendor/lib/libmmcamera_llvd.so
 vendor/lib/libmmcamera_optizoom_lib.so
 vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdaf.so
