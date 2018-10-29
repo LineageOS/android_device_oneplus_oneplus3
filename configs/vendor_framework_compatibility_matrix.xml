@@ -52,7 +52,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </hal>
     <hal format="hidl" optional="true">
         <name>vendor.display.config</name>
-        <version>1.0-4</version>
+        <version>1.0-5</version>
         <interface>
              <name>IDisplayConfig</name>
              <instance>default</instance>
