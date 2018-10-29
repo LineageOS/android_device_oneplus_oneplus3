@@ -31,4 +31,12 @@ cc_binary {
         "android.hardware.camera.provider@2.4",
         "android.hardware.camera.common@1.0",
     ],
+    product_variables: {
+        lineage: {
+            uses_qti_camera_device: {
+                cppflags: ["-DQTI_CAMERA_DEVICE"],
+                shared_libs: ["vendor.qti.hardware.camera.device@1.0_vendor"],
+            },
+        },
+    },
 }
