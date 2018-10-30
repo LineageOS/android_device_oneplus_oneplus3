@@ -29,25 +29,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Configure mobile tcp buffer sizes in the form:
-         rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
-         If no value is found for the rat-name in use, the system default will be applied.
-    -->
-    <string-array name="config_mobile_tcp_buffers">
-        <item>umts:131072,262144,1452032,4096,16384,399360</item>
-        <item>hspa:131072,262144,1452032,4096,16384,399360</item>
-        <item>hsdpa:131072,262144,1452032,4096,16384,399360</item>
-        <item>hsupa:131072,262144,1452032,4096,16384,399360</item>
-        <item>hspap:131072,262144,1452032,4096,16384,399360</item>
-        <item>edge:4093,26280,35040,4096,16384,35040</item>
-        <item>gprs:4092,8760,11680,4096,8760,11680</item>
-        <item>evdo:4094,87380,262144,4096,16384,262144</item>
-        <item>lte:524288,1048576,8388608,262144,524288,4194304</item>
-    </string-array>
-
-    <!-- If Voice Radio Technology is RIL_RADIO_TECHNOLOGY_LTE:14 this is the Values
+<!-- If Voice Radio Technology is RIL_RADIO_TECHNOLOGY_LTE:14 this is the value
          that should be used instead. A value of RIL_RADIO_TECHNOLOGY_UNKNOWN:0 means
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">3</integer>
-
 </resources>

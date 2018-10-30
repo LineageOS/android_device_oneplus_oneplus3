@@ -33,18 +33,5 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          that should be used instead. A value of RIL_RADIO_TECHNOLOGY_UNKNOWN:0 means
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">6</integer>
-
-    <!-- The VoiceMail default value is displayed to my own number if it is true -->
-    <bool name="config_telephony_use_own_number_for_voicemail">true</bool>
-
-    <!-- Default network policy warning threshold, in megabytes. -->
-    <integer name="config_networkPolicyDefaultWarning">51200</integer>
-
-    <!-- Sometimes, PDU has garbages. So, need to use valid index -->
-    <integer name="config_valid_wappush_index">4</integer>
-
-    <!-- sms encoded as octet is decoded by utf8 decoder. if it is true -->
-    <bool name="config_sms_utf8_support">true</bool>
-
 </resources>
 

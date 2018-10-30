@@ -33,20 +33,4 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          that should be used instead. A value of RIL_RADIO_TECHNOLOGY_UNKNOWN:0 means
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">3</integer>
-
-    <!-- Configure mobile tcp buffer sizes in the form:
-         rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
-         If no value is found for the rat-name in use, the system default will be applied.
-    -->
-    <string-array name="config_mobile_tcp_buffers">
-        <item>umts:21135,131070,1056768,6144,24576,165312</item>
-        <item>hspa:18300,131070,1056768,6144,24576,393216</item>
-        <item>hsdpa:18300,131070,1056768,6144,24576,393216</item>
-        <item>hsupa:6141,131070,1056768,6144,24576,393216</item>
-        <item>hspap:31455,131070,1830912,6144,24576,1830912</item>
-        <item>edge:8192,26280,704512,4096,16384,110208</item>
-        <item>gprs:8192,8760,704512,4096,8760,110208</item>
-        <item>lte:786432,1572864,3840000,786432,1572864,3840000</item>
-    </string-array>
-
 </resources>
