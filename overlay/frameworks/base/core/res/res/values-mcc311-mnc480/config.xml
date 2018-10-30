@@ -41,7 +41,5 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">6</integer>
 
-    <!-- Use ERI text for network name on CDMA LTE -->
-    <bool name="config_LTE_eri_for_network_name">false</bool>
 
 </resources>

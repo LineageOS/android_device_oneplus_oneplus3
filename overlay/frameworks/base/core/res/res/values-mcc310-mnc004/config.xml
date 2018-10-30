@@ -33,8 +33,4 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          that should be used instead. A value of RIL_RADIO_TECHNOLOGY_UNKNOWN:0 means
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">6</integer>
-
-    <!-- Use ERI text for network name on CDMA LTE -->
-    <bool name="config_LTE_eri_for_network_name">false</bool>
-
 </resources>
