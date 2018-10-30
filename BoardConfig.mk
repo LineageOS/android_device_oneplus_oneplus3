@@ -177,6 +177,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 JAVA_SOURCE_OVERLAYS := org.lineageos.hardware|$(PLATFORM_PATH)/lineagehw|**/*.java
 
 # Mainfest
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(PLATFORM_PATH)/configs/framework_manifest.xml
 DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/configs/manifest.xml
 DEVICE_MATRIX_FILE   := $(PLATFORM_PATH)/configs/compatibility_matrix.xml
 
