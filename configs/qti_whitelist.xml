@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!--
-/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -42,4 +42,74 @@
     <allow-in-power-save package="com.qualcomm.qti.server.wigigapp" />
     <allow-in-power-save package="com.qualcomm.qti.StatsPollManager" />
     <allow-in-power-save package="com.qualcomm.qti.gsma.services.nfc" />
+    <allow-in-power-save package="com.quicinc.voice.activation" />
+    <allow-in-power-save package="com.android.mms" />
+    <allow-in-power-save package="com.qualcomm.qti.callenhancement" />
+    <allow-in-power-save package="com.qualcomm.qti.smartassistant" />
+    <!-- These telephony applications need access to non-[System]SDK APIs -->
+    <hidden-api-whitelisted-app package="com.qualcomm.uimremoteserver" />
+    <hidden-api-whitelisted-app package="com.qualcomm.uimremoteclient" />
+    <hidden-api-whitelisted-app package="com.qualcomm.atfwd" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.autoregistration" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.callenhancement" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.callfeaturessetting" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.confdialer" />
+    <hidden-api-whitelisted-app package="org.codeaurora.dialer" />
+    <hidden-api-whitelisted-app package="com.qti.qualcomm.datastatusnotification" />
+    <hidden-api-whitelisted-app package="com.qti.qualcomm.deviceinfo" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.modemtestmode" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.networksetting" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.qtisystemservice" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.telephonyservice" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.radioconfiginterface" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.radioconfigtest" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.roamingsettings" />
+    <hidden-api-whitelisted-app package="com.qualcomm.simcontacts" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.simsettings" />
+    <hidden-api-whitelisted-app package="org.codeaurora.ims" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.ims" />
+    <hidden-api-whitelisted-app package="com.qti.xdivert" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qcrilmsgtunnel" />
+    <hidden-api-whitelisted-app package="com.qti.confuridialer" />
+    <hidden-api-whitelisted-app package="com.qti.editnumber" />
+    <hidden-api-whitelisted-app package="com.qualcomm.embmstest" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.ltedirect" />
+    <hidden-api-whitelisted-app package="com.android.MultiplePdpTest" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.app" />
+    <hidden-api-whitelisted-app package="com.qualcomm.embms" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.embmstuneaway" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.uimlpatest" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.lpa" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.uim" />
+
+    <hidden-api-whitelisted-app package="org.codeaurora.snapcam" />
+    <hidden-api-whitelisted-app package="com.android.mms" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.carrierswitch" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.carrierconfigure" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.sva" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.smartassistant" />
+    <hidden-api-whitelisted-app package="com.quicinc.voice.activation" />
+    <hidden-api-whitelisted-app package="com.android.backup" />
+    <hidden-api-whitelisted-app package="com.android.contacts" />
+    <hidden-api-whitelisted-app package="com.android.exchange" />
+    <hidden-api-whitelisted-app package="com.android.soundrecorder" />
+    <hidden-api-whitelisted-app package="com.android.camera2" />
+    <hidden-api-whitelisted-app package="org.codeaurora.gallery" />
+    <hidden-api-whitelisted-app package="com.example.connmgr" />
+    <hidden-api-whitelisted-app package="com.android.email" />
+    <hidden-api-whitelisted-app package="com.cyanogenmod.filemanager" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.presenceappSub2" />
+    <hidden-api-whitelisted-app package="com.qualcomm.secureindicator" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.sysmonappExternal" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.biometrics.voiceprint.voiceprintdemo" />
+    <hidden-api-whitelisted-app package="com.qti.vtloopback " />
+    <hidden-api-whitelisted-app package="com.android.bluetooth" />
+    <hidden-api-whitelisted-app package="org.codeaurora.bluetooth" />
+    <hidden-api-whitelisted-app package="org.codeaurora.bluetooth.hidtestapp" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.qmmi" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.perfdump" />
+    <hidden-api-whitelisted-app package="com.qualcomm.wfd.client" />
+    <hidden-api-whitelisted-app package="com.qualcomm.wfd.service" />
+    <hidden-api-whitelisted-app package="com.qualcomm.qti.server.wigigapp" />
+    <hidden-api-whitelisted-app package="com.qti.service.colorservice" />
 </config>
