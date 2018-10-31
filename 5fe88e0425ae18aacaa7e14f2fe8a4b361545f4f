@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ed075e9_bbc4459c",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 11883
+      },
+      "writtenOn": "2018-10-31T08:47:02Z",
+      "side": 1,
+      "message": "you can skip that and add the firmware directory to uevent.qcom.rc\nhttps://android.googlesource.com/device/google/crosshatch/+/f7334cbd73bfc76fba6c6169ffc00d2cd1691cfb%5E%21/#F2",
+      "revId": "5fe88e0425ae18aacaa7e14f2fe8a4b361545f4f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
