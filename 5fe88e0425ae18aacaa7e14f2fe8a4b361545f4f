@@ -16,6 +16,24 @@
       "revId": "5fe88e0425ae18aacaa7e14f2fe8a4b361545f4f",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a68fc5e_ff593d33",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2018-10-31T09:14:44Z",
+      "side": 1,
+      "message": "CAF and google devices have both in cmdline and ueventd, and my ueventd change is in a later commit",
+      "parentUuid": "3ed075e9_bbc4459c",
+      "revId": "5fe88e0425ae18aacaa7e14f2fe8a4b361545f4f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
