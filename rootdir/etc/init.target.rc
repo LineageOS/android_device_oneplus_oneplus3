@@ -27,7 +27,6 @@
 #
 #
 
-import /vendor/etc/init/hw/init.qcom.power.rc
 import /vendor/etc/init/hw/init.oneplus3.rc
 
 on early-init

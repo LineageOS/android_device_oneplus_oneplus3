@@ -1,5 +1,5 @@
 #!/vendor/bin/sh
-# Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2018, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -27,8 +27,6 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
-chown -h root.system /sys/devices/platform/msm_hsusb/gadget/wakeup
-chmod -h 220 /sys/devices/platform/msm_hsusb/gadget/wakeup
 
 # Set platform variables
 if [ -f /sys/devices/soc0/hw_platform ]; then
@@ -43,44 +41,6 @@ else
     soc_machine=`cat /sys/devices/system/soc/soc0/machine` 2> /dev/null
 fi
 
-# Get hardware revision
-if [ -f /sys/devices/soc0/revision ]; then
-    soc_revision=`cat /sys/devices/soc0/revision` 2> /dev/null
-else
-    soc_revision=`cat /sys/devices/system/soc/soc0/revision` 2> /dev/null
-fi
-
-#
-# Allow persistent usb charging disabling
-# User needs to set usb charging disabled in persist.usb.chgdisabled
-#
-target=`getprop ro.board.platform`
-usbchgdisabled=`getprop persist.usb.chgdisabled`
-case "$usbchgdisabled" in
-    "") ;; #Do nothing here
-    * )
-    case $target in
-        "msm8660")
-        echo "$usbchgdisabled" > /sys/module/pmic8058_charger/parameters/disabled
-        echo "$usbchgdisabled" > /sys/module/smb137b/parameters/disabled
-	;;
-        "msm8960")
-        echo "$usbchgdisabled" > /sys/module/pm8921_charger/parameters/disabled
-	;;
-    esac
-esac
-
-usbcurrentlimit=`getprop persist.usb.currentlimit`
-case "$usbcurrentlimit" in
-    "") ;; #Do nothing here
-    * )
-    case $target in
-        "msm8960")
-        echo "$usbcurrentlimit" > /sys/module/pm8921_charger/parameters/usb_max_current
-	;;
-    esac
-esac
-
 #
 # Check ESOC for external MDM
 #
@@ -89,7 +49,7 @@ esac
 if [ -d /sys/bus/esoc/devices ]; then
 for f in /sys/bus/esoc/devices/*; do
     if [ -d $f ]; then
-        if [ `grep "^MDM" $f/esoc_name` ]; then
+    if [ `grep -e "^MDM" -e "^SDX" $f/esoc_name` ]; then
             esoc_link=`cat $f/esoc_link`
             break
         fi
@@ -106,81 +66,74 @@ else
 	soc_id=`cat /sys/devices/system/soc/soc0/id`
 fi
 
-#
-# Allow USB enumeration with default PID/VID
-#
-baseband=`getprop ro.baseband`
+if [ -f /sys/class/android_usb/f_mass_storage/lun/nofua ]; then
+	echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
+fi
 
-echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
-usb_config=`getprop persist.sys.usb.config`
-case "$usb_config" in
-    "" | "adb") #USB persist config not set, select default configuration
-      case "$esoc_link" in
-          "PCIe")
-              setprop persist.sys.usb.config diag,diag_mdm,serial_cdev,rmnet_qti_ether,mass_storage,adb
-          ;;
-          *)
-	  case "$baseband" in
+#
+# Override USB default composition
+#
+# If USB persist config not set, set default configuration
+if [ "$(getprop persist.vendor.usb.config)" == "" -a \
+	"$(getprop init.svc.vendor.usb-gadget-hal-1-0)" != "running" ]; then
+      if [ "$esoc_link" != "" ]; then
+	  setprop persist.vendor.usb.config diag,diag_mdm,qdss,qdss_mdm,serial_cdev,dpl,rmnet,adb
+      else
+	  case "$(getprop ro.baseband)" in
 	      "apq")
-	          setprop persist.sys.usb.config diag,adb
+	          setprop persist.vendor.usb.config diag,adb
 	      ;;
 	      *)
 	      case "$soc_hwplatform" in
 	          "Dragon" | "SBC")
-	              setprop persist.sys.usb.config diag,adb
+	              setprop persist.vendor.usb.config diag,adb
 	          ;;
                   *)
 		  soc_machine=${soc_machine:0:3}
 		  case "$soc_machine" in
 		    "SDA")
-	              setprop persist.sys.usb.config diag,adb
+	              setprop persist.vendor.usb.config diag,adb
 		    ;;
 		    *)
 	            case "$target" in
-                      "msm8916")
-		          setprop persist.sys.usb.config diag,serial_smd,rmnet_bam,adb
-		      ;;
-	              "msm8994" | "msm8992")
-	                  setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_ipa,mass_storage,adb
-		      ;;
 	              "msm8996")
-	                  setprop persist.sys.usb.config diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
+	                  setprop persist.vendor.usb.config diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
 		      ;;
 	              "msm8909")
-		          setprop persist.sys.usb.config diag,serial_smd,rmnet_qti_bam,adb
+		          setprop persist.vendor.usb.config diag,serial_smd,rmnet_qti_bam,adb
 		      ;;
 	              "msm8937")
-			      if [ -d /config/usb_gadget ]; then
-				      setprop persist.sys.usb.config diag,adb
-			      else
-				      case "$soc_id" in
-					"313" | "320")
-				            setprop persist.sys.usb.config diag,serial_smd,rmnet_ipa,adb
-				      ;;
-				      *)
-				            setprop persist.sys.usb.config diag,serial_smd,rmnet_qti_bam,adb
-				      ;;
-				      esac
-			      fi
-		      ;;
-	              "msm8952")
-		          setprop persist.sys.usb.config diag,serial_smd,rmnet_ipa,adb
+			    if [ -d /config/usb_gadget ]; then
+				       setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
+			    else
+			               case "$soc_id" in
+				               "313" | "320")
+				                  setprop persist.vendor.usb.config diag,serial_smd,rmnet_ipa,adb
+				               ;;
+				               *)
+				                  setprop persist.vendor.usb.config diag,serial_smd,rmnet_qti_bam,adb
+				               ;;
+			               esac
+			    fi
 		      ;;
 	              "msm8953")
 			      if [ -d /config/usb_gadget ]; then
-				      setprop persist.sys.usb.config diag,serial_cdev,rmnet,dpl,adb
+				      setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
 			      else
-				      setprop persist.sys.usb.config diag,serial_smd,rmnet_ipa,adb
+				      setprop persist.vendor.usb.config diag,serial_smd,rmnet_ipa,adb
 			      fi
 		      ;;
 	              "msm8998" | "sdm660" | "apq8098_latv")
-		          setprop persist.sys.usb.config diag,serial_cdev,rmnet,adb
+		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,adb
 		      ;;
-	              "sdm845")
-		          setprop persist.sys.usb.config diag,serial_cdev,rmnet,dpl,adb
+	              "sdm845" | "sdm710")
+		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
+		      ;;
+	              "msmnile" | "talos")
+			  setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,qdss,adb
 		      ;;
 	              *)
-		          setprop persist.sys.usb.config diag,adb
+		          setprop persist.vendor.usb.config diag,adb
 		      ;;
                     esac
 		    ;;
@@ -189,53 +142,35 @@ case "$usb_config" in
 	      esac
 	      ;;
 	  esac
-	  ;;
-      esac
-      ;;
-  * ) ;; #USB persist config exists, do nothing
+      fi
+fi
+
+# set rndis transport to BAM2BAM_IPA for 8920 and 8940
+if [ "$target" == "msm8937" ]; then
+	if [ ! -d /config/usb_gadget ]; then
+	   case "$soc_id" in
+		"313" | "320")
+		   echo BAM2BAM_IPA > /sys/class/android_usb/android0/f_rndis_qc/rndis_transports
+		;;
+		*)
+		;;
+	   esac
+	fi
+fi
+
+# set device mode notification to USB driver for SA8150 Auto ADP
+product=`getprop ro.build.product`
+
+case "$product" in
+	"msmnile_au")
+	echo peripheral > /sys/bus/platform/devices/a600000.ssusb/mode
+         ;;
+	*)
+	;;
 esac
 
 # check configfs is mounted or not
 if [ -d /config/usb_gadget ]; then
-	# set USB controller's device node
-	case "$target" in
-	"msm8937")
-		setprop sys.usb.controller "msm_hsusb"
-		;;
-	"msm8953")
-		setprop sys.usb.controller "7000000.dwc3"
-		setprop sys.usb.rndis.func.name "rndis_bam"
-		setprop sys.usb.rmnet.func.name "rmnet_bam"
-		echo 131072 > /sys/module/usb_f_mtp/parameters/mtp_tx_req_len
-		echo 131072 > /sys/module/usb_f_mtp/parameters/mtp_rx_req_len
-		;;
-	"msm8996")
-		setprop sys.usb.controller "6a00000.dwc3"
-		setprop sys.usb.rndis.func.name "rndis_bam"
-		setprop sys.usb.rmnet.func.name "rmnet_bam"
-		echo 131072 > /sys/module/usb_f_mtp/parameters/mtp_tx_req_len
-		echo 131072 > /sys/module/usb_f_mtp/parameters/mtp_rx_req_len
-		;;
-	"msm8998" | "apq8098_latv")
-		setprop sys.usb.controller "a800000.dwc3"
-		setprop sys.usb.rndis.func.name "gsi"
-		setprop sys.usb.rmnet.func.name "gsi"
-		;;
-	"sdm660")
-		setprop sys.usb.controller "a800000.dwc3"
-		setprop sys.usb.rndis.func.name "rndis_bam"
-		setprop sys.usb.rmnet.func.name "rmnet_bam"
-		echo 15916 > /sys/module/usb_f_qcrndis/parameters/rndis_dl_max_xfer_size
-		;;
-	"sdm845")
-		setprop sys.usb.controller "a600000.dwc3"
-		setprop sys.usb.rndis.func.name "gsi"
-		setprop sys.usb.rmnet.func.name "gsi"
-		;;
-	*)
-		;;
-	esac
-
 	# Chip-serial is used for unique MSM identification in Product string
 	msm_serial=`cat /sys/devices/soc0/serial_number`;
 	msm_serial_hex=`printf %08X $msm_serial`
@@ -249,140 +184,76 @@ if [ -d /config/usb_gadget ]; then
 		serialno=1234567
 		echo $serialno > /config/usb_gadget/g1/strings/0x409/serialnumber
 	fi
-
-	persist_comp=`getprop persist.sys.usb.config`
-	comp=`getprop sys.usb.config`
-	echo $persist_comp
-	echo $comp
-	if [ "$comp" != "$persist_comp" ]; then
-		echo "setting sys.usb.config"
-		setprop sys.usb.config $persist_comp
-	fi
-
-	setprop sys.usb.configfs 1
-else
-	persist_comp=`getprop persist.sys.usb.config`
-	comp=`getprop sys.usb.config`
-	echo $persist_comp
-	echo $comp
-	if [ "$comp" != "$persist_comp" ]; then
-		echo "setting sys.usb.config"
-		setprop sys.usb.config $persist_comp
-	fi
-        #
-        # Do target specific things
-        #
-        case "$target" in
-             "msm8974")
-                # Select USB BAM - 2.0 or 3.0
-                echo ssusb > /sys/bus/platform/devices/usb_bam/enable
-             ;;
-             "apq8084")
-                if [ "$baseband" == "apq" ]; then
-                      echo "msm_hsic_host" > /sys/bus/platform/drivers/xhci_msm_hsic/unbind
-                fi
-             ;;
-             "msm8226")
-                if [ -e /sys/bus/platform/drivers/msm_hsic_host ]; then
-                      if [ ! -L /sys/bus/usb/devices/1-1 ]; then
-                          echo msm_hsic_host > /sys/bus/platform/drivers/msm_hsic_host/unbind
-                      fi
-                fi
-             ;;
-             "msm8994" | "msm8992" | "msm8996" | "msm8953")
-                echo BAM2BAM_IPA > /sys/class/android_usb/android0/f_rndis_qc/rndis_transports
-                echo 131072 > /sys/module/g_android/parameters/mtp_tx_req_len
-                echo 131072 > /sys/module/g_android/parameters/mtp_rx_req_len
-             ;;
-             "msm8937")
-                case "$soc_id" in
-                      "313" | "320")
-                         echo BAM2BAM_IPA > /sys/class/android_usb/android0/f_rndis_qc/rndis_transports
-                      ;;
-                esac
-             ;;
-        esac
 fi
-
-#
-# set module params for embedded rmnet devices
-#
-rmnetmux=`getprop persist.rmnet.mux`
-case "$baseband" in
-    "mdm" | "dsda" | "sglte2")
-        case "$rmnetmux" in
-            "enabled")
-                    echo 1 > /sys/module/rmnet_usb/parameters/mux_enabled
-                    echo 8 > /sys/module/rmnet_usb/parameters/no_fwd_rmnet_links
-                    echo 17 > /sys/module/rmnet_usb/parameters/no_rmnet_insts_per_dev
-            ;;
-        esac
-        echo 1 > /sys/module/rmnet_usb/parameters/rmnet_data_init
-        # Allow QMUX daemon to assign port open wait time
-        chown -h radio.radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
-    ;;
-    "dsda2")
-          echo 2 > /sys/module/rmnet_usb/parameters/no_rmnet_devs
-          echo hsicctl,hsusbctl > /sys/module/rmnet_usb/parameters/rmnet_dev_names
-          case "$rmnetmux" in
-               "enabled") #mux is neabled on both mdms
-                      echo 3 > /sys/module/rmnet_usb/parameters/mux_enabled
-                      echo 8 > /sys/module/rmnet_usb/parameters/no_fwd_rmnet_links
-                      echo 17 > write /sys/module/rmnet_usb/parameters/no_rmnet_insts_per_dev
-               ;;
-               "enabled_hsic") #mux is enabled on hsic mdm
-                      echo 1 > /sys/module/rmnet_usb/parameters/mux_enabled
-                      echo 8 > /sys/module/rmnet_usb/parameters/no_fwd_rmnet_links
-                      echo 17 > /sys/module/rmnet_usb/parameters/no_rmnet_insts_per_dev
-               ;;
-               "enabled_hsusb") #mux is enabled on hsusb mdm
-                      echo 2 > /sys/module/rmnet_usb/parameters/mux_enabled
-                      echo 8 > /sys/module/rmnet_usb/parameters/no_fwd_rmnet_links
-                      echo 17 > /sys/module/rmnet_usb/parameters/no_rmnet_insts_per_dev
-               ;;
-          esac
-          echo 1 > /sys/module/rmnet_usb/parameters/rmnet_data_init
-          # Allow QMUX daemon to assign port open wait time
-          chown -h radio.radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
-    ;;
-esac
-
-#
-# Add support for exposing lun0 as cdrom in mass-storage
-#
-cdromname="/system/etc/cdrom_install.iso"
-platformver=`cat /sys/devices/soc0/hw_platform`
-case "$target" in
-	"msm8226" | "msm8610" | "msm8916")
-		case $platformver in
-			"QRD")
-				echo "mounting usbcdrom lun"
-				echo $cdromname > /sys/class/android_usb/android0/f_mass_storage/rom/file
-				chmod 0444 /sys/class/android_usb/android0/f_mass_storage/rom/file
-				;;
-		esac
-		;;
-esac
 
 #
 # Initialize RNDIS Diag option. If unset, set it to 'none'.
 #
-diag_extra=`getprop persist.sys.usb.config.extra`
+diag_extra=`getprop persist.vendor.usb.config.extra`
 if [ "$diag_extra" == "" ]; then
-	setprop persist.sys.usb.config.extra none
-fi
-
-# soc_ids for 8937
-if [ -f /sys/devices/soc0/soc_id ]; then
-	soc_id=`cat /sys/devices/soc0/soc_id`
-else
-	soc_id=`cat /sys/devices/system/soc/soc0/id`
+	setprop persist.vendor.usb.config.extra none
 fi
 
 # enable rps cpus on msm8937 target
-setprop sys.usb.rps_mask 0
+setprop vendor.usb.rps_mask 0
 case "$soc_id" in
-	"294" | "295")
-		setprop sys.usb.rps_mask 40
+	"294" | "295" | "353" | "354")
+		setprop vendor.usb.rps_mask 40
 	;;
 esac
+
+#
+# Initialize UVC conifguration.
+#
+if [ -d /config/usb_gadget/g1/functions/uvc.0 ]; then
+	cd /config/usb_gadget/g1/functions/uvc.0
+
+	echo 3072 > streaming_maxpacket
+	echo 1 > streaming_maxburst
+	mkdir control/header/h
+	ln -s control/header/h control/class/fs/
+	ln -s control/header/h control/class/ss
+
+	mkdir -p streaming/uncompressed/u/360p
+	echo "666666\n1000000\n5000000\n" > streaming/uncompressed/u/360p/dwFrameInterval
+
+	mkdir -p streaming/uncompressed/u/720p
+	echo 1280 > streaming/uncompressed/u/720p/wWidth
+	echo 720 > streaming/uncompressed/u/720p/wWidth
+	echo 29491200 > streaming/uncompressed/u/720p/dwMinBitRate
+	echo 29491200 > streaming/uncompressed/u/720p/dwMaxBitRate
+	echo 1843200 > streaming/uncompressed/u/720p/dwMaxVideoFrameBufferSize
+	echo 5000000 > streaming/uncompressed/u/720p/dwDefaultFrameInterval
+	echo "5000000\n" > streaming/uncompressed/u/720p/dwFrameInterval
+
+	mkdir -p streaming/mjpeg/m/360p
+	echo "666666\n1000000\n5000000\n" > streaming/mjpeg/m/360p/dwFrameInterval
+
+	mkdir -p streaming/mjpeg/m/720p
+	echo 1280 > streaming/mjpeg/m/720p/wWidth
+	echo 720 > streaming/mjpeg/m/720p/wWidth
+	echo 29491200 > streaming/mjpeg/m/720p/dwMinBitRate
+	echo 29491200 > streaming/mjpeg/m/720p/dwMaxBitRate
+	echo 1843200 > streaming/mjpeg/m/720p/dwMaxVideoFrameBufferSize
+	echo 5000000 > streaming/mjpeg/m/720p/dwDefaultFrameInterval
+	echo "5000000\n" > streaming/mjpeg/m/720p/dwFrameInterval
+
+	echo 0x04 > /config/usb_gadget/g1/functions/uvc.0/streaming/mjpeg/m/bmaControls
+
+	mkdir -p streaming/h264/h/960p
+	echo 1920 > streaming/h264/h/960p/wWidth
+	echo 960 > streaming/h264/h/960p/wWidth
+	echo 40 > streaming/h264/h/960p/bLevelIDC
+	echo "333667\n" > streaming/h264/h/960p/dwFrameInterval
+
+	mkdir -p streaming/h264/h/1920p
+	echo "333667\n" > streaming/h264/h/1920p/dwFrameInterval
+
+	mkdir streaming/header/h
+	ln -s streaming/uncompressed/u streaming/header/h
+	ln -s streaming/mjpeg/m streaming/header/h
+	ln -s streaming/h264/h streaming/header/h
+	ln -s streaming/header/h streaming/class/fs/
+	ln -s streaming/header/h streaming/class/hs/
+	ln -s streaming/header/h streaming/class/ss/
+fi

@@ -32,23 +32,77 @@
 #
 baseband=`getprop ro.baseband`
 sgltecsfb=`getprop persist.vendor.radio.sglte_csfb`
-datamode=`getprop persist.data.mode`
+datamode=`getprop persist.vendor.data.mode`
+qcrild_status=true
 
 case "$baseband" in
-    "apq" | "sda" )
-    setprop ro.radio.noril yes
+    "apq" | "sda" | "qcs" )
+    setprop ro.vendor.radio.noril yes
     stop ril-daemon
+    stop vendor.ril-daemon
+    stop vendor.qcrild
+    start vendor.ipacm
 esac
 
 case "$baseband" in
     "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3")
-    start qmuxd
+    start vendor.qmuxd
 esac
 
 case "$baseband" in
-    "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3" | "sdm" | "sdx")
-    start ipacm-diag
-    start ipacm
+    "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3" | "sdm" | "sdx" | "sm6")
+
+    # For older modem packages launch ril-daemon.
+    if [ -f /vendor/firmware_mnt/verinfo/ver_info.txt ]; then
+        modem=`cat /vendor/firmware_mnt/verinfo/ver_info.txt |
+                sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
+                sed 's/.*MPSS.\(.*\)/\1/g' | cut -d \. -f 1`
+        if [ "$modem" = "AT" ]; then
+            version=`cat /vendor/firmware_mnt/verinfo/ver_info.txt |
+                    sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
+                    sed 's/.*AT.\(.*\)/\1/g' | cut -d \- -f 1`
+            if [ ! -z $version ]; then
+                if [ "$version" \< "3.1" ]; then
+                    qcrild_status=false
+                fi
+            fi
+        elif [ "$modem" = "TA" ]; then
+            version=`cat /vendor/firmware_mnt/verinfo/ver_info.txt |
+                    sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
+                    sed 's/.*TA.\(.*\)/\1/g' | cut -d \- -f 1`
+            if [ ! -z $version ]; then
+                if [ "$version" \< "3.0" ]; then
+                    qcrild_status=false
+                fi
+            fi
+        elif [ "$modem" = "JO" ]; then
+            version=`cat /vendor/firmware_mnt/verinfo/ver_info.txt |
+                    sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
+                    sed 's/.*JO.\(.*\)/\1/g' | cut -d \- -f 1`
+            if [ ! -z $version ]; then
+                if [ "$version" \< "3.2" ]; then
+                    qcrild_status=false
+                fi
+            fi
+        elif [ "$modem" = "TH" ]; then
+            qcrild_status=false
+        fi
+    fi
+
+    if [ "$qcrild_status" = "true" ]; then
+        # Make sure both rild, qcrild are not running at same time.
+        # This is possible with vanilla aosp system image.
+        stop ril-daemon
+        stop vendor.ril-daemon
+
+        start vendor.qcrild
+    else
+        start ril-daemon
+        start vendor.ril-daemon
+    fi
+
+    start vendor.ipacm-diag
+    start vendor.ipacm
     case "$baseband" in
         "svlte2a" | "csfb")
           start qmiproxy
@@ -60,40 +114,49 @@ case "$baseband" in
               setprop persist.vendor.radio.voice.modem.index 0
           fi
         ;;
-        "dsda2")
-          setprop persist.radio.multisim.config dsda
     esac
 
     multisim=`getprop persist.radio.multisim.config`
 
     if [ "$multisim" = "dsds" ] || [ "$multisim" = "dsda" ]; then
-        start ril-daemon2
+        if [ "$qcrild_status" = "true" ]; then
+          start vendor.qcrild2
+        else
+          start vendor.ril-daemon2
+        fi
     elif [ "$multisim" = "tsts" ]; then
-        start ril-daemon2
-        start ril-daemon3
+        if [ "$qcrild_status" = "true" ]; then
+          start vendor.qcrild2
+          start vendor.qcrild3
+        else
+          start vendor.ril-daemon2
+          start vendor.ril-daemon3
+        fi
     fi
 
     case "$datamode" in
         "tethered")
-            start qti
-            start port-bridge
+            start vendor.dataqti
+            start vendor.dataadpl
+            start vendor.port-bridge
             ;;
         "concurrent")
-            start qti
-            start netmgrd
-            start port-bridge
+            start vendor.dataqti
+            start vendor.dataadpl
+            start vendor.netmgrd
+            start vendor.port-bridge
             ;;
         *)
-            start netmgrd
+            start vendor.netmgrd
             ;;
     esac
 esac
 
 #
 # Allow persistent faking of bms
-# User needs to set fake bms charge in persist.bms.fake_batt_capacity
+# User needs to set fake bms charge in persist.vendor.bms.fake_batt_capacity
 #
-fake_batt_capacity=`getprop persist.bms.fake_batt_capacity`
+fake_batt_capacity=`getprop persist.vendor.bms.fake_batt_capacity`
 case "$fake_batt_capacity" in
     "") ;; #Do nothing here
     * )
