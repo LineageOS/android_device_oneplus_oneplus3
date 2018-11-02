@@ -537,11 +537,13 @@ service cnd /system/vendor/bin/cnd
     class main
     user system
     group system wifi inet radio wakelock net_admin
+    writepid /dev/cpuset/system-background/tasks
 
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
     group radio system
+    writepid /dev/cpuset/system-background/tasks
 
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
@@ -553,10 +555,12 @@ service rmt_storage /vendor/bin/rmt_storage
     user root
     shutdown critical
     ioprio rt 0
+    writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /vendor/bin/tftp_server
    class core
    user root
+   writepid /dev/cpuset/system-background/tasks
 
 on property:wc_transport.start_hci=true
     start start_hci_filter
@@ -569,6 +573,7 @@ service start_hci_filter /system/vendor/bin/wcnss_filter
     user bluetooth
     group bluetooth diag system wakelock
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
@@ -624,10 +629,12 @@ service qmuxd /system/vendor/bin/qmuxd
     user root
     group radio audio bluetooth gps nfc diag
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /system/vendor/bin/netmgrd
     class main
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service ipacm-diag /system/vendor/bin/ipacm-diag
     class main
@@ -641,18 +648,21 @@ service ipacm /system/vendor/bin/ipacm
     user radio
     group radio inet
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service qti /system/vendor/bin/qti
     class main
     user radio
     group radio oem_2901 diag usb net_admin
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service sensors /vendor/bin/sensors.qcom
     class core
     user root
     group root
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -790,6 +800,7 @@ service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
     capabilities NET_ADMIN
+    writepid /dev/cpuset/system-background/tasks
 
 on property:sys.powerctl=*
     stop cnss-daemon
@@ -873,6 +884,7 @@ service atfwd /vendor/bin/ATFWD-daemon
     user system
     group system radio
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 on property:persist.radio.atfwd.start=true
     start atfwd
@@ -916,6 +928,7 @@ service ril-daemon2 /vendor/bin/hw/rild -c 2
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2901 log
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    writepid /dev/cpuset/system-background/tasks
 
 service ril-daemon3 /vendor/bin/hw/rild -c 3
     class main
@@ -925,6 +938,7 @@ service ril-daemon3 /vendor/bin/hw/rild -c 3
     disabled
     group radio cache inet misc audio sdcard_r sdcard_rw diag oem_2901 log
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
+    writepid /dev/cpuset/system-background/tasks
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
@@ -1073,6 +1087,7 @@ service time_daemon /system/vendor/bin/time_daemon
     class main
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 service qdmastatsd /system/vendor/bin/qdmastatsd
     class late_start
