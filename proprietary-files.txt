@@ -757,7 +757,6 @@ framework/QtiTelephonyServicelibrary.jar
 framework/uimlpalibrary.jar
 lib64/libparam.so
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
-vendor/bin/ipacm-diag
 vendor/bin/netmgrd
 vendor/bin/qti
 vendor/bin/rmt_storage
