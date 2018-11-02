@@ -28,6 +28,7 @@
 #
 
 import /vendor/etc/init/hw/init.qcom.power.rc
+import /vendor/etc/init/hw/init.oneplus3.rc
 
 on early-init
     symlink /data/tombstones /tombstones
@@ -37,16 +38,11 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all /vendor/etc/fstab.qcom
     swapon_all /vendor/etc/fstab.qcom
-
-    # Keeping following partitions outside fstab file. As user may not have
-    # these partition flashed on the device. Failure to mount any partition in fstab file
-    # results in failure to launch late-start class.
-
-    wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist noatime nosuid nodev barrier=1
-    mkdir /persist/data 0700 system system
-    mkdir /persist/bms 0700 root system
-    restorecon_recursive /persist
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/data 0700 system system
+    mkdir /mnt/vendor/persist/bms 0700 root system
+    restorecon_recursive /mnt/vendor/persist
 
 on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
@@ -64,7 +60,6 @@ on post-fs-data
     mkdir /data/misc/seemp 0700 system system
     mkdir /data/usf 0700 system system
     mkdir /data/misc/tloc/ 0700 system drmrpc
-    mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/audio_pp 0771 media audio
 
    # Add a cpuset for the camera daemon
@@ -79,12 +74,6 @@ on post-fs-data
 #Create folder for mm-qcamera-daemon
 mkdir /data/vendor/camera 0770 camera camera
 
-    # Create oemnvitems for RIL
-    mkdir /data/oemnvitems 0771 radio radio
-
-    # NFC local data and nfcee xml storage
-    mkdir /data/vendor/nfc 0770 nfc nfc
-
 on property:init.svc.bootanim=running
     write /sys/class/leds/wled/brightness 4095
 
@@ -96,120 +85,13 @@ on boot
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
+    write /proc/sys/kernel/sched_boost 1
     write /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input0/update_fw 1
 
-    # Update touchscreen and keypad firmware
-    write /sys/bus/i2c/devices/12-0020/tp_fw_update 0
-    write /proc/s1302/fw_update 0
-
-    # Touchscreen
-    chown system radio /proc/touchpanel/double_tap_enable
-    chmod 0660 /proc/touchpanel/double_tap_enable
-
-    chown root system /proc/touchpanel/up_swipe_enable
-    chmod 0660 /proc/touchpanel/up_swipe_enable
-    chown root system /proc/touchpanel/down_swipe_enable
-    chmod 0660 /proc/touchpanel/down_swipe_enable
-    chown root system /proc/touchpanel/left_swipe_enable
-    chmod 0660 /proc/touchpanel/left_swipe_enable
-    chown root system /proc/touchpanel/right_swipe_enable
-    chmod 0660 /proc/touchpanel/right_swipe_enable
-    chown root system /proc/touchpanel/double_swipe_enable
-    chmod 0660 /proc/touchpanel/double_swipe_enable
-    chown root system /proc/touchpanel/up_arrow_enable
-    chmod 0660 /proc/touchpanel/up_arrow_enable
-    chown root system /proc/touchpanel/down_arrow_enable
-    chmod 0660 /proc/touchpanel/down_arrow_enable
-    chown root system /proc/touchpanel/left_arrow_enable
-    chmod 0660 /proc/touchpanel/left_arrow_enable
-    chown root system /proc/touchpanel/right_arrow_enable
-    chmod 0660 /proc/touchpanel/right_arrow_enable
-    chown root system /proc/touchpanel/letter_o_enable
-    chmod 0660 /proc/touchpanel/letter_o_enable
-
-    # Buttons
-    chown root system /proc/s1302/key_rep
-    chmod 0660 /proc/s1302/key_rep
-
-    chown root system /proc/s1302/virtual_key
-    chmod 0660 /proc/s1302/virtual_key
-
-    chown root system /proc/tri-state-key/keyCode_top
-    chmod 0660 /proc/tri-state-key/keyCode_top
-
-    chown root system /proc/tri-state-key/keyCode_middle
-    chmod 0660 /proc/tri-state-key/keyCode_middle
-
-    chown root system /proc/tri-state-key/keyCode_bottom
-    chmod 0660 /proc/tri-state-key/keyCode_bottom
-
-    # Graphics
-    chown system graphics /sys/class/graphics/fb0/dyn_pu
-    chmod 0664 /sys/class/graphics/fb0/dyn_pu
-    chown system graphics /sys/class/graphics/fb0/idle_time
-    chmod 0664 /sys/class/graphics/fb0/idle_time
-    chown system graphics /sys/class/graphics/fb0/mode
-    chmod 0664 /sys/class/graphics/fb0/mode
-    chown system graphics /sys/class/graphics/fb0/modes
-    chmod 0664 /sys/class/graphics/fb0/modes
-    chown system graphics /sys/class/graphics/fb0/hbm
-    chmod 0664 /sys/class/graphics/fb0/hbm
-    chown system graphics /sys/class/graphics/fb0/srgb
-    chmod 0664 /sys/class/graphics/fb0/srgb
-    chown system graphics /sys/class/graphics/fb0/dci_p3
-    chmod 0664 /sys/class/graphics/fb0/dci_p3
-
-    # Fingerprint
-    chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/report_home
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/report_home
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/update_info
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/update_info
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/screen_state
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/screen_state
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/hw_reset
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/proximity_state
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
-
-    # NFC
-    chmod 0666 /dev/pn544
-    chown nfc nfc /dev/pn544
-    chmod 0666 /dev/p61
-    chown spi spi /dev/p61
-
-    # DASH
-    chmod 0666 /dev/dash
-
-    # RGB light
-    chown system system /sys/class/leds/red/pause_lo
-    chown system system /sys/class/leds/blue/pause_lo
-    chown system system /sys/class/leds/green/pause_lo
-
-    chown system system /sys/class/leds/red/pause_hi
-    chown system system /sys/class/leds/blue/pause_hi
-    chown system system /sys/class/leds/green/pause_hi
-
-    chown system system /sys/class/leds/red/blink
-    chown system system /sys/class/leds/blue/blink
-    chown system system /sys/class/leds/green/blink
-
-    chown system system /sys/class/leds/red/ramp_step_ms
-    chown system system /sys/class/leds/blue/ramp_step_ms
-    chown system system /sys/class/leds/green/ramp_step_ms
-
-    chown system system /sys/class/leds/red/duty_pcts
-    chown system system /sys/class/leds/blue/duty_pcts
-    chown system system /sys/class/leds/green/duty_pcts
-
-    chown system system /sys/class/leds/red/start_idx
-    chown system system /sys/class/leds/blue/start_idx
-    chown system system /sys/class/leds/green/start_idx
-
-    chown system system /sys/class/leds/rgb/rgb_blink
-
-    setprop persist.camera.HAL3.enabled 1
+#USB controller configuration
+    write /sys/module/g_android/parameters/mtp_tx_req_len 131072
+    write /sys/module/g_android/parameters/mtp_rx_req_len 131072
+    write /sys/class/android_usb/android0/f_rndis_qc/rndis_transports BAM2BAM_IPA
 
 #start camera server as daemon
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
@@ -234,17 +116,11 @@ service qfp-daemon /system/vendor/bin/qfp-daemon
 #    user system
 #    group system input
 
-service qvrd /system/vendor/bin/qvrservice
-    class late_start
-    user system
-    group system camera graphics
-    socket qvrservice stream 0666 system system
-
 #Start up peripheral manager
 service per_mgr /vendor/bin/pm-service
     class core
     user system
-    group system
+    group system net_raw
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
@@ -261,9 +137,9 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-#service mdm_launcher /system/bin/sh init.mdm.sh
-#     class core
-#     oneshot
+service mdm_launcher /system/bin/sh init.mdm.sh
+     class core
+     oneshot
 
 service mdm_helper /system/bin/mdm_helper
      class core
@@ -324,7 +200,7 @@ service secotad /system/vendor/bin/secotad
 #   group system
 #   disabled
 #
-service thermal-engine /system/vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
+service thermal-engine /system/vendor/bin/thermal-engine
    class main
    user root
    socket thermal-send-client stream 0666 system system
@@ -345,11 +221,6 @@ service thermal-engine /system/vendor/bin/thermal-engine -c ${sys.qcom.thermalcf
 #    class core
 #    oneshot
 #
-service time_daemon /system/vendor/bin/time_daemon
-   class late_start
-   user root
-   group root
-
 service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
@@ -424,14 +295,16 @@ service usf-post-boot /system/vendor/bin/sh /system/etc/usf_post_boot.sh
 on property:init.svc.bootanim=stopped
     start usf-post-boot
 
-service imsqmidaemon /system/vendor/bin/imsqmidaemon
+## imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
+service vendor.imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group radio log diag
     writepid /dev/cpuset/system-background/tasks
 
-service imsdatadaemon /system/vendor/bin/imsdatadaemon
+# imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
+service vendor.imsdatadaemon /system/vendor/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
@@ -457,24 +330,21 @@ on property:persist.sys.pd_enable=0
 #   oneshot
 #
 on property:vendor.ims.QMI_DAEMON_STATUS=1
-    start imsdatadaemon
+    start vendor.imsdatadaemon
 
-service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
+service vendor.ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
    class main
    user system
    group radio diag inet log
-   disabled
 
 service vendor.imsrcsservice /system/vendor/bin/imsrcsd
    class main
    user system
-   group radio diag inet log
-   disabled
+   group radio diag inet log wakelock
    writepid /dev/cpuset/system-background/tasks
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
-   start ims_rtp_daemon
-   start vendor.imsrcsservice
+    restart vendor.ims_rtp_daemon
 
 service dts_configurator /system/vendor/bin/dts_configurator
     class late_start
@@ -509,18 +379,13 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=restarting
     stop ppd
 
-service tlocd /system/bin/tloc_daemon
-    class late_start
-    user system
-    group drmrpc gps net_raw
-
 service energy-awareness /system/vendor/bin/energy-awareness
     class main
     user root
     group system
     oneshot
 
-service hvdcp_opti /system/vendor/bin/hvdcp_opti
+service vendor.hvdcp_opti /system/vendor/bin/hvdcp_opti
     class main
     user root
     group system wakelock
@@ -536,7 +401,7 @@ on charger
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     wait /dev/block/bootdevice/by-name/system
     mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
-    start hvdcp_opti
+    start vendor.hvdcp_opti
 
 service dhcpcd_eth0 /system/vendor/bin/dhcpcd -ABKLG
 	class late_start
@@ -554,21 +419,3 @@ service ppd /vendor/bin/mm-pp-dpps
     group system graphics
     socket pps stream 0660 system system
     disabled
-
-service dashd /sbin/dashd
-    class core
-    critical
-    seclabel u:r:dashd:s0
-    group root system
-    writepid /dev/cpuset/system-background/tasks
-
-service ifaadaemon /system/bin/ifaadaemon
-    class late_start
-    user system
-    group system
-    writepid /dev/cpuset/system-background/tasks
-
-service remosaic_daemon /vendor/bin/remosaic_daemon
-    class late_start
-    user camera
-    writepid /dev/cpuset/system-background/tasks
