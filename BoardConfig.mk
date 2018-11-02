@@ -220,7 +220,8 @@ include device/qcom/sepolicy/sepolicy.mk
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
-    /vendor/lib/hw/camera.msm8996.so|libcamera_shim.so
+    /vendor/lib/hw/camera.msm8996.so|libcamera_shim.so \
+    /vendor/lib64/lib-sec-disp.so|libgui_shim.so
 
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
