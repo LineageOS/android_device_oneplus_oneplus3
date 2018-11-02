@@ -21,9 +21,6 @@ on boot
     chown system system /dev/cpuset/camera-daemon/tasks
     chmod 0664 /dev/cpuset/camera-daemon/tasks
 
-    # Enable sched boost
-    write /proc/sys/kernel/sched_boost 1
-
 on enable-low-power
     # Disable thermal hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
