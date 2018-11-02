@@ -561,11 +561,13 @@ service vendor.cnd /system/vendor/bin/cnd
     class main
     user system
     group system wifi inet radio wakelock net_admin
+    writepid /dev/cpuset/system-background/tasks
 
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
     group system
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
     class core
@@ -583,10 +585,12 @@ service vendor.rmt_storage /vendor/bin/rmt_storage
     user root
     shutdown critical
     ioprio rt 0
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.tftp_server /vendor/bin/tftp_server
    class core
    user root
+    writepid /dev/cpuset/system-background/tasks
 
 on property:vendor.wc_transport.start_hci=true
     start vendor.start_hci_filter
@@ -648,10 +652,12 @@ service vendor.qmuxd /system/vendor/bin/qmuxd
     user root
     group radio audio bluetooth gps nfc diag
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.netmgrd /system/vendor/bin/netmgrd
     class main
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.ipacm-diag /system/vendor/bin/ipacm-diag
     class main
@@ -665,12 +671,14 @@ service vendor.ipacm /system/vendor/bin/ipacm
     user radio
     group radio inet
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.dataqti /system/vendor/bin/qti
     class main
     user radio
     group radio oem_2901 diag usb net_admin
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.dataadpl /system/vendor/bin/adpl
     class main
@@ -689,6 +697,7 @@ service vendor.sensors.qti /vendor/bin/sensors.qti
     user system
     group system
     disabled
+    writepid /dev/cpuset/system-background/tasks
 
 on property:ro.vendor.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -815,6 +824,7 @@ service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
     capabilities NET_ADMIN
+    writepid /dev/cpuset/system-background/tasks
 
 on property:sys.powerctl=*
     stop cnss-daemon
@@ -846,6 +856,7 @@ service loc_launcher /system/vendor/bin/loc_launcher
     class late_start
     user gps
     group gps
+    writepid /dev/cpuset/system-background/tasks
 
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
@@ -921,6 +932,7 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
+    writepid /dev/cpuset/system-background/tasks
 
 service hostapd_fst /vendor/bin/hw/hostapd -dd -g /data/vendor/wifi/hostapd/global
     interface android.hardware.wifi.hostapd@1.0::IHostapd default
@@ -1120,6 +1132,7 @@ service time_daemon /system/vendor/bin/time_daemon
     class main
     user root
     group root
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.vppservice /vendor/bin/vppservice
     class main

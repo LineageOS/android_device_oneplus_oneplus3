@@ -97,7 +97,7 @@ service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
 
 #fingerprint service
 service fingerprintd /system/vendor/bin/fingerprintd
@@ -224,6 +224,7 @@ service adsprpcd /system/vendor/bin/adsprpcd
    class main
    user media
    group media
+   writepid /dev/cpuset/system-background/tasks
 
 service audiod /system/vendor/bin/audiod
    class late_start
@@ -335,6 +336,7 @@ service vendor.ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
    class main
    user system
    group radio diag inet log
+   writepid /dev/cpuset/system-background/tasks
 
 service vendor.imsrcsservice /system/vendor/bin/imsrcsd
    class main
@@ -418,3 +420,4 @@ service ppd /vendor/bin/mm-pp-dpps
     group system graphics
     socket pps stream 0660 system system
     disabled
+    writepid /dev/cpuset/system-background/tasks
