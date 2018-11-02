@@ -84,3 +84,5 @@ sed -i "s|name=\"android.hidl.manager-V1.0-java|name=\"android.hidl.manager@1.0-
 
 patchelf --replace-needed android.hardware.gnss@1.0.so android.hardware.gnss@1.0-v27.so $DEVICE_BLOB_ROOT/lib64/vendor.qti.gnss@1.0.so
 patchelf --replace-needed android.hardware.gnss@1.0.so android.hardware.gnss@1.0-v27.so $DEVICE_BLOB_ROOT/vendor/lib64/vendor.qti.gnss@1.0_vendor.so
+
+patchelf --replace-needed android.frameworks.sensorservice@1.0.so android.frameworks.sensorservice@1.0-v27.so $DEVICE_BLOB_ROOT/vendor/bin/slim_daemon
