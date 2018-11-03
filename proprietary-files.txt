@@ -771,7 +771,7 @@ etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
-framework/qti-telephony-common.jar|2eba987ae297a892e895ec1e9a302b41dbe0232e
+framework/qti-telephony-common.jar|2c63f71885a6fa1fea1af7435b45b94ede87182e
 framework/QtiTelephonyServicelibrary.jar
 framework/uimlpalibrary.jar
 lib64/libparam.so
