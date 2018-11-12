@@ -43,7 +43,7 @@ vendor.display.perf_hint_window=50
 vendor.gralloc.disable_wb_ubwc=1
 # Property to enable display default color mode
 vendor.display.enable_default_color_mode=1
-ro.sf.lcd_density=480
+ro.sf.lcd_density=420
 
 #ifdef VENDOR_EDIT
 #liuhuisheng@OnePlus 20171016 for input
