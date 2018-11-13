@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: loc-core
+Description: QTI GPS Loc Core
+Version: @VERSION@
+Libs: -L${libdir} -lloc_core
+Cflags: -I${includedir}/loc-core
