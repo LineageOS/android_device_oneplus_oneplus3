@@ -156,7 +156,6 @@ endif
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(PLATFORM_PATH)/config.fs
-TARGET_EXFAT_DRIVER := exfat
 
 # GPS
 USE_DEVICE_SPECIFIC_GPS := true
