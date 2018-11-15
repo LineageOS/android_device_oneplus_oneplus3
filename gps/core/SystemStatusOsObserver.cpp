@@ -32,23 +32,20 @@
 #include <SystemStatus.h>
 #include <SystemStatusOsObserver.h>
 #include <IDataItemCore.h>
-#include <IClientIndex.h>
-#include <IDataItemIndex.h>
-#include <IndexFactory.h>
 #include <DataItemsFactoryProxy.h>
 
 namespace loc_core
 {
-SystemStatusOsObserver::SystemStatusOsObserver(const MsgTask* msgTask) :
-    mAddress("SystemStatusOsObserver"),
-    mClientIndex(IndexFactory<IDataItemObserver*, DataItemId> :: createClientIndex()),
-    mDataItemIndex(IndexFactory<IDataItemObserver*, DataItemId> :: createDataItemIndex())
-{
-    mContext.mMsgTask = msgTask;
+template <typename CINT, typename COUT>
+COUT SystemStatusOsObserver::containerTransfer(CINT& inContainer) {
+    COUT outContainer(0);
+    for (auto item : inContainer) {
+        outContainer.insert(outContainer.begin(), item);
+    }
+    return outContainer;
 }
 
-SystemStatusOsObserver::~SystemStatusOsObserver()
-{
+SystemStatusOsObserver::~SystemStatusOsObserver() {
     // Close data-item library handle
     DataItemsFactoryProxy::closeDataItemLibraryHandle();
 
@@ -60,290 +57,238 @@ SystemStatusOsObserver::~SystemStatusOsObserver()
     }
 
     mDataItemCache.clear();
-    delete mClientIndex;
-    delete mDataItemIndex;
 }
 
 void SystemStatusOsObserver::setSubscriptionObj(IDataItemSubscription* subscriptionObj)
 {
-    mContext.mSubscriptionObj = subscriptionObj;
+    struct SetSubsObj : public LocMsg {
+        ObserverContext& mContext;
+        IDataItemSubscription* mSubsObj;
+        inline SetSubsObj(ObserverContext& context, IDataItemSubscription* subscriptionObj) :
+                mContext(context), mSubsObj(subscriptionObj) {}
+        void proc() const {
+            mContext.mSubscriptionObj = mSubsObj;
 
-    LOC_LOGD("Request cache size -  Subscribe:%zu RequestData:%zu",
-            mSubscribeReqCache.size(), mReqDataCache.size());
-
-    // we have received the subscription object. process cached requests
-    // process - subscribe request cache
-    for (auto each : mSubscribeReqCache) {
-        subscribe(each.second, each.first);
-    }
-    // process - requestData request cache
-    for (auto each : mReqDataCache) {
-        requestData(each.second, each.first);
-    }
-}
-
-// Helper to cache requests subscribe and requestData till subscription obj is obtained
-void SystemStatusOsObserver::cacheObserverRequest(ObserverReqCache& reqCache,
-        const list<DataItemId>& l, IDataItemObserver* client)
-{
-    ObserverReqCache::iterator dicIter = reqCache.find(client);
-    if (dicIter != reqCache.end()) {
-        // found
-        list<DataItemId> difference(0);
-        set_difference(l.begin(), l.end(),
-                dicIter->second.begin(), dicIter->second.end(),
-                inserter(difference, difference.begin()));
-        if (!difference.empty()) {
-            difference.sort();
-            dicIter->second.merge(difference);
-            dicIter->second.unique();
+            if (!mContext.mSSObserver->mDataItemToClients.empty()) {
+                list<DataItemId> dis(
+                        containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                mContext.mSSObserver->mDataItemToClients.getKeys()));
+                mContext.mSubscriptionObj->subscribe(dis, mContext.mSSObserver);
+                mContext.mSubscriptionObj->requestData(dis, mContext.mSSObserver);
+            }
         }
-    }
-    else {
-        // not found
-        reqCache[client] = l;
+    };
+
+    if (nullptr == subscriptionObj) {
+        LOC_LOGw("subscriptionObj is NULL");
+    } else {
+        mContext.mMsgTask->sendMsg(new SetSubsObj(mContext, subscriptionObj));
     }
 }
 
 /******************************************************************************
  IDataItemSubscription Overrides
 ******************************************************************************/
-void SystemStatusOsObserver::subscribe(
-        const list<DataItemId>& l, IDataItemObserver* client)
+void SystemStatusOsObserver::subscribe(const list<DataItemId>& l, IDataItemObserver* client,
+                                       bool toRequestData)
 {
-    if (nullptr == mContext.mSubscriptionObj) {
-        LOC_LOGD("%s]: Subscription object is NULL. Caching requests", __func__);
-        cacheObserverRequest(mSubscribeReqCache, l, client);
-        return;
-    }
-
     struct HandleSubscribeReq : public LocMsg {
-        HandleSubscribeReq(SystemStatusOsObserver* parent,
-                const list<DataItemId>& l, IDataItemObserver* client) :
-                mParent(parent), mClient(client), mDataItemList(l) {}
-        virtual ~HandleSubscribeReq() {}
+        inline HandleSubscribeReq(SystemStatusOsObserver* parent,
+                list<DataItemId>& l, IDataItemObserver* client, bool requestData) :
+                mParent(parent), mClient(client),
+                mDataItemSet(containerTransfer<list<DataItemId>, unordered_set<DataItemId>>(l)),
+                mToRequestData(requestData) {}
+
         void proc() const {
+            unordered_set<DataItemId> dataItemsToSubscribe(0);
+            mParent->mDataItemToClients.add(mDataItemSet, {mClient}, &dataItemsToSubscribe);
+            mParent->mClientToDataItems.add(mClient, mDataItemSet);
 
-            if (mDataItemList.empty()) {
-                LOC_LOGV("mDataItemList is empty. Nothing to do. Exiting");
-                return;
-            }
+            mParent->sendCachedDataItems(mDataItemSet, mClient);
 
-            // Handle First Response
-            list<DataItemId> pendingFirstResponseList(0);
-            mParent->mClientIndex->add(mClient, mDataItemList, pendingFirstResponseList);
-
-            // Do not send first response for only pendingFirstResponseList,
-            // instead send for all the data items  (present in the cache) that
-            // have been subscribed for each time.
-            mParent->sendFirstResponse(mDataItemList, mClient);
-
-            list<DataItemId> yetToSubscribeDataItemsList(0);
-            mParent->mDataItemIndex->add(mClient, mDataItemList, yetToSubscribeDataItemsList);
-
-            // Send subscription list to framework
-            if (!yetToSubscribeDataItemsList.empty()) {
-                mParent->mContext.mSubscriptionObj->subscribe(yetToSubscribeDataItemsList, mParent);
+            // Send subscription set to framework
+            if (nullptr != mParent->mContext.mSubscriptionObj && !dataItemsToSubscribe.empty()) {
                 LOC_LOGD("Subscribe Request sent to framework for the following");
-                mParent->logMe(yetToSubscribeDataItemsList);
+                mParent->logMe(dataItemsToSubscribe);
+
+                if (mToRequestData) {
+                    mParent->mContext.mSubscriptionObj->requestData(
+                            containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                    std::move(dataItemsToSubscribe)),
+                            mParent);
+                } else {
+                    mParent->mContext.mSubscriptionObj->subscribe(
+                            containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                    std::move(dataItemsToSubscribe)),
+                            mParent);
+                }
             }
         }
-        SystemStatusOsObserver* mParent;
+        mutable SystemStatusOsObserver* mParent;
         IDataItemObserver* mClient;
-        const list<DataItemId> mDataItemList;
+        const unordered_set<DataItemId> mDataItemSet;
+        bool mToRequestData;
     };
-    mContext.mMsgTask->sendMsg(new (nothrow) HandleSubscribeReq(this, l, client));
+
+    if (l.empty() || nullptr == client) {
+        LOC_LOGw("Data item set is empty or client is nullptr");
+    } else {
+        mContext.mMsgTask->sendMsg(
+                new HandleSubscribeReq(this, (list<DataItemId>&)l, client, toRequestData));
+    }
 }
 
 void SystemStatusOsObserver::updateSubscription(
         const list<DataItemId>& l, IDataItemObserver* client)
 {
-    if (nullptr == mContext.mSubscriptionObj) {
-        LOC_LOGE("%s:%d]: Subscription object is NULL", __func__, __LINE__);
-        return;
-    }
-
     struct HandleUpdateSubscriptionReq : public LocMsg {
         HandleUpdateSubscriptionReq(SystemStatusOsObserver* parent,
-                const list<DataItemId>& l, IDataItemObserver* client) :
-                mParent(parent), mClient(client), mDataItemList(l) {}
-        virtual ~HandleUpdateSubscriptionReq() {}
+                                    list<DataItemId>& l, IDataItemObserver* client) :
+                mParent(parent), mClient(client),
+                mDataItemSet(containerTransfer<list<DataItemId>, unordered_set<DataItemId>>(l)) {}
+
         void proc() const {
-            if (mDataItemList.empty()) {
-                LOC_LOGV("mDataItemList is empty. Nothing to do. Exiting");
-                return;
-            }
-
-            list<DataItemId> currentlySubscribedList(0);
-            mParent->mClientIndex->getSubscribedList(mClient, currentlySubscribedList);
-
-            list<DataItemId> removeDataItemList(0);
-            set_difference(currentlySubscribedList.begin(), currentlySubscribedList.end(),
-                    mDataItemList.begin(), mDataItemList.end(),
-                    inserter(removeDataItemList,removeDataItemList.begin()));
-
-            // Handle First Response
-            list<DataItemId> pendingFirstResponseList(0);
-            mParent->mClientIndex->add(mClient, mDataItemList, pendingFirstResponseList);
+            unordered_set<DataItemId> dataItemsToSubscribe(0);
+            unordered_set<DataItemId> dataItemsToUnsubscribe(0);
+            unordered_set<IDataItemObserver*> clients({mClient});
+            // below removes clients from all entries keyed with the return of the
+            // mClientToDataItems.update() call. If leaving an empty set of clients as the
+            // result, the entire entry will be removed. dataItemsToUnsubscribe will be
+            // populated to keep the keys of the removed entries.
+            mParent->mDataItemToClients.trimOrRemove(
+                    // this call updates <IDataItemObserver*, DataItemId> map; removes
+                    // the DataItemId's that are not new to the clietn from mDataItemSet;
+                    // and returns a set of mDataItemSet's that are no longer used by client.
+                    // This unused set of mDataItemSet's is passed to trimOrRemove method of
+                    // <DataItemId, IDataItemObserver*> map to remove the client from the
+                    // corresponding entries, and gets a set of the entries that are
+                    // removed from the <DataItemId, IDataItemObserver*> map as a result.
+                    mParent->mClientToDataItems.update(mClient,
+                                                       (unordered_set<DataItemId>&)mDataItemSet),
+                    clients, &dataItemsToUnsubscribe, nullptr);
+            // below adds mClient to <DataItemId, IDataItemObserver*> map, and populates
+            // new keys added to that map, which are DataItemIds to be subscribed.
+            mParent->mDataItemToClients.add(mDataItemSet, clients, &dataItemsToSubscribe);
 
             // Send First Response
-            mParent->sendFirstResponse(pendingFirstResponseList, mClient);
+            mParent->sendCachedDataItems(mDataItemSet, mClient);
 
-            list<DataItemId> yetToSubscribeDataItemsList(0);
-            mParent->mDataItemIndex->add(
-                    mClient, mDataItemList, yetToSubscribeDataItemsList);
+            if (nullptr != mParent->mContext.mSubscriptionObj) {
+                // Send subscription set to framework
+                if (!dataItemsToSubscribe.empty()) {
+                    LOC_LOGD("Subscribe Request sent to framework for the following");
+                    mParent->logMe(dataItemsToSubscribe);
 
-            // Send subscription list to framework
-            if (!yetToSubscribeDataItemsList.empty()) {
-                mParent->mContext.mSubscriptionObj->subscribe(
-                        yetToSubscribeDataItemsList, mParent);
-                LOC_LOGD("Subscribe Request sent to framework for the following");
-                mParent->logMe(yetToSubscribeDataItemsList);
-            }
+                    mParent->mContext.mSubscriptionObj->subscribe(
+                            containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                    std::move(dataItemsToSubscribe)),
+                            mParent);
+                }
 
-            list<DataItemId> unsubscribeList(0);
-            list<DataItemId> unused(0);
-            mParent->mClientIndex->remove(mClient, removeDataItemList, unused);
-
-            if (!mParent->mClientIndex->isSubscribedClient(mClient)) {
-                mParent->mDataItemIndex->remove(
-                        list<IDataItemObserver*> (1,mClient), unsubscribeList);
-            }
-            if (!unsubscribeList.empty()) {
                 // Send unsubscribe to framework
-                mParent->mContext.mSubscriptionObj->unsubscribe(unsubscribeList, mParent);
-                LOC_LOGD("Unsubscribe Request sent to framework for the following");
-                mParent->logMe(unsubscribeList);
+                if (!dataItemsToUnsubscribe.empty()) {
+                    LOC_LOGD("Unsubscribe Request sent to framework for the following");
+                    mParent->logMe(dataItemsToUnsubscribe);
+
+                    mParent->mContext.mSubscriptionObj->unsubscribe(
+                            containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                    std::move(dataItemsToUnsubscribe)),
+                            mParent);
+                }
             }
         }
         SystemStatusOsObserver* mParent;
         IDataItemObserver* mClient;
-        const list<DataItemId> mDataItemList;
+        unordered_set<DataItemId> mDataItemSet;
     };
-    mContext.mMsgTask->sendMsg(new (nothrow) HandleUpdateSubscriptionReq(this, l, client));
-}
 
-void SystemStatusOsObserver::requestData(
-        const list<DataItemId>& l, IDataItemObserver* client)
-{
-    if (nullptr == mContext.mSubscriptionObj) {
-        LOC_LOGD("%s]: Subscription object is NULL. Caching requests", __func__);
-        cacheObserverRequest(mReqDataCache, l, client);
-        return;
+    if (l.empty() || nullptr == client) {
+        LOC_LOGw("Data item set is empty or client is nullptr");
+    } else {
+        mContext.mMsgTask->sendMsg(
+                new HandleUpdateSubscriptionReq(this, (list<DataItemId>&)l, client));
     }
-
-    struct HandleRequestData : public LocMsg {
-        HandleRequestData(SystemStatusOsObserver* parent,
-                const list<DataItemId>& l, IDataItemObserver* client) :
-                mParent(parent), mClient(client), mDataItemList(l) {}
-        virtual ~HandleRequestData() {}
-        void proc() const {
-            if (mDataItemList.empty()) {
-                LOC_LOGV("mDataItemList is empty. Nothing to do. Exiting");
-                return;
-            }
-
-            list<DataItemId> yetToSubscribeDataItemsList(0);
-            mParent->mClientIndex->add(
-                    mClient, mDataItemList, yetToSubscribeDataItemsList);
-            mParent->mDataItemIndex->add(
-                    mClient, mDataItemList, yetToSubscribeDataItemsList);
-
-            // Send subscription list to framework
-            if (!mDataItemList.empty()) {
-                mParent->mContext.mSubscriptionObj->requestData(mDataItemList, mParent);
-                LOC_LOGD("Subscribe Request sent to framework for the following");
-                mParent->logMe(yetToSubscribeDataItemsList);
-            }
-        }
-        SystemStatusOsObserver* mParent;
-        IDataItemObserver* mClient;
-        const list<DataItemId> mDataItemList;
-    };
-    mContext.mMsgTask->sendMsg(new (nothrow) HandleRequestData(this, l, client));
 }
 
 void SystemStatusOsObserver::unsubscribe(
         const list<DataItemId>& l, IDataItemObserver* client)
 {
-    if (nullptr == mContext.mSubscriptionObj) {
-        LOC_LOGE("%s:%d]: Subscription object is NULL", __func__, __LINE__);
-        return;
-    }
     struct HandleUnsubscribeReq : public LocMsg {
         HandleUnsubscribeReq(SystemStatusOsObserver* parent,
-                const list<DataItemId>& l, IDataItemObserver* client) :
-                mParent(parent), mClient(client), mDataItemList(l) {}
-        virtual ~HandleUnsubscribeReq() {}
+                list<DataItemId>& l, IDataItemObserver* client) :
+                mParent(parent), mClient(client),
+                mDataItemSet(containerTransfer<list<DataItemId>, unordered_set<DataItemId>>(l)) {}
+
         void proc() const {
-            if (mDataItemList.empty()) {
-                LOC_LOGV("mDataItemList is empty. Nothing to do. Exiting");
-                return;
-            }
+            unordered_set<DataItemId> dataItemsUnusedByClient(0);
+            unordered_set<IDataItemObserver*> clientToRemove(0);
+            mParent->mClientToDataItems.trimOrRemove({mClient}, mDataItemSet,  &clientToRemove,
+                                                     &dataItemsUnusedByClient);
+            unordered_set<DataItemId> dataItemsToUnsubscribe(0);
+            mParent->mDataItemToClients.trimOrRemove(dataItemsUnusedByClient, {mClient},
+                                                     &dataItemsToUnsubscribe, nullptr);
 
-            list<DataItemId> unsubscribeList(0);
-            list<DataItemId> unused(0);
-            mParent->mClientIndex->remove(mClient, mDataItemList, unused);
-
-            for (auto each : mDataItemList) {
-                list<IDataItemObserver*> clientListSubs(0);
-                list<IDataItemObserver*> clientListOut(0);
-                mParent->mDataItemIndex->remove(
-                        each, list<IDataItemObserver*> (1,mClient), clientListOut);
-                // check if there are any other subscribed client for this data item id
-                mParent->mDataItemIndex->getListOfSubscribedClients(each, clientListSubs);
-                if (clientListSubs.empty())
-                {
-                    LOC_LOGD("Client list subscribed is empty for dataitem - %d", each);
-                    unsubscribeList.push_back(each);
-                }
-            }
-
-            if (!unsubscribeList.empty()) {
-                // Send unsubscribe to framework
-                mParent->mContext.mSubscriptionObj->unsubscribe(unsubscribeList, mParent);
+            if (nullptr != mParent->mContext.mSubscriptionObj && !dataItemsToUnsubscribe.empty()) {
                 LOC_LOGD("Unsubscribe Request sent to framework for the following data items");
-                mParent->logMe(unsubscribeList);
+                mParent->logMe(dataItemsToUnsubscribe);
+
+                // Send unsubscribe to framework
+                mParent->mContext.mSubscriptionObj->unsubscribe(
+                        containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                  std::move(dataItemsToUnsubscribe)),
+                        mParent);
             }
         }
         SystemStatusOsObserver* mParent;
         IDataItemObserver* mClient;
-        const list<DataItemId> mDataItemList;
+        unordered_set<DataItemId> mDataItemSet;
     };
-    mContext.mMsgTask->sendMsg(new (nothrow) HandleUnsubscribeReq(this, l, client));
+
+    if (l.empty() || nullptr == client) {
+        LOC_LOGw("Data item set is empty or client is nullptr");
+    } else {
+        mContext.mMsgTask->sendMsg(new HandleUnsubscribeReq(this, (list<DataItemId>&)l, client));
+    }
 }
 
 void SystemStatusOsObserver::unsubscribeAll(IDataItemObserver* client)
 {
-    if (nullptr == mContext.mSubscriptionObj) {
-        LOC_LOGE("%s:%d]: Subscription object is NULL", __func__, __LINE__);
-        return;
-    }
-
     struct HandleUnsubscribeAllReq : public LocMsg {
         HandleUnsubscribeAllReq(SystemStatusOsObserver* parent,
                 IDataItemObserver* client) :
                 mParent(parent), mClient(client) {}
-        virtual ~HandleUnsubscribeAllReq() {}
-        void proc() const {
-            list<IDataItemObserver*> clients(1, mClient);
-            list<DataItemId> unsubscribeList(0);
-            if(0 == mParent->mClientIndex->remove(mClient)) {
-                return;
-            }
-            mParent->mDataItemIndex->remove(clients, unsubscribeList);
 
-            if (!unsubscribeList.empty()) {
-                // Send unsubscribe to framework
-                mParent->mContext.mSubscriptionObj->unsubscribe(unsubscribeList, mParent);
-                LOC_LOGD("Unsubscribe Request sent to framework for the following data items");
-                mParent->logMe(unsubscribeList);
+        void proc() const {
+            unordered_set<DataItemId> diByClient = mParent->mClientToDataItems.getValSet(mClient);
+            if (!diByClient.empty()) {
+                unordered_set<DataItemId> dataItemsToUnsubscribe;
+                mParent->mClientToDataItems.remove(mClient);
+                mParent->mDataItemToClients.trimOrRemove(diByClient, {mClient},
+                                                         &dataItemsToUnsubscribe, nullptr);
+
+                if (!dataItemsToUnsubscribe.empty() &&
+                    nullptr != mParent->mContext.mSubscriptionObj) {
+
+                    LOC_LOGD("Unsubscribe Request sent to framework for the following data items");
+                    mParent->logMe(dataItemsToUnsubscribe);
+
+                    // Send unsubscribe to framework
+                    mParent->mContext.mSubscriptionObj->unsubscribe(
+                            containerTransfer<unordered_set<DataItemId>, list<DataItemId>>(
+                                    std::move(dataItemsToUnsubscribe)),
+                            mParent);
+                }
             }
         }
         SystemStatusOsObserver* mParent;
         IDataItemObserver* mClient;
     };
-    mContext.mMsgTask->sendMsg(new (nothrow) HandleUnsubscribeAllReq(this, client));
+
+    if (nullptr == client) {
+        LOC_LOGw("Data item set is empty or client is nullptr");
+    } else {
+        mContext.mMsgTask->sendMsg(new HandleUnsubscribeAllReq(this, client));
+    }
 }
 
 /******************************************************************************
@@ -351,84 +296,78 @@ void SystemStatusOsObserver::unsubscribeAll(IDataItemObserver* client)
 ******************************************************************************/
 void SystemStatusOsObserver::notify(const list<IDataItemCore*>& dlist)
 {
-    list<IDataItemCore*> dataItemList(0);
-
-    for (auto each : dlist) {
-        string dv;
-        each->stringify(dv);
-        LOC_LOGD("notify: DataItem In Value:%s", dv.c_str());
-
-        IDataItemCore* di = DataItemsFactoryProxy::createNewDataItem(each->getId());
-        if (nullptr == di) {
-            LOC_LOGE("Unable to create dataitem:%d", each->getId());
-            return;
-        }
-
-        // Copy contents into the newly created data item
-        di->copy(each);
-        dataItemList.push_back(di);
-        // Request systemstatus to record this dataitem in its cache
-        SystemStatus* systemstatus = SystemStatus::getInstance(mContext.mMsgTask);
-        if(nullptr != systemstatus) {
-            systemstatus->eventDataItemNotify(di);
-        }
-    }
-
     struct HandleNotify : public LocMsg {
-        HandleNotify(SystemStatusOsObserver* parent, const list<IDataItemCore*>& l) :
-            mParent(parent), mDList(l) {}
-        virtual ~HandleNotify() {
-            for (auto each : mDList) {
-                delete each;
+        HandleNotify(SystemStatusOsObserver* parent, vector<IDataItemCore*>& v) :
+                mParent(parent), mDiVec(std::move(v)) {}
+
+        inline virtual ~HandleNotify() {
+            for (auto item : mDiVec) {
+                delete item;
             }
         }
+
         void proc() const {
             // Update Cache with received data items and prepare
             // list of data items to be sent.
-            list<DataItemId> dataItemIdsToBeSent(0);
-            for (auto item : mDList) {
-                bool dataItemUpdated = false;
-                mParent->updateCache(item, dataItemUpdated);
-                if (dataItemUpdated) {
-                    dataItemIdsToBeSent.push_back(item->getId());
+            unordered_set<DataItemId> dataItemIdsToBeSent(0);
+            for (auto item : mDiVec) {
+                if (mParent->updateCache(item)) {
+                    dataItemIdsToBeSent.insert(item->getId());
                 }
             }
 
             // Send data item to all subscribed clients
-            list<IDataItemObserver*> clientList(0);
+            unordered_set<IDataItemObserver*> clientSet(0);
             for (auto each : dataItemIdsToBeSent) {
-                list<IDataItemObserver*> clients(0);
-                mParent->mDataItemIndex->getListOfSubscribedClients(each, clients);
-                for (auto each_cient: clients) {
-                    clientList.push_back(each_cient);
+                auto clients = mParent->mDataItemToClients.getValSetPtr(each);
+                if (nullptr != clients) {
+                    clientSet.insert(clients->begin(), clients->end());
                 }
             }
-            clientList.unique();
 
-            for (auto client : clientList) {
-                list<DataItemId> dataItemIdsSubscribedByThisClient(0);
-                list<DataItemId> dataItemIdsToBeSentForThisClient(0);
-                mParent->mClientIndex->getSubscribedList(
-                        client, dataItemIdsSubscribedByThisClient);
-                dataItemIdsSubscribedByThisClient.sort();
-                dataItemIdsToBeSent.sort();
+            for (auto client : clientSet) {
+                unordered_set<DataItemId> dataItemIdsForThisClient(
+                        mParent->mClientToDataItems.getValSet(client));
+                for (auto id : dataItemIdsForThisClient) {
+                    if (dataItemIdsToBeSent.find(id) == dataItemIdsToBeSent.end()) {
+                        dataItemIdsForThisClient.erase(id);
+                    }
+                }
 
-                set_intersection(dataItemIdsToBeSent.begin(),
-                        dataItemIdsToBeSent.end(),
-                        dataItemIdsSubscribedByThisClient.begin(),
-                        dataItemIdsSubscribedByThisClient.end(),
-                        inserter(dataItemIdsToBeSentForThisClient,
-                        dataItemIdsToBeSentForThisClient.begin()));
-
-                mParent->sendCachedDataItems(dataItemIdsToBeSentForThisClient, client);
-                dataItemIdsSubscribedByThisClient.clear();
-                dataItemIdsToBeSentForThisClient.clear();
+                mParent->sendCachedDataItems(dataItemIdsForThisClient, client);
             }
         }
         SystemStatusOsObserver* mParent;
-        const list<IDataItemCore*> mDList;
+        const vector<IDataItemCore*> mDiVec;
     };
-    mContext.mMsgTask->sendMsg(new (nothrow) HandleNotify(this, dataItemList));
+
+    if (!dlist.empty()) {
+        vector<IDataItemCore*> dataItemVec(dlist.size());
+
+        for (auto each : dlist) {
+            IF_LOC_LOGD {
+                string dv;
+                each->stringify(dv);
+                LOC_LOGD("notify: DataItem In Value:%s", dv.c_str());
+            }
+
+            IDataItemCore* di = DataItemsFactoryProxy::createNewDataItem(each->getId());
+            if (nullptr == di) {
+                LOC_LOGw("Unable to create dataitem:%d", each->getId());
+                continue;
+            }
+
+            // Copy contents into the newly created data item
+            di->copy(each);
+
+            // add this dataitem if updated from last one
+            dataItemVec.push_back(di);
+        }
+
+        if (!dataItemVec.empty()) {
+            mContext.mMsgTask->sendMsg(new HandleNotify(this, dataItemVec));
+        }
+    }
 }
 
 /******************************************************************************
@@ -442,7 +381,7 @@ void SystemStatusOsObserver::turnOn(DataItemId dit, int timeOut)
     }
 
     // Check if data item exists in mActiveRequestCount
-    map<DataItemId, int>::iterator citer = mActiveRequestCount.find(dit);
+    DataItemIdToInt::iterator citer = mActiveRequestCount.find(dit);
     if (citer == mActiveRequestCount.end()) {
         // Data item not found in map
         // Add reference count as 1 and add dataitem to map
@@ -480,7 +419,7 @@ void SystemStatusOsObserver::turnOff(DataItemId dit)
     }
 
     // Check if data item exists in mActiveRequestCount
-    map<DataItemId, int>::iterator citer = mActiveRequestCount.find(dit);
+    DataItemIdToInt::iterator citer = mActiveRequestCount.find(dit);
     if (citer != mActiveRequestCount.end()) {
         // found
         citer->second--;
@@ -509,84 +448,65 @@ void SystemStatusOsObserver::turnOff(DataItemId dit)
 /******************************************************************************
  Helpers
 ******************************************************************************/
-void SystemStatusOsObserver::sendFirstResponse(
-        const list<DataItemId>& l, IDataItemObserver* to)
-{
-    if (l.empty()) {
-        LOC_LOGV("list is empty. Nothing to do. Exiting");
-        return;
-    }
-
-    string clientName;
-    to->getName(clientName);
-    list<IDataItemCore*> dataItems(0);
-
-    for (auto each : l) {
-        map<DataItemId, IDataItemCore*>::const_iterator citer = mDataItemCache.find(each);
-        if (citer != mDataItemCache.end()) {
-            string dv;
-            citer->second->stringify(dv);
-            LOC_LOGI("DataItem: %s >> %s", dv.c_str(), clientName.c_str());
-            dataItems.push_back(citer->second);
-        }
-    }
-    if (dataItems.empty()) {
-        LOC_LOGV("No items to notify. Nothing to do. Exiting");
-        return;
-    }
-    to->notify(dataItems);
-}
-
 void SystemStatusOsObserver::sendCachedDataItems(
-        const list<DataItemId>& l, IDataItemObserver* to)
+        const unordered_set<DataItemId>& s, IDataItemObserver* to)
 {
-    string clientName;
-    to->getName(clientName);
-    list<IDataItemCore*> dataItems(0);
+    if (nullptr == to) {
+        LOC_LOGv("client pointer is NULL.");
+    } else {
+        string clientName;
+        to->getName(clientName);
+        list<IDataItemCore*> dataItems(0);
 
-    for (auto each : l) {
-        string dv;
-        IDataItemCore* di = mDataItemCache[each];
-        di->stringify(dv);
-        LOC_LOGI("DataItem: %s >> %s", dv.c_str(), clientName.c_str());
-        dataItems.push_back(di);
+        for (auto each : s) {
+            auto citer = mDataItemCache.find(each);
+            if (citer != mDataItemCache.end()) {
+                string dv;
+                citer->second->stringify(dv);
+                LOC_LOGI("DataItem: %s >> %s", dv.c_str(), clientName.c_str());
+                dataItems.push_front(citer->second);
+            }
+        }
+
+        if (dataItems.empty()) {
+            LOC_LOGv("No items to notify.");
+        } else {
+            to->notify(dataItems);
+        }
     }
-    to->notify(dataItems);
 }
 
-void SystemStatusOsObserver::updateCache(IDataItemCore* d, bool& dataItemUpdated)
+bool SystemStatusOsObserver::updateCache(IDataItemCore* d)
 {
-    if (nullptr == d) {
-        return;
-    }
+    bool dataItemUpdated = false;
 
-    // Check if data item exists in cache
-    map<DataItemId, IDataItemCore*>::iterator citer =
-            mDataItemCache.find(d->getId());
-    if (citer == mDataItemCache.end()) {
-        // New data item; not found in cache
-        IDataItemCore* dataitem = DataItemsFactoryProxy::createNewDataItem(d->getId());
-        if (nullptr == dataitem) {
-            return;
+    // Request systemstatus to record this dataitem in its cache
+    // if the return is false, it means that SystemStatus is not
+    // handling it, so SystemStatusOsObserver also doesn't.
+    // So it has to be true to proceed.
+    if (nullptr != d && mSystemStatus->eventDataItemNotify(d)) {
+        auto citer = mDataItemCache.find(d->getId());
+        if (citer == mDataItemCache.end()) {
+            // New data item; not found in cache
+            IDataItemCore* dataitem = DataItemsFactoryProxy::createNewDataItem(d->getId());
+            if (nullptr != dataitem) {
+                // Copy the contents of the data item
+                dataitem->copy(d);
+                // Insert in mDataItemCache
+                mDataItemCache.insert(std::make_pair(d->getId(), dataitem));
+                dataItemUpdated = true;
+            }
+        } else {
+            // Found in cache; Update cache if necessary
+            citer->second->copy(d, &dataItemUpdated);
         }
 
-        // Copy the contents of the data item
-        dataitem->copy(d);
-        pair<DataItemId, IDataItemCore*> cpair(d->getId(), dataitem);
-        // Insert in mDataItemCache
-        mDataItemCache.insert(cpair);
-        dataItemUpdated = true;
-    }
-    else {
-        // Found in cache; Update cache if necessary
-        if(0 == citer->second->copy(d, &dataItemUpdated)) {
-            return;
+        if (dataItemUpdated) {
+            LOC_LOGV("DataItem:%d updated:%d", d->getId(), dataItemUpdated);
         }
     }
 
-    if (dataItemUpdated) {
-        LOC_LOGV("DataItem:%d updated:%d", d->getId(), dataItemUpdated);
-    }
+    return dataItemUpdated;
 }
 
 } // namespace loc_core

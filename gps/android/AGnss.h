@@ -43,7 +43,7 @@ struct Gnss;
 struct AGnss : public IAGnss {
 
     AGnss(Gnss* gnss);
-    ~AGnss() = default;
+    ~AGnss();
     /*
      * Methods from ::android::hardware::gnss::V1_0::IAGnss interface follow.
      * These declarations were generated from IAGnss.hal.
@@ -60,12 +60,14 @@ struct AGnss : public IAGnss {
     Return<bool> setServer(IAGnssCallback::AGnssType type,
                          const hidl_string& hostname, int32_t port) override;
 
+    void statusIpV4Cb(AGnssExtStatusIpV4 status);
+
     /* Data call setup callback passed down to GNSS HAL implementation */
     static void agnssStatusIpV4Cb(AGnssExtStatusIpV4 status);
 
  private:
     Gnss* mGnss = nullptr;
-    static sp<IAGnssCallback> sAGnssCbIface;
+    sp<IAGnssCallback> mAGnssCbIface = nullptr;
 };
 
 }  // namespace implementation

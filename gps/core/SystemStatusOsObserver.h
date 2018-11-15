@@ -40,6 +40,7 @@
 #include <DataItemId.h>
 #include <IOsObserver.h>
 #include <platform_lib_log_util.h>
+#include <LocUnorderedSetMap.h>
 
 namespace loc_core
 {
@@ -47,24 +48,28 @@ namespace loc_core
  SystemStatusOsObserver
 ******************************************************************************/
 using namespace std;
+using namespace loc_util;
 
 // Forward Declarations
 class IDataItemCore;
-template<typename CT, typename DIT> class IClientIndex;
-template<typename CT, typename DIT> class IDataItemIndex;
+class SystemStatus;
+class SystemStatusOsObserver;
+typedef map<IDataItemObserver*, list<DataItemId>> ObserverReqCache;
+typedef LocUnorderedSetMap<IDataItemObserver*, DataItemId> ClientToDataItems;
+typedef LocUnorderedSetMap<DataItemId, IDataItemObserver*> DataItemToClients;
+typedef unordered_map<DataItemId, IDataItemCore*> DataItemIdToCore;
+typedef unordered_map<DataItemId, int> DataItemIdToInt;
 
-struct SystemContext {
+struct ObserverContext {
     IDataItemSubscription* mSubscriptionObj;
     IFrameworkActionReq* mFrameworkActionReqObj;
     const MsgTask* mMsgTask;
+    SystemStatusOsObserver* mSSObserver;
 
-    inline SystemContext() :
-        mSubscriptionObj(NULL),
-        mFrameworkActionReqObj(NULL),
-        mMsgTask(NULL) {}
+    inline ObserverContext(const MsgTask* msgTask, SystemStatusOsObserver* observer) :
+            mSubscriptionObj(NULL), mFrameworkActionReqObj(NULL),
+            mMsgTask(msgTask), mSSObserver(observer) {}
 };
-
-typedef map<IDataItemObserver*, list<DataItemId>> ObserverReqCache;
 
 // Clients wanting to get data from OS/Framework would need to
 // subscribe with OSObserver using IDataItemSubscription interface.
@@ -74,10 +79,25 @@ class SystemStatusOsObserver : public IOsObserver {
 
 public:
     // ctor
-    SystemStatusOsObserver(const MsgTask* msgTask);
+    inline SystemStatusOsObserver(SystemStatus* systemstatus, const MsgTask* msgTask) :
+            mSystemStatus(systemstatus), mContext(msgTask, this),
+            mAddress("SystemStatusOsObserver"),
+            mClientToDataItems(MAX_DATA_ITEM_ID), mDataItemToClients(MAX_DATA_ITEM_ID)
+#ifdef USE_GLIB
+            , mBackHaulConnectReqCount(0)
+#endif
+    {
+    }
 
     // dtor
     ~SystemStatusOsObserver();
+
+    template <typename CINT, typename COUT>
+    static COUT containerTransfer(CINT& s);
+    template <typename CINT, typename COUT>
+    inline static COUT containerTransfer(CINT&& s) {
+        return containerTransfer<CINT, COUT>(s);
+    }
 
     // To set the subscription object
     virtual void setSubscriptionObj(IDataItemSubscription* subscriptionObj);
@@ -88,43 +108,49 @@ public:
     }
 
     // IDataItemSubscription Overrides
-    virtual void subscribe(const list<DataItemId>& l, IDataItemObserver* client);
-    virtual void updateSubscription(const list<DataItemId>& l, IDataItemObserver* client);
-    virtual void requestData(const list<DataItemId>& l, IDataItemObserver* client);
-    virtual void unsubscribe(const list<DataItemId>& l, IDataItemObserver* client);
-    virtual void unsubscribeAll(IDataItemObserver* client);
+    inline virtual void subscribe(const list<DataItemId>& l, IDataItemObserver* client) override {
+        subscribe(l, client, false);
+    }
+    virtual void updateSubscription(const list<DataItemId>& l, IDataItemObserver* client) override;
+    inline virtual void requestData(const list<DataItemId>& l, IDataItemObserver* client) override {
+        subscribe(l, client, true);
+    }
+    virtual void unsubscribe(const list<DataItemId>& l, IDataItemObserver* client) override;
+    virtual void unsubscribeAll(IDataItemObserver* client) override;
 
     // IDataItemObserver Overrides
-    virtual void notify(const list<IDataItemCore*>& dlist);
-    inline virtual void getName(string& name) {
+    virtual void notify(const list<IDataItemCore*>& dlist) override;
+    inline virtual void getName(string& name) override {
         name = mAddress;
     }
 
     // IFrameworkActionReq Overrides
-    virtual void turnOn(DataItemId dit, int timeOut = 0);
-    virtual void turnOff(DataItemId dit);
+    virtual void turnOn(DataItemId dit, int timeOut = 0) override;
+    virtual void turnOff(DataItemId dit) override;
 
 private:
-    SystemContext                                    mContext;
+    SystemStatus*                                    mSystemStatus;
+    ObserverContext                                  mContext;
     const string                                     mAddress;
-    IClientIndex<IDataItemObserver*, DataItemId>*    mClientIndex;
-    IDataItemIndex<IDataItemObserver*, DataItemId>*  mDataItemIndex;
-    map<DataItemId, IDataItemCore*>                  mDataItemCache;
-    map<DataItemId, int>                             mActiveRequestCount;
+    ClientToDataItems                                mClientToDataItems;
+    DataItemToClients                                mDataItemToClients;
+    DataItemIdToCore                                 mDataItemCache;
+    DataItemIdToInt                                  mActiveRequestCount;
 
     // Cache the subscribe and requestData till subscription obj is obtained
-    ObserverReqCache mSubscribeReqCache;
-    ObserverReqCache mReqDataCache;
     void cacheObserverRequest(ObserverReqCache& reqCache,
             const list<DataItemId>& l, IDataItemObserver* client);
 
+    void subscribe(const list<DataItemId>& l, IDataItemObserver* client, bool toRequestData);
+
     // Helpers
-    void sendFirstResponse(const list<DataItemId>& l, IDataItemObserver* to);
-    void sendCachedDataItems(const list<DataItemId>& l, IDataItemObserver* to);
-    void updateCache(IDataItemCore* d, bool& dataItemUpdated);
-    inline void logMe(const list<DataItemId>& l) {
-        for (auto id : l) {
-            LOC_LOGD("DataItem %d", id);
+    void sendCachedDataItems(const unordered_set<DataItemId>& s, IDataItemObserver* to);
+    bool updateCache(IDataItemCore* d);
+    inline void logMe(const unordered_set<DataItemId>& l) {
+        IF_LOC_LOGD {
+            for (auto id : l) {
+                LOC_LOGD("DataItem %d", id);
+            }
         }
     }
 };

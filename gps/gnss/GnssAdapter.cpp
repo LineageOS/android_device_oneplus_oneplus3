@@ -3018,8 +3018,8 @@ bool GnssAdapter::getDebugReport(GnssDebugReport& r)
               (int64_t)(reports.mTimeAndClock.back().mGpsTowMs);
 
         r.mTime.timeUncertaintyNs =
-            (float)((reports.mTimeAndClock.back().mTimeUnc +
-                     reports.mTimeAndClock.back().mLeapSecUnc)*1000);
+                ((float)(reports.mTimeAndClock.back().mTimeUnc) +
+                 (float)(reports.mTimeAndClock.back().mLeapSecUnc))*1000.0f;
         r.mTime.frequencyUncertaintyNsPerSec =
             (float)(reports.mTimeAndClock.back().mClockFreqBiasUnc);
         LOC_LOGV("getDebugReport - timeestimate=%" PRIu64 " unc=%f frequnc=%f",
