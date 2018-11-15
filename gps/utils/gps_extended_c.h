@@ -1282,6 +1282,9 @@ typedef void (*LocAgpsOpenResultCb)(bool isSuccess, AGpsExtType agpsType, const 
 
 typedef void (*LocAgpsCloseResultCb)(bool isSuccess, AGpsExtType agpsType, void* userDataPtr);
 
+/* Shared resources of LocIpc */
+#define LOC_IPC_HAL "/dev/socket/location/socket_hal"
+#define LOC_IPC_XTRA "/dev/socket/location/xtra/socket_xtra"
 
 #ifdef __cplusplus
 }
