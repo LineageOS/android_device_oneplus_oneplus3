@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f9865c9_0524030d",
+        "filename": "gps/etc/gps.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 16208
+      },
+      "writtenOn": "2018-11-15T15:00:13Z",
+      "side": 1,
+      "message": "The overlay value will override it",
+      "revId": "09676017d3bd00aab6817e079f028ba9e301b389",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
