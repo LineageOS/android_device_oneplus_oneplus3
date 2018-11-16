@@ -16,6 +16,24 @@
       "revId": "09676017d3bd00aab6817e079f028ba9e301b389",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c1e5bc5_71443e95",
+        "filename": "gps/etc/gps.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2018-11-16T12:27:00Z",
+      "side": 1,
+      "message": "gps hal will directly parse and use this option",
+      "parentUuid": "9f9865c9_0524030d",
+      "revId": "09676017d3bd00aab6817e079f028ba9e301b389",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
