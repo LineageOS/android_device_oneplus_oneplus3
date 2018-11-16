@@ -412,15 +412,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <instance>default</instance>
         </interface>
     </hal>
-   <hal format="hidl">
-      <name>android.hardware.cas</name>
-      <transport>hwbinder</transport>
-      <version>1.0</version>
-       <interface>
-            <name>IMediaCasService</name>
-            <instance>default</instance>
-       </interface>
-    </hal>
     <hal format="hidl">
         <name>android.hardware.wifi.supplicant</name>
         <transport>hwbinder</transport>
