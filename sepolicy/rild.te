@@ -1,0 +1,2 @@
+#dontaudit rild tombstone_data_file:dir search;
+dontaudit rild vendor_file:file ioctl;
