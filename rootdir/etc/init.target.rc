@@ -29,9 +29,6 @@
 
 import /vendor/etc/init/hw/init.oneplus3.rc
 
-on early-init
-    symlink /data/tombstones /tombstones
-
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -48,15 +45,14 @@ on init
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
+    mkdir /data/tombstones/modem 0771 system system
+    mkdir /data/tombstones/lpass 0771 system system
+    mkdir /data/tombstones/wcnss 0771 system system
+    mkdir /data/tombstones/dsps 0771 system system
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
     mkdir /persist/qti_fp 0700 system system
     mkdir /data/misc/dts 0770 media audio
-    mkdir /data/misc/seemp 0700 system system
     mkdir /data/usf 0700 system system
     mkdir /data/misc/tloc/ 0700 system drmrpc
     mkdir /data/misc/audio_pp 0771 media audio
@@ -119,7 +115,7 @@ service qfp-daemon /system/vendor/bin/qfp-daemon
 service per_mgr /vendor/bin/pm-service
     class core
     user system
-    group system net_raw
+    group system
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
@@ -136,9 +132,9 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service mdm_launcher /system/bin/sh init.mdm.sh
-     class core
-     oneshot
+#service mdm_launcher /system/bin/sh init.mdm.sh
+#     class core
+#     oneshot
 
 service mdm_helper /system/bin/mdm_helper
      class core
