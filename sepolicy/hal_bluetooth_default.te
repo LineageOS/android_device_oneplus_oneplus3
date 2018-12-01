@@ -1,4 +1,0 @@
-allow hal_bluetooth_default bluetooth_data_file:dir ra_dir_perms;
-allow hal_bluetooth_default bluetooth_data_file:file create_file_perms;
-
-allow hal_bluetooth_default wcnss_filter:unix_stream_socket connectto;
