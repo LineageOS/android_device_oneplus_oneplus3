@@ -1,6 +1,5 @@
-get_prop(rild, diag_prop);
-
 # qcril.so needs access to /vendor/radio/qcril_database/qcril.db
 allow rild vendor_file:file ioctl;
 
+allow rild shell_exec:file rx_file_perms;
 allow rild toolbox_exec:file rx_file_perms;

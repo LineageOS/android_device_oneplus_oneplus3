@@ -3435,7 +3435,7 @@ case "$target" in
 	fi
 	echo N > /sys/module/lpm_levels/parameters/sleep_disabled
         # Starting io prefetcher service
-        start iop
+        # start iop
 
         # Set Memory parameters
         configure_memory_parameters

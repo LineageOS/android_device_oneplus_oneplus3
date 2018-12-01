@@ -1,4 +1,5 @@
 allow hal_camera_default camera_data_file:sock_file rw_file_perms;
+allow hal_camera_default camera_data_file:dir search;
 allow hal_camera_default qdsp_device:chr_file r_file_perms;
 allow hal_camera_default system_server:unix_stream_socket rw_socket_perms;
 allow hal_camera_default sensorservice_service:service_manager find;

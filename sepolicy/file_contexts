@@ -1,28 +1,34 @@
-# We have a couple of non-standard NV partitions
-/dev/block/platform/soc/624000.ufshc/by-name/oem_dycnvbk        u:object_r:modem_efs_partition_device:s0
-/dev/block/platform/soc/624000.ufshc/by-name/oem_stanvbk        u:object_r:modem_efs_partition_device:s0
+# Camera
+/data/camera(/.*)?                                              u:object_r:camera_socket:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.4-service\.oneplus3       u:object_r:hal_camera_default_exec:s0
+/(vendor|system/vendor)/bin/remosaic_daemon                     u:object_r:remosaic_daemon_exec:s0
+
+# Charger
+/dev/dash                                                       u:object_r:dash_device:s0
+
+# Display
+/sys/devices/virtual/graphics/fb0/dci_p3                        u:object_r:sysfs_livedisplay:s0
+/sys/devices/virtual/graphics/fb0/srgb                          u:object_r:sysfs_livedisplay:s0
+
+# Fingerprint
+/dev/fpc1020                                                    u:object_r:fpc1020_device:s0
+/data/fpc(/.*)?                                                 u:object_r:fingerprint_vendor_data_file:s0
+/data/fpc_images(/.*)?                                          u:object_r:fingerprint_vendor_data_file:s0
 
 # FRP partition
 /dev/block/platform/soc/624000.ufshc/by-name/config             u:object_r:frp_block_device:s0
 
-# Devices
-/dev/fpc1020                                                    u:object_r:fpc1020_device:s0
-/dev/dash                                                       u:object_r:dash_device:s0
+# Healthd
+/sys/devices/soc/soc:qcom,bcl/power_supply/bcl/type             u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/msm-bcl-14/power_supply/fg_adc/type            u:object_r:sysfs_batteryinfo:s0
 
-# HALs
-/(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.4-service\.oneplus3       u:object_r:hal_camera_default_exec:s0
+# IFAA
+/system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
+
+# LEDs
+/sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                    u:object_r:sysfs_leds:s0
 
 # Ril
 /data/oemnvitems(/.*)?                                          u:object_r:vendor_radio_data_file:s0
-
-# Sys files
-/sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc:s0
-/sys/devices/soc/soc:fpc_fpc1020/proximity_state                u:object_r:sysfs_fpc:s0
-/sys/devices/soc/soc:fpc_fpc1020/report_home                    u:object_r:sysfs_fpc:s0
-/sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                    u:object_r:sysfs_leds:s0
-/sys/devices/virtual/graphics/fb0/dci_p3                        u:object_r:sysfs_livedisplay:s0
-/sys/devices/virtual/graphics/fb0/srgb                          u:object_r:sysfs_livedisplay:s0
-
-# Binaries
-/system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
-/(vendor|system/vendor)/bin/remosaic_daemon                     u:object_r:remosaic_daemon_exec:s0
+/dev/block/platform/soc/624000.ufshc/by-name/oem_dycnvbk        u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/soc/624000.ufshc/by-name/oem_stanvbk        u:object_r:modem_efs_partition_device:s0

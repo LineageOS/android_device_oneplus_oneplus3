@@ -1,7 +1,14 @@
-allow system_app time_daemon:unix_stream_socket connectto;
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file rw_file_perms;
-allow system_app sysfs_fpc:file write;
+
+allow system_app sysfs_fpc:dir search;
+allow system_app sysfs_fpc:file rw_file_perms;
+
+# WTF?
+allow system_app proc_pagetypeinfo:file r_file_perms;
+binder_call(system_app, netd);
+binder_call(system_app, perfprofd);
+r_dir_file(system_app, sysfs_zram)
 
 binder_call(system_app, ifaadaemon)
 binder_call(system_app, remosaic_daemon)

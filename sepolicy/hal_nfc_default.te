@@ -1,0 +1,3 @@
+# Data file accesses.
+allow hal_nfc_default nfc_vendor_data_file:dir create_dir_perms;
+allow hal_nfc_default nfc_vendor_data_file:file create_file_perms;

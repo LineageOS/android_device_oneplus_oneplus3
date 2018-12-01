@@ -1,7 +1,2 @@
-#allow rmt_storage modem_efs_partition_device:blk_file rw_file_perms;
-
-# debugfs access
-userdebug_or_eng(`
-  allow rmt_storage debugfs_rmt:dir search;
-  allow rmt_storage debugfs_rmt:file rw_file_perms;
-')
+allow rmt_storage debugfs_rmt_storage:dir search;
+allow rmt_storage debugfs_rmt_storage:file w_file_perms; 
