@@ -3,5 +3,7 @@ allow hal_fingerprint_default firmware_file:dir search;
 allow hal_fingerprint_default sysfs_leds:dir search;
 allow hal_fingerprint_default firmware_file:file r_file_perms;
 allow hal_fingerprint_default sysfs_fpc:file rw_file_perms;
+allow hal_fingerprint_default fingerprint_data_file:dir rw_dir_perms;
+allow hal_fingerprint_default fingerprint_data_file:sock_file create_file_perms;
 r_dir_file(hal_fingerprint_default, proc_touchpanel)
 r_dir_file(hal_fingerprint_default, sysfs_graphics)
