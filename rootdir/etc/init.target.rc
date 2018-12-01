@@ -82,6 +82,12 @@ mkdir /data/vendor/camera 0770 camera camera
     # Create oemnvitems for RIL
     mkdir /data/oemnvitems 0771 radio radio
 
+    #fingerint, changhua add for fp debug image usage,feature default off
+    mkdir /data/fpc_images 0770 system system
+    mkdir /data/fpc_images/verify 0770 system system
+    mkdir /data/fpc_images/enroll 0770 system system
+    mkdir /data/fpc 0770 system system
+
 on property:init.svc.bootanim=running
     write /sys/class/leds/wled/brightness 4095
 
