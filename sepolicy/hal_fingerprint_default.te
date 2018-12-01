@@ -1,7 +1,16 @@
-allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 allow hal_fingerprint_default firmware_file:dir search;
-allow hal_fingerprint_default sysfs_leds:dir search;
 allow hal_fingerprint_default firmware_file:file r_file_perms;
+
+allow hal_fingerprint_default sysfs_fpc:dir r_dir_perms;
 allow hal_fingerprint_default sysfs_fpc:file rw_file_perms;
+
+allow hal_fingerprint_default fingerprint_vendor_data_file:sock_file  create_file_perms;
+
+# access to /data/system/users/[0-9]+/fpdata
+allow hal_fingerprint_default fingerprintd_data_file:file create_file_perms;
+allow hal_fingerprint_default fingerprintd_data_file:dir rw_dir_perms;
+
+allow hal_fingerprint_default sysfs_leds:dir search;
+allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
 r_dir_file(hal_fingerprint_default, proc_touchpanel)
 r_dir_file(hal_fingerprint_default, sysfs_graphics)

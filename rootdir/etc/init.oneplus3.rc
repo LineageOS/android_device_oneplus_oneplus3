@@ -63,6 +63,9 @@ on post-fs-data
     mkdir /data/fpc_images/enroll 0770 system system
     mkdir /data/fpc 0770 system system
 
+on early-boot
+    chown system system /mnt/vendor/persist/sensors/gyro_sensitity_cal
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
