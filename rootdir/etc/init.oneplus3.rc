@@ -57,6 +57,12 @@ on post-fs-data
     # NFC local data and nfcee xml storage
     mkdir /data/vendor/nfc 0770 nfc nfc
 
+    #fingerint, changhua add for fp debug image usage,feature default off
+    mkdir /data/fpc_images 0770 system system
+    mkdir /data/fpc_images/verify 0770 system system
+    mkdir /data/fpc_images/enroll 0770 system system
+    mkdir /data/fpc 0770 system system
+
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
