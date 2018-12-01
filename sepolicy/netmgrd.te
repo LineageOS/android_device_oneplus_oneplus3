@@ -1,1 +1,1 @@
-get_prop(netmgrd, diag_prop);
+set_prop(netmgrd, vendor_xlat_prop)

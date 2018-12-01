@@ -1,0 +1,2 @@
+dontaudit domain diag_prop:file r_file_perms;
+dontaudit domain diag_prop:property_service set;
