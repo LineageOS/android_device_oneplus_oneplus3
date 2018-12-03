@@ -1,2 +1,1 @@
-get_prop(dpmd, diag_prop);
 allow dpmd self:capability dac_override;
