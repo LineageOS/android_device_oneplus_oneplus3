@@ -1,0 +1,8 @@
+set_prop({
+  domain
+# Hitting neverallows but not accessing the prop, skip them
+  -appdomain
+  -ueventd
+  -webview_zygote
+  -hal_configstore_server
+}, diag_prop)
