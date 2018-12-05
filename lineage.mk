@@ -25,7 +25,7 @@ $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Vendor security patch level
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.lineage.build.vendor_security_patch=2018-09-01
+    ro.lineage.build.vendor_security_patch=2018-11-01
 
 PRODUCT_NAME := lineage_oneplus3
 PRODUCT_DEVICE := oneplus3
