@@ -403,6 +403,9 @@ int IPACM_IfaceManager::create_iface_instance(ipacm_ifacemgr_data *param)
 #else
 				IPACM_EvtDispatcher::registr(IPA_TETHERING_STATS_UPDATE_EVENT, wl);
 #endif
+#ifdef FEATURE_IPACM_HAL
+				IPACM_EvtDispatcher::registr(IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE, wl);
+#endif
 				/* IPA_LAN_DELETE_SELF should be always last */
 				IPACM_EvtDispatcher::registr(IPA_LAN_DELETE_SELF, wl);
 				IPACMDBG_H("ipa_WLAN (%s):ipa_index (%d) instance open/registr ok\n", wl->dev_name, wl->ipa_if_num);
@@ -452,6 +455,7 @@ int IPACM_IfaceManager::create_iface_instance(ipacm_ifacemgr_data *param)
 						IPACM_EvtDispatcher::registr(IPA_WLAN_SWITCH_TO_MCC, w);
 #ifdef FEATURE_IPACM_HAL
 						IPACM_EvtDispatcher::registr(IPA_SSR_NOTICE, w);
+						IPACM_EvtDispatcher::registr(IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE, w);
 #endif
 #endif
 					}

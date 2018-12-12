@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -53,9 +53,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPA_V2_NUM_DEFAULT_WAN_FILTER_RULE_IPV4 2
 
 #ifdef FEATURE_IPA_ANDROID
-#define IPA_V2_NUM_DEFAULT_WAN_FILTER_RULE_IPV6 6
+#define IPA_V2_NUM_DEFAULT_WAN_FILTER_RULE_IPV6 7
 #define IPA_V2_NUM_TCP_WAN_FILTER_RULE_IPV6 3
 #define IPA_V2_NUM_MULTICAST_WAN_FILTER_RULE_IPV6 3
+#define IPA_V2_NUM_FRAG_WAN_FILTER_RULE_IPV6 1
 #else
 #define IPA_V2_NUM_DEFAULT_WAN_FILTER_RULE_IPV6 3
 #endif

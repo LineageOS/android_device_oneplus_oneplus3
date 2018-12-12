@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -93,6 +93,8 @@ public:
 	ConntrackTimeoutUpdater *touInstance;
 
 	bool search_framwork_cache(char * interface_name);
+
+	bool push_framework_event(const char * if_name, _ipacm_offload_prefix prefix);
 
 private:
 

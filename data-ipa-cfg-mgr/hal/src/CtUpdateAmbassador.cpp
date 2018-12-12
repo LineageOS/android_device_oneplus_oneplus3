@@ -78,7 +78,10 @@ void CtUpdateAmbassador::updateTimeout(IpaNatTimeoutUpdate in) {
          */
         ALOGE("Failed to translate timeout event :(");
     } else {
-        mFramework->updateTimeout(out);
+        auto ret = mFramework->updateTimeout(out);
+        if (!ret.isOk()) {
+            ALOGE("Triggering updateTimeout Callback failed.");
+        }
     }
 } /* updateTimeout */
 

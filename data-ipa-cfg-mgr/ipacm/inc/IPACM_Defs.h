@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
+Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -195,6 +195,7 @@ typedef enum
 	IPA_HANDLE_VLAN_CLIENT_INFO,              /* ipacm_event_data_all */
 	IPA_HANDLE_VLAN_IFACE_INFO,               /* ipacm_event_data_all */
 #endif
+	IPA_WLAN_FWR_SSR_BEFORE_SHUTDOWN_NOTICE,
 	IPA_LAN_DELETE_SELF,                      /* ipacm_event_data_fid */
 	IPACM_EVENT_MAX
 } ipa_cm_event_id;

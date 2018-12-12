@@ -73,6 +73,12 @@ bool IPACM_Filtering::AddFilteringRule(struct ipa_ioc_add_flt_rule const *ruleTa
 {
 	int retval = 0;
 
+	if (ruleTable == NULL)
+	{
+		IPACMERR("ruleTable is NULL\n");
+		return false;
+	}
+
 	IPACMDBG("Printing filter add attributes\n");
 	IPACMDBG("ip type: %d\n", ruleTable->ip);
 	IPACMDBG("Number of rules: %d\n", ruleTable->num_rules);
@@ -116,6 +122,12 @@ bool IPACM_Filtering::AddFilteringRule(struct ipa_ioc_add_flt_rule const *ruleTa
 
 bool IPACM_Filtering::AddFilteringRuleAfter(struct ipa_ioc_add_flt_rule_after const *ruleTable)
 {
+	if (ruleTable == NULL)
+	{
+		IPACMERR("ruleTable is NULL\n");
+		return false;
+	}
+
 	IPACMDBG("Printing filter add attributes\n");
 	IPACMDBG("ip type: %d\n", ruleTable->ip);
 	IPACMDBG("Number of rules: %d\n", ruleTable->num_rules);
@@ -152,6 +164,12 @@ bool IPACM_Filtering::AddFilteringRuleAfter(struct ipa_ioc_add_flt_rule_after co
 bool IPACM_Filtering::DeleteFilteringRule(struct ipa_ioc_del_flt_rule *ruleTable)
 {
 	int retval = 0;
+
+	if (ruleTable == NULL)
+	{
+		IPACMERR("ruleTable is NULL\n");
+		return false;
+	}
 
 	retval = ioctl(fd, IPA_IOC_DEL_FLT_RULE, ruleTable);
 	if (retval != 0)
@@ -508,6 +526,12 @@ ipa_filter_action_enum_v01 IPACM_Filtering::GetQmiFilterAction(ipa_flt_action ac
 bool IPACM_Filtering::ModifyFilteringRule(struct ipa_ioc_mdfy_flt_rule* ruleTable)
 {
 	int i, ret = 0;
+
+	if (ruleTable == NULL)
+	{
+		IPACMERR("ruleTable is NULL\n");
+		return false;
+	}
 
 	IPACMDBG("Printing filtering add attributes\n");
 	IPACMDBG("IP type: %d Number of rules: %d commit value: %d\n", ruleTable->ip, ruleTable->num_rules, ruleTable->commit);
