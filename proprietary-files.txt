@@ -776,7 +776,6 @@ vendor/bin/ATFWD-daemon
 vendor/bin/netmgrd
 vendor/bin/qti
 vendor/bin/rmt_storage
-vendor/bin/tftp_server
 vendor/etc/data/dsi_config.xml
 vendor/etc/data/netmgr_config.xml
 vendor/lib/libmdmdetect.so
@@ -802,6 +801,11 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0_vendor.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.0_vendor.so
 vendor/radio/qcril_database/qcril.db
+
+# Radio - from daisy - PKQ1.180917.001
+vendor/bin/tftp_server|05a9c0e0e691e534e703bded4a99083d25a26ebb
+vendor/lib64/libqrtr.so|83676274fde1056a0507b4100a3a5423f5af5021
+vendor/lib64/libqsocket.so|3799e723be152c31c270f93a64e2865c0d9e86c4
 
 # Radio - IMS
 -app/imssettings/imssettings.apk

@@ -1,2 +1,0 @@
-# TODO: Drop after getting P tftp_server
-allow rfs_access self:capability dac_override;
