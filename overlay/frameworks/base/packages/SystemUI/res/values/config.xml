@@ -32,4 +32,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <resources>
     <!-- Enable doze mode -->
     <bool name="doze_display_state_supported">true</bool>
+
+    <!-- Whether to relocate volume dialog to the left side of the device,
+         thus matching the location of the device's hardware keys. -->
+    <bool name="config_relocateVolumeDialog">true</bool>
 </resources>
