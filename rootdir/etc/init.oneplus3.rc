@@ -200,6 +200,13 @@ on property:sys.boot_completed=1
 
     setprop sys.io.scheduler "bfq"
 
+    # Update cpusets now that boot is complete and we want better load balancing
+    write /dev/cpuset/top-app/cpus 0-3
+    write /dev/cpuset/foreground/cpus 0-2
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 0-2
+    write /dev/cpuset/restricted/cpus 0-1
+
 service dashd /sbin/dashd
     class core
     critical
