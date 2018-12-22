@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb0f8bdb_615c0a9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-12-22T18:48:18Z",
+      "side": 1,
+      "message": "Relocate volume dialog to the left side",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "6aebad3a35c1247945971ce429125febcb77a93d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b147e7b_836470c5",
+        "filename": "overlay/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-12-22T18:48:18Z",
+      "side": 1,
+      "message": "Match fw/b change:\n\n      Whether to relocate volume dialog to the left side of the device, thus matching the \n      location of the device\u0027s hardware keys.",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 69
+      },
+      "revId": "6aebad3a35c1247945971ce429125febcb77a93d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
