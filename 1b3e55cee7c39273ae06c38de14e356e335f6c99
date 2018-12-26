@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cb97ea8b_13013f15",
+        "filename": "sepolicy/hal_perf_default.te",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 12847
+      },
+      "writtenOn": "2018-12-26T09:05:05Z",
+      "side": 1,
+      "message": "line feed can be removed",
+      "revId": "1b3e55cee7c39273ae06c38de14e356e335f6c99",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
