@@ -1,3 +1,4 @@
 allow hal_perf_default hal_camera_default:process signull;
 allow hal_perf_default hal_graphics_composer_default:process signull;
 allow hal_perf_default self:capability kill;
+r_dir_file(hal_perf_default, hal_power_default)
