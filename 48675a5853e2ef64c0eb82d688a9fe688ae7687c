@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea3ceb87_9f6f973a",
+        "filename": "device.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-12-26T11:51:23Z",
+      "side": 1,
+      "message": "Add libaacwrapper too",
+      "revId": "48675a5853e2ef64c0eb82d688a9fe688ae7687c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d6b66df1_bf2ed806",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2018-12-26T11:51:23Z",
+      "side": 1,
+      "message": "Buildable from sources.",
+      "range": {
+        "startLine": 938,
+        "startChar": 0,
+        "endLine": 938,
+        "endChar": 61
+      },
+      "revId": "48675a5853e2ef64c0eb82d688a9fe688ae7687c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
