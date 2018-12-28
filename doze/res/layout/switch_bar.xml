@@ -29,11 +29,12 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:paddingStart="48dp"
+        android:paddingStart="56dp"
         android:maxLines="2"
         android:ellipsize="end"
         android:textAppearance="@android:style/TextAppearance.Material.Title"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         android:textAlignment="viewStart" />
 
     <Switch
@@ -42,6 +43,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:background="@null"
-        android:theme="@style/Theme.Main.SwitchBar" />
+        android:theme="@style/Theme.Main.SwitchBar.Switch" />
 
 </LinearLayout>
