@@ -400,6 +400,7 @@
          and one pSIM) -->
     <integer name="config_num_physical_slots">2</integer>
 
+
     <!-- Whether the always on display mode is available. -->
     <bool name="config_dozeAlwaysOnDisplayAvailable">true</bool>
 
@@ -413,6 +414,21 @@
     <!-- Whether the display blanks itself when transitioning from a doze to a non-doze state -->
     <bool name="config_displayBlanksAfterDoze">true</bool>
 
-    <!-- Minimum color temperature, in Kelvin, supported by Night display. -->
-    <integer name="config_nightDisplayColorTemperatureMin">1200</integer>
+    <!-- Flag indicating whether we should enable smart battery. -->
+    <bool name="config_smart_battery_available">true</bool>
+
+	<!-- Hardware keys present on the device, stored as a bit field.
+         This integer should equal the sum of the corresponding value for each
+         of the following keys present:
+             1 - Home
+             2 - Back
+             4 - Menu
+             8 - Assistant (search)
+            16 - App switch
+            32 - Camera
+            64 - Volume rocker
+         For example, a device with Home, Back and Menu keys would set this
+         config to 7. -->
+    <integer name="config_deviceHardwareKeys">83</integer>
+
 </resources>
