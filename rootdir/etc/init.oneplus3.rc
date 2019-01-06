@@ -220,6 +220,3 @@ service remosaic_daemon /vendor/bin/remosaic_daemon
 
 on property:vendor.post_boot.parsed=*
     setprop sys.post_boot.parsed ${vendor.post_boot.parsed}
-
-on property:sys.listeners.registered=*
-    setprop vendor.sys.keymaster.loaded ${sys.listeners.registered}
