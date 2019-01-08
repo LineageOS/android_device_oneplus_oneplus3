@@ -237,8 +237,8 @@ persist.radio.efssync=true
 #end
 
 # Display power reduction (FOSS)
-ro.qcom.dpps.sensortype=3
-ro.qualcomm.display.paneltype=1
-ro.qualcomm.foss=1
-config.foss.xml=1
-config.foss.path=/vendor/etc/FOSSConfig.xml
+ro.vendor.display.sensortype=3
+ro.vendor.display.paneltype=1
+ro.vendor.display.foss=1
+vendor.display.foss.config=1
+vendor.display.foss.config_path=/vendor/etc/FOSSConfig.xml
