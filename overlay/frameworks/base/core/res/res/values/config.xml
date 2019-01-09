@@ -380,22 +380,6 @@
     <!-- If this is true, device supports Sustained Performance Mode. -->
     <bool name="config_sustainedPerformanceModeSupported">true</bool>
 
-    <!-- Values for GPS configuration -->
-    <string-array translatable="false" name="config_gpsParameters">
-        <item>SUPL_HOST=supl.google.com</item>
-        <item>SUPL_PORT=7275</item>
-        <item>SUPL_VER=0x20000</item>
-        <item>SUPL_MODE=1</item>
-        <item>SUPL_ES=0</item>
-        <item>LPP_PROFILE=0</item>
-        <item>USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL=1</item>
-        <item>A_GLONASS_POS_PROTOCOL_SELECT=0</item>
-        <item>GPS_LOCK=0</item>
-        <item>XTRA_SERVER_1=http://xtrapath1.izatcloud.net/xtra3grc.bin</item>
-        <item>XTRA_SERVER_2=http://xtrapath2.izatcloud.net/xtra3grc.bin</item>
-        <item>XTRA_SERVER_3=http://xtrapath3.izatcloud.net/xtra3grc.bin</item>
-    </string-array>
-
     <!-- If true, the display will be shifted around in ambient mode. -->
     <bool name="config_enableBurnInProtection">true</bool>
 
