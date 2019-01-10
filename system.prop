@@ -196,6 +196,8 @@ vendor.debug.enable.gamed=0
 persist.vendor.camera.display.umax=1920x1080
 persist.vendor.camera.display.lmax=1280x720
 
+vendor.camera.hal1.packagelist=com.whatsapp,com.intsig.camscanner
+
 #Disable face beautification
 persist.ts.postmakeup=false
 persist.ts.rtmakeup=false
