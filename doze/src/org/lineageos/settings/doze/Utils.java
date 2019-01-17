@@ -89,8 +89,12 @@ public final class Utils {
     }
 
     protected static boolean isAlwaysOnEnabled(Context context) {
+        final boolean enabledByDefault = context.getResources()
+                .getBoolean(com.android.internal.R.bool.config_dozeAlwaysOnEnabled);
+
         return Settings.Secure.getIntForUser(context.getContentResolver(),
-                DOZE_ALWAYS_ON, 1, UserHandle.USER_CURRENT) != 0;
+                DOZE_ALWAYS_ON, alwaysOnDisplayAvailable(context) && enabledByDefault ? 1 : 0,
+                UserHandle.USER_CURRENT) != 0;
     }
 
     protected static boolean alwaysOnDisplayAvailable(Context context) {
