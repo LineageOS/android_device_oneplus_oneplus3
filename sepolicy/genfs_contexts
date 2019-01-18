@@ -4,11 +4,6 @@ genfscon sysfs /devices/soc/soc:fpc_fpc1020         u:object_r:sysfs_fpc:s0
 # Ril
 genfscon debugfs /rmt_storage                       u:object_r:debugfs_rmt_storage:s0
 
-# SSR
-genfscon sysfs /devices/soc/1c00000.qcom,ssc/subsys4/name              u:object_r:sysfs_ssr:s0
-genfscon sysfs /devices/soc/9300000.qcom,lpass/subsys3/name            u:object_r:sysfs_ssr:s0
-genfscon sysfs /devices/soc/2080000.qcom,mss/subsys5/name              u:object_r:sysfs_ssr:s0
-
 # Touchscreen
 genfscon proc /touchpanel                           u:object_r:proc_touchpanel:s0
 genfscon proc /s1302                                u:object_r:proc_touchpanel:s0
