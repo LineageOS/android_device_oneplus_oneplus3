@@ -615,11 +615,6 @@ vendor/lib/libOpenCL.so|74840ef50111c3232a7fcef79bf78e7fa516a237
 vendor/lib/librs_adreno_sha1.so|065a538f25d41713501c568a2d7ef1561c8e3bb7
 vendor/lib/librs_adreno.so|12b4c0d4174c108e27a4e09fe3e2b5ac860693a2
 vendor/lib/libRSDriver_adreno.so|26de2b456a064d9d3ea68b8ceacf26f4a866c067
-vendor/lib/libscalar.so|cad128a6e71195b4ad38494bc0382bf80e1fb0b2
-vendor/lib/libsdm-color.so|9144f6d1e254fc6353fb91386eb1d0ee1964d8a2
-vendor/lib/libsdm-diag.so|e2e3a0fba39190c58bafa0568e8cd51b391b71b6
-vendor/lib/libsdmextension.so|04fba39e30c182e4edbf01d78c897c0fd0dc52d9
-vendor/lib/libtinyxml2_1.so|3882fddae942997be6ad6af789cf209fa45e61b3
 vendor/lib64/egl/eglSubDriverAndroid.so|1722e81010c6f9836d83f6d684b206412c410d49
 vendor/lib64/egl/libEGL_adreno.so|b7ab1dad439779da82ab66439e3c8e85a153056d
 vendor/lib64/egl/libGLESv1_CM_adreno.so|1eaa98e7feb9daba88f68ff167e2dacfaeed5e21
@@ -639,11 +634,19 @@ vendor/lib64/libOpenCL.so|6400a952fbc2d2e5d9aed56ae1aa4f1380dcdd73
 vendor/lib64/librs_adreno_sha1.so|35c26aecafd9a12d84ff6f89b1891699c19eb88f
 vendor/lib64/librs_adreno.so|5b853ae3692fc3d8cf7c5b63d45320533c194cde
 vendor/lib64/libRSDriver_adreno.so|eb72d1cabfb31ee3362c9832a40b265e42858dc9
-vendor/lib64/libscalar.so|61c059ca3b9da6a36bdf112e8fbe26a252ad1234
-vendor/lib64/libsdm-color.so|bca0a2a58c2c33e1dbed82de7446ebfcbc8250ff
-vendor/lib64/libsdm-diag.so|87a4f764e894f16246c9a0d6e3f5885df76b750b
-vendor/lib64/libsdmextension.so|b26b05c09aac03153fdb6ece475cc5866f390e1d
-vendor/lib64/libtinyxml2_1.so|b225b16e689e7e4c26fc6144637f6b0c416063f8
+
+# Graphics (SDM) - LA.UM.7.5.r1-03700-8x96.0
+vendor/lib/libscalar.so|cad128a6e71195b4ad38494bc0382bf80e1fb0b2
+vendor/lib/libsdm-color.so|b13ab5f965f5bb8f40207879415cb1adbb55da42
+vendor/lib/libsdm-diag.so|e2e3a0fba39190c58bafa0568e8cd51b391b71b6
+vendor/lib/libsdmextension.so|a8659e7e0df5f1e20266ede1331da0660e0fe260
+vendor/lib/libtinyxml2_1.so|3882fddae942997be6ad6af789cf209fa45e61b3
+vendor/lib64/libscalar.so|490cc7447863b3279771ad99e92a5625525db055
+vendor/lib64/libsdm-color.so|9bb3f5147c277eae08c7f918e7de3bd2fccf1f74
+vendor/lib64/libsdm-diag.so|7ab5d2a980029ac9bd20fe68656823b21e483e11
+vendor/lib64/libsdm-disp-vndapis.so|6ae24866bbd413ed112778650c8fd7a2631cb1a9
+vendor/lib64/libsdmextension.so|e91aaf852df780e42bb083c3089f5b42c87c49f7
+vendor/lib64/libtinyxml2_1.so|b743b93bbb47bb2d80322fcfb985b7b8c696fa1b
 
 # Graphics (Vulkan) - from marlin - PPR2.180905.006
 vendor/lib/hw/vulkan.msm8996.so|1e62d0727748c40269f7cb6b432bd03b56c7323d
@@ -715,7 +718,6 @@ vendor/bin/hw/vendor.display.color@1.0-service|2dbbb46a62ac5cf8d3a084c8350457442
 vendor/bin/mm-pp-dpps|c281ee28274eeff6273091ae07aa1856a0c160db
 vendor/etc/init/vendor.display.color@1.0-service.rc|5ad673f879b3685a0e79b5633437e5499cb94f48
 vendor/lib64/libdisp-aba.so|2b9a85de013e956f1adfaf00146a865efb7077c4
-vendor/lib64/libsdm-disp-vndapis.so|fde2de5a3f031577edc39b49036435ef2607b134
 vendor/lib64/vendor.display.color@1.0.so|ec75654927c63b74c7f8d0760fa463f0e8287f25
 vendor/lib64/vendor.display.color@1.1.so|28dd1ef69ea74f5623746bbac5c483a3f3b46990
 vendor/lib64/vendor.display.color@1.2.so|2c61fe34f1b7548b258812c85920aa82f6b3a8db
