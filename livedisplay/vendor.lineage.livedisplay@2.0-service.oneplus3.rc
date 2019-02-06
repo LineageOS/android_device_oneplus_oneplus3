@@ -1,0 +1,4 @@
+service vendor.livedisplay-oneplus3-hal-2-0 /vendor/bin/hw/vendor.lineage.livedisplay@2.0-service.oneplus3
+    class late_start
+    user system
+    group system
