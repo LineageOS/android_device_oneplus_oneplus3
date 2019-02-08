@@ -97,9 +97,6 @@ on boot
     chown system system /proc/s1302/key_rep
     chmod 0660 /proc/s1302/key_rep
 
-    chown system system /proc/s1302/virtual_key
-    chmod 0660 /proc/s1302/virtual_key
-
     chown system system /proc/tri-state-key/keyCode_top
     chmod 0660 /proc/tri-state-key/keyCode_top
 
