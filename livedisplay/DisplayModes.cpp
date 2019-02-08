@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+#include <unordered_map>
+
+#include <android-base/file.h>
+
 #include "DisplayModes.h"
 #include "PictureAdjustment.h"
 #include "Utils.h"
@@ -27,6 +31,16 @@ struct sdm_disp_mode {
     sdm_disp_mode() : id(-1), type(0), len(128) { name = new char[128]; }
     ~sdm_disp_mode() { delete[] name; }
 };
+
+const std::string kSysfsModeBasePath = "/sys/class/graphics/fb0/";
+const std::unordered_map<int32_t, std::string> kSysfsModeMap = {
+    {601, "srgb"},
+    {602, "dci_p3"},
+};
+
+inline bool isSysfsMode(int32_t modeId) {
+    return modeId > 600;
+}
 }  // anonymous namespace
 
 namespace vendor {
@@ -35,8 +49,21 @@ namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
 
+using ::android::base::WriteStringToFile;
+
 DisplayModes::DisplayModes(std::shared_ptr<SDMController> controller, uint64_t cookie)
-    : mController(std::move(controller)), mCookie(cookie) {}
+    : mController(std::move(controller)), mCookie(cookie) {
+    if (!isSupported() || !saveInitialDisplayMode()) {
+        return;
+    }
+
+    int32_t defModeId = getDefaultDisplayModeId();
+    if (isSysfsMode(defModeId)) {
+        setDisplayMode(defModeId, false);
+    } else {
+        mActiveModeId = defModeId;
+    }
+}
 
 bool DisplayModes::isSupported() {
     int32_t count = 0;
@@ -63,6 +90,15 @@ out:
 }
 
 std::vector<DisplayMode> DisplayModes::getDisplayModesInternal() {
+    std::vector<DisplayMode> modes = getDisplayModesQDCM();
+    std::vector<DisplayMode> sysfsModes = getDisplayModesSysfs();
+
+    modes.insert(modes.end(), sysfsModes.begin(), sysfsModes.end());
+
+    return modes;
+}
+
+std::vector<DisplayMode> DisplayModes::getDisplayModesQDCM() {
     std::vector<DisplayMode> modes;
     int32_t count = 0;
     uint32_t flags = 0;
@@ -76,6 +112,18 @@ std::vector<DisplayMode> DisplayModes::getDisplayModesInternal() {
     if (mController->get_display_modes(mCookie, 0, 0, tmp, count, &flags) == 0) {
         for (int i = 0; i < count; i++) {
             modes.emplace_back(DisplayMode{tmp[i].id, std::string(tmp[i].name)});
+        }
+    }
+
+    return modes;
+}
+
+std::vector<DisplayMode> DisplayModes::getDisplayModesSysfs() {
+    std::vector<DisplayMode> modes;
+
+    for (const auto& entry : kSysfsModeMap) {
+        if (!access((kSysfsModeBasePath + entry.second).c_str(), F_OK)) {
+            modes.emplace_back(DisplayMode{entry.first, entry.second});
         }
     }
 
@@ -101,17 +149,19 @@ DisplayMode DisplayModes::getCurrentDisplayModeInternal() {
 }
 
 int32_t DisplayModes::getCurrentDisplayModeId() {
-    int32_t id = 0;
-    uint32_t mask = 0, flags = 0;
-
-    if (mController->get_active_display_mode(mCookie, 0, &id, &mask, &flags) != 0) {
-        id = -1;
-    }
-
-    return id;
+    return mActiveModeId;
 }
 
 DisplayMode DisplayModes::getDefaultDisplayModeInternal() {
+    return getDisplayModeById(getDefaultDisplayModeId());
+}
+
+int32_t DisplayModes::getDefaultDisplayModeId() {
+    int32_t id = Utils::readLocalModeId();
+    return (id >= 0 ? id : getDefaultDisplayModeIdQDCM());
+}
+
+int32_t DisplayModes::getDefaultDisplayModeIdQDCM() {
     int32_t id = 0;
     uint32_t flags = 0;
 
@@ -119,7 +169,43 @@ DisplayMode DisplayModes::getDefaultDisplayModeInternal() {
         id = -1;
     }
 
-    return getDisplayModeById(id);
+    return id;
+}
+
+bool DisplayModes::setModeState(int32_t modeId, bool on) {
+    // To set sysfs mode state, just write to the node
+    if (isSysfsMode(modeId)) {
+        const auto mode = kSysfsModeMap.find(modeId);
+        if (mode == kSysfsModeMap.end()) {
+            return false;
+        }
+        return WriteStringToFile(on ? "1" : "0", kSysfsModeBasePath + mode->second);
+    }
+
+    int32_t id;
+    if (on) {
+        // To turn on QDCM mode, just enable it
+        id = modeId;
+    } else {
+        // To turn off QDCM mode, turn on the initial QDCM mode instead
+        id = Utils::readInitialModeId();
+        if (id < 0) {
+            return false;
+        }
+        if (id == modeId) {
+            // Can't turn off the initial mode
+            return true;
+        }
+    }
+    return mController->set_active_display_mode(mCookie, 0, id, 0) == 0;
+}
+
+bool DisplayModes::saveInitialDisplayMode() {
+    int32_t id = Utils::readInitialModeId();
+    if (id < 0) {
+        return Utils::writeInitialModeId(std::max(0, getDefaultDisplayModeIdQDCM()));
+    }
+    return true;
 }
 
 // Methods from ::vendor::lineage::livedisplay::V2_0::IDisplayModes follow.
@@ -150,12 +236,36 @@ Return<bool> DisplayModes::setDisplayMode(int32_t modeID, bool makeDefault) {
         return false;
     }
 
-    if (mController->set_active_display_mode(mCookie, 0, modeID, 0)) {
+    /**
+     * Sysfs mode is active or switching to sysfs mode,
+     * turn off the active mode before switching.
+     */
+    if (isSysfsMode(curModeId) || isSysfsMode(modeID)) {
+        if (!setModeState(curModeId, false)) {
+            return false;
+        }
+    }
+
+    if (!setModeState(modeID, true)) {
         return false;
     }
 
-    if (makeDefault && mController->set_default_display_mode(mCookie, 0, modeID, 0)) {
-        return false;
+    mActiveModeId = modeID;
+
+    if (makeDefault) {
+        if (!Utils::writeLocalModeId(modeID)) {
+            return false;
+        }
+
+        if (isSysfsMode(modeID)) {
+            modeID = Utils::readInitialModeId();
+            if (modeID < 0) {
+                return false;
+            }
+        }
+        if (mController->set_default_display_mode(mCookie, 0, modeID, 0) != 0) {
+            return false;
+        }
     }
 
     PictureAdjustment::updateDefaultPictureAdjustment();
