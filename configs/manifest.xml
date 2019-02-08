@@ -745,6 +745,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <transport>hwbinder</transport>
         <version>1.0</version>
         <interface>
+            <name>IKeyDisabler</name>
+            <instance>default</instance>
+        </interface>
+        <interface>
             <name>ITouchscreenGesture</name>
             <instance>default</instance>
         </interface>
