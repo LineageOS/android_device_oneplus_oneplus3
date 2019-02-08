@@ -29,6 +29,10 @@ namespace sdm {
 
 class Utils {
    public:
+    static int32_t readLocalModeId();
+    static bool writeLocalModeId(int32_t id);
+    static int32_t readInitialModeId();
+    static bool writeInitialModeId(int32_t id);
     static int sendDPPSCommand(char* buf, size_t len);
     static bool checkFeatureVersion(SDMController* controller, uint64_t cookie,
                                     feature_ver_sw feature);
