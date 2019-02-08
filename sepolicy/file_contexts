@@ -28,6 +28,9 @@
 # LEDs
 /sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                    u:object_r:sysfs_leds:s0
 
+# Lineage hardware
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service\.oneplus3                    u:object_r:hal_lineage_touch_default_exec:s0
+
 # Ril
 /data/oemnvitems(/.*)?                                          u:object_r:vendor_radio_data_file:s0
 /dev/block/platform/soc/624000.ufshc/by-name/oem_dycnvbk        u:object_r:modem_efs_partition_device:s0
