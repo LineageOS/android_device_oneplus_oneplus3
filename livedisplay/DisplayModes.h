@@ -45,12 +45,19 @@ class DisplayModes : public IDisplayModes {
    private:
     std::shared_ptr<SDMController> mController;
     uint64_t mCookie;
+    int32_t mActiveModeId = -1;
 
     std::vector<DisplayMode> getDisplayModesInternal();
+    std::vector<DisplayMode> getDisplayModesQDCM();
+    std::vector<DisplayMode> getDisplayModesSysfs();
     DisplayMode getDisplayModeById(int32_t id);
     DisplayMode getCurrentDisplayModeInternal();
     int32_t getCurrentDisplayModeId();
     DisplayMode getDefaultDisplayModeInternal();
+    int32_t getDefaultDisplayModeId();
+    int32_t getDefaultDisplayModeIdQDCM();
+    bool setModeState(int32_t modeId, bool on);
+    bool saveInitialDisplayMode();
 };
 
 }  // namespace sdm
