@@ -21,6 +21,7 @@ cc_defaults {
         "DisplayModes.cpp",
         "PictureAdjustment.cpp",
         "SDMController.cpp",
+        "SunlightEnhancement.cpp",
         "Utils.cpp",
         "service.cpp",
     ],

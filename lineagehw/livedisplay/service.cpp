@@ -26,6 +26,7 @@
 #include "DisplayModes.h"
 #include "PictureAdjustment.h"
 #include "SDMController.h"
+#include "SunlightEnhancement.h"
 
 using android::OK;
 using android::sp;
@@ -36,10 +37,12 @@ using android::hardware::joinRpcThreadpool;
 using ::vendor::lineage::livedisplay::V2_0::IAdaptiveBacklight;
 using ::vendor::lineage::livedisplay::V2_0::IDisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::IPictureAdjustment;
+using ::vendor::lineage::livedisplay::V2_0::ISunlightEnhancement;
 using ::vendor::lineage::livedisplay::V2_0::sdm::AdaptiveBacklight;
 using ::vendor::lineage::livedisplay::V2_0::sdm::DisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::sdm::PictureAdjustment;
 using ::vendor::lineage::livedisplay::V2_0::sdm::SDMController;
+using ::vendor::lineage::livedisplay::V2_0::sysfs::SunlightEnhancement;
 
 int main() {
     // Vendor backend
@@ -50,6 +53,7 @@ int main() {
     sp<AdaptiveBacklight> ab;
     sp<DisplayModes> dm;
     sp<PictureAdjustment> pa;
+    sp<SunlightEnhancement> se;
 
     status_t status = OK;
 
@@ -89,6 +93,13 @@ int main() {
         goto shutdown;
     }
 
+    se = new SunlightEnhancement();
+    if (se == nullptr) {
+        LOG(ERROR)
+            << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, exiting.";
+        goto shutdown;
+    }
+
     if (!dm->isSupported() && !pa->isSupported()) {
         // Backend isn't ready yet, so restart and try again
         goto shutdown;
@@ -119,6 +130,15 @@ int main() {
         if (status != OK) {
             LOG(ERROR) << "Could not register service for LiveDisplay HAL PictureAdjustment Iface ("
                        << status << ")";
+            goto shutdown;
+        }
+    }
+
+    if (se->isSupported()) {
+        status = se->registerAsService();
+        if (status != OK) {
+            LOG(ERROR) << "Could not register service for LiveDisplay HAL SunlightEnhancement Iface"
+                       << " (" << status << ")";
             goto shutdown;
         }
     }

@@ -738,6 +738,10 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <name>IPictureAdjustment</name>
             <instance>default</instance>
         </interface>
+        <interface>
+            <name>ISunlightEnhancement</name>
+            <instance>default</instance>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>vendor.lineage.power</name>
