@@ -2,4 +2,3 @@ type camera_socket, file_type, data_file_type, core_data_file_type;
 type debugfs_rmt_storage, debugfs_type, fs_type;
 type proc_touchpanel, fs_type, proc_type;
 type sysfs_fpc, sysfs_type, fs_type;
-type sysfs_livedisplay, sysfs_type, fs_type;

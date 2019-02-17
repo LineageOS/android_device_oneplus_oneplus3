@@ -1,0 +1,2 @@
+# Grant access over LiveDisplay tuneables
+allow hal_lineage_livedisplay_qti sysfs_livedisplay_tuneable:file rw_file_perms;
