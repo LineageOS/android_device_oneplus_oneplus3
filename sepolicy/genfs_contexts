@@ -1,6 +1,15 @@
 # Fingerprint
 genfscon sysfs /devices/soc/soc:fpc_fpc1020         u:object_r:sysfs_fpc:s0
 
+# Healthd
+genfscon sysfs /devices/soc/soc:qcom,bcl/power_supply/bcl/type          u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/msm-bcl-14/power_supply/fg_adc/type         u:object_r:sysfs_batteryinfo:s0
+
+# LEDs
+genfscon sysfs /devices/soc/leds-qpnp-18/leds       u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/soc/leds-qpnp-24/leds       u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/soc/leds-qpnp-25/leds       u:object_r:sysfs_leds:s0
+
 # LiveDisplay
 genfscon sysfs /devices/virtual/graphics/fb0/dci_p3 u:object_r:sysfs_livedisplay_tuneable:s0
 genfscon sysfs /devices/virtual/graphics/fb0/srgb   u:object_r:sysfs_livedisplay_tuneable:s0
