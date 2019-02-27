@@ -16,13 +16,6 @@
 # FRP partition
 /dev/block/platform/soc/624000.ufshc/by-name/config             u:object_r:frp_block_device:s0
 
-# Healthd
-/sys/devices/soc/soc:qcom,bcl/power_supply/bcl/type             u:object_r:sysfs_batteryinfo:s0
-/sys/devices/soc/msm-bcl-14/power_supply/fg_adc/type            u:object_r:sysfs_batteryinfo:s0
-
-# LEDs
-/sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                    u:object_r:sysfs_leds:s0
-
 # Lineage hardware
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.0-service\.oneplus3              u:object_r:hal_lineage_livedisplay_qti_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service\.oneplus3                    u:object_r:hal_lineage_touch_default_exec:s0
