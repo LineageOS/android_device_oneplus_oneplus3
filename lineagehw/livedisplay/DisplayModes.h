@@ -45,7 +45,7 @@ class DisplayModes : public IDisplayModes {
    private:
     std::shared_ptr<SDMController> mController;
     uint64_t mCookie;
-    int32_t mActiveModeId = -1;
+    int32_t mActiveModeId;
 
     std::vector<DisplayMode> getDisplayModesInternal();
     std::vector<DisplayMode> getDisplayModesQDCM();

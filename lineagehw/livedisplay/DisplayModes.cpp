@@ -57,11 +57,9 @@ DisplayModes::DisplayModes(std::shared_ptr<SDMController> controller, uint64_t c
         return;
     }
 
-    int32_t defModeId = getDefaultDisplayModeId();
-    if (isSysfsMode(defModeId)) {
-        setDisplayMode(defModeId, false);
-    } else {
-        mActiveModeId = defModeId;
+    mActiveModeId = getDefaultDisplayModeId();
+    if (isSysfsMode(mActiveModeId)) {
+        setModeState(mActiveModeId, true);
     }
 }
 
