@@ -29,14 +29,14 @@ public class DozeService extends Service {
     private static final String TAG = "DozeService";
     private static final boolean DEBUG = false;
 
-    private ProximitySensor mProximitySensor;
     private PickupSensor mPickupSensor;
+    private PocketSensor mPocketSensor;
 
     @Override
     public void onCreate() {
         if (DEBUG) Log.d(TAG, "Creating service");
-        mProximitySensor = new ProximitySensor(this);
         mPickupSensor = new PickupSensor(this);
+        mPocketSensor = new PocketSensor(this);
 
         IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -54,8 +54,8 @@ public class DozeService extends Service {
         if (DEBUG) Log.d(TAG, "Destroying service");
         super.onDestroy();
         this.unregisterReceiver(mScreenStateReceiver);
-        mProximitySensor.disable();
         mPickupSensor.disable();
+        mPocketSensor.disable();
     }
 
     @Override
@@ -70,7 +70,7 @@ public class DozeService extends Service {
         }
         if (Utils.isHandwaveGestureEnabled(this) ||
                 Utils.isPocketGestureEnabled(this)) {
-            mProximitySensor.disable();
+            mPocketSensor.disable();
         }
     }
 
@@ -81,7 +81,7 @@ public class DozeService extends Service {
         }
         if (Utils.isHandwaveGestureEnabled(this) ||
                 Utils.isPocketGestureEnabled(this)) {
-            mProximitySensor.enable();
+            mPocketSensor.enable();
         }
     }
 

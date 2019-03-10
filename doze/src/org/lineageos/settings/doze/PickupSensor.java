@@ -34,7 +34,6 @@ public class PickupSensor implements SensorEventListener {
     private static final boolean DEBUG = false;
     private static final String TAG = "PickupSensor";
 
-    private static final int BATCH_LATENCY_IN_MS = 100;
     private static final int MIN_PULSE_INTERVAL_MS = 2500;
 
     private SensorManager mSensorManager;
@@ -47,7 +46,7 @@ public class PickupSensor implements SensorEventListener {
     public PickupSensor(Context context) {
         mContext = context;
         mSensorManager = mContext.getSystemService(SensorManager.class);
-        mSensor = Utils.getSensor(mSensorManager, "com.oneplus.sensor.pickup");
+        mSensor = Utils.findSensorWithType(mSensorManager, "com.oneplus.sensor.pickup");
         mExecutorService = Executors.newSingleThreadExecutor();
     }
 
@@ -80,7 +79,7 @@ public class PickupSensor implements SensorEventListener {
         if (DEBUG) Log.d(TAG, "Enabling");
         submit(() -> {
             mSensorManager.registerListener(this, mSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL, BATCH_LATENCY_IN_MS * 1000);
+                    SensorManager.SENSOR_DELAY_NORMAL);
             mEntryTimestamp = SystemClock.elapsedRealtime();
         });
     }

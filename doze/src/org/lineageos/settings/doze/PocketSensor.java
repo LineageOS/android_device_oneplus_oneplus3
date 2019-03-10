@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- *               2017-2018 The LineageOS Project
+ *               2017-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class ProximitySensor implements SensorEventListener {
+public class PocketSensor implements SensorEventListener {
 
     private static final boolean DEBUG = false;
-    private static final String TAG = "ProximitySensor";
+    private static final String TAG = "PocketSensor";
 
     // Maximum time for the hand to cover the sensor: 1s
     private static final int HANDWAVE_MAX_DELTA_NS = 1000 * 1000 * 1000;
@@ -47,10 +47,10 @@ public class ProximitySensor implements SensorEventListener {
     private boolean mSawNear = false;
     private long mInPocketTime = 0;
 
-    public ProximitySensor(Context context) {
+    public PocketSensor(Context context) {
         mContext = context;
         mSensorManager = mContext.getSystemService(SensorManager.class);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY, false);
+        mSensor = Utils.findSensorWithType(mSensorManager, "com.oneplus.sensor.pocket");
         mExecutorService = Executors.newSingleThreadExecutor();
     }
 
@@ -60,7 +60,7 @@ public class ProximitySensor implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        boolean isNear = event.values[0] < mSensor.getMaximumRange();
+        boolean isNear = event.values[0] == 1;
         if (mSawNear && !isNear) {
             if (shouldPulse(event.timestamp)) {
                 Utils.launchDozePulse(mContext);
