@@ -17,7 +17,7 @@ persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
 # Start in global mode
-#ro.telephony.default_network=10
+ro.telephony.default_network=22,20
 
 debug.sf.enable_hwc_vds=1
 debug.sf.hw=1
@@ -43,13 +43,6 @@ vendor.display.perf_hint_window=50
 vendor.gralloc.disable_wb_ubwc=1
 # Property to enable display default color mode
 vendor.display.enable_default_color_mode=1
-ro.sf.lcd_density=420
-
-#ifdef VENDOR_EDIT
-#liuhuisheng@OnePlus 20171016 for input
-persist.vendor.qti.inputopts.enable=true
-persist.vendor.qti.inputopts.movetouchslop=0.6
-#endif /* VENDOR_EDIT */
 
 #ro.hdmi.enable=true
 #
@@ -121,7 +114,7 @@ ro.vendor.display.cabl=2
 #
 # System props for telephony
 # System prop to turn on CdmaLTEPhone always
-#telephony.lteOnCdmaDevice=1
+telephony.lteOnCdmaDevice=1
 
 #Simulate sdcard on /data/media
 #
