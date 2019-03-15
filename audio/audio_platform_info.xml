@@ -33,7 +33,14 @@
         <device name="SND_DEVICE_IN_UNPROCESSED_THREE_MIC" acdb_id="145"/>
         <device name="SND_DEVICE_IN_UNPROCESSED_QAUD_MIC" acdb_id="146"/>
         <device name="SND_DEVICE_IN_UNPROCESSED_HEADSET_MIC" acdb_id="147"/>
+        <!-- dodda.pavitra@multimedia Fix for RAINP-866, Add unprocessed usb mic id to pass Cts Verifer Test Audio frequency unprocessed Test Feb 5h, 2019 -->
+        <device name="SND_DEVICE_IN_UNPROCESSED_USB_HEADSET_MIC" acdb_id="133"/>
+
+        <!-- Extracted from stock HAL -->
+        <device name="SND_DEVICE_IN_HANDSET_DMIC_AEC_NS" acdb_id="41" />
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="15" />
+        <device name="SND_DEVICE_IN_HEADSET_MIC_FLUENCE" acdb_id="16" />
+        <device name="SND_DEVICE_IN_SPEAKER_DMIC_AEC_NS" acdb_id="43" />
     </acdb_ids>
     <bit_width_configs>
         <device name="SND_DEVICE_OUT_SPEAKER" bit_width="24"/>

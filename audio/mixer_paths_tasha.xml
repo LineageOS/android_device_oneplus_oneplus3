@@ -2199,9 +2199,81 @@
     </path>
 
     <path name="handset-mic-sbc">
-        <path name="dmic3" />
+        <path name="adc5" />
+        <ctl name="ADC5 Volume" value="12" />
     </path>
 
+<!--modified by lf 20170214-->
+ <path name="handset-mic-re-sbc">
+        <ctl name="AIF1_CAP Mixer SLIM TX4" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="SLIM TX4 MUX" value="DEC4" />
+        <ctl name="ADC MUX4" value="AMIC" />
+        <ctl name="AMIC MUX4" value="ADC4" />
+        <ctl name="SLIM TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="AMIC" />
+        <ctl name="AMIC MUX5" value="ADC5" />
+        <ctl name="ADC4 Volume" value="6" />
+        <ctl name="ADC5 Volume" value="6" />
+        <ctl name="DEC5 Volume" value="86" />
+        <ctl name="DEC4 Volume" value="86" />
+    </path>
+
+ <path name="handset-mic-re-three">
+        <!--ctl name="AIF1_CAP Mixer SLIM TX5" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX6" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX8" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="Three" />
+        <ctl name="SLIM TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="DMIC" />
+        <ctl name="DMIC MUX5" value="DMIC2" />
+        <ctl name="SLIM TX6 MUX" value="DEC6" />
+        <ctl name="ADC MUX6" value="DMIC" />
+        <ctl name="DMIC MUX6" value="DMIC0" />
+        <ctl name="SLIM TX8 MUX" value="DEC8" />
+        <ctl name="ADC MUX8" value="DMIC" />
+        <ctl name="DMIC MUX8" value="DMIC5" /-->
+        <ctl name="AIF1_CAP Mixer SLIM TX3" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="One" />
+        <ctl name="SLIM TX3 MUX" value="DEC3" />
+        <ctl name="ADC MUX3" value="AMIC" />
+        <ctl name="AMIC MUX3" value="ADC3" />
+        <ctl name="ADC3 Volume" value="6" />
+        <ctl name="IIR0 INP0 MUX" value="DEC3" />
+    </path>
+
+ <path name="handset-mic-re-default">
+        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX4" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="SLIM TX4 MUX" value="DEC4" />
+        <ctl name="ADC MUX4" value="AMIC" />
+        <ctl name="AMIC MUX4" value="ADC4" />
+        <ctl name="SLIM TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="AMIC" />
+        <ctl name="AMIC MUX5" value="ADC5" />
+        <ctl name="ADC4 Volume" value="6" />
+        <ctl name="ADC5 Volume" value="6" />
+        <ctl name="DEC5 Volume" value="86" />
+        <ctl name="DEC4 Volume" value="86" />
+    </path>
+<path name="handset-mic-re-sbc-other">
+        <ctl name="AIF1_CAP Mixer SLIM TX4" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="SLIM TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="AMIC" />
+        <ctl name="AMIC MUX5" value="ADC4" />
+        <ctl name="SLIM TX4 MUX" value="DEC4" />
+        <ctl name="ADC MUX4" value="AMIC" />
+        <ctl name="AMIC MUX4" value="ADC5" />
+        <ctl name="ADC4 Volume" value="6" />
+        <ctl name="ADC5 Volume" value="6" />
+        <ctl name="DEC5 Volume" value="86" />
+        <ctl name="DEC4 Volume" value="86" />
+    </path>
+<!--modified end-->
     <path name="three-mic">
         <ctl name="AIF1_CAP Mixer SLIM TX5" value="1" />
         <ctl name="AIF1_CAP Mixer SLIM TX6" value="1" />
@@ -2237,8 +2309,8 @@
         <ctl name="SLIM RX3 MUX" value="AIF4_PB" />
         <ctl name="SLIM_6_RX Channels" value="Two" />
         <!-- #ifdef VENDOR_EDIT-->
-        <!-- LF@MultiMedia,2017/3/14,use 24bits to get rid of 16bits innate noise  -->
-        <ctl name="SLIM_6_RX Format" value="S24_LE" />
+        <!-- guoguangyi@MultiMedia,2016/4/7,use 24bits to get rid of 16bits innate noise  -->
+        <ctl name="SLIM_0_RX Format" value="S24_LE" />
         <!-- #endif VENDOR_EDIT-->
         <ctl name="RX INT1_2 MUX" value="RX2" />
         <ctl name="RX INT2_2 MUX" value="RX3" />
@@ -2596,6 +2668,28 @@
 <!-- #endif -->
     </path>
 
+<!-- #ifdef VENDOR_EDIT -->
+<!--  [lifei][Multimedia] , 5/7/2017, for recoder stereo control -->
+    <path name="speaker-stereo-dmic-ef-other">
+        <ctl name="AIF1_CAP Mixer SLIM TX4" value="1"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX5" value="1"/>
+        <ctl name="SLIM TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="AMIC" />
+        <ctl name="AMIC MUX5" value="ADC4" />
+        <ctl name="SLIM TX4 MUX" value="DEC4" />
+        <ctl name="ADC MUX4" value="AMIC" />
+        <ctl name="AMIC MUX4" value="ADC5" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+<!-- #ifdef VENDOR_EDIT -->
+<!-- /*zhiguang.su@MultiMedia.AudioDrv , 2016/04/19, mic power high level mode and add adc volume*/  -->
+        <ctl name="ADC4 Volume" value="11" />
+        <ctl name="ADC5 Volume" value="11" />
+        <ctl name="AMIC_3_4 PWR MODE" value="HIGH_PERF" />
+        <ctl name="AMIC_5_6 PWR MODE" value="HIGH_PERF" />
+<!-- #endif -->
+    </path>
+<!-- #endif -->
+
     <path name="voice-dmic-ef-tmus">
         <path name="dmic-endfire" />
     </path>
@@ -2611,6 +2705,24 @@
         <ctl name="left Profile" value="1"/>
        <!-- zhiguang.su@MultiMedia.AudioDrv,2015/4/28,remove for causing ec ref problem  -->
        <!--  <ctl name="VOC_EXT_EC MUX" value="QUAT_MI2S_TX" /> -->
+    </path>
+    <!-- #endif VENDOR_EDIT-->
+
+    <!-- #ifdef VENDOR_EDIT-->
+    <!-- wangdongdong@MultiMedia.AudioDrv,2017/8/16,add for king voice echo  -->
+    <path name="voice-speaker-king-voip-mic">
+	<ctl name="AIF1_CAP Mixer SLIM TX5" value="1"/>
+        <ctl name="AIF1_CAP Mixer SLIM TX4" value="1"/>
+        <ctl name="SLIM TX5 MUX" value="DEC5" />
+        <ctl name="ADC MUX5" value="AMIC" />
+        <ctl name="AMIC MUX5" value="ADC5" />
+        <ctl name="SLIM TX4 MUX" value="DEC4" />
+        <ctl name="ADC MUX4" value="AMIC" />
+        <ctl name="AMIC MUX4" value="ADC4" />
+        <ctl name="SLIM_0_TX Channels" value="Two" />
+        <ctl name="ADC5 Volume" value="10" />
+        <ctl name="ADC4 Volume" value="8" />
+        <ctl name="left Profile" value="1"/>
     </path>
     <!-- #endif VENDOR_EDIT-->
 
