@@ -1,7 +1,0 @@
-service camera-provider-2-4 /vendor/bin/hw/android.hardware.camera.provider@2.4-service.oneplus3
-    class hal
-    user cameraserver
-    group audio camera input drmrpc
-    ioprio rt 4
-    capabilities SYS_NICE
-    writepid /dev/cpuset/camera-daemon/tasks /dev/stune/top-app/tasks
