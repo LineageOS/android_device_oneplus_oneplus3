@@ -82,11 +82,11 @@ TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.heapstartsize=16m \
     dalvik.vm.heapgrowthlimit=256m \
+    dalvik.vm.heapstartsize=8m \
     dalvik.vm.heapsize=512m \
     dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=4m \
+    dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=8m
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -233,7 +233,8 @@ PRODUCT_PACKAGES += \
     vendor.display.color@1.0-impl
 
 PRODUCT_PROPERTY_OVERRIDES  += \
-    ro.opengles.version=196610
+    ro.opengles.version=196610 \
+    ro.sf.lcd_density=420
 
 # Display calibration
 PRODUCT_PACKAGES += \
