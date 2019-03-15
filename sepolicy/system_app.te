@@ -4,5 +4,4 @@ allow system_app proc_touchpanel:file rw_file_perms;
 allow system_app sysfs_fpc:dir search;
 allow system_app sysfs_fpc:file rw_file_perms;
 
-binder_call(system_app, ifaadaemon)
-binder_call(system_app, remosaic_daemon)
+hal_client_domain(system_app, hal_ifaa)
