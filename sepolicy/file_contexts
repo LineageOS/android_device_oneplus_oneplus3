@@ -1,6 +1,5 @@
 # Camera
 /data/camera(/.*)?                                              u:object_r:camera_socket:s0
-/(vendor|system/vendor)/bin/hw/android\.hardware\.camera\.provider@2\.4-service\.oneplus3       u:object_r:hal_camera_default_exec:s0
 /(vendor|system/vendor)/bin/remosaic_daemon                     u:object_r:remosaic_daemon_exec:s0
 
 # Charger
