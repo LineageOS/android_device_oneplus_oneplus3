@@ -103,7 +103,6 @@ vendor.vidc.enc.disable.pq=true
 #
 ro.vendor.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
-persist.data.mode=concurrent
 persist.vendor.data.mode=concurrent
 
 #system prop for Bluetooth SOC type
