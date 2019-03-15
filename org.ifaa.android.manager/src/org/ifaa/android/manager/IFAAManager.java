@@ -19,14 +19,6 @@ public abstract class IFAAManager {
     public abstract int startBIOManager(Context context, int authType);
 
     /**
-     * 通过ifaateeclient的so文件实现REE到TA的通道
-     * @param context
-     * @param param 用于传输到IFAA TA的数据buffer
-     * @return IFAA TA返回给REE数据buffer
-     */
-    public native byte[] processCmd(Context context, byte[] param);
-
-    /**
      * 获取设备型号，同一款机型型号需要保持一致
      */
     public abstract String getDeviceModel();
@@ -35,11 +27,4 @@ public abstract class IFAAManager {
      * 获取IFAAManager接口定义版本，目前为1
      */
     public abstract int getVersion();
-
-    /**
-     * load so to communicate from REE to TEE
-     */
-    static {
-        System.loadLibrary("teeclientjni");//teeclientjni for TA test binary //ifaateeclient
-    }
 }
