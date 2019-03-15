@@ -204,7 +204,7 @@ PRODUCT_PACKAGES += \
     Snap \
     libcamera_shim \
     android.hardware.camera.provider@2.4-impl \
-    android.hardware.camera.provider@2.4-service.oneplus3
+    android.hardware.camera.provider@2.4-service
 
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
