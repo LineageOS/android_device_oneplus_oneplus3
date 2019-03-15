@@ -180,6 +180,3 @@ service remosaic_daemon /vendor/bin/remosaic_daemon
     class late_start
     user camera
     writepid /dev/cpuset/system-background/tasks
-
-on property:vendor.post_boot.parsed=*
-    setprop sys.post_boot.parsed ${vendor.post_boot.parsed}
