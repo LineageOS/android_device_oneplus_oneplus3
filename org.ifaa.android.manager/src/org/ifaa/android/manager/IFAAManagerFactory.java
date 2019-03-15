@@ -12,7 +12,7 @@ import android.util.Slog;
 
 import com.android.internal.app.IIFAAService;
 
-public class IFAAManagerFactory  extends IFAAManagerV2{
+public class IFAAManagerFactory  extends IFAAManagerV3 {
     public static IFAAManagerFactory mIFAAManagerFactory = null;
     private static final int BIOTypeFingerprint = 0x01;
     private static final int BIOTypeIris = 0x02;
@@ -22,19 +22,35 @@ public class IFAAManagerFactory  extends IFAAManagerV2{
 
 	private static final String TAG = "IFAAManagerFactory";
 
+    private static final String FP_SENSOR_LOCATION_PARAM =
+            "{'type': 0, 'fullView': {'startX': 452, 'startY': 1970,'width': 174, 'height': 174, 'navConflict': true}}";
     static final String IFAA_SERVICE_PACKAGE = "com.oneplus.ifaaservice";
     static final String IFAA_SERVICE_CLASS = "com.oneplus.ifaaservice.IFAAService";
     static final ComponentName IFAA_SERVICE_COMPONENT = new ComponentName(
             IFAA_SERVICE_PACKAGE,
             IFAA_SERVICE_CLASS);
     private IIFAAService mIFAAService = null;
-    private static final int BIND_IFAASER_SERVICE_TIMEOUT = 10000;
+    private static final int BIND_IFAASER_SERVICE_TIMEOUT = 3000;
 
-    public IFAAManagerFactory() {
+    public IFAAManagerFactory(Context context) {
+        // to ensure that IFAAService was bound successfully
+        ensureIfaaService(context, 0);
     }
+
     public int getSupportBIOTypes(Context context) {
         Slog.e(TAG, "BIOTypeFingerprint" + BIOTypeFingerprint);
         return BIOTypeFingerprint;
+    }
+
+    public void setExtInfo(int authType, String keyExtInfo, String valExtInfo) {
+    }
+
+    public String getExtInfo(int authType, String keyExtInfo) {
+        if (IFAAManagerV3.KEY_GET_SENSOR_LOCATION.equals(keyExtInfo)) {
+            return FP_SENSOR_LOCATION_PARAM;
+        }
+        Slog.e(TAG, "getExtInfo: Didn't request supported ext info");
+        return "";
     }
 
     public int startBIOManager(Context context, int authType) {
@@ -60,13 +76,13 @@ public class IFAAManagerFactory  extends IFAAManagerV2{
     }
 
     public int getVersion() {
-        return 2;
+        return 3;
     }
 
-    public static IFAAManagerV2 getIFAAManager(Context context, int authType) {
+    public static IFAAManagerV3 getIFAAManager(Context context, int authType) {
          Slog.e(TAG, "getIFAAManager");
         if(mIFAAManagerFactory == null) {
-            mIFAAManagerFactory = new IFAAManagerFactory();
+            mIFAAManagerFactory = new IFAAManagerFactory(context);
             return mIFAAManagerFactory;
         } else {
             return mIFAAManagerFactory;
@@ -80,7 +96,7 @@ public class IFAAManagerFactory  extends IFAAManagerV2{
         byte[] result = null;
 
         // to ensure that IFAAService was bound successfully
-        ensureIfaaService(context);
+        ensureIfaaService(context, BIND_IFAASER_SERVICE_TIMEOUT);
 
         // get processCmdV2 from pass through remote service: IFAAService
         try {
@@ -92,15 +108,18 @@ public class IFAAManagerFactory  extends IFAAManagerV2{
         return result;
     }
 
-    private void ensureIfaaService(Context context) {
+    private void ensureIfaaService(Context context, int timeout) {
         if(mIFAAService == null) {
             Intent service = new Intent().setComponent(IFAA_SERVICE_COMPONENT);
             context.bindService(service, mConnection, Context.BIND_AUTO_CREATE);
-            synchronized (mConnection) {
-                try {
-                    mConnection.wait(BIND_IFAASER_SERVICE_TIMEOUT);
-                } catch (InterruptedException e) {
-                    Slog.e(TAG, "exception while binding IFAAService: " + e);
+            if (timeout > 0) {
+                Slog.e(TAG, "Waiting for IFAAService connected");
+                synchronized (mConnection) {
+                    try {
+                        mConnection.wait(timeout);
+                    } catch (InterruptedException e) {
+                        Slog.e(TAG, "exception while binding IFAAService: " + e);
+                    }
                 }
             }
         }
