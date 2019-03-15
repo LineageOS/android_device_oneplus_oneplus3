@@ -52,7 +52,7 @@ on late-fs
 
 on post-fs-data
     # Create oemnvitems for RIL
-    mkdir /data/oemnvitems 0771 radio radio
+    mkdir /data/vendor/oemnvitems 0771 radio radio
 
     #fingerint, changhua add for fp debug image usage,feature default off
     mkdir /data/fpc_images 0770 system system
@@ -174,12 +174,6 @@ service dashd /sbin/dashd
     critical
     seclabel u:r:dashd:s0
     group root system
-    writepid /dev/cpuset/system-background/tasks
-
-service ifaadaemon /system/bin/ifaadaemon
-    class late_start
-    user system
-    group system
     writepid /dev/cpuset/system-background/tasks
 
 service remosaic_daemon /vendor/bin/remosaic_daemon
