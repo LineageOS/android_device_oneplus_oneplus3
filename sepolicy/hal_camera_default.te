@@ -1,13 +1,2 @@
-allow hal_camera_default camera_data_file:sock_file rw_file_perms;
 allow hal_camera_default camera_data_file:dir search;
-allow hal_camera_default qdsp_device:chr_file r_file_perms;
-allow hal_camera_default system_server:unix_stream_socket rw_socket_perms;
-allow hal_camera_default sensorservice_service:service_manager find;
-allow hal_camera_default permission_service:service_manager find;
-allow hal_camera_default hal_configstore_ISurfaceFlingerConfigs:hwservice_manager find;
-allow hal_camera_default hal_graphics_allocator_hwservice:hwservice_manager find;
-r_dir_file(hal_camera_default, adsprpcd_file);
-binder_call(hal_camera_default, servicemanager);
-binder_call(hal_camera_default, hal_configstore_default);
-binder_call(hal_camera_default, hal_graphics_allocator_default);
-binder_use(hal_camera_default);
+allow hal_camera_default camera_data_file:sock_file write;
