@@ -43,6 +43,9 @@ on fs
 on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
+on post-fs
+   start vendor.qseecomd
+
 on post-fs-data
     mkdir /data/tombstones 0771 system system
     mkdir /data/tombstones/modem 0771 system system
@@ -112,25 +115,26 @@ service qfp-daemon /system/vendor/bin/qfp-daemon
 #    group system input
 
 #Start up peripheral manager
-service per_mgr /vendor/bin/pm-service
+service vendor.per_mgr /vendor/bin/pm-service
     class core
     user system
     group system
     ioprio rt 4
     writepid /dev/cpuset/system-background/tasks
 
-service per_proxy /vendor/bin/pm-proxy
+service vendor.per_proxy /vendor/bin/pm-proxy
     class core
     user system
     group system
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-on property:init.svc.per_mgr=running
-    start per_proxy
+on property:init.svc.vendor.per_mgr=running
+    start vendor.per_proxy
 
 on property:sys.shutdown.requested=*
-    stop per_proxy
+    stop vendor.per_proxy
+    stop vendor.ims_rtp_daemon
 
 #service mdm_launcher /system/bin/sh init.mdm.sh
 #     class core
@@ -162,7 +166,7 @@ service mdm_helper /system/bin/mdm_helper
 #on property:sys.boot_completed=1
 #    start qrngp
 
-service qseecomd /vendor/bin/qseecomd
+service vendor.qseecomd /vendor/bin/qseecomd
    class core
    user root
    group root
@@ -308,12 +312,12 @@ service vendor.imsdatadaemon /system/vendor/bin/imsdatadaemon
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-service pd_mapper /system/vendor/bin/pd-mapper
+service vendor.pd_mapper /system/vendor/bin/pd-mapper
      class core
      disabled
 
 on property:persist.sys.pd_enable=1
-     start pd_mapper
+     start vendor.pd_mapper
      write /sys/class/service_locator/service_locator_status 1
 
 on property:persist.sys.pd_enable=0

@@ -60,6 +60,9 @@ on post-fs-data
     mkdir /data/fpc_images/enroll 0770 system system
     mkdir /data/fpc 0770 system system
 
+    #Create folder of camera
+    mkdir /data/misc/camera 0770 camera camera
+
 on early-boot
     chown system system /mnt/vendor/persist/sensors/gyro_sensitity_cal
 
