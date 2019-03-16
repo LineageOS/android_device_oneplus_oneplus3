@@ -19,12 +19,14 @@ allow dashd {
     sysfs_usb_supply
 }:file rw_file_perms;
 
+allow dashd self:capability sys_resource;
+
 ###
 ### dashd: charger mode
 ###
 #allow dashd sysfs:file { open read write ioctl };
 allow dashd dash_device:chr_file { open read write ioctl };
-allow dashd rootfs:file { entrypoint read execute };
+allow dashd rootfs:file { entrypoint read execute getattr };
 
 #allow ueventd sysfs:chr_file {create setattr};
 allow sysfs tmpfs:filesystem associate;
