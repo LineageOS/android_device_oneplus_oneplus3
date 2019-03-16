@@ -9,7 +9,4 @@ allow hal_fingerprint_default fingerprintd_data_file:file create_file_perms;
 allow hal_fingerprint_default fingerprintd_data_file:dir rw_dir_perms;
 allow hal_fingerprint_default fingerprintd_data_file:sock_file { create unlink };
 
-allow hal_fingerprint_default sysfs_leds:dir search;
 allow hal_fingerprint_default tee_device:chr_file rw_file_perms;
-r_dir_file(hal_fingerprint_default, proc_touchpanel)
-r_dir_file(hal_fingerprint_default, sysfs_graphics)

@@ -1,12 +1,4 @@
 # qcril.so needs access to /vendor/radio/qcril_database/qcril.db
 allow rild vendor_file:file ioctl;
 
-# TODO(b/36644492): Remove data_between_core_and_vendor_violators once
-# rild no longer directly accesses the radio app's data type.
-typeattribute rild data_between_core_and_vendor_violators;
-# allow rild to access radio data file
-allow rild radio_data_file:dir rw_dir_perms;
-allow rild radio_data_file:file create_file_perms;
-
-allow rild shell_exec:file rx_file_perms;
-allow rild toolbox_exec:file rx_file_perms;
+set_prop(rild, vendor_default_prop)
