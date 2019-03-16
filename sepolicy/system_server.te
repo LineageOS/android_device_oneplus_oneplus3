@@ -1,4 +1,2 @@
-get_prop(system_server, vendor_camera_prop)
-
 # OTA with encrypted f2fs
 allow system_server ota_package_file:dir getattr;

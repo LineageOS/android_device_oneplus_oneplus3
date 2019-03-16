@@ -1,3 +1,2 @@
-allow hal_perf_default hal_camera_default:process signull;
-allow hal_perf_default hal_graphics_composer_default:process signull;
-allow hal_perf_default self:capability kill;
+dontaudit hal_perf_default self:capability dac_override;
+set_prop(hal_perf_default, vendor_mpctl_prop)

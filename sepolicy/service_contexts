@@ -1,2 +1,1 @@
-ifaadaemon                           u:object_r:ifaadaemon_service:s0
 android.samsung.IRemosaicDaemon      u:object_r:remosaic_service:s0
