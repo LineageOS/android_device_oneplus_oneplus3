@@ -103,8 +103,6 @@ on boot
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=1000,rmode=0770,fmode=0660
     write /sys/class/android_usb/android0/f_ffs/aliases adb
     setprop vendor.usb.controller ${sys.usb.controller}
-
-on load_persist_props_action
     enable vendor.qcom-usb-sh
 
 service vendor.qcom-usb-sh /vendor/bin/init.qcom.usb.sh

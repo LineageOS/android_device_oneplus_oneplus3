@@ -42,20 +42,11 @@ else
 fi
 
 #
-# Check ESOC for external MDM
+# Check ESOC for external modem
 #
-# Note: currently only a single MDM is supported
+# Note: currently only a single MDM/SDX is supported
 #
-if [ -d /sys/bus/esoc/devices ]; then
-for f in /sys/bus/esoc/devices/*; do
-    if [ -d $f ]; then
-    if [ `grep -e "^MDM" -e "^SDX" $f/esoc_name` ]; then
-            esoc_link=`cat $f/esoc_link`
-            break
-        fi
-    fi
-done
-fi
+esoc_name=`cat /sys/bus/esoc/devices/esoc0/esoc_name 2> /dev/null`
 
 target=`getprop ro.board.platform`
 
@@ -76,9 +67,9 @@ fi
 # If USB persist config not set, set default configuration
 if [ "$(getprop persist.vendor.usb.config)" == "" -a \
 	"$(getprop init.svc.vendor.usb-gadget-hal-1-0)" != "running" ]; then
-      if [ "$esoc_link" != "" ]; then
+    if [ "$esoc_name" != "" ]; then
 	  setprop persist.vendor.usb.config diag,diag_mdm,qdss,qdss_mdm,serial_cdev,dpl,rmnet,adb
-      else
+    else
 	  case "$(getprop ro.baseband)" in
 	      "apq")
 	          setprop persist.vendor.usb.config diag,adb
@@ -96,9 +87,6 @@ if [ "$(getprop persist.vendor.usb.config)" == "" -a \
 		    ;;
 		    *)
 	            case "$target" in
-	              "msm8996")
-	                  setprop persist.vendor.usb.config diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
-		      ;;
 	              "msm8909")
 		          setprop persist.vendor.usb.config diag,serial_smd,rmnet_qti_bam,adb
 		      ;;
@@ -123,13 +111,20 @@ if [ "$(getprop persist.vendor.usb.config)" == "" -a \
 				      setprop persist.vendor.usb.config diag,serial_smd,rmnet_ipa,adb
 			      fi
 		      ;;
+	              "msm8996")
+			      if [ -d /config/usb_gadget ]; then
+				      setprop persist.vendor.usb.config diag,serial_cdev,rmnet,adb
+			      else
+				      setprop persist.vendor.usb.config diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
+			      fi
+		      ;;
 	              "msm8998" | "sdm660" | "apq8098_latv")
 		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,adb
 		      ;;
 	              "sdm845" | "sdm710")
 		          setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,adb
 		      ;;
-	              "msmnile" | "talos")
+	              "msmnile" | "sm6150" | "trinket")
 			  setprop persist.vendor.usb.config diag,serial_cdev,rmnet,dpl,qdss,adb
 		      ;;
 	              *)
@@ -155,19 +150,28 @@ if [ "$target" == "msm8937" ]; then
 		*)
 		;;
 	   esac
+	else
+	   case "$soc_id" in
+		"313" | "320")
+		   setprop vendor.usb.rndis.func.name "rndis_bam"
+		   setprop vendor.usb.rmnet.func.name "rmnet_bam"
+		   setprop vendor.usb.rmnet.inst.name "rmnet"
+		   setprop vendor.usb.dpl.inst.name "dpl"
+		;;
+		*)
+		;;
+	   esac
 	fi
 fi
 
-# set device mode notification to USB driver for SA8150 Auto ADP
-product=`getprop ro.build.product`
-
-case "$product" in
-	"msmnile_au")
-	echo peripheral > /sys/bus/platform/devices/a600000.ssusb/mode
-         ;;
-	*)
-	;;
-esac
+if [ "$target" == "msm8996" ]; then
+       if [ -d /config/usb_gadget ]; then
+                  setprop vendor.usb.rndis.func.name "rndis_bam"
+                  setprop vendor.usb.rmnet.func.name "rmnet_bam"
+                  setprop vendor.usb.rmnet.inst.name "rmnet"
+                  setprop vendor.usb.dpl.inst.name "dpl"
+       fi
+fi
 
 # check configfs is mounted or not
 if [ -d /config/usb_gadget ]; then
