@@ -1,0 +1,12 @@
+type hal_param_default, domain;
+hal_server_domain(hal_param_default, hal_param)
+
+type hal_param_default_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_param_default)
+
+# Allow hwbinder call from hal client to server
+binder_call(hal_param_client, hal_param_server)
+
+# Add hwservice related rules
+add_hwservice(hal_param_server, hal_param_hwservice)
+allow hal_param_client hal_param_hwservice:hwservice_manager find;
