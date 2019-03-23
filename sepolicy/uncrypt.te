@@ -1,0 +1,2 @@
+# OTA with encrypted f2fs
+allow uncrypt self:capability fowner;
