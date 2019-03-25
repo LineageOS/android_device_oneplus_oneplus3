@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015, The CyanogenMod Project
- * Copyright (C) 2017, The LineageOS Project
+ * Copyright (C) 2017-2019, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -176,25 +176,22 @@ Value* VerifyModemFn(const char *name, State *state, const std::vector<std::uniq
                 "%s() failed to read current MODEM build time-stamp: %d", name, ret);
     }
 
-    std::vector<std::string> args;
-    if (!ReadArgs(state, argv, &args)) {
+    std::string modem_version;
+    if (argv.empty() || !Evaluate(state, argv[0], &modem_version)) {
         return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
     }
 
     memset(&tm1, 0, sizeof(tm));
     strptime(current_modem_version, "%Y-%m-%d %H:%M:%S", &tm1);
 
-    for (auto &modem_version : args) {
-        memset(&tm2, 0, sizeof(tm));
-        strptime(modem_version.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
+    memset(&tm2, 0, sizeof(tm));
+    strptime(modem_version.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
 
-        if (mktime(&tm1) >= mktime(&tm2)) {
-            ret = 1;
-            break;
-        }
+    if (mktime(&tm1) >= mktime(&tm2)) {
+        ret = 1;
     }
 
-    return StringValue(strdup(ret ? "1" : "0"));
+    return StringValue(std::to_string(ret));
 }
 
 void Register_librecovery_updater_op3() {

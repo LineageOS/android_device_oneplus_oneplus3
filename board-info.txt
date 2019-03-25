@@ -1,1 +1,1 @@
-require version-modem=2018-12-06 00:49:24
+require version-modem=2018-12-06 00:49:24|OxygenOS 5.0.8
