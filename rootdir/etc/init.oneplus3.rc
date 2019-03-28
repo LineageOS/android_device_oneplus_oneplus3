@@ -54,9 +54,6 @@ on post-fs-data
     # Create oemnvitems for RIL
     mkdir /data/oemnvitems 0771 radio radio
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/vendor/nfc 0770 nfc nfc
-
     #fingerint, changhua add for fp debug image usage,feature default off
     mkdir /data/fpc_images 0770 system system
     mkdir /data/fpc_images/verify 0770 system system
@@ -119,12 +116,6 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/proximity_state
     chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
-
-    # NFC
-    chmod 0666 /dev/pn544
-    chown nfc nfc /dev/pn544
-    chmod 0666 /dev/p61
-    chown spi spi /dev/p61
 
     # DASH
     chmod 0666 /dev/dash
