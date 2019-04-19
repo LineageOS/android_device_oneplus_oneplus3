@@ -25,7 +25,7 @@
         e.g. "/system/framework/eg-telephony-common.jar"
 -->
 <injection package="com.qualcomm.qti.internal.telephony.QtiTelephonyComponentFactory"
-           jar="/system/framework/qti-telephony-common.jar:/product/framework/qti-telephony-hidl-wrapper.jar:/product/framework/qti-telephony-utils.jar:/system/framework/qti-telephony-utils.jar">
+           jar="/system/framework/qti-telephony-common.jar:/product/framework/qti-telephony-common.jar:/product/framework/qti-telephony-hidl-wrapper.jar:/product/framework/qti-telephony-utils.jar:/system/framework/qti-telephony-utils.jar">
     <components>
         <!-- Components use injected component factory,
             e.g. com.android.internal.telephony.ServiceStateTracker
