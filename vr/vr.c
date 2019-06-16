@@ -23,7 +23,7 @@
 #include <hardware/hardware.h>
 
 static void restart_thermal_engine() {
-    if (property_set("ctl.restart", "thermal-engine")) {
+    if (property_set("ctl.restart", "vendor.thermal-engine")) {
         ALOGE("%s: couldn't set a system property, "
               "ctl.restart.", __FUNCTION__);
     }
@@ -35,14 +35,14 @@ static void vr_init(struct vr_module *module) {
 
 static void vr_set_vr_mode(struct vr_module *module, bool enabled) {
     if (enabled) {
-        if (property_set("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine-vr.conf")) {
+        if (property_set("vendor.qcom.thermalcfg", "/vendor/etc/thermal-engine-vr.conf")) {
             ALOGE("%s: couldn't set a system property, "
-                  "sys.qcom.thermalcfg.", __FUNCTION__);
+                  "vendor.qcom.thermalcfg.", __FUNCTION__);
         }
     } else {
-        if (property_set("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine.conf")) {
+        if (property_set("vendor.qcom.thermalcfg", "/vendor/etc/thermal-engine.conf")) {
             ALOGE("%s: couldn't set a system property, "
-                  "sys.qcom.thermalcfg.", __FUNCTION__);
+                  "vendor.qcom.thermalcfg.", __FUNCTION__);
         }
     }
     restart_thermal_engine();
