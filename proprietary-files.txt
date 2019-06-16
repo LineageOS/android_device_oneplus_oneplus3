@@ -835,11 +835,11 @@ lib64/lib-imsvideocodec.so
 lib64/lib-imsvt.so
 lib64/lib-imsvtextutils.so
 lib64/lib-imsvtutils.so
-lib64/libimscamera_jni.so
-lib64/libimsmedia_jni.so
+lib64/libimscamera_jni.so|bbbad052ad9b7cfdde9a585d9aa92f9fd289967a
+lib64/libimsmedia_jni.so|1a33694897edf11dbc95ed5fd4fd233b4bc667dd
 lib64/librcc.so
 lib64/vendor.qti.imsrtpservice@1.0.so
--priv-app/ims/ims.apk
+-priv-app/ims/ims.apk|eef47c0b6f250e7f96e7155d84274b1c83940d8f
 vendor/bin/ims_rtp_daemon
 vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
