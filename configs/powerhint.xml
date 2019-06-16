@@ -45,7 +45,7 @@
         <!-- CPUBW low power io percent of 50 -->
 
         <Config
-            Id="0x00001300" Enable="true" Target="msm8996"
+            Id="0x00001300" Enable="true" Target="msm8996" Timeout="0"
             Resources="0x41400000, 0x4, 0x41410000, 0x5F, 0x41414000, 0x22C, 0x41420000, 0x5A, 0x41400100, 0x4, 0x41410100, 0x5F
             , 0x41414100, 0x22C, 0x41420100, 0x5A, 0x41810000, 0x9C4, 0x41814000, 0x32" />
 
@@ -65,7 +65,7 @@
         <!-- L CPU - disable ignore_hispeed_notif -->
         <!-- B CPU - disable ignore_hispeed_notif -->
         <Config
-            Id="0x00001203" Enable="true" Target="msm8996"
+            Id="0x00001203" Enable="true" Target="msm8996" Timeout="0"
             Resources="0x41400000, 0x4, 0x41410000, 0x5F ,0x41414000, 0x326, 0x41420000, 0x5A, 0x41400100, 0x4, 0x41410100
             , 0x5F, 0x41414100, 0x22C, 0x41420100, 0x5A, 0x41810000 ,0x9C4, 0x41814000,
             0x32, 0x4180C000 ,0x0, 0x41820000, 0xA, 0x41438100, 0x0, 0x41438000, 0x0" />
@@ -80,7 +80,7 @@
         <!-- B CPU - hispeed freq of 729 MHz -->
         <!-- B CPU - target load of 90 -->
         <Config
-            Id="0x00001204" Enable="true" Target="msm8996"
+            Id="0x00001204" Enable="true" Target="msm8996" Timeout="0"
             Resources="0x41400100, 0x4, 0x41410100, 0x5F ,0x41414100, 0x2D9, 0x41420100, 0x5A, 0x41400000, 0x4, 0x41410000
             , 0x5F, 0x41414000, 0x2D9, 0x41420000, 0x5A" />
 
@@ -93,7 +93,7 @@
         <!-- GPU - max freq 342 Mhz -->
         <!-- GPUBW freq uncapped -->
         <Config
-            Id="0x00001206" Enable="true" Target="msm8996"
+            Id="0x00001206" Enable="true" Target="msm8996" Timeout="0"
             Resources="0x40800000, 0x0, 0x40800100, 0x0, 0x40804000, 0x4E0, 0x40804100, 0x4E0,
             0x4280C000, 0xB4, 0x42810000, 0x156, 0x42814000, 0x0"/>
         <!--vr mode-->
@@ -105,7 +105,7 @@
         <!-- GPU - max freq 510 Mhz -->
         <!-- GPUBW freq 775 Mhz-->
         <Config
-            Id="0x00001207" Enable="true" Target="msm8996"
+            Id="0x00001207" Enable="true" Target="msm8996" Timeout="0"
             Resources="0x40800000, 0x579, 0x40800100, 0x579, 0x40804000, 0x579, 0x40804100, 0x579,
             0x4280C000, 0x203, 0x42810000, 0x203, 0x42814000, 0x1E4F"/>
 
@@ -118,7 +118,7 @@
         <!-- GPU - max freq 342 Mhz -->
         <!-- GPUBW freq 775 Mhz -->
         <Config
-            Id="0x00001301" Enable="true" Target="msm8996"
+            Id="0x00001301" Enable="true" Target="msm8996" Timeout="0"
             Resources="0x40800000, 0x4E0, 0x40800100, 0x4E0, 0x40804000, 0x4E0, 0x40804100, 0x4E0, 0x4280C000, 0x156,
             0x42810000, 0x156, 0x42814000, 0x1E4F"/>
     </Powerhint>
