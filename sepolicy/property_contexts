@@ -1,0 +1,2 @@
+sys.qcom.thermalcfg                 u:object_r:thermal_prop:s0
+ctl.thermal-engine                  u:object_r:thermal_prop:s0
