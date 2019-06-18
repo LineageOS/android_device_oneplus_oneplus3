@@ -40,12 +40,12 @@ lib64/vendor.oneplus.hardware.ifaa@2.0.so
 vendor/bin/hw/vendor.oneplus.hardware.ifaa@2.0-service
 vendor/etc/init/vendor.oneplus.hardware.ifaa@2.0-service.rc
 
-# ANT+ - from LA.UM.7.2.r1-06900-sdm660.0
--lib/libantradio.so|b6b7b93dfa155de37d755542a0d66cc9f77e256c
-lib64/com.qualcomm.qti.ant@1.0.so|33d353a1077c70c3d7c013938b092e93a18d5b58
--lib64/libantradio.so|def8c83cab05b53fe70754f23cf475240a8358fd
-vendor/lib64/com.qualcomm.qti.ant@1.0.so|5779ba85ae23ede7552a768afb8042d72f71afe2
-vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|94729946e6ba94dd5d24c0495661efadc7ab782e
+# ANT+ - from LA.UM.7.5.r1-04000-8x96.0
+-lib/libantradio.so|4f03cc258ec1806ddb7100252e2b8e6433693027
+lib64/com.qualcomm.qti.ant@1.0.so|f764999a53054c78f9e8a6f1d1bfcad3d446fb02
+-lib64/libantradio.so|247bf6302abcbc55e0006aa7032097069a7a2f96
+vendor/lib64/com.qualcomm.qti.ant@1.0.so|f764999a53054c78f9e8a6f1d1bfcad3d446fb02
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|8ce47bae3b903a56697c69b416927e569d7e7b80
 
 # Audio
 etc/firmware/tfa98xx.cnt
@@ -76,8 +76,8 @@ vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/libbtnv.so
 
-# Bluetooth - from LA.UM.7.2.r1-06900-sdm660.0
-vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|514226960669db32e44a9457e6de7c07ac70ec1b
+# Bluetooth - from LA.UM.7.5.r1-04000-8x96.0
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|e29484b7d03c9e47fbb264e2f3b272bf80db8d0d
 
 # Camera
 etc/camera/camera_config.xml
