@@ -773,7 +773,6 @@ etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
 framework/qcnvitems.jar
 framework/qcrilhook.jar
-framework/qti-telephony-common.jar|b1953a3599255f08f1785c677d22810f65e0167b
 framework/QtiTelephonyServicelibrary.jar
 framework/uimlpalibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
@@ -822,6 +821,9 @@ vendor/radio/qcril_database/upgrade/1_version_intro.sql
 vendor/radio/qcril_database/upgrade/2_version_add_wps_config.sql
 vendor/radio/qcril_database/upgrade/3_version_update_wps_config.sql
 
+# Radio - from LA.UM.7.5.r1-04000-8x96.0
+framework/qti-telephony-common.jar|9aa88e7f3166d86da217d688b003c2ecf2840acf
+
 # Radio - param
 lib64/vendor.oneplus.hardware.param@1.0.so
 vendor/bin/hw/vendor.oneplus.hardware.param@1.0-service
@@ -839,7 +841,6 @@ lib64/libimscamera_jni.so
 lib64/libimsmedia_jni.so
 lib64/librcc.so
 lib64/vendor.qti.imsrtpservice@1.0.so
--priv-app/ims/ims.apk
 vendor/bin/ims_rtp_daemon
 vendor/bin/imsdatadaemon
 vendor/bin/imsqmidaemon
@@ -869,6 +870,9 @@ vendor/lib64/vendor.qti.hardware.radio.ims@1.4.so
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
+
+# Radio - IMS - from LA.UM.7.5.r1-04000-8x96.0
+-priv-app/ims/ims.apk|e601112f50eef846e8672eb03bcbc6e472b927c1
 
 # Radio - MBN
 etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mbn_ota.txt
