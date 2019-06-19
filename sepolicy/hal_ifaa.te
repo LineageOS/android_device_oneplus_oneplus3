@@ -17,5 +17,9 @@ allow hal_ifaa_server tee_device:chr_file rw_file_perms;
 #Allow access to ion device
 allow hal_ifaa_server ion_device:chr_file r_file_perms;
 
+#Allow IPerf access
+allow hal_ifaa_server hal_perf_hwservice:hwservice_manager find;
+binder_call(hal_ifaa_server, hal_perf_server)
+
 #Allow access to firmware
 r_dir_file(hal_ifaa_server, firmware_file)
