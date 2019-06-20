@@ -218,10 +218,6 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR += $(PLATFORM_PATH)/sepolicy/public
 BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
 
-# Shims
-TARGET_LD_SHIM_LIBS := \
-    /vendor/lib/hw/camera.msm8996.so|libcamera_shim.so
-
 # Thermal
 USE_DEVICE_SPECIFIC_THERMAL := true
 
