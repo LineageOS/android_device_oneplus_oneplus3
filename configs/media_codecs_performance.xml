@@ -119,7 +119,9 @@ limitations under the License.
             <Limit name="measured-frame-rate-352x288" range="200-200" />
         </MediaCodec>
         <MediaCodec name="OMX.google.hevc.decoder" type="video/hevc" update="true">
-            <Limit name="measured-frame-rate-352x288" range="170-170" />
+            <!-- <Limit name="measured-frame-rate-352x288" range="170-170" /> -->
+            <!-- sohailhoque@multimedia [RAINP-2095] 2019/06/25 ,  modified the range of frame-rate for CTS testCases -->
+            <Limit name="measured-frame-rate-352x288" range="450-450" />
             <Limit name="measured-frame-rate-640x360" range="209-209" />
             <Limit name="measured-frame-rate-720x480" range="190-190" />
             <Limit name="measured-frame-rate-1280x720" range="93-88" />
