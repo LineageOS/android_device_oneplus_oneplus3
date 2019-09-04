@@ -19,6 +19,7 @@ package org.lineageos.settings.doze;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.display.AmbientDisplayConfiguration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.UserHandle;
@@ -26,8 +27,6 @@ import android.support.v7.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 
 import java.util.List;
 
