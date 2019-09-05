@@ -223,7 +223,7 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/i2c-5                0660   media       media
 /dev/avtimer              0660   system     audio
 /dev/spidev2.0            0660   system     audio
-
+/dev/aud_pasthru_adsp     0660   system     audio
 # DVB devices
 /dev/dvb/adapter0/demux*  0440   media       media
 /dev/dvb/adapter0/dvr*    0660   media       media
