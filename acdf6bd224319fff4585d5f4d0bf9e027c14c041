@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "350a5f1c_d1641fff",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-09-05T13:00:16Z",
+      "side": 1,
+      "message": "You may need to remove from a build target in the vendor makefiles, otherwise it won\u0027t probably boot.",
+      "range": {
+        "startLine": 519,
+        "startChar": 6,
+        "endLine": 519,
+        "endChar": 15
+      },
+      "revId": "acdf6bd224319fff4585d5f4d0bf9e027c14c041",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
