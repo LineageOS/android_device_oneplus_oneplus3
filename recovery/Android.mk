@@ -12,5 +12,4 @@ LOCAL_C_INCLUDES := \
     bootable/recovery/otautil/include
 LOCAL_SRC_FILES := recovery_updater.cpp
 LOCAL_MODULE := librecovery_updater_op3
-LOCAL_MODULE_TAGS := eng
 include $(BUILD_STATIC_LIBRARY)
