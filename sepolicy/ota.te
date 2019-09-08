@@ -33,4 +33,4 @@
 #
 
 # move-time-data-sh for time-service
-coredata_datavendor_migration(move-time-data-sh, time_data_file, vendor_time_data_file);
+#coredata_datavendor_migration(move-time-data-sh, time_data_file, vendor_time_data_file);
