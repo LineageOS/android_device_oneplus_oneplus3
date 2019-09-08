@@ -175,9 +175,10 @@ on property:sys.boot_completed=1
 service dashd /sbin/dashd
     class core
     critical
-    seclabel u:r:dashd:s0
+    #seclabel u:r:dashd:s0
     group root system
     writepid /dev/cpuset/system-background/tasks
+    disabled
 
 service remosaic_daemon /vendor/bin/remosaic_daemon
     class late_start
