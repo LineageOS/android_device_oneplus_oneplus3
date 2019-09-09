@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7220d16f_e1c3d821",
+        "filename": "doze/src/org/lineageos/settings/doze/Utils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-09-09T08:18:19Z",
+      "side": 1,
+      "message": "This goes above.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 60
+      },
+      "revId": "188afcd63c3cb8a47a1af0b5062ce2f043462ee5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
