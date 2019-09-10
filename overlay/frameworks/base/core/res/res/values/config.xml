@@ -220,9 +220,9 @@
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
 
     <!-- Enable overlay for all location components. -->
-    <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
+    <!-- <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string> -->
      <!-- Component name of the combo network location provider. -->
-    <string name="config_comboNetworkLocationProvider" translatable="false">com.qualcomm.location</string>
+    <!-- <string name="config_comboNetworkLocationProvider" translatable="false">com.qualcomm.location</string> -->
     <!-- Enable doze mode -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
     <bool name="config_dozeAfterScreenOffByDefault">true</bool>
