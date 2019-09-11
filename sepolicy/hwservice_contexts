@@ -1,3 +1,4 @@
 vendor.oneplus.fingerprint.extension::IVendorFingerprintExtensions u:object_r:hal_fingerprint_hwservice:s0
 vendor.oneplus.hardware.ifaa::IOneplusIfaa                         u:object_r:hal_ifaa_hwservice:s0
 vendor.oneplus.hardware.param::IOneplusParam                       u:object_r:hal_param_hwservice:s0
+vendor.nxp.nxpnfc::INxpNfc                                         u:object_r:nxpnfc_hwservice:s0
