@@ -1,2 +1,3 @@
 type hal_ifaa_hwservice, hwservice_manager_type;
 type hal_param_hwservice, hwservice_manager_type;
+type nxpnfc_hwservice, hwservice_manager_type;
