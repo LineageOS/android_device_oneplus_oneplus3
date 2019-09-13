@@ -70,14 +70,16 @@ vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
 # Bluetooth
-lib64/libaptX_encoder.so
-lib64/libaptXHD_encoder.so
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/libbtnv.so
 
 # Bluetooth - from LA.UM.7.5.r1-04000-8x96.0
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|e29484b7d03c9e47fbb264e2f3b272bf80db8d0d
+
+# Bluetooth (aptX) - from crosshatch - QP1A.190711.020
+product/lib64/libaptX_encoder.so|df1c89d7af1bb35808d5fe3496b04ba066c10cbc
+product/lib64/libaptXHD_encoder.so|e13fa70c97caaa24d061678bdee608eb8850a69e
 
 # Camera
 etc/camera/camera_config.xml
