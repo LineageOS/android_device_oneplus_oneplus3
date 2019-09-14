@@ -359,7 +359,7 @@ PRODUCT_PACKAGES += \
     nqnfcse_access.xml \
     Tag \
     com.android.nfc_extras \
-    vendor.nxp.hardware.nfc@1.1-service \
+    vendor.nxp.hardware.nfc@1.2-service \
     nfc_nci.nqx.default.hw
 
 PRODUCT_COPY_FILES += \
