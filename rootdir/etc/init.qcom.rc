@@ -759,7 +759,6 @@ service vendor.atfwd /vendor/bin/ATFWD-daemon
     writepid /dev/cpuset/system-background/tasks
 
 service hostapd_fst /vendor/bin/hw/hostapd -dd -g /data/vendor/wifi/hostapd/global
-    interface android.hardware.wifi.hostapd@1.0::IHostapd default
     class main
     capabilities NET_ADMIN NET_RAW
     user wifi
