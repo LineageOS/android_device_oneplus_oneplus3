@@ -947,7 +947,6 @@ vendor/bin/thermal-engine
 vendor/lib64/libthermalioctl.so
 
 # Time services
-bin/move_time_data.sh
 -vendor/app/TimeService/TimeService.apk
 vendor/bin/time_daemon
 vendor/lib64/libtime_genoff.so
