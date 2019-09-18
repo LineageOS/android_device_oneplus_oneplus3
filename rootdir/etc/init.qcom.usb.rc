@@ -113,8 +113,8 @@ service vendor.qcom-usb-sh /vendor/bin/init.qcom.usb.sh
     oneshot
     disabled
 
-on property:persist.vendor.usb.config=*
-    setprop persist.sys.usb.config ${persist.vendor.usb.config}
+#on property:persist.vendor.usb.config=*
+#    setprop persist.sys.usb.config ${persist.vendor.usb.config}
 
 on boot && property:ro.boot.usbconfigfs=true
         setprop sys.usb.configfs 1
