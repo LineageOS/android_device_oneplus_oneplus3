@@ -97,6 +97,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
 
         <!-- Config to allow hold in video calls -->
         <boolean name="allow_holding_video_call" value="true"/>
+        <!-- Config to allow accept one way for video calls -->
+        <boolean name="allow_one_way_accept_video_call" value="true"/>
     </carrier_config>
 
     <carrier_config mcc="001" mnc="01">
@@ -1774,6 +1776,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="carrier_rtt_upgrade_supported" value="true"/>
         <boolean name="carrier_rtt_downgrade_supported" value="true"/>
         <boolean name="carrier_wfc_supports_wifi_only_bool" value="true"/>
+        <boolean name="allow_one_way_accept_video_call" value="false"/>
     </carrier_config>
 
     <carrier_config mcc="310" mnc="160">
@@ -1794,6 +1797,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="carrier_rtt_upgrade_supported" value="true"/>
         <boolean name="carrier_rtt_downgrade_supported" value="true"/>
         <boolean name="carrier_wfc_supports_wifi_only_bool" value="true"/>
+        <boolean name="allow_one_way_accept_video_call" value="false"/>
     </carrier_config>
 
     <carrier_config mcc="310" mnc="220">
@@ -1833,6 +1837,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="carrier_rtt_upgrade_supported" value="true"/>
         <boolean name="carrier_rtt_downgrade_supported" value="true"/>
         <boolean name="carrier_wfc_supports_wifi_only_bool" value="true"/>
+        <boolean name="allow_one_way_accept_video_call" value="false"/>
     </carrier_config>
 
     <carrier_config mcc="310" mnc="490">
