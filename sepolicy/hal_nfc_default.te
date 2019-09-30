@@ -1,3 +1,6 @@
+# TODO(b/36657258): Remove data_between_core_and_vendor_violators once
+# hal_nfc no longer directly accesses /data owned by the nfc app.
+typeattribute hal_nfc_default data_between_core_and_vendor_violators;
 # Data file accesses.
-allow hal_nfc_default nfc_vendor_data_file:dir create_dir_perms;
-allow hal_nfc_default nfc_vendor_data_file:file create_file_perms;
+allow hal_nfc_default nfc_data_file:dir create_dir_perms;
+allow hal_nfc_default nfc_data_file:{ file lnk_file fifo_file } create_file_perms;

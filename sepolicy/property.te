@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 type thermal_prop, property_type;
+=======
+type diag_prop, property_type;
+>>>>>>> parent of 16c0c7f... op3: Update sepolicy for P blobs

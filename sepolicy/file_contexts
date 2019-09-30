@@ -1,7 +1,5 @@
-# Alipay
-/(vendor|system/vendor)/bin/hw/vendor\.oneplus\.hardware\.ifaa@2\.0-service                     u:object_r:hal_ifaa_default_exec:s0
-
 # Camera
+/data/camera(/.*)?                                              u:object_r:camera_socket:s0
 /(vendor|system/vendor)/bin/remosaic_daemon                     u:object_r:remosaic_daemon_exec:s0
 
 # Charger
@@ -15,15 +13,24 @@
 # FRP partition
 /dev/block/platform/soc/624000.ufshc/by-name/config             u:object_r:frp_block_device:s0
 
+<<<<<<< HEAD
+=======
+# Healthd
+/sys/devices/soc/soc:qcom,bcl/power_supply/bcl/type             u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/msm-bcl-14/power_supply/fg_adc/type            u:object_r:sysfs_batteryinfo:s0
+
+# IFAA
+/system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
+
+# LEDs
+/sys/devices/soc/leds-qpnp-[0-9]+/leds(/.*)?                    u:object_r:sysfs_leds:s0
+
+>>>>>>> parent of 16c0c7f... op3: Update sepolicy for P blobs
 # Lineage hardware
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.0-service\.oneplus3              u:object_r:hal_lineage_livedisplay_qti_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service\.oneplus3                    u:object_r:hal_lineage_touch_default_exec:s0
 
-# OTA
-/system/bin/move_time_data\.sh                                  u:object_r:move-time-data-sh_exec:s0
-
 # Ril
-/data/vendor/oemnvitems(/.*)?                                   u:object_r:vendor_radio_data_file:s0
+/data/oemnvitems(/.*)?                                          u:object_r:radio_data_file:s0
 /dev/block/platform/soc/624000.ufshc/by-name/oem_dycnvbk        u:object_r:modem_efs_partition_device:s0
 /dev/block/platform/soc/624000.ufshc/by-name/oem_stanvbk        u:object_r:modem_efs_partition_device:s0
-/(vendor|system/vendor)/bin/hw/vendor\.oneplus\.hardware\.param@1\.0-service                    u:object_r:hal_param_default_exec:s0
