@@ -72,6 +72,11 @@ vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 # Bluetooth
 lib64/libaptX_encoder.so
 lib64/libaptXHD_encoder.so
+<<<<<<< HEAD
+=======
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
+vendor/bin/wcnss_filter
+>>>>>>> parent of bee752c... op3: remove wcnss_filter
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/libbtnv.so
