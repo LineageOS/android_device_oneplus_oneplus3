@@ -313,7 +313,6 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
-    mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
     #Create directories for Location services
@@ -327,10 +326,6 @@ on post-fs-data
     #Create directories for wifihal services
     mkdir /dev/socket/wifihal 0770 wifi wifi
     chmod 2770 /dev/socket/wifihal
-
-    #Create directory for FOTA
-    mkdir /data/fota 0771
-    chown system system /data/fota
 
     # Create /data/time folder for time-services
     mkdir /data/vendor/time/ 0700 system system
