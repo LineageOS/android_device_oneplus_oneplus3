@@ -529,9 +529,7 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 
 # GPS
 etc/permissions/com.qti.location.sdk.xml
-etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
-etc/permissions/privapp-permissions-com.qualcomm.location.xml
 framework/com.qti.location.sdk.jar
 framework/izat.xt.srv.jar
 lib64/liblocationservice_jni.so
@@ -541,7 +539,6 @@ lib64/vendor.qti.gnss@1.1.so
 lib64/vendor.qti.gnss@1.2.so
 lib64/vendor.qti.gnss@2.0.so
 lib64/vendor.qti.gnss@2.1.so
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/hw/vendor.qti.gnss@1.0-service
 vendor/bin/loc_launcher
 vendor/bin/lowi-server
@@ -577,6 +574,11 @@ vendor/lib64/vendor.qti.gnss@1.0.so
 vendor/lib64/vendor.qti.gnss@1.1.so
 vendor/lib64/vendor.qti.gnss@1.2.so
 vendor/lib64/vendor.qti.gnss@2.0.so
+
+# GPS - from LA.UM.8.6.r1-01900-89xx.0
+etc/permissions/com.qualcomm.location.xml|1d36e7cf8e16813aa13ee6b3fca8d8687b543828
+etc/permissions/privapp-permissions-com.qualcomm.location.xml|2dc7fba818bdf582bfea849a74f4b312d90745c9
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk|fbe3f6542f1dd0ed112a1b6eabd0209661bdc57f
 
 # Graphics - Adreno
 vendor/lib/egl/eglSubDriverAndroid.so
