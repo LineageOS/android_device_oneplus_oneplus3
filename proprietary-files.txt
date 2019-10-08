@@ -631,33 +631,32 @@ vendor/lib/hw/sound_trigger.primary.msm8996.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
-# Media
-lib/extractors/libmmparser.so
-lib/libFileMux.so
-lib/libmmosal.so
-lib/libmmparser_lite.so
-lib/libOmxMux.so
-lib64/libmmosal.so
--vendor/lib/libgpustats.so
-vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal_proprietary.so
-vendor/lib/libOmxAacDec.so
-vendor/lib/libOmxAlacDec.so
-vendor/lib/libOmxAlacDecSw.so
-vendor/lib/libOmxAmrDec.so
-vendor/lib/libOmxAmrwbplusDec.so
-vendor/lib/libOmxApeDec.so
-vendor/lib/libOmxApeDecSw.so
-vendor/lib/libOmxEvrcDec.so
-vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libOmxVideoDSMode.so
-vendor/lib/libOmxVpp.so
-vendor/lib/libOmxWmaDec.so
-vendor/lib/libvpphvx.so
-vendor/lib/libvpplibrary.so
-vendor/lib/libvqzip.so
--vendor/lib64/libgpustats.so
+# Media - from LA.UM.8.6.r1-01900-89xx.0
+lib/extractors/libmmparserextractor.so|41d5ee2c7f76f21f7566956ad0a490f6927c2f95
+lib/libFileMux.so|79661e6dffc90234ad446641264fd0fa1a3fe6ab
+lib/libmmosal.so|9464733295e192301b2577f52fab720e72c0d152
+lib/libmmparser_lite.so|b1b4161b7097f5feeff0f043e8b94cd94553e4ad
+lib/libOmxMux.so|2803ebee03e8372844a278f8ee637c6226e33139
+lib64/libmmosal.so|9ceff2581e86d32bc2795dffb96ebe4bdc88f2f7
+-vendor/lib/libgpustats.so|e1ffdfcdd7c03b9fb9de7b95e76541780ec34a1e
+vendor/lib/libI420colorconvert.so|309927237aa3e17ae4294a5012df293a03f93121
+vendor/lib/libmm-color-convertor.so|4191173950988206b70d14c4e25f911a1bd6abd9
+vendor/lib/libmmosal_proprietary.so|4b0788590e1ecfccd3b20b3181a4add528acb2b6
+vendor/lib/libOmxAacDec.so|8e10de2b6ce36f611268dcb2b3f0ee9f6e4862e6
+vendor/lib/libOmxAlacDec.so|dc149a80c341aeccfc908f2d90d3f3f0eb2194e8
+vendor/lib/libOmxAlacDecSw.so|e2e9c926434e1a34b82b92831d231b203b68c10a
+vendor/lib/libOmxAmrDec.so|e8991419794c7a1d75e41761f768cb83e0afc26c
+vendor/lib/libOmxAmrwbplusDec.so|aa55931f0a5b6265c83ab92172ae57881ddb0b4f
+vendor/lib/libOmxApeDec.so|0ab0a081606c73e6b5fa5ac59e25b7cfc81d7c82
+vendor/lib/libOmxApeDecSw.so|a780d0080b6f9e180070393838882e164fc1efe8
+vendor/lib/libOmxDsdDec.so|9a6a3621e2e07db7881712536cc4ef0433515199
+vendor/lib/libOmxEvrcDec.so|7ac2ca1c4f6aa5c31b1e54be9f82b6128bcc6c50
+vendor/lib/libOmxG711Dec.so|dde0ae7ee761e7faddba9c6e7fcf536ac523add5
+vendor/lib/libOmxQcelp13Dec.so|c19e3495cf9c300ffd802c5270cb88adf2ddba7d
+vendor/lib/libOmxVideoDSMode.so|f3f96d9ba16ebda2d3e9d5a726010d9356d3d0ac
+vendor/lib/libOmxWmaDec.so|c1d071accf3eacd7c69e6d07765e14494754ff60
+vendor/lib/libvqzip.so|9cb3212b118b6626918850abc907c41d1b819ac4
+-vendor/lib64/libgpustats.so|7f884a3e4ddc6f7016120ab9aed952f1261e210f
 
 # NFC firmware
 vendor/lib/libpn548ad_fw.so
