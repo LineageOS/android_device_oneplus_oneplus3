@@ -822,8 +822,8 @@ vendor/radio/qcril_database/upgrade/1_version_intro.sql
 vendor/radio/qcril_database/upgrade/2_version_add_wps_config.sql
 vendor/radio/qcril_database/upgrade/3_version_update_wps_config.sql
 
-# Radio - from LA.UM.7.5.r1-04000-8x96.0
-framework/qti-telephony-common.jar|9aa88e7f3166d86da217d688b003c2ecf2840acf
+# Radio - from LA.UM.8.6.r1-01900-89xx.0
+product/framework/qti-telephony-common.jar|532af9b997feab1f71c3a6457d14b7bec22fe6b6
 
 # Radio - param
 lib64/vendor.oneplus.hardware.param@1.0.so
