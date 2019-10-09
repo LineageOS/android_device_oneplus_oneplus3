@@ -18,8 +18,7 @@ LOCAL_SHARED_LIBRARIES := \
         libcutils \
         libgps.utils \
         liblog \
-        libloc_core \
-        liblbs_core
+        libloc_core
 
 LOCAL_HEADER_LIBRARIES := \
     libgps.utils_headers \
