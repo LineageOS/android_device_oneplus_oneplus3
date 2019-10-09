@@ -816,6 +816,7 @@ vendor/radio/qcril_database/upgrade/2_version_add_wps_config.sql
 vendor/radio/qcril_database/upgrade/3_version_update_wps_config.sql
 
 # Radio - from LA.UM.8.6.r1-01900-89xx.0
+product/etc/permissions/telephony_product_privapp-permissions-qti.xml|0536410f98ef3be8ca7630ba8e9383e41e423ceb
 product/framework/qti-telephony-common.jar|532af9b997feab1f71c3a6457d14b7bec22fe6b6
 vendor/etc/init/dataadpl.rc|cd4907d9bfd438fe5f5c86f5d6cec590ac0bac2a
 vendor/etc/init/dataqti.rc|6abfd1a850d782adbbb6f42c9d8ca870036b2ad1
@@ -835,8 +836,6 @@ lib64/lib-imsvideocodec.so
 lib64/lib-imsvt.so
 lib64/lib-imsvtextutils.so
 lib64/lib-imsvtutils.so
-lib64/libimscamera_jni.so
-lib64/libimsmedia_jni.so
 lib64/librcc.so
 lib64/vendor.qti.imsrtpservice@1.0.so
 vendor/bin/ims_rtp_daemon
@@ -869,8 +868,10 @@ vendor/lib64/vendor.qti.ims.callinfo@1.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so
 vendor/lib64/vendor.qti.imsrtpservice@1.0-service-Impl.so
 
-# Radio - IMS - from LA.UM.7.5.r1-04000-8x96.0
--priv-app/ims/ims.apk|e601112f50eef846e8672eb03bcbc6e472b927c1
+# Radio - IMS - from LA.UM.8.6.r1-01900-89xx.0
+product/lib64/libimscamera_jni.so|7cb89110cca94d37d68c705f12a7a5a4ee106139
+product/lib64/libimsmedia_jni.so|e50217e9eb8878136614db66313508ac970a2b42
+-product/priv-app/ims/ims.apk|ce41daca328db67984843588e8bafa7e0eb53a0a
 
 # Radio - MBN
 etc/firmware/mbn_ota/mcfg_sw_NoCDMA/mbn_ota.txt
