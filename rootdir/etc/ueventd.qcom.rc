@@ -135,6 +135,7 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/spcom                0660   system     system
 /dev/spss_utils           0660   system     system
 /dev/sp_kernel            0660   system     system
+/dev/sp_nvm               0660   system     system
 /dev/sp_ssr               0660   system     system
 /dev/sp_keymaster         0660   system     system
 /dev/sec_nvm_*            0660   system     system
