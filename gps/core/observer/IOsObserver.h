@@ -91,8 +91,8 @@ public:
     inline virtual void turnOn (DataItemId /*dit*/, int /*timeOut*/){}
     inline virtual void turnOff (DataItemId /*dit*/) {}
 #ifdef USE_GLIB
-    inline virtual bool connectBackhaul() {}
-    inline virtual bool disconnectBackhaul() {}
+    inline virtual bool connectBackhaul() { return false; }
+    inline virtual bool disconnectBackhaul() { return false; }
 #endif
 
     /**

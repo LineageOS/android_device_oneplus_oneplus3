@@ -1,7 +1,6 @@
 GNSS_CFLAGS := \
     -Werror \
     -Wno-error=unused-parameter \
-    -Wno-error=format \
     -Wno-error=macro-redefined \
     -Wno-error=reorder \
     -Wno-error=missing-braces \

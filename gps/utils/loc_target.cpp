@@ -54,6 +54,7 @@
 #define STR_MTP         "MTP"
 #define STR_APQ         "apq"
 #define STR_SDC         "sdc"  // alternative string for APQ targets
+#define STR_QCS         "qcs"  // string for Gen9 APQ targets
 #define STR_MSM         "msm"
 #define STR_SDM         "sdm"  // alternative string for MSM targets
 #define STR_APQ_NO_WGR  "baseband_apq_nowgr"
@@ -175,7 +176,8 @@ unsigned int loc_get_target(void)
     }
 
     if( !memcmp(baseband, STR_APQ, LENGTH(STR_APQ)) ||
-        !memcmp(baseband, STR_SDC, LENGTH(STR_SDC)) ) {
+        !memcmp(baseband, STR_SDC, LENGTH(STR_SDC)) ||
+        !memcmp(baseband, STR_QCS, LENGTH(STR_QCS)) ) {
 
         if( !memcmp(rd_id, MPQ8064_ID_1, LENGTH(MPQ8064_ID_1))
             && IS_STR_END(rd_id[LENGTH(MPQ8064_ID_1)]) )

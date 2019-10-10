@@ -28,10 +28,20 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 PKG_PROG_PKG_CONFIG
 
-# Checks for libraries.
-PKG_CHECK_MODULES([CUTILS], [libcutils])
-AC_SUBST([CUTILS_CFLAGS])
-AC_SUBST([CUTILS_LIBS])
+AC_ARG_WITH([external_ap],
+    AC_HELP_STRING([--with-external_ap=@<:@dir@:>@],
+        [Using External Application Processor]),
+    [],
+    with_external_ap=no)
+
+if test "x$with_external_ap" != "xno"; then
+    CPPFLAGS="${CPPFLAGS} -DFEATURE_EXTERNAL_AP"
+else
+    # Checks for libraries.
+    PKG_CHECK_MODULES([CUTILS], [libcutils])
+    AC_SUBST([CUTILS_CFLAGS])
+    AC_SUBST([CUTILS_LIBS])
+fi
 
 AC_ARG_WITH([core_includes],
       AC_HELP_STRING([--with-core-includes=@<:@dir@:>@],

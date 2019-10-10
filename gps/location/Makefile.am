@@ -26,7 +26,9 @@ liblocation_api_la_LIBADD = -lstdc++ -ldl $(GPSUTILS_LIBS)
 library_include_HEADERS = \
     LocationAPI.h \
     LocationAPIClientBase.h \
-    location_interface.h
+    location_interface.h \
+    LocationDataTypes.h \
+    ILocationAPI.h
 
 #Create and Install libraries
 lib_LTLIBRARIES = liblocation_api.la

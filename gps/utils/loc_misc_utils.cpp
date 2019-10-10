@@ -30,6 +30,7 @@
 #define LOG_TAG "LocSvc_misc_utils"
 #include <stdio.h>
 #include <string.h>
+#include <dlfcn.h>
 #include <log_util.h>
 #include <loc_misc_utils.h>
 #include <ctype.h>
@@ -111,4 +112,34 @@ void loc_util_trim_space(char *org_string)
     if (last_nonspace) { *last_nonspace = '\0'; }
 err:
     return;
+}
+
+inline void logDlError(const char* failedCall) {
+    const char * err = dlerror();
+    LOC_LOGe("%s error: %s", failedCall, (nullptr == err) ? "unknown" : err);
+}
+
+void* dlGetSymFromLib(void*& libHandle, const char* libName, const char* symName)
+{
+    void* sym = nullptr;
+    if ((nullptr != libHandle || nullptr != libName) && nullptr != symName) {
+        if (nullptr == libHandle) {
+            libHandle = dlopen(libName, RTLD_NOW);
+            if (nullptr == libHandle) {
+                logDlError("dlopen");
+            }
+        }
+        // NOT else, as libHandle gets assigned 5 line above
+        if (nullptr != libHandle) {
+            sym = dlsym(libHandle, symName);
+            if (nullptr == sym) {
+                logDlError("dlsym");
+            }
+        }
+    } else {
+        LOC_LOGe("Either libHandle (%p) or libName (%p) must not be null; "
+                 "symName (%p) can not be null.", libHandle, libName, symName);
+    }
+
+    return sym;
 }

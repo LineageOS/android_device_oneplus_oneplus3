@@ -92,6 +92,34 @@ SIDE EFFECTS
    N/A
 ===========================================================================*/
 void loc_util_trim_space(char *org_string);
+
+/*===========================================================================
+FUNCTION dlGetSymFromLib
+
+DESCRIPTION
+   Handy function to get a pointer to a symbol from a library.
+
+   If libHandle is not null, it will be used as the handle to the library. In
+   that case libName wll not be used;
+   libHandle is an in / out parameter.
+   If libHandle is null, libName will be used to dlopen.
+   Either libHandle or libName must not be nullptr.
+   symName must not be null.
+
+DEPENDENCIES
+   N/A
+
+RETURN VALUE
+   pointer to symName. Could be nullptr if
+       Parameters are incorrect; or
+       libName can not be opened; or
+       symName can not be found.
+
+SIDE EFFECTS
+   N/A
+===========================================================================*/
+void* dlGetSymFromLib(void*& libHandle, const char* libName, const char* symName);
+
 #ifdef __cplusplus
 }
 #endif
