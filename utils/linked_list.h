@@ -50,6 +50,8 @@ typedef enum
      /**< Failed because an there were not enough resources. */
   eLINKED_LIST_INSUFFICIENT_BUFFER                 = -5,
      /**< Failed because an the supplied buffer was too small. */
+  eLINKED_LIST_EMPTY                               = -6
+     /**< Failed because list is empty. */
 }linked_list_err_type;
 
 /*===========================================================================

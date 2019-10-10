@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2019, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -26,13 +26,14 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_Agps"
 
 #include <Agps.h>
 #include <loc_pla.h>
 #include <ContextBase.h>
 #include <loc_timer.h>
+#include <inttypes.h>
 
 /* --------------------------------------------------------------------
  *   AGPS State Machine Methods
@@ -77,16 +78,8 @@ void AgpsStateMachine::processAgpsEventSubscribe(){
             /* Add subscriber to list
              * No notifications until we get RSRC_GRANTED */
             addSubscriber(mCurrentSubscriber);
-
-            /* Send data request
-             * The if condition below is added so that if the data call setup
-             * fails for DS State Machine, we want to retry in released state.
-             * for Agps State Machine, sendRsrcRequest() will always return
-             * success. */
-            if (requestOrReleaseDataConn(true) == 0) {
-                // If data request successful, move to pending state
-                transitionState(AGPS_STATE_PENDING);
-            }
+            requestOrReleaseDataConn(true);
+            transitionState(AGPS_STATE_PENDING);
             break;
 
         case AGPS_STATE_PENDING:
@@ -293,24 +286,25 @@ void AgpsStateMachine::processAgpsEventDenied(){
  * bool request :
  *      true  = Request data connection
  *      false = Release data connection */
-int AgpsStateMachine::requestOrReleaseDataConn(bool request){
+void AgpsStateMachine::requestOrReleaseDataConn(bool request){
 
     AGnssExtStatusIpV4 nifRequest;
     memset(&nifRequest, 0, sizeof(nifRequest));
 
     nifRequest.type = mAgpsType;
-
+    nifRequest.apnTypeMask = mApnTypeMask;
     if (request) {
-        LOC_LOGD("AGPS Data Conn Request");
+        LOC_LOGD("AGPS Data Conn Request mAgpsType=%d mApnTypeMask=0x%X",
+                 mAgpsType, mApnTypeMask);
         nifRequest.status = LOC_GPS_REQUEST_AGPS_DATA_CONN;
     }
     else{
-        LOC_LOGD("AGPS Data Conn Release");
+        LOC_LOGD("AGPS Data Conn Release mAgpsType=%d mApnTypeMask=0x%X",
+                 mAgpsType, mApnTypeMask);
         nifRequest.status = LOC_GPS_RELEASE_AGPS_DATA_CONN;
     }
 
-    mAgpsManager->mFrameworkStatusV4Cb(nifRequest);
-    return 0;
+    mFrameworkStatusV4Cb(nifRequest);
 }
 
 void AgpsStateMachine::notifyAllSubscribers(
@@ -360,14 +354,14 @@ void AgpsStateMachine::notifyEventToSubscriber(
 
         case AGPS_EVENT_GRANTED:
             mAgpsManager->mAtlOpenStatusCb(
-                    subscriberToNotify->mConnHandle, 1, getAPN(),
-                    getBearer(), mAgpsType);
+                    subscriberToNotify->mConnHandle, 1, getAPN(), getAPNLen(),
+                    getBearer(), mAgpsType, mApnTypeMask);
             break;
 
         case AGPS_EVENT_DENIED:
             mAgpsManager->mAtlOpenStatusCb(
-                    subscriberToNotify->mConnHandle, 0, getAPN(),
-                    getBearer(), mAgpsType);
+                    subscriberToNotify->mConnHandle, 0, getAPN(), getAPNLen(),
+                    getBearer(), mAgpsType, mApnTypeMask);
             break;
 
         case AGPS_EVENT_UNSUBSCRIBE:
@@ -451,15 +445,14 @@ void AgpsStateMachine::setAPN(char* apn, unsigned int len){
 
     if (NULL != mAPN) {
         delete mAPN;
+        mAPN  = NULL;
     }
 
-    if (apn == NULL || len <= 0) {
+    if (NULL == apn || len <= 0 || len > MAX_APN_LEN || strlen(apn) != len) {
         LOC_LOGD("Invalid apn len (%d) or null apn", len);
         mAPN = NULL;
         mAPNLen = 0;
-    }
-
-    if (NULL != apn) {
+    } else {
         mAPN = new char[len+1];
         if (NULL != mAPN) {
             memcpy(mAPN, apn, len);
@@ -513,194 +506,12 @@ void AgpsStateMachine::dropAllSubscribers(){
 }
 
 /* --------------------------------------------------------------------
- *   DS State Machine Methods
- * -------------------------------------------------------------------*/
-const int DSStateMachine::MAX_START_DATA_CALL_RETRIES = 4;
-const int DSStateMachine::DATA_CALL_RETRY_DELAY_MSEC = 500;
-
-/* Overridden method
- * DS SM needs to handle one scenario differently */
-void DSStateMachine::processAgpsEvent(AgpsEvent event) {
-
-    LOC_LOGD("DSStateMachine::processAgpsEvent() %d", event);
-
-    /* DS Client call setup APIs don't return failure/closure separately.
-     * Hence we receive RELEASED event in both cases.
-     * If we are in pending, we should consider RELEASED as DENIED */
-    if (event == AGPS_EVENT_RELEASED && mState == AGPS_STATE_PENDING) {
-
-        LOC_LOGD("Translating RELEASED to DENIED event");
-        event = AGPS_EVENT_DENIED;
-    }
-
-    /* Redirect process to base class */
-    AgpsStateMachine::processAgpsEvent(event);
-}
-
-/* Timer Callback
- * For the retry timer started in case of DS Client call setup failure */
-void delay_callback(void *callbackData, int result)
-{
-    LOC_LOGD("delay_callback(): cbData %p", callbackData);
-
-    (void)result;
-
-    if (callbackData == NULL) {
-        LOC_LOGE("delay_callback(): NULL argument received !");
-        return;
-    }
-    DSStateMachine* dsStateMachine = (DSStateMachine *)callbackData;
-    dsStateMachine->retryCallback();
-}
-
-/* Invoked from Timer Callback
- * For the retry timer started in case of DS Client call setup failure */
-void DSStateMachine :: retryCallback()
-{
-    LOC_LOGD("DSStateMachine::retryCallback()");
-
-    /* Request SUPL ES
-     * There must be at least one active subscriber in list */
-    AgpsSubscriber* subscriber = getFirstSubscriber(false);
-    if (subscriber == NULL) {
-
-        LOC_LOGE("No active subscriber for DS Client call setup");
-        return;
-    }
-
-    /* Send message to retry */
-    mAgpsManager->mSendMsgToAdapterQueueFn(
-            new AgpsMsgRequestATL(
-                    mAgpsManager, subscriber->mConnHandle,
-                    LOC_AGPS_TYPE_SUPL_ES));
-}
-
-/* Overridden method
- * Request or Release data connection
- * bool request :
- *      true  = Request data connection
- *      false = Release data connection */
-int DSStateMachine::requestOrReleaseDataConn(bool request){
-
-    LOC_LOGD("DSStateMachine::requestOrReleaseDataConn(): "
-             "request %d", request);
-
-    /* Release data connection required ? */
-    if (!request && mAgpsManager->mDSClientStopDataCallFn) {
-
-        mAgpsManager->mDSClientStopDataCallFn();
-        LOC_LOGD("DS Client release data call request sent !");
-        return 0;
-    }
-
-    /* Setup data connection request
-     * There must be at least one active subscriber in list */
-    AgpsSubscriber* subscriber = getFirstSubscriber(false);
-    if (subscriber == NULL) {
-
-        LOC_LOGE("No active subscriber for DS Client call setup");
-        return -1;
-    }
-
-    /* DS Client Fn registered ? */
-    if (!mAgpsManager->mDSClientOpenAndStartDataCallFn) {
-
-        LOC_LOGE("DS Client start fn not registered, fallback to SUPL ATL");
-        notifyEventToSubscriber(AGPS_EVENT_DENIED, subscriber, false);
-        return -1;
-    }
-
-    /* Setup the call */
-    int ret = mAgpsManager->mDSClientOpenAndStartDataCallFn();
-
-    /* Check if data call start failed */
-    switch (ret) {
-
-        case LOC_API_ADAPTER_ERR_ENGINE_BUSY:
-            LOC_LOGE("DS Client open call failed, err: %d", ret);
-            mRetries++;
-            if (mRetries > MAX_START_DATA_CALL_RETRIES) {
-
-                LOC_LOGE("DS Client call retries exhausted, "
-                         "falling back to normal SUPL ATL");
-                notifyEventToSubscriber(AGPS_EVENT_DENIED, subscriber, false);
-            }
-            /* Retry DS Client call setup after some delay */
-            else if(loc_timer_start(
-                        DATA_CALL_RETRY_DELAY_MSEC, delay_callback, this)) {
-                    LOC_LOGE("Error: Could not start delay thread\n");
-                    return -1;
-                }
-            break;
-
-        case LOC_API_ADAPTER_ERR_UNSUPPORTED:
-            LOC_LOGE("No emergency profile found. Fall back to normal SUPL ATL");
-            notifyEventToSubscriber(AGPS_EVENT_DENIED, subscriber, false);
-            break;
-
-        case LOC_API_ADAPTER_ERR_SUCCESS:
-            LOC_LOGD("Request to start data call sent");
-            break;
-
-        default:
-            LOC_LOGE("Unrecognized return value: %d", ret);
-    }
-
-    return ret;
-}
-
-void DSStateMachine::notifyEventToSubscriber(
-        AgpsEvent event, AgpsSubscriber* subscriberToNotify,
-        bool deleteSubscriberPostNotify) {
-
-    LOC_LOGD("DSStateMachine::notifyEventToSubscriber(): "
-             "SM %p, Event %d Subscriber %p Delete %d",
-             this, event, subscriberToNotify, deleteSubscriberPostNotify);
-
-    switch (event) {
-
-        case AGPS_EVENT_GRANTED:
-            mAgpsManager->mAtlOpenStatusCb(
-                    subscriberToNotify->mConnHandle, 1, NULL,
-                    AGPS_APN_BEARER_INVALID, LOC_AGPS_TYPE_SUPL_ES);
-            break;
-
-        case AGPS_EVENT_DENIED:
-            /* Now try with regular SUPL
-             * We need to send request via message queue */
-            mRetries = 0;
-            mAgpsManager->mSendMsgToAdapterQueueFn(
-                    new AgpsMsgRequestATL(
-                            mAgpsManager, subscriberToNotify->mConnHandle,
-                            LOC_AGPS_TYPE_SUPL));
-            break;
-
-        case AGPS_EVENT_UNSUBSCRIBE:
-            mAgpsManager->mAtlCloseStatusCb(subscriberToNotify->mConnHandle, 1);
-            break;
-
-        case AGPS_EVENT_RELEASED:
-            mAgpsManager->mDSClientCloseDataCallFn();
-            mAgpsManager->mAtlCloseStatusCb(subscriberToNotify->mConnHandle, 1);
-            break;
-
-        default:
-            LOC_LOGE("Invalid event %d", event);
-    }
-
-    /* Search this subscriber in list and delete */
-    if (deleteSubscriberPostNotify) {
-        deleteSubscriber(subscriberToNotify);
-    }
-}
-
-/* --------------------------------------------------------------------
  *   Loc AGPS Manager Methods
  * -------------------------------------------------------------------*/
 
 /* CREATE AGPS STATE MACHINES
  * Must be invoked in Msg Handler context */
-void AgpsManager::createAgpsStateMachines() {
+void AgpsManager::createAgpsStateMachines(const AgpsCbInfo& cbInfo) {
 
     LOC_LOGD("AgpsManager::createAgpsStateMachines");
 
@@ -708,30 +519,17 @@ void AgpsManager::createAgpsStateMachines() {
             ((loc_core::ContextBase::mGps_conf.CAPABILITIES & LOC_GPS_CAPABILITY_MSA) ||
                     (loc_core::ContextBase::mGps_conf.CAPABILITIES & LOC_GPS_CAPABILITY_MSB));
 
-    if (NULL == mInternetNif) {
+    if (NULL == mInternetNif && (cbInfo.atlType & AGPS_ATL_TYPE_WWAN)) {
         mInternetNif = new AgpsStateMachine(this, LOC_AGPS_TYPE_WWAN_ANY);
+        mInternetNif->registerFrameworkStatusCallback((AgnssStatusIpV4Cb)cbInfo.statusV4Cb);
         LOC_LOGD("Internet NIF: %p", mInternetNif);
     }
     if (agpsCapable) {
-        if (NULL == mAgnssNif) {
+        if (NULL == mAgnssNif && (cbInfo.atlType & AGPS_ATL_TYPE_SUPL) &&
+                (cbInfo.atlType & AGPS_ATL_TYPE_SUPL_ES)) {
             mAgnssNif = new AgpsStateMachine(this, LOC_AGPS_TYPE_SUPL);
+            mAgnssNif->registerFrameworkStatusCallback((AgnssStatusIpV4Cb)cbInfo.statusV4Cb);
             LOC_LOGD("AGNSS NIF: %p", mAgnssNif);
-        }
-        if (NULL == mDsNif &&
-                loc_core::ContextBase::mGps_conf.USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL) {
-
-            if(!mDSClientInitFn){
-
-                LOC_LOGE("DS Client Init Fn not registered !");
-                return;
-            }
-            if (mDSClientInitFn(false) != 0) {
-
-                LOC_LOGE("Failed to init data service client");
-                return;
-            }
-            mDsNif = new DSStateMachine(this);
-            LOC_LOGD("DS NIF: %p", mDsNif);
         }
     }
 }
@@ -744,21 +542,16 @@ AgpsStateMachine* AgpsManager::getAgpsStateMachine(AGpsExtType agpsType) {
 
         case LOC_AGPS_TYPE_INVALID:
         case LOC_AGPS_TYPE_SUPL:
+        case LOC_AGPS_TYPE_SUPL_ES:
             if (mAgnssNif == NULL) {
                 LOC_LOGE("NULL AGNSS NIF !");
             }
             return mAgnssNif;
-
-        case LOC_AGPS_TYPE_SUPL_ES:
-            if (loc_core::ContextBase::mGps_conf.USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL) {
-                if (mDsNif == NULL) {
-                    createAgpsStateMachines();
-                }
-                return mDsNif;
-            } else {
-                return mAgnssNif;
+        case LOC_AGPS_TYPE_WWAN_ANY:
+            if (mInternetNif == NULL) {
+                LOC_LOGE("NULL Internet NIF !");
             }
-
+            return mInternetNif;
         default:
             return mInternetNif;
     }
@@ -767,30 +560,38 @@ AgpsStateMachine* AgpsManager::getAgpsStateMachine(AGpsExtType agpsType) {
     return NULL;
 }
 
-void AgpsManager::requestATL(int connHandle, AGpsExtType agpsType){
+void AgpsManager::requestATL(int connHandle, AGpsExtType agpsType,
+                             LocApnTypeMask apnTypeMask){
 
-    LOC_LOGD("AgpsManager::requestATL(): connHandle %d, agpsType %d",
-               connHandle, agpsType);
+    LOC_LOGD("AgpsManager::requestATL(): connHandle %d, agpsType 0x%X apnTypeMask: 0x%X",
+               connHandle, agpsType, apnTypeMask);
 
+    if (0 == loc_core::ContextBase::mGps_conf.USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL &&
+        LOC_AGPS_TYPE_SUPL_ES == agpsType) {
+        agpsType = LOC_AGPS_TYPE_SUPL;
+        apnTypeMask &= ~LOC_APN_TYPE_MASK_EMERGENCY;
+        apnTypeMask |= LOC_APN_TYPE_MASK_SUPL;
+        LOC_LOGD("Changed agpsType to non-emergency when USE_EMERGENCY... is 0"
+                 "and removed LOC_APN_TYPE_MASK_EMERGENCY from apnTypeMask"
+                 "agpsType 0x%X apnTypeMask : 0x%X",
+                 agpsType, apnTypeMask);
+    }
     AgpsStateMachine* sm = getAgpsStateMachine(agpsType);
 
     if (sm == NULL) {
 
-        LOC_LOGE("No AGPS State Machine for agpsType: %d", agpsType);
+        LOC_LOGE("No AGPS State Machine for agpsType: %d apnTypeMask: 0x%X",
+                 agpsType, apnTypeMask);
         mAtlOpenStatusCb(
-                connHandle, 0, NULL, AGPS_APN_BEARER_INVALID, agpsType);
+                connHandle, 0, NULL, 0, AGPS_APN_BEARER_INVALID, agpsType, apnTypeMask);
         return;
     }
+    sm->setType(agpsType);
+    sm->setApnTypeMask(apnTypeMask);
 
     /* Invoke AGPS SM processing */
-    AgpsSubscriber subscriber(connHandle, false, false);
+    AgpsSubscriber subscriber(connHandle, false, false, apnTypeMask);
     sm->setCurrentSubscriber(&subscriber);
-
-    /* If DS State Machine, wait for close complete */
-    if (agpsType == LOC_AGPS_TYPE_SUPL_ES) {
-        subscriber.mWaitForCloseComplete = true;
-    }
-
     /* Send subscriber event */
     sm->processAgpsEvent(AGPS_EVENT_SUBSCRIBE);
 }
@@ -812,39 +613,15 @@ void AgpsManager::releaseATL(int connHandle){
             (subscriber = mInternetNif->getSubscriber(connHandle)) != NULL) {
         sm = mInternetNif;
     }
-    else if (mDsNif &&
-            (subscriber = mDsNif->getSubscriber(connHandle)) != NULL) {
-        sm = mDsNif;
-    }
-
     if (sm == NULL) {
         LOC_LOGE("Subscriber with connHandle %d not found in any SM",
                     connHandle);
-        mAtlCloseStatusCb(connHandle, 0);
         return;
     }
 
     /* Now send unsubscribe event */
     sm->setCurrentSubscriber(subscriber);
     sm->processAgpsEvent(AGPS_EVENT_UNSUBSCRIBE);
-}
-
-void AgpsManager::reportDataCallOpened(){
-
-    LOC_LOGD("AgpsManager::reportDataCallOpened");
-
-    if (mDsNif) {
-        mDsNif->processAgpsEvent(AGPS_EVENT_GRANTED);
-    }
-}
-
-void AgpsManager::reportDataCallClosed(){
-
-    LOC_LOGD("AgpsManager::reportDataCallClosed");
-
-    if (mDsNif) {
-        mDsNif->processAgpsEvent(AGPS_EVENT_RELEASED);
-    }
 }
 
 void AgpsManager::reportAtlOpenSuccess(
@@ -894,19 +671,5 @@ void AgpsManager::handleModemSSR(){
     }
     if (mInternetNif) {
         mInternetNif->dropAllSubscribers();
-    }
-    if (mDsNif) {
-        mDsNif->dropAllSubscribers();
-    }
-
-    // reinitialize DS client in SSR mode
-    if (loc_core::ContextBase::mGps_conf.
-            USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL) {
-
-        mDSClientStopDataCallFn();
-        mDSClientCloseDataCallFn();
-        mDSClientReleaseFn();
-
-        mDSClientInitFn(true);
     }
 }

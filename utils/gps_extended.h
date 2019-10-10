@@ -55,14 +55,19 @@ struct LocPosMode
     bool share_position;
     char credentials[14];
     char provider[8];
+    GnssPowerMode powerMode;
+    uint32_t timeBetweenMeasurements;
     LocPosMode(LocPositionMode m, LocGpsPositionRecurrence recr,
                uint32_t gap, uint32_t accu, uint32_t time,
-               bool sp, const char* cred, const char* prov) :
+               bool sp, const char* cred, const char* prov,
+               GnssPowerMode pMode = GNSS_POWER_MODE_INVALID,
+               uint32_t tbm = 0) :
         mode(m), recurrence(recr),
         min_interval(gap < GPS_MIN_POSSIBLE_FIX_INTERVAL_MS ?
                      GPS_MIN_POSSIBLE_FIX_INTERVAL_MS : gap),
         preferred_accuracy(accu), preferred_time(time),
-        share_position(sp) {
+        share_position(sp), powerMode(pMode),
+        timeBetweenMeasurements(tbm) {
         memset(credentials, 0, sizeof(credentials));
         memset(provider, 0, sizeof(provider));
         if (NULL != cred) {
@@ -78,7 +83,8 @@ struct LocPosMode
         recurrence(LOC_GPS_POSITION_RECURRENCE_PERIODIC),
         min_interval(GPS_DEFAULT_FIX_INTERVAL_MS),
         preferred_accuracy(50), preferred_time(120000),
-        share_position(true) {
+        share_position(true), powerMode(GNSS_POWER_MODE_INVALID),
+        timeBetweenMeasurements(GPS_DEFAULT_FIX_INTERVAL_MS) {
         memset(credentials, 0, sizeof(credentials));
         memset(provider, 0, sizeof(provider));
     }
@@ -90,6 +96,8 @@ struct LocPosMode
             anotherMode.min_interval == min_interval &&
             anotherMode.preferred_accuracy == preferred_accuracy &&
             anotherMode.preferred_time == preferred_time &&
+            anotherMode.powerMode == powerMode &&
+            anotherMode.timeBetweenMeasurements == timeBetweenMeasurements &&
             !strncmp(anotherMode.credentials, credentials, sizeof(credentials)-1) &&
             !strncmp(anotherMode.provider, provider, sizeof(provider)-1);
     }

@@ -30,10 +30,28 @@
 #define __LOC_SHARED_LOCK__
 
 #include <stddef.h>
+#ifndef FEATURE_EXTERNAL_AP
 #include <cutils/atomic.h>
+#endif /* FEATURE_EXTERNAL_AP */
 #include <pthread.h>
 
-// This is a utility created for use cases such that there are more than
+#ifdef FEATURE_EXTERNAL_AP
+#include <atomic>
+
+inline int32_t android_atomic_inc(volatile int32_t *addr)
+{
+    volatile std::atomic_int_least32_t* a = (volatile std::atomic_int_least32_t*)addr;
+    return std::atomic_fetch_add_explicit(a, 1, std::memory_order_release);
+}
+
+inline int32_t android_atomic_dec(volatile int32_t *addr)
+{
+    volatile std::atomic_int_least32_t* a = (volatile std::atomic_int_least32_t*)addr;
+    return std::atomic_fetch_sub_explicit(a, 1, std::memory_order_release);
+}
+
+#endif /* FEATURE_EXTERNAL_AP */
+ // This is a utility created for use cases such that there are more than
 // one client who need to share the same lock, but it is not predictable
 // which of these clients is to last to go away. This shared lock deletes
 // itself when the last client calls its drop() method. To add a cient,

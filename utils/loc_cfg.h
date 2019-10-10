@@ -37,7 +37,7 @@
 #include <grp.h>
 
 #define LOC_MAX_PARAM_NAME                 80
-#define LOC_MAX_PARAM_STRING               80
+#define LOC_MAX_PARAM_STRING               172
 #define LOC_MAX_PARAM_LINE    (LOC_MAX_PARAM_NAME + LOC_MAX_PARAM_STRING)
 
 #define LOC_FEATURE_MODE_DISABLED "DISABLED"
@@ -72,19 +72,20 @@
  *============================================================================*/
 typedef struct
 {
-  const char                    *param_name;
-  void                          *param_ptr;
-  uint8_t                       *param_set;   /* indicate value set by config file */
-  char                           param_type;  /* 'n' for number,
-                                                 's' for string,
-                                                 'f' for double */
+  const char *param_name;
+  void       *param_ptr;   /* for string type, buf size need to be LOC_MAX_PARAM_STRING */
+  uint8_t    *param_set;   /* indicate value set by config file */
+  char        param_type;  /* 'n' for number,
+                              's' for string, NOTE: buf size need to be LOC_MAX_PARAM_STRING
+                              'f' for double */
 } loc_param_s_type;
 
 typedef enum {
     ENABLED,
     RUNNING,
     DISABLED,
-    DISABLED_FROM_CONF
+    DISABLED_FROM_CONF,
+    DISABLED_VIA_VENDOR_ENHANCED_CHECK
 } loc_process_e_status;
 
 typedef struct {
@@ -112,6 +113,8 @@ extern "C" {
  *                       MODULE EXPORTED FUNCTIONS
  *
  *============================================================================*/
+bool isVendorEnhanced();
+void setVendorEnhanced(bool vendorEnhanced);
 void loc_read_conf(const char* conf_file_name,
                    const loc_param_s_type* config_table,
                    uint32_t table_length);
@@ -132,9 +135,7 @@ extern const char LOC_PATH_QUIPC_CONF[];
 
 int loc_read_process_conf(const char* conf_file_name, uint32_t * process_count_ptr,
                           loc_process_info_s_type** process_info_table_ptr);
-
-uint32_t loc_modem_emulator_enabled();
-
+int loc_get_datum_type();
 #ifdef __cplusplus
 }
 #endif

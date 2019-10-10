@@ -27,8 +27,8 @@
  *
  */
 
-#ifndef __LOC_SOCKET__
-#define __LOC_SOCKET__
+#ifndef __LOC_IPC__
+#define __LOC_IPC__
 
 #include <string>
 #include <memory>
@@ -37,33 +37,71 @@
 #include <sys/un.h>
 #include <LocThread.h>
 
+using namespace std;
+
 namespace loc_util {
 
+
+class LocIpcRecver;
 class LocIpcSender;
+class LocIpcRunnable;
+
+class ILocIpcListener {
+protected:
+    inline virtual ~ILocIpcListener() {}
+public:
+    // LocIpc client can overwrite this function to get notification
+    // when the socket for LocIpc is ready to receive messages.
+    inline virtual void onListenerReady() {}
+    virtual void onReceive(const char* data, uint32_t length)= 0;
+};
+
 
 class LocIpc {
-friend LocIpcSender;
 public:
-    inline LocIpc() : mIpcFd(-1), mStopRequested(false), mRunnable(nullptr) {}
-    inline virtual ~LocIpc() { stopListening(); }
+    inline LocIpc() : mRunnable(nullptr) {}
+    inline virtual ~LocIpc() {
+        stopNonBlockingListening();
+    }
+
+    static shared_ptr<LocIpcSender>
+            getLocIpcLocalSender(const char* localSockName);
+    static shared_ptr<LocIpcSender>
+            getLocIpcInetUdpSender(const char* serverName, int32_t port);
+    static shared_ptr<LocIpcSender>
+            getLocIpcInetTcpSender(const char* serverName, int32_t port);
+    static shared_ptr<LocIpcSender>
+            getLocIpcQrtrSender(int service, int instance);
+
+    static unique_ptr<LocIpcRecver>
+            getLocIpcLocalRecver(const shared_ptr<ILocIpcListener>& listener,
+                                 const char* localSockName);
+    static unique_ptr<LocIpcRecver>
+            getLocIpcInetUdpRecver(const shared_ptr<ILocIpcListener>& listener,
+                                 const char* serverName, int32_t port);
+    static unique_ptr<LocIpcRecver>
+            getLocIpcInetTcpRecver(const shared_ptr<ILocIpcListener>& listener,
+                                   const char* serverName, int32_t port);
+    static unique_ptr<LocIpcRecver>
+            getLocIpcQrtrRecver(const shared_ptr<ILocIpcListener>& listener,
+                                int service, int instance);
+
+    static pair<shared_ptr<LocIpcSender>, unique_ptr<LocIpcRecver>>
+            getLocIpcQmiLocServiceSenderRecverPair(const shared_ptr<ILocIpcListener>& listener,
+                                                   int instance);
 
     // Listen for new messages in current thread. Calling this funciton will
-    // block current thread. The listening can be stopped by calling stopListening().
-    //
-    // Argument name is the path of the unix local socket to be listened.
-    // The function will return true on success, and false on failure.
-    bool startListeningBlocking(const std::string& name);
+    // block current thread.
+    // The listening can be stopped by calling stopBlockingListening() passing
+    // in the same ipcRecver obj handle.
+    static bool startBlockingListening(LocIpcRecver& ipcRecver);
+    static void stopBlockingListening(LocIpcRecver& ipcRecver);
 
     // Create a new LocThread and listen for new messages in it.
     // Calling this function will return immediately and won't block current thread.
-    // The listening can be stopped by calling stopListening().
-    //
-    // Argument name is the path of the unix local socket to be be listened.
-    // The function will return true on success, and false on failure.
-    bool startListeningNonBlocking(const std::string& name);
-
-    // Stop listening to new messages.
-    void stopListening();
+    // The listening can be stopped by calling stopNonBlockingListening().
+    bool startNonBlockingListening(unique_ptr<LocIpcRecver>& ipcRecver);
+    void stopNonBlockingListening();
 
     // Send out a message.
     // Call this function to send a message in argument data to socket in argument name.
@@ -71,83 +109,75 @@ public:
     // Argument name contains the name of the target unix socket. data contains the
     // message to be sent out. Convert your message to a string before calling this function.
     // The function will return true on success, and false on failure.
-    static bool send(const char name[], const std::string& data);
-    static bool send(const char name[], const uint8_t data[], uint32_t length);
-
-protected:
-    // Callback function for receiving incoming messages.
-    // Override this function in your derived class to process incoming messages.
-    // For each received message, this callback function will be called once.
-    // This callback function will be called in the calling thread of startListeningBlocking
-    // or in the new LocThread created by startListeningNonBlocking.
-    //
-    // Argument data contains the received message. You need to parse it.
-    inline virtual void onReceive(const std::string& /*data*/) {}
-
-    // LocIpc client can overwrite this function to get notification
-    // when the socket for LocIpc is ready to receive messages.
-    inline virtual void onListenerReady() {}
+    static bool send(LocIpcSender& sender, const uint8_t data[],
+                     uint32_t length, int32_t msgId = -1);
 
 private:
-    static bool sendData(int fd, const sockaddr_un& addr,
-            const uint8_t data[], uint32_t length);
-
-    int mIpcFd;
-    bool mStopRequested;
     LocThread mThread;
-    LocRunnable *mRunnable;
+    LocIpcRunnable *mRunnable;
 };
 
+/* this is only when client needs to implement Sender / Recver that are not already provided by
+   the factor methods prvoided by LocIpc. */
+
 class LocIpcSender {
+protected:
+    LocIpcSender() = default;
+    virtual ~LocIpcSender() = default;
+    virtual bool isOperable() const = 0;
+    virtual ssize_t send(const uint8_t data[], uint32_t length, int32_t msgId) const = 0;
 public:
-    // Constructor of LocIpcSender class
-    //
-    // Argument destSocket contains the full path name of destination socket.
-    // This class hides generated fd and destination address object from user.
-    inline LocIpcSender(const char* destSocket):
-            LocIpcSender(std::make_shared<int>(::socket(AF_UNIX, SOCK_DGRAM, 0)), destSocket) {
-        if (-1 == *mSocket) {
-            mSocket = nullptr;
-        }
+    virtual void informRecverRestarted() {}
+    inline bool isSendable() const { return isOperable(); }
+    inline bool sendData(const uint8_t data[], uint32_t length, int32_t msgId) const {
+        return isSendable() && (send(data, length, msgId) > 0);
     }
+};
 
-    // Replicate a new LocIpcSender object with new destination socket.
-    inline LocIpcSender* replicate(const char* destSocket) {
-        return (nullptr == mSocket) ? nullptr : new LocIpcSender(mSocket, destSocket);
-    }
+class LocIpcRecver {
+    LocIpcSender& mIpcSender;
+protected:
+    const shared_ptr<ILocIpcListener> mDataCb;
+    inline LocIpcRecver(const shared_ptr<ILocIpcListener>& listener, LocIpcSender& sender) :
+            mIpcSender(sender), mDataCb(listener) {}
+    LocIpcRecver(LocIpcRecver const& recver) = delete;
+    LocIpcRecver& operator=(LocIpcRecver const& recver) = delete;
+    virtual ssize_t recv() const = 0;
+public:
+    virtual ~LocIpcRecver() = default;
+    inline bool recvData() const { return isRecvable() && (recv() > 0); }
+    inline bool isRecvable() const { return mDataCb != nullptr && mIpcSender.isSendable(); }
+    virtual void onListenerReady() { if (mDataCb != nullptr) mDataCb->onListenerReady(); }
+    virtual void abort() const = 0;
+    virtual const char* getName() const = 0;
+};
 
-    inline ~LocIpcSender() {
-        if (nullptr != mSocket && mSocket.unique()) {
-            ::close(*mSocket);
-        }
-    }
-
-    // Send out a message.
-    // Call this function to send a message
-    //
-    // Argument data and length contains the message to be sent out.
-    // Return true when succeeded
-    inline bool send(const uint8_t data[], uint32_t length) {
-        bool rtv = false;
-        if (nullptr != mSocket && nullptr != data) {
-            rtv = LocIpc::sendData(*mSocket, mDestAddr, data, length);
-        }
-        return rtv;
-    }
-
-private:
-    std::shared_ptr<int> mSocket;
-    struct sockaddr_un mDestAddr;
-
-    inline LocIpcSender(
-            const std::shared_ptr<int>& mySocket, const char* destSocket) : mSocket(mySocket) {
-        if ((nullptr != mSocket) && (-1 != *mSocket) && (nullptr != destSocket)) {
-            mDestAddr.sun_family = AF_UNIX;
-            snprintf(mDestAddr.sun_path, sizeof(mDestAddr.sun_path), "%s", destSocket);
+class Sock {
+    static const char MSG_ABORT[];
+    static const char LOC_IPC_HEAD[];
+    const uint32_t mMaxTxSize;
+    ssize_t sendto(const void *buf, size_t len, int flags, const struct sockaddr *destAddr,
+                   socklen_t addrlen) const;
+    ssize_t recvfrom(const shared_ptr<ILocIpcListener>& dataCb, int sid, int flags,
+                     struct sockaddr *srcAddr, socklen_t *addrlen) const;
+public:
+    int mSid;
+    inline Sock(int sid, const uint32_t maxTxSize = 8192) : mMaxTxSize(maxTxSize), mSid(sid) {}
+    inline ~Sock() { close(); }
+    inline bool isValid() const { return -1 != mSid; }
+    ssize_t send(const void *buf, uint32_t len, int flags, const struct sockaddr *destAddr,
+                 socklen_t addrlen) const;
+    ssize_t recv(const shared_ptr<ILocIpcListener>& dataCb, int flags, struct sockaddr *srcAddr,
+                 socklen_t *addrlen, int sid = -1) const;
+    ssize_t sendAbort(int flags, const struct sockaddr *destAddr, socklen_t addrlen);
+    inline void close() {
+        if (isValid()) {
+            ::close(mSid);
+            mSid = -1;
         }
     }
 };
 
 }
 
-#endif //__LOC_SOCKET__
+#endif //__LOC_IPC__

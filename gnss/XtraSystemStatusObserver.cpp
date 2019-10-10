@@ -1,4 +1,4 @@
-/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017, 2019, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -49,6 +49,7 @@
 #include <DataItemsFactoryProxy.h>
 #include <DataItemConcreteTypesBase.h>
 
+using namespace loc_util;
 using namespace loc_core;
 
 #ifdef LOG_TAG
@@ -56,8 +57,65 @@ using namespace loc_core;
 #endif
 #define LOG_TAG "LocSvc_XSSO"
 
-bool XtraSystemStatusObserver::updateLockStatus(uint32_t lock) {
-    mGpsLock = lock;
+class XtraIpcListener : public ILocIpcListener {
+    IOsObserver*    mSystemStatusObsrvr;
+    const MsgTask* mMsgTask;
+    XtraSystemStatusObserver& mXSSO;
+public:
+    inline XtraIpcListener(IOsObserver* observer, const MsgTask* msgTask,
+                           XtraSystemStatusObserver& xsso) :
+            mSystemStatusObsrvr(observer), mMsgTask(msgTask), mXSSO(xsso) {}
+    virtual void onReceive(const char* data, uint32_t length) override {
+#define STRNCMP(str, constStr) strncmp(str, constStr, sizeof(constStr)-1)
+        if (!STRNCMP(data, "ping")) {
+            LOC_LOGd("ping received");
+#ifdef USE_GLIB
+        } else if (!STRNCMP(data, "connectBackhaul")) {
+            mSystemStatusObsrvr->connectBackhaul();
+        } else if (!STRNCMP(data, "disconnectBackhaul")) {
+            mSystemStatusObsrvr->disconnectBackhaul();
+#endif
+        } else if (!STRNCMP(data, "requestStatus")) {
+            int32_t xtraStatusUpdated = 0;
+            sscanf(data, "%*s %d", &xtraStatusUpdated);
+
+            struct HandleStatusRequestMsg : public LocMsg {
+                XtraSystemStatusObserver& mXSSO;
+                int32_t mXtraStatusUpdated;
+                inline HandleStatusRequestMsg(XtraSystemStatusObserver& xsso,
+                                              int32_t xtraStatusUpdated) :
+                        mXSSO(xsso), mXtraStatusUpdated(xtraStatusUpdated) {}
+                inline void proc() const override {
+                    mXSSO.onStatusRequested(mXtraStatusUpdated);
+                }
+            };
+            mMsgTask->sendMsg(new HandleStatusRequestMsg(mXSSO, xtraStatusUpdated));
+        } else {
+            LOC_LOGw("unknown event: %s", data);
+        }
+    }
+};
+
+XtraSystemStatusObserver::XtraSystemStatusObserver(IOsObserver* sysStatObs,
+                                                   const MsgTask* msgTask) :
+        mSystemStatusObsrvr(sysStatObs), mMsgTask(msgTask),
+        mGpsLock(-1), mConnections(~0), mXtraThrottle(true),
+        mReqStatusReceived(false),
+        mIsConnectivityStatusKnown(false),
+        mSender(LocIpc::getLocIpcLocalSender(LOC_IPC_XTRA)),
+        mDelayLocTimer(*mSender) {
+    subscribe(true);
+    auto recver = LocIpc::getLocIpcLocalRecver(
+            make_shared<XtraIpcListener>(sysStatObs, msgTask, *this),
+            LOC_IPC_HAL);
+    mIpc.startNonBlockingListening(recver);
+    mDelayLocTimer.start(100 /*.1 sec*/,  false);
+}
+
+bool XtraSystemStatusObserver::updateLockStatus(GnssConfigGpsLock lock) {
+    // mask NI(NFW bit) since from XTRA's standpoint GPS is enabled if
+    // MO(AFW bit) is enabled and disabled when MO is disabled
+    mGpsLock = lock & ~GNSS_CONFIG_GPS_LOCK_NI;
 
     if (!mReqStatusReceived) {
         return true;
@@ -65,22 +123,41 @@ bool XtraSystemStatusObserver::updateLockStatus(uint32_t lock) {
 
     stringstream ss;
     ss <<  "gpslock";
-    ss << " " << lock;
-    return ( send(LOC_IPC_XTRA, ss.str()) );
+    ss << " " << mGpsLock;
+    string s = ss.str();
+    return ( LocIpc::send(*mSender, (const uint8_t*)s.data(), s.size()) );
 }
 
-bool XtraSystemStatusObserver::updateConnections(uint64_t allConnections) {
+bool XtraSystemStatusObserver::updateConnections(uint64_t allConnections,
+        NetworkInfoType* networkHandleInfo) {
     mIsConnectivityStatusKnown = true;
     mConnections = allConnections;
+
+    LOC_LOGd("updateConnections mConnections:%" PRIx64, mConnections);
+    for (uint8_t i = 0; i < MAX_NETWORK_HANDLES; ++i) {
+        mNetworkHandle[i] = networkHandleInfo[i];
+        LOC_LOGd("updateConnections [%d] networkHandle:%" PRIx64 " networkType:%u",
+            i, mNetworkHandle[i].networkHandle, mNetworkHandle[i].networkType);
+    }
 
     if (!mReqStatusReceived) {
         return true;
     }
 
     stringstream ss;
-    ss <<  "connection";
-    ss << " " << mConnections;
-    return ( send(LOC_IPC_XTRA, ss.str()) );
+    ss << "connection" << endl << mConnections << endl
+            << mNetworkHandle[0].toString() << endl
+            << mNetworkHandle[1].toString() << endl
+            << mNetworkHandle[2].toString() << endl
+            << mNetworkHandle[3].toString() << endl
+            << mNetworkHandle[4].toString() << endl
+            << mNetworkHandle[5].toString() << endl
+            << mNetworkHandle[6].toString() << endl
+            << mNetworkHandle[7].toString() << endl
+            << mNetworkHandle[8].toString() << endl
+            << mNetworkHandle[MAX_NETWORK_HANDLES-1].toString();
+    string s = ss.str();
+    return ( LocIpc::send(*mSender, (const uint8_t*)s.data(), s.size()) );
 }
 
 bool XtraSystemStatusObserver::updateTac(const string& tac) {
@@ -93,7 +170,8 @@ bool XtraSystemStatusObserver::updateTac(const string& tac) {
     stringstream ss;
     ss <<  "tac";
     ss << " " << tac.c_str();
-    return ( send(LOC_IPC_XTRA, ss.str()) );
+    string s = ss.str();
+    return ( LocIpc::send(*mSender, (const uint8_t*)s.data(), s.size()) );
 }
 
 bool XtraSystemStatusObserver::updateMccMnc(const string& mccmnc) {
@@ -106,7 +184,8 @@ bool XtraSystemStatusObserver::updateMccMnc(const string& mccmnc) {
     stringstream ss;
     ss <<  "mncmcc";
     ss << " " << mccmnc.c_str();
-    return ( send(LOC_IPC_XTRA, ss.str()) );
+    string s = ss.str();
+    return ( LocIpc::send(*mSender, (const uint8_t*)s.data(), s.size()) );
 }
 
 bool XtraSystemStatusObserver::updateXtraThrottle(const bool enabled) {
@@ -119,7 +198,8 @@ bool XtraSystemStatusObserver::updateXtraThrottle(const bool enabled) {
     stringstream ss;
     ss <<  "xtrathrottle";
     ss << " " << (enabled ? 1 : 0);
-    return ( send(LOC_IPC_XTRA, ss.str()) );
+    string s = ss.str();
+    return ( LocIpc::send(*mSender, (const uint8_t*)s.data(), s.size()) );
 }
 
 inline bool XtraSystemStatusObserver::onStatusRequested(int32_t xtraStatusUpdated) {
@@ -132,41 +212,22 @@ inline bool XtraSystemStatusObserver::onStatusRequested(int32_t xtraStatusUpdate
     stringstream ss;
 
     ss << "respondStatus" << endl;
-    (mGpsLock == -1 ? ss : ss << mGpsLock) << endl << mConnections << endl
+    (mGpsLock == -1 ? ss : ss << mGpsLock) << endl;
+    (mConnections == (uint64_t)~0 ? ss : ss << mConnections) << endl
+            << mNetworkHandle[0].toString() << endl
+            << mNetworkHandle[1].toString() << endl
+            << mNetworkHandle[2].toString() << endl
+            << mNetworkHandle[3].toString() << endl
+            << mNetworkHandle[4].toString() << endl
+            << mNetworkHandle[5].toString() << endl
+            << mNetworkHandle[6].toString() << endl
+            << mNetworkHandle[7].toString() << endl
+            << mNetworkHandle[8].toString() << endl
+            << mNetworkHandle[MAX_NETWORK_HANDLES-1].toString() << endl
             << mTac << endl << mMccmnc << endl << mIsConnectivityStatusKnown;
 
-    return ( send(LOC_IPC_XTRA, ss.str()) );
-}
-
-void XtraSystemStatusObserver::onReceive(const std::string& data) {
-    if (!strncmp(data.c_str(), "ping", sizeof("ping") - 1)) {
-        LOC_LOGd("ping received");
-
-#ifdef USE_GLIB
-    } else if (!strncmp(data.c_str(), "connectBackhaul", sizeof("connectBackhaul") - 1)) {
-        mSystemStatusObsrvr->connectBackhaul();
-
-    } else if (!strncmp(data.c_str(), "disconnectBackhaul", sizeof("disconnectBackhaul") - 1)) {
-        mSystemStatusObsrvr->disconnectBackhaul();
-#endif
-
-    } else if (!strncmp(data.c_str(), "requestStatus", sizeof("requestStatus") - 1)) {
-        int32_t xtraStatusUpdated = 0;
-        sscanf(data.c_str(), "%*s %d", &xtraStatusUpdated);
-
-        struct HandleStatusRequestMsg : public LocMsg {
-            XtraSystemStatusObserver& mXSSO;
-            int32_t mXtraStatusUpdated;
-            inline HandleStatusRequestMsg(XtraSystemStatusObserver& xsso,
-                    int32_t xtraStatusUpdated) :
-                    mXSSO(xsso), mXtraStatusUpdated(xtraStatusUpdated) {}
-            inline void proc() const override { mXSSO.onStatusRequested(mXtraStatusUpdated); }
-        };
-        mMsgTask->sendMsg(new (nothrow) HandleStatusRequestMsg(*this, xtraStatusUpdated));
-
-    } else {
-        LOC_LOGw("unknown event: %s", data.c_str());
-    }
+    string s = ss.str();
+    return ( LocIpc::send(*mSender, (const uint8_t*)s.data(), s.size()) );
 }
 
 void XtraSystemStatusObserver::subscribe(bool yes)
@@ -218,8 +279,11 @@ void XtraSystemStatusObserver::notify(const list<IDataItemCore*>& dlist)
         }
 
         inline ~HandleOsObserverUpdateMsg() {
-            for (auto each : mDataItemList) {
-                delete each;
+            for (auto itor = mDataItemList.begin(); itor != mDataItemList.end(); ++itor) {
+                if (*itor != nullptr) {
+                    delete *itor;
+                    *itor = nullptr;
+                }
             }
         }
 
@@ -231,7 +295,10 @@ void XtraSystemStatusObserver::notify(const list<IDataItemCore*>& dlist)
                     {
                         NetworkInfoDataItemBase* networkInfo =
                                 static_cast<NetworkInfoDataItemBase*>(each);
-                        mXtraSysStatObj->updateConnections(networkInfo->getAllTypes());
+                        NetworkInfoType* networkHandleInfo =
+                                static_cast<NetworkInfoType*>(networkInfo->getNetworkHandle());
+                        mXtraSysStatObj->updateConnections(networkInfo->getAllTypes(),
+                                networkHandleInfo);
                     }
                     break;
 

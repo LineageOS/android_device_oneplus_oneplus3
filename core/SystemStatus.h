@@ -1,4 +1,4 @@
-/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -32,6 +32,8 @@
 #include <stdint.h>
 #include <sys/time.h>
 #include <vector>
+#include <algorithm>
+#include <iterator>
 #include <loc_pla.h>
 #include <log_util.h>
 #include <MsgTask.h>
@@ -42,20 +44,22 @@
 
 #include <gps_extended_c.h>
 
-#define GPS_MIN  (1)   //1-32
-#define SBAS_MIN (33)
-#define GLO_MIN  (65)  //65-88
-#define QZSS_MIN (193) //193-197
-#define BDS_MIN  (201) //201-237
-#define GAL_MIN  (301) //301-336
+#define GPS_MIN    (1)   //1-32
+#define SBAS_MIN   (33)
+#define GLO_MIN    (65)  //65-88
+#define QZSS_MIN   (193) //193-197
+#define BDS_MIN    (201) //201-237
+#define GAL_MIN    (301) //301-336
+#define NAVIC_MIN  (401) //401-414
 
-#define GPS_NUM  (32)
-#define SBAS_NUM (32)
-#define GLO_NUM  (24)
-#define QZSS_NUM (5)
-#define BDS_NUM  (37)
-#define GAL_NUM  (36)
-#define SV_ALL_NUM  (GPS_NUM+GLO_NUM+QZSS_NUM+BDS_NUM+GAL_NUM) //=134
+#define GPS_NUM     (32)
+#define SBAS_NUM    (32)
+#define GLO_NUM     (24)
+#define QZSS_NUM    (5)
+#define BDS_NUM     (37)
+#define GAL_NUM     (36)
+#define NAVIC_NUM   (14)
+#define SV_ALL_NUM  (GPS_NUM+GLO_NUM+QZSS_NUM+BDS_NUM+GAL_NUM+NAVIC_NUM) //=148
 
 namespace loc_core
 {
@@ -66,15 +70,15 @@ namespace loc_core
 class SystemStatusItemBase
 {
 public:
-    timespec mUtcTime;     // UTC timestamp when this info was last updated
-    timespec mUtcReported; // UTC timestamp when this info was reported
+    timespec  mUtcTime;
+    timespec  mUtcReported;
     static const uint32_t maxItem = 5;
 
     SystemStatusItemBase() {
-        struct timespec tv;
-        clock_gettime(CLOCK_MONOTONIC, &tv);
+        timeval tv;
+        gettimeofday(&tv, NULL);
         mUtcTime.tv_sec  = tv.tv_sec;
-        mUtcTime.tv_nsec = tv.tv_nsec;
+        mUtcTime.tv_nsec = tv.tv_usec*1000ULL;
         mUtcReported = mUtcTime;
     };
     virtual ~SystemStatusItemBase() {};
@@ -114,6 +118,7 @@ public:
     int32_t  mClockFreqBiasUnc;
     int32_t  mLeapSeconds;
     int32_t  mLeapSecUnc;
+    uint64_t mTimeUncNs;
     inline SystemStatusTimeAndClock() :
         mGpsWeek(0),
         mGpsTowMs(0),
@@ -123,7 +128,8 @@ public:
         mClockFreqBias(0),
         mClockFreqBiasUnc(0),
         mLeapSeconds(0),
-        mLeapSecUnc(0) {}
+        mLeapSecUnc(0),
+        mTimeUncNs(0ULL) {}
     inline SystemStatusTimeAndClock(const SystemStatusPQWM1& nmea);
     bool equals(const SystemStatusTimeAndClock& peer);
     void dump(void);
@@ -254,11 +260,13 @@ public:
     uint32_t  mBdsXtraAge;
     uint32_t  mGalXtraAge;
     uint32_t  mQzssXtraAge;
+    uint32_t  mNavicXtraAge;
     uint32_t  mGpsXtraValid;
     uint32_t  mGloXtraValid;
     uint64_t  mBdsXtraValid;
     uint64_t  mGalXtraValid;
     uint8_t   mQzssXtraValid;
+    uint32_t  mNavicXtraValid;
     inline SystemStatusXtra() :
         mXtraValidMask(0),
         mGpsXtraAge(0),
@@ -266,11 +274,13 @@ public:
         mBdsXtraAge(0),
         mGalXtraAge(0),
         mQzssXtraAge(0),
+        mNavicXtraAge(0),
         mGpsXtraValid(0),
         mGloXtraValid(0),
         mBdsXtraValid(0ULL),
         mGalXtraValid(0ULL),
-        mQzssXtraValid(0) {}
+        mQzssXtraValid(0),
+        mNavicXtraValid(0) {}
     inline SystemStatusXtra(const SystemStatusPQWP3& nmea);
     bool equals(const SystemStatusXtra& peer);
     void dump(void);
@@ -305,32 +315,38 @@ public:
     uint64_t  mBdsUnknownMask;
     uint64_t  mGalUnknownMask;
     uint8_t   mQzssUnknownMask;
+    uint32_t  mNavicUnknownMask;
     uint32_t  mGpsGoodMask;
     uint32_t  mGloGoodMask;
     uint64_t  mBdsGoodMask;
     uint64_t  mGalGoodMask;
     uint8_t   mQzssGoodMask;
+    uint32_t  mNavicGoodMask;
     uint32_t  mGpsBadMask;
     uint32_t  mGloBadMask;
     uint64_t  mBdsBadMask;
     uint64_t  mGalBadMask;
     uint8_t   mQzssBadMask;
+    uint32_t  mNavicBadMask;
     inline SystemStatusSvHealth() :
         mGpsUnknownMask(0),
         mGloUnknownMask(0),
         mBdsUnknownMask(0ULL),
         mGalUnknownMask(0ULL),
         mQzssUnknownMask(0),
+        mNavicUnknownMask(0),
         mGpsGoodMask(0),
         mGloGoodMask(0),
         mBdsGoodMask(0ULL),
         mGalGoodMask(0ULL),
         mQzssGoodMask(0),
+        mNavicGoodMask(0),
         mGpsBadMask(0),
         mGloBadMask(0),
         mBdsBadMask(0ULL),
         mGalBadMask(0ULL),
-        mQzssBadMask(0) {}
+        mQzssBadMask(0),
+        mNavicBadMask(0) {}
     inline SystemStatusSvHealth(const SystemStatusPQWP5& nmea);
     bool equals(const SystemStatusSvHealth& peer);
     void dump(void);
@@ -467,7 +483,8 @@ public:
             std::string typeName="",
             string subTypeName="",
             bool connected=false,
-            bool roaming=false) :
+            bool roaming=false,
+            uint64_t networkHandle=NETWORK_HANDLE_UNKNOWN) :
             NetworkInfoDataItemBase(
                     (NetworkType)type,
                     type,
@@ -475,7 +492,8 @@ public:
                     subTypeName,
                     connected && (!roaming),
                     connected,
-                    roaming),
+                    roaming,
+                    networkHandle),
             mSrcObjPtr(nullptr) {}
     inline SystemStatusNetworkInfo(const NetworkInfoDataItemBase& itemBase) :
             NetworkInfoDataItemBase(itemBase),
@@ -483,20 +501,76 @@ public:
         mType = itemBase.getType();
     }
     inline bool equals(const SystemStatusNetworkInfo& peer) {
-        return (mAllTypes == peer.mAllTypes);
+        for (uint8_t i = 0; i < MAX_NETWORK_HANDLES; ++i) {
+             if (!(mAllNetworkHandles[i] == peer.mAllNetworkHandles[i])) {
+                 return false;
+             }
+         }
+        return true;
     }
     inline virtual SystemStatusItemBase& collate(SystemStatusItemBase& curInfo) {
         uint64_t allTypes = (static_cast<SystemStatusNetworkInfo&>(curInfo)).mAllTypes;
+        uint64_t networkHandle =
+                (static_cast<SystemStatusNetworkInfo&>(curInfo)).mNetworkHandle;
+        int32_t type = (static_cast<SystemStatusNetworkInfo&>(curInfo)).mType;
+        // Replace current with cached table for now and then update
+        memcpy(mAllNetworkHandles,
+               (static_cast<SystemStatusNetworkInfo&>(curInfo)).getNetworkHandle(),
+               sizeof(mAllNetworkHandles));
         if (mConnected) {
             mAllTypes |= allTypes;
+            for (uint8_t i = 0; i < MAX_NETWORK_HANDLES; ++i) {
+                if (mNetworkHandle == mAllNetworkHandles[i].networkHandle) {
+                    LOC_LOGD("collate duplicate detected, not updating");
+                    break;
+                }
+                if (NETWORK_HANDLE_UNKNOWN == mAllNetworkHandles[i].networkHandle) {
+                    mAllNetworkHandles[i].networkHandle = mNetworkHandle;
+                    mAllNetworkHandles[i].networkType = (loc_core::NetworkType) mType;
+                    break;
+                }
+            }
         } else if (0 != mAllTypes) {
-            mAllTypes = (allTypes & (~mAllTypes));
+            uint8_t deletedIndex = MAX_NETWORK_HANDLES;
+            uint8_t lastValidIndex = 0;
+            uint8_t typeCount = 0;
+            for (; lastValidIndex < MAX_NETWORK_HANDLES &&
+                     NETWORK_HANDLE_UNKNOWN != mAllNetworkHandles[lastValidIndex].networkHandle;
+                 ++lastValidIndex) {
+                // Maintain count for number of network handles still
+                // connected for given type
+                if (mType == mAllNetworkHandles[lastValidIndex].networkType) {
+                    typeCount++;
+                }
+
+                if (mNetworkHandle == mAllNetworkHandles[lastValidIndex].networkHandle) {
+                    deletedIndex = lastValidIndex;
+                    typeCount--;
+                }
+            }
+
+            if (MAX_NETWORK_HANDLES != deletedIndex) {
+                LOC_LOGD("deletedIndex:%u, lastValidIndex:%u, typeCount:%u",
+                        deletedIndex, lastValidIndex, typeCount);
+                mAllNetworkHandles[deletedIndex] = mAllNetworkHandles[lastValidIndex];
+                mAllNetworkHandles[lastValidIndex].networkHandle = NETWORK_HANDLE_UNKNOWN;
+                mAllNetworkHandles[lastValidIndex].networkType = TYPE_UNKNOWN;
+            }
+
+            // If no more handles of given type, set bitmask
+            if (0 == typeCount) {
+                mAllTypes = (allTypes & (~mAllTypes));
+                LOC_LOGD("mAllTypes:%" PRIx64, mAllTypes);
+            }
         } // else (mConnected == false && mAllTypes == 0)
           // we keep mAllTypes as 0, which means no more connections.
 
         if (nullptr != mSrcObjPtr) {
             // this is critical, changing mAllTypes of the original obj
             mSrcObjPtr->mAllTypes = mAllTypes;
+            memcpy(mSrcObjPtr->mAllNetworkHandles,
+                   mAllNetworkHandles,
+                   sizeof(mSrcObjPtr->mAllNetworkHandles));
         }
         return *this;
     }
@@ -713,8 +787,12 @@ public:
             BtDeviceScanDetailsDataItemBase() {}
     inline SystemStatusBtDeviceScanDetail(const BtDeviceScanDetailsDataItemBase& itemBase) :
             BtDeviceScanDetailsDataItemBase(itemBase) {}
-    inline bool equals(const SystemStatusBtDeviceScanDetail& /*peer*/) {
-        return true;
+    inline bool equals(const SystemStatusBtDeviceScanDetail& peer) {
+        return ((mApSrnRssi == peer.mApSrnRssi) &&
+                (0 == memcmp(mApSrnMacAddress, peer.mApSrnMacAddress, sizeof(mApSrnMacAddress))) &&
+                (mApSrnTimestamp == peer.mApSrnTimestamp) &&
+                (mRequestTimestamp == peer.mRequestTimestamp) &&
+                (mReceiveTimestamp == peer.mReceiveTimestamp));
     }
 };
 
@@ -726,8 +804,12 @@ public:
             BtLeDeviceScanDetailsDataItemBase() {}
     inline SystemStatusBtleDeviceScanDetail(const BtLeDeviceScanDetailsDataItemBase& itemBase) :
             BtLeDeviceScanDetailsDataItemBase(itemBase) {}
-    inline bool equals(const SystemStatusBtleDeviceScanDetail& /*peer*/) {
-        return true;
+    inline bool equals(const SystemStatusBtleDeviceScanDetail& peer) {
+        return ((mApSrnRssi == peer.mApSrnRssi) &&
+                (0 == memcmp(mApSrnMacAddress, peer.mApSrnMacAddress, sizeof(mApSrnMacAddress))) &&
+                (mApSrnTimestamp == peer.mApSrnTimestamp) &&
+                (mRequestTimestamp == peer.mRequestTimestamp) &&
+                (mReceiveTimestamp == peer.mReceiveTimestamp));
     }
 };
 
@@ -822,7 +904,9 @@ public:
     bool setNmeaString(const char *data, uint32_t len);
     bool getReport(SystemStatusReports& reports, bool isLatestonly = false) const;
     bool setDefaultGnssEngineStates(void);
-    bool eventConnectionStatus(bool connected, int8_t type);
+    bool eventConnectionStatus(bool connected, int8_t type,
+                               bool roaming, NetworkHandle networkHandle);
+    bool updatePowerConnectState(bool charging);
 };
 
 } // namespace loc_core
