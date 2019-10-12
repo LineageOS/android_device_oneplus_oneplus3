@@ -69,6 +69,11 @@ vendor/etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_Headset_cal.acdb
 vendor/etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 
+# Audio (bluetooth) - from LA.UM.8.6.r1-01900-89xx.0
+vendor/lib/hw/audio.bluetooth_qti.default.so|f0f31aee0b22334bc0752486b6c039f2f93f120c
+vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so|15ccf882ffb8da689f5b00b06b09b5ada10ab7d5
+vendor/lib/libbluetooth_audio_session_qti.so|573d4d862b53cadfd9828cbf7b22e1bebe1fe6ed
+
 # Bluetooth
 lib64/libaptX_encoder.so
 lib64/libaptXHD_encoder.so
