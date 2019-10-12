@@ -16,6 +16,24 @@
       "revId": "0074357c2bb70a01e1ea16d36787da991295324d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9e533d6_e9077446",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2019-10-12T07:59:16Z",
+      "side": 1,
+      "message": "vendor/qcom-opensource/bluetooth, but probably not needed, this commit is wip and only for staging purpose atm",
+      "parentUuid": "210338b6_0a44eb92",
+      "revId": "0074357c2bb70a01e1ea16d36787da991295324d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
