@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "210338b6_0a44eb92",
+        "filename": "system.prop",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2019-10-12T07:57:06Z",
+      "side": 1,
+      "message": "Where is this file?",
+      "revId": "0074357c2bb70a01e1ea16d36787da991295324d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
