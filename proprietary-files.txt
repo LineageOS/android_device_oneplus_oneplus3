@@ -76,8 +76,12 @@ vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
 vendor/lib64/libbtnv.so
 
-# Bluetooth - from LA.UM.7.5.r1-04000-8x96.0
-vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|e29484b7d03c9e47fbb264e2f3b272bf80db8d0d
+# Bluetooth - from LA.UM.8.6.r1-01900-89xx.0
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
+vendor/lib64/hw/audio.bluetooth_qti.default.so
+vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
+vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
+vendor/lib64/libbluetooth_audio_session_qti.so
 
 # Camera
 etc/camera/camera_config.xml
