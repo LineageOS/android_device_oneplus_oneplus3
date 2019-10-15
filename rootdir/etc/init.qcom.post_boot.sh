@@ -3632,6 +3632,12 @@ case "$target" in
             echo 400 > $memlat/mem_latency/ratio_ceil
         done
 
+        #Enable cdspl3 governor for L3 cdsp nodes
+        for l3cdsp in $device/*cdsp-cdsp-l3-lat/devfreq/*cdsp-cdsp-l3-lat
+        do
+            echo "cdspl3" > $l3cdsp/governor
+        done
+
         #Gold L3 ratio ceil
         echo 4000 > /sys/class/devfreq/soc:qcom,cpu6-cpu-l3-lat/mem_latency/ratio_ceil
 
