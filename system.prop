@@ -18,6 +18,7 @@ ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
 # Start in global mode
 ro.telephony.default_network=22,20
+persist.sys.fflag.override.settings_network_and_internet_v2=true
 
 debug.sf.enable_hwc_vds=1
 debug.sf.hw=1
