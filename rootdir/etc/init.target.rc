@@ -172,13 +172,6 @@ service vendor.qseecomd /vendor/bin/qseecomd
    group root
    writepid /dev/cpuset/system-background/tasks
 
-service gamed /system/vendor/bin/gamed
-   class main
-   user system
-   group system
-   disabled
-   socket gamed seqpacket 0640 system system
-
 service seempd /system/vendor/bin/seempd
    class late_start
    user system
@@ -190,10 +183,6 @@ service secotad /system/vendor/bin/secotad
    user system
    group system
 
-#service mpdecision /system/vendor/bin/mpdecision --avg_comp
-#   user root
-#   disabled
-#
 #service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
 #   user system
 #   group system
