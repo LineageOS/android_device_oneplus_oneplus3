@@ -1,4 +1,4 @@
-# Copyright (c) 2011-2016, 2018 The Linux Foundation. All rights reserved.
+# Copyright (c) 2011-2016, 2018-2019 The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -30,7 +30,7 @@ on charger
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount configfs none /config
     mkdir /config/usb_gadget/g1 0770 shell shell
-    mkdir /config/usb_gadget/g1/strings/0x409 0770 shell shell
+    mkdir /config/usb_gadget/g1/strings/0x409 0770
     write /config/usb_gadget/g1/bcdUSB 0x0200
     write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
@@ -73,6 +73,7 @@ on boot
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     mkdir /config/usb_gadget/g1/functions/diag.diag
     mkdir /config/usb_gadget/g1/functions/diag.diag_mdm
+    mkdir /config/usb_gadget/g1/functions/diag.diag_mdm2
     mkdir /config/usb_gadget/g1/functions/cser.dun.0
     mkdir /config/usb_gadget/g1/functions/cser.nmea.1
     mkdir /config/usb_gadget/g1/functions/cser.dun.2
@@ -102,7 +103,7 @@ on boot
     mkdir /dev/usb-ffs/adb 0770 shell system
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=1000,rmode=0770,fmode=0660
     write /sys/class/android_usb/android0/f_ffs/aliases adb
-    setprop sys.usb.mtp.device_type 2
+    setprop sys.mtp.device_type 2
     setprop vendor.usb.controller ${sys.usb.controller}
     enable vendor.qcom-usb-sh
 
@@ -116,6 +117,9 @@ on property:persist.vendor.usb.config=*
     setprop persist.sys.usb.config ${persist.vendor.usb.config}
 
 on boot && property:ro.boot.usbconfigfs=true
+        setprop sys.usb.configfs 1
+
+on property:vendor.usb.configfs=1 && property:sys.usb.configfs=0
         setprop sys.usb.configfs 1
 
 # Following are the parameters required for usb functionality. They provide configurable options like
