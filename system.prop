@@ -40,8 +40,7 @@ sdm.debug.disable_skip_validate=1
 vendor.gralloc.enable_fb_ubwc=1
 vendor.display.disable_skip_validate=1
 vendor.display.perf_hint_window=50
-# Property to disable wfd ubwc
-vendor.gralloc.disable_wb_ubwc=1
+
 # Property to enable display default color mode
 vendor.display.enable_default_color_mode=1
 
@@ -140,14 +139,6 @@ ro.nfc.port=I2C
 #property to enable WFD WL solution
 #ro.vendor.wl_library=libqti-wl.so
 
-#property for vendor specific library
-#ro.vendor.gt_library=libqti-gt.so
-#ro.vendor.at_library=libqti-at.so
-#sys.games.gt.prof=1
-
-#default usb composition
-#persist.sys.usb.config=diag,serial_cdev,serial_tty,rmnet_ipa,mass_storage,adb
-
 #property to enable VDS WFD solution
 persist.hwc.enable_vds=1
 
@@ -161,9 +152,6 @@ persist.sys.pd_enable=0
 #Disable rotator split feature
 sdm.debug.disable_rotator_split=1
 
-#Increase cached app limit
-ro.vendor.qti.sys.fw.bg_apps_limit=60
-
 #Camera fullscreen doesn't show navigation bar
 Camera.no_navigation_bar=true
 
@@ -171,9 +159,6 @@ Camera.no_navigation_bar=true
 #yangfb 20160919 ,modify to set cutoff voltage to 3250mv
 ro.cutoff_voltage_mv=3250
 #endif
-
-#property for game detection feature
-vendor.debug.enable.gamed=0
 
 #properties for limiting preview size in camera
 persist.vendor.camera.display.umax=1920x1080
@@ -190,21 +175,6 @@ ro.qti.sensors.dev_ori=false
 ro.qti.sensors.pmd=false
 ro.qti.sensors.sta_detect=false
 ro.qti.sensors.mot_detect=false
-
-# ro.location properties below are used in conjunction
-# with NLP_MODE setting in /vendor/etc/izat.conf
-# either as the main network provider or as a fallback
-# provider depending on NLP_MODE that is set
-# These properties are optional and will not cause
-# issues if not set to existing packages.
-# ro.location.osnlp.package sets the name of default
-# OS sepecific network location provider package to use
-# ro.location.osnlp.region.package is set to the name
-# of the alternative network location provider package
-# to be used for a particular region where the default
-# network location provider is not functional
-ro.location.osnlp.package=com.google.android.gms
-ro.location.osnlp.region.package=
 
 #mbn ota config
 persist.vendor.radio.hw_mbn_update=0
