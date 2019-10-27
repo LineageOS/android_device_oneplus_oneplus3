@@ -7,7 +7,7 @@ AC_PREREQ(2.61)
 # Initialize the gps loc-hal package version 1.0.0
 AC_INIT([loc-hal],1.0.0)
 # Does not strictly follow GNU Coding standards
-AM_INIT_AUTOMAKE([foreign])
+AM_INIT_AUTOMAKE([foreign subdir-objects])
 # Disables auto rebuilding of configure, Makefile.ins
 AM_MAINTAINER_MODE
 # Verifies the --srcdir is correct by checking for the path

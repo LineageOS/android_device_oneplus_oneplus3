@@ -88,10 +88,41 @@ void convertGnssLocation(Location& in, V2_0::GnssLocation& out)
 
     struct timespec sinceBootTime;
     struct timespec currentTime;
-    if (0 == clock_gettime(CLOCK_BOOTTIME,&sinceBootTime) &&
-        0 == clock_gettime(CLOCK_REALTIME,&currentTime)) {
+    struct timespec sinceBootTimeTest;
+    int64_t sinceBootTimeNanos = 0;
+    bool clockGetTimeSuccess = false;
+    const uint32_t MAX_TIME_DELTA_VALUE_NANOS = 10000;
+    const uint32_t MAX_GET_TIME_COUNT = 20;
+    /* Attempt to get CLOCK_REALTIME and CLOCK_BOOTIME in succession without an interruption
+       or context switch (for up to MAX_GET_TIME_COUNT times) to avoid errors in the calculation */
+    for (uint32_t i=0; i < MAX_GET_TIME_COUNT; i++) {
+        if (clock_gettime(CLOCK_BOOTTIME, &sinceBootTime) != 0) {
+            break;
+        };
+        if (clock_gettime(CLOCK_REALTIME, &currentTime) != 0) {
+            break;
+        }
+        if (clock_gettime(CLOCK_BOOTTIME, &sinceBootTimeTest) != 0) {
+            break;
+        };
+        sinceBootTimeNanos = sinceBootTime.tv_sec*1000000000 + sinceBootTime.tv_nsec;
+        int64_t sinceBootTimeTestNanos =
+                sinceBootTimeTest.tv_sec*1000000000 + sinceBootTimeTest.tv_nsec;
+        int64_t sinceBootTimeDeltaNanos = sinceBootTimeTestNanos - sinceBootTimeNanos;
 
-        int64_t sinceBootTimeNanos = sinceBootTime.tv_sec*1000000000 + sinceBootTime.tv_nsec;
+        /* sinceBootTime and sinceBootTimeTest should have a close value if there was no
+           interruption or context switch between clock_gettime for CLOCK_BOOTIME and
+           clock_gettime for CLOCK_REALTIME */
+        if (sinceBootTimeDeltaNanos < MAX_TIME_DELTA_VALUE_NANOS) {
+            clockGetTimeSuccess = true;
+            break;
+        } else {
+            LOC_LOGD("%s]: Delta:%" PRIi64 "ns time too large, retry number #%u...",
+                __FUNCTION__, sinceBootTimeDeltaNanos, i+1);
+        }
+    }
+
+    if (clockGetTimeSuccess) {
         int64_t currentTimeNanos = currentTime.tv_sec*1000000000 + currentTime.tv_nsec;
         int64_t locationTimeNanos = in.timestamp*1000000;
         LOC_LOGD("%s]: sinceBootTimeNanos:%" PRIi64 " currentTimeNanos:%" PRIi64 ""
@@ -110,8 +141,10 @@ void convertGnssLocation(Location& in, V2_0::GnssLocation& out)
                         __FUNCTION__, out.elapsedRealtime.timestampNs);
             }
         }
+    } else {
+        LOC_LOGE("%s]: Failed to calculate elapsedRealtimeNanos timestamp after %u tries",
+            __FUNCTION__, MAX_GET_TIME_COUNT);
     }
-
 }
 
 void convertGnssLocation(const V1_0::GnssLocation& in, Location& out)

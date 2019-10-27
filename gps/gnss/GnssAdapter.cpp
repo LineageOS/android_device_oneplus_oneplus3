@@ -1816,12 +1816,15 @@ GnssAdapter::gnssDeleteAidingDataCommand(GnssAidingData& data)
             mSessionId(sessionId),
             mData(data) {}
         inline virtual void proc() const {
-            mAdapter.deleteAidingData(mData, mSessionId);
+            if ((mData.posEngineMask & STANDARD_POSITIONING_ENGINE) != 0) {
+                mAdapter.deleteAidingData(mData, mSessionId);
 
-            SystemStatus* s = mAdapter.getSystemStatus();
-            if ((nullptr != s) && (mData.deleteAll)) {
-                s->setDefaultGnssEngineStates();
+                SystemStatus* s = mAdapter.getSystemStatus();
+                if ((nullptr != s) && (mData.deleteAll)) {
+                    s->setDefaultGnssEngineStates();
+                }
             }
+
             mAdapter.mEngHubProxy->gnssDeleteAidingData(mData);
         }
     };
@@ -3269,9 +3272,10 @@ GnssAdapter::reportPosition(const UlpLocation& ulpLocation,
                           (0 == ulpLocation.gpsLocation.longitude) &&
                           (LOC_RELIABILITY_NOT_SET == locationExtended.horizontal_reliability));
         uint8_t generate_nmea = (reportToGnssClient && status != LOC_SESS_FAILURE && !blank_fix);
+        bool custom_nmea_gga = (1 == ContextBase::mGps_conf.CUSTOM_NMEA_GGA_FIX_QUALITY_ENABLED);
         std::vector<std::string> nmeaArraystr;
         loc_nmea_generate_pos(ulpLocation, locationExtended, mLocSystemInfo,
-                              generate_nmea, nmeaArraystr);
+                              generate_nmea, custom_nmea_gga, nmeaArraystr);
         stringstream ss;
         for (auto itor = nmeaArraystr.begin(); itor != nmeaArraystr.end(); ++itor) {
             ss << *itor;
@@ -3481,7 +3485,7 @@ GnssAdapter::reportSv(GnssSvNotification& svNotify)
 
         // If SV ID was used in previous position fix, then set USED_IN_FIX
         // flag, else clear the USED_IN_FIX flag.
-        if (svUsedIdMask & (1 << (gnssSvId - 1))) {
+        if ((gnssSvId < 64) && (svUsedIdMask & (1ULL << (gnssSvId - 1)))) {
             svNotify.gnssSvs[i].gnssSvOptionsMask |= GNSS_SV_OPTIONS_USED_IN_FIX_BIT;
         }
     }

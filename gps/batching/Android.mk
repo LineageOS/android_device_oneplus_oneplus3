@@ -6,6 +6,9 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := libbatching
+LOCAL_SANITIZE += $(GNSS_SANITIZE)
+# activate the following line for debug purposes only, comment out for production
+#LOCAL_SANITIZE_DIAG += $(GNSS_SANITIZE_DIAG)
 LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_TAGS := optional
 
