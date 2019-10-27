@@ -231,6 +231,7 @@ void GnssAPIClient::gnssDeleteAidingData(IGnss::GnssAidingData aidingDataFlags)
         GNSS_AIDING_DATA_SV_TYPE_QZSS_BIT |
         GNSS_AIDING_DATA_SV_TYPE_BEIDOU_BIT |
         GNSS_AIDING_DATA_SV_TYPE_GALILEO_BIT;
+    data.posEngineMask = STANDARD_POSITIONING_ENGINE;
 
     if (aidingDataFlags == IGnss::GnssAidingData::DELETE_ALL)
         data.deleteAll = true;

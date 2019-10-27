@@ -460,6 +460,9 @@ void loc_read_conf(const char* conf_file_name, const loc_param_s_type* config_ta
 #define CONFIG_MASK_AUTOPLATFORM_ALL     0x10
 #define CONFIG_MASK_AUTOPLATFORM_FOUND   0x20
 #define CONFIG_MASK_AUTOPLATFORM_CHECK   0x30
+#define CONFIG_MASK_SOCID_ALL            0x40
+#define CONFIG_MASK_SOCID_FOUND          0x80
+#define CONFIG_MASK_SOCID_CHECK          0xc0
 
 #define LOC_FEATURE_MASK_GTP_WIFI_BASIC            0x01
 #define LOC_FEATURE_MASK_GTP_WIFI_PREMIUM          0X02
@@ -483,6 +486,8 @@ typedef struct {
     unsigned int loc_feature_mask;
     char platform_list[LOC_MAX_PARAM_STRING];
     char baseband[LOC_MAX_PARAM_STRING];
+    char low_ram_targets[LOC_MAX_PARAM_STRING];
+    char soc_id_list[LOC_MAX_PARAM_STRING];
     unsigned int sglte_target;
     char feature_gtp_mode[LOC_MAX_PARAM_STRING];
     char feature_gtp_waa[LOC_MAX_PARAM_STRING];
@@ -523,7 +528,9 @@ static const loc_param_s_type loc_process_conf_parameter_table[] = {
     {"PREMIUM_FEATURE",            &conf.premium_feature,          NULL, 'n'},
     {"IZAT_FEATURE_MASK",          &conf.loc_feature_mask,         NULL, 'n'},
     {"PLATFORMS",                  &conf.platform_list,            NULL, 's'},
+    {"SOC_IDS",                    &conf.soc_id_list,            NULL, 's'},
     {"BASEBAND",                   &conf.baseband,                 NULL, 's'},
+    {"LOW_RAM_TARGETS",            &conf.low_ram_targets,          NULL, 's'},
     {"HARDWARE_TYPE",              &conf.auto_platform,            NULL, 's'},
     {"VENDOR_ENHANCED_PROCESS",    &conf.vendor_enhanced_process,  NULL, 'n'},
 };
@@ -561,13 +568,14 @@ int loc_read_process_conf(const char* conf_file_name, uint32_t * process_count_p
     gid_t gid_list[LOC_PROCESS_MAX_NUM_GROUPS];
     char *split_strings[MAX_NUM_STRINGS];
     int name_length=0, group_list_length=0, platform_length=0, baseband_length=0, ngroups=0, ret=0;
-    int auto_platform_length = 0;
+    int auto_platform_length = 0, soc_id_list_length=0;
     int group_index=0, nstrings=0, status_length=0;
     FILE* conf_fp = nullptr;
     char platform_name[PROPERTY_VALUE_MAX], baseband_name[PROPERTY_VALUE_MAX];
-    char autoplatform_name[PROPERTY_VALUE_MAX];
+    int low_ram_target=0;
+    char autoplatform_name[PROPERTY_VALUE_MAX], socid_value[PROPERTY_VALUE_MAX];
     unsigned int loc_service_mask=0;
-    char config_mask = 0;
+    unsigned char config_mask = 0;
     unsigned char proc_list_length=0;
     int gtp_cell_ap_enabled = 0;
     char arg_gtp_waa[LOC_PROCESS_MAX_ARG_STR_LENGTH] = "--";
@@ -597,6 +605,10 @@ int loc_read_process_conf(const char* conf_file_name, uint32_t * process_count_p
     loc_get_target_baseband(baseband_name, sizeof(baseband_name));
     //Identify if this is an automotive platform
     loc_get_auto_platform_name(autoplatform_name,sizeof(autoplatform_name));
+    //Identify if this is a low ram target from ro.config.low_ram property
+    low_ram_target = loc_identify_low_ram_target();
+    // Get the soc-id for this device.
+    loc_get_device_soc_id(socid_value, sizeof(socid_value));
 
     UTIL_READ_CONF(conf_file_name, loc_feature_conf_table);
 
@@ -769,9 +781,10 @@ int loc_read_process_conf(const char* conf_file_name, uint32_t * process_count_p
         baseband_length = (int)strlen(conf.baseband);
         status_length = (int)strlen(conf.proc_status);
         auto_platform_length = (int)strlen(conf.auto_platform);
+        soc_id_list_length = (int)strlen(conf.soc_id_list);
 
         if(!name_length || !group_list_length || !platform_length ||
-           !baseband_length || !status_length || !auto_platform_length) {
+           !baseband_length || !status_length || !auto_platform_length || !soc_id_list_length) {
             LOC_LOGE("%s:%d]: Error: i: %d; One of the parameters not specified in conf file",
                      __func__, __LINE__, i);
             continue;
@@ -842,6 +855,34 @@ int loc_read_process_conf(const char* conf_file_name, uint32_t * process_count_p
             }
         }
 
+        // SOC Id's check
+        nstrings = loc_util_split_string(conf.soc_id_list, split_strings, MAX_NUM_STRINGS, ' ');
+        if (strcmp("all", split_strings[0]) == 0) {
+            if (nstrings == 1 || (nstrings == 2 && (strcmp("exclude", split_strings[1]) == 0))) {
+                LOC_LOGd("Enabled for all SOC ids\n");
+                config_mask |= CONFIG_MASK_SOCID_ALL;
+            }
+            else if (nstrings > 2 && (strcmp("exclude", split_strings[1]) == 0)) {
+                config_mask |= CONFIG_MASK_SOCID_FOUND;
+                for (i = 2; i < nstrings; i++) {
+                    if (strcmp(socid_value, split_strings[i]) == 0) {
+                        LOC_LOGd("Disabled for SOC id %s\n", socid_value);
+                        config_mask &= ~CONFIG_MASK_SOCID_FOUND;
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            for (i = 0; i < nstrings; i++) {
+                if (strcmp(socid_value, split_strings[i]) == 0) {
+                    LOC_LOGd("Matched SOC id : %s\n", split_strings[i]);
+                    config_mask |= CONFIG_MASK_SOCID_FOUND;
+                    break;
+                }
+            }
+        }
+
         nstrings = loc_util_split_string(conf.baseband, split_strings, MAX_NUM_STRINGS, ' ');
         if(strcmp("all", split_strings[0]) == 0) {
             if (nstrings == 1 || (nstrings == 2 && (strcmp("exclude", split_strings[1]) == 0))) {
@@ -894,9 +935,17 @@ int loc_read_process_conf(const char* conf_file_name, uint32_t * process_count_p
             }
         }
 
+        nstrings = loc_util_split_string(conf.low_ram_targets, split_strings, MAX_NUM_STRINGS, ' ');
+        if (!strcmp("DISABLED", split_strings[0]) && low_ram_target) {
+            LOC_LOGd("Disabled for low ram targets\n");
+            child_proc[j].proc_status = DISABLED;
+            continue;
+        }
+
         if((config_mask & CONFIG_MASK_TARGET_CHECK) &&
            (config_mask & CONFIG_MASK_BASEBAND_CHECK) &&
            (config_mask & CONFIG_MASK_AUTOPLATFORM_CHECK) &&
+           (config_mask & CONFIG_MASK_SOCID_CHECK) &&
            (child_proc[j].proc_status != DISABLED_FROM_CONF) &&
            (child_proc[j].proc_status != DISABLED_VIA_VENDOR_ENHANCED_CHECK)) {
 

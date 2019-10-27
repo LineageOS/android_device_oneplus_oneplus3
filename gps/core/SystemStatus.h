@@ -59,7 +59,8 @@
 #define BDS_NUM     (37)
 #define GAL_NUM     (36)
 #define NAVIC_NUM   (14)
-#define SV_ALL_NUM  (GPS_NUM+GLO_NUM+QZSS_NUM+BDS_NUM+GAL_NUM+NAVIC_NUM) //=148
+#define SV_ALL_NUM_MIN  (GPS_NUM + GLO_NUM + QZSS_NUM + BDS_NUM + GAL_NUM) //=134
+#define SV_ALL_NUM      (SV_ALL_NUM_MIN + NAVIC_NUM) //=148
 
 namespace loc_core
 {

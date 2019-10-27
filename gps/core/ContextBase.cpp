@@ -70,7 +70,8 @@ const loc_param_s_type ContextBase::mGps_conf_table[] =
   {"XTRA_SERVER_1",                  &mGps_conf.XTRA_SERVER_1,                  NULL, 's'},
   {"XTRA_SERVER_2",                  &mGps_conf.XTRA_SERVER_2,                  NULL, 's'},
   {"XTRA_SERVER_3",                  &mGps_conf.XTRA_SERVER_3,                  NULL, 's'},
-  {"USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL",  &mGps_conf.USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL,          NULL, 'n'},
+  {"USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL",
+           &mGps_conf.USE_EMERGENCY_PDN_FOR_EMERGENCY_SUPL,          NULL, 'n'},
   {"AGPS_CONFIG_INJECT",             &mGps_conf.AGPS_CONFIG_INJECT,             NULL, 'n'},
   {"EXTERNAL_DR_ENABLED",            &mGps_conf.EXTERNAL_DR_ENABLED,                  NULL, 'n'},
   {"SUPL_HOST",                      &mGps_conf.SUPL_HOST,                      NULL, 's'},
@@ -78,13 +79,19 @@ const loc_param_s_type ContextBase::mGps_conf_table[] =
   {"MODEM_TYPE",                     &mGps_conf.MODEM_TYPE,                     NULL, 'n' },
   {"MO_SUPL_HOST",                   &mGps_conf.MO_SUPL_HOST,                   NULL, 's' },
   {"MO_SUPL_PORT",                   &mGps_conf.MO_SUPL_PORT,                   NULL, 'n' },
-  {"CONSTRAINED_TIME_UNCERTAINTY_ENABLED",       &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENABLED,      NULL, 'n'},
-  {"CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD",     &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD,    NULL, 'f'},
-  {"CONSTRAINED_TIME_UNCERTAINTY_ENERGY_BUDGET", &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENERGY_BUDGET, NULL, 'n'},
-  {"POSITION_ASSISTED_CLOCK_ESTIMATOR_ENABLED",  &mGps_conf.POSITION_ASSISTED_CLOCK_ESTIMATOR_ENABLED, NULL, 'n'},
+  {"CONSTRAINED_TIME_UNCERTAINTY_ENABLED",
+           &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENABLED,      NULL, 'n'},
+  {"CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD",
+           &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD,    NULL, 'f'},
+  {"CONSTRAINED_TIME_UNCERTAINTY_ENERGY_BUDGET",
+           &mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENERGY_BUDGET, NULL, 'n'},
+  {"POSITION_ASSISTED_CLOCK_ESTIMATOR_ENABLED",
+           &mGps_conf.POSITION_ASSISTED_CLOCK_ESTIMATOR_ENABLED, NULL, 'n'},
   {"PROXY_APP_PACKAGE_NAME",         &mGps_conf.PROXY_APP_PACKAGE_NAME,         NULL, 's' },
   {"CP_MTLR_ES",                     &mGps_conf.CP_MTLR_ES,                     NULL, 'n' },
   {"GNSS_DEPLOYMENT",  &mGps_conf.GNSS_DEPLOYMENT, NULL, 'n'},
+  {"CUSTOM_NMEA_GGA_FIX_QUALITY_ENABLED",
+           &mGps_conf.CUSTOM_NMEA_GGA_FIX_QUALITY_ENABLED, NULL, 'n'},
 };
 
 const loc_param_s_type ContextBase::mSap_conf_table[] =
@@ -171,13 +178,19 @@ void ContextBase::readConfig()
         /* default configuration value of constrained time uncertainty mode:
            feature disabled, time uncertainty threshold defined by modem,
            and unlimited power budget */
+#ifdef FEATURE_AUTOMOTIVE
+        mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENABLED = 1;
+#else
         mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENABLED = 0;
+#endif
         mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_THRESHOLD = 0.0;
         mGps_conf.CONSTRAINED_TIME_UNCERTAINTY_ENERGY_BUDGET = 0;
+
         /* default configuration value of position assisted clock estimator mode */
         mGps_conf.POSITION_ASSISTED_CLOCK_ESTIMATOR_ENABLED = 0;
         /* default configuration QTI GNSS H/W */
         mGps_conf.GNSS_DEPLOYMENT = 0;
+        mGps_conf.CUSTOM_NMEA_GGA_FIX_QUALITY_ENABLED = 0;
 
         UTIL_READ_CONF(LOC_PATH_GPS_CONF, mGps_conf_table);
         UTIL_READ_CONF(LOC_PATH_SAP_CONF, mSap_conf_table);

@@ -53,7 +53,7 @@ public:
     // LocIpc client can overwrite this function to get notification
     // when the socket for LocIpc is ready to receive messages.
     inline virtual void onListenerReady() {}
-    virtual void onReceive(const char* data, uint32_t length)= 0;
+    virtual void onReceive(const char* data, uint32_t len, const LocIpcRecver* recver) = 0;
 };
 
 
@@ -123,14 +123,17 @@ private:
 class LocIpcSender {
 protected:
     LocIpcSender() = default;
-    virtual ~LocIpcSender() = default;
     virtual bool isOperable() const = 0;
     virtual ssize_t send(const uint8_t data[], uint32_t length, int32_t msgId) const = 0;
 public:
+    virtual ~LocIpcSender() = default;
     virtual void informRecverRestarted() {}
     inline bool isSendable() const { return isOperable(); }
     inline bool sendData(const uint8_t data[], uint32_t length, int32_t msgId) const {
         return isSendable() && (send(data, length, msgId) > 0);
+    }
+    virtual unique_ptr<LocIpcRecver> getRecver(const shared_ptr<ILocIpcListener>& listener) {
+        return nullptr;
     }
 };
 
@@ -148,6 +151,9 @@ public:
     inline bool recvData() const { return isRecvable() && (recv() > 0); }
     inline bool isRecvable() const { return mDataCb != nullptr && mIpcSender.isSendable(); }
     virtual void onListenerReady() { if (mDataCb != nullptr) mDataCb->onListenerReady(); }
+    inline virtual unique_ptr<LocIpcSender> getLastSender() const {
+        return nullptr;
+    }
     virtual void abort() const = 0;
     virtual const char* getName() const = 0;
 };
@@ -158,8 +164,8 @@ class Sock {
     const uint32_t mMaxTxSize;
     ssize_t sendto(const void *buf, size_t len, int flags, const struct sockaddr *destAddr,
                    socklen_t addrlen) const;
-    ssize_t recvfrom(const shared_ptr<ILocIpcListener>& dataCb, int sid, int flags,
-                     struct sockaddr *srcAddr, socklen_t *addrlen) const;
+    ssize_t recvfrom(const LocIpcRecver& recver, const shared_ptr<ILocIpcListener>& dataCb,
+                     int sid, int flags, struct sockaddr *srcAddr, socklen_t *addrlen) const;
 public:
     int mSid;
     inline Sock(int sid, const uint32_t maxTxSize = 8192) : mMaxTxSize(maxTxSize), mSid(sid) {}
@@ -167,8 +173,8 @@ public:
     inline bool isValid() const { return -1 != mSid; }
     ssize_t send(const void *buf, uint32_t len, int flags, const struct sockaddr *destAddr,
                  socklen_t addrlen) const;
-    ssize_t recv(const shared_ptr<ILocIpcListener>& dataCb, int flags, struct sockaddr *srcAddr,
-                 socklen_t *addrlen, int sid = -1) const;
+    ssize_t recv(const LocIpcRecver& recver, const shared_ptr<ILocIpcListener>& dataCb, int flags,
+                 struct sockaddr *srcAddr, socklen_t *addrlen, int sid = -1) const;
     ssize_t sendAbort(int flags, const struct sockaddr *destAddr, socklen_t addrlen);
     inline void close() {
         if (isValid()) {
@@ -176,6 +182,23 @@ public:
             mSid = -1;
         }
     }
+};
+
+class SockRecver : public LocIpcRecver {
+    shared_ptr<Sock> mSock;
+protected:
+    inline virtual ssize_t recv() const override {
+        return mSock->recv(*this, mDataCb, 0, nullptr, nullptr);
+    }
+public:
+    inline SockRecver(const shared_ptr<ILocIpcListener>& listener,
+                  LocIpcSender& sender, shared_ptr<Sock> sock) :
+            LocIpcRecver(listener, sender), mSock(sock) {
+    }
+    inline virtual const char* getName() const override {
+        return "SockRecver";
+    }
+    inline virtual void abort() const override {}
 };
 
 }
