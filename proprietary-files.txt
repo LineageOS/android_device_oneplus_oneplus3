@@ -458,6 +458,7 @@ vendor/etc/cne/wqeclient/VZW/VZW_profile4.xml|ff91feb5060a6df07e3e4d9bc99ae58bcc
 vendor/etc/cne/wqeclient/VZW/VZW_profile5.xml|f76c894f3c6d5b6ed35113a088dc3174c900501b
 vendor/etc/cne/wqeclient/VZW/VZW_profile6.xml|14d136e7fcc682311757d3edc0b9d3eaeba11815
 vendor/etc/init/cnd.rc|ff205cff8e00ec6805fd1e19f3ca6ff86700cbb6
+vendor/lib64/libcacertclient.so|e05949a011c39667984bb70e19a3a67c06739737
 vendor/lib64/libcne.so|514967f94ed4d6299214510d0c72505490f26b1a
 vendor/lib64/libcneapiclient.so|27d607da9f357d5a6924e30de26bcd4ef6630cfa
 vendor/lib64/libcneoplookup.so|f0bd13e3db5893ca61c0701e7c43dd355a4dfae5
