@@ -467,6 +467,7 @@ vendor/lib64/libwms.so|e814a6575d211ea9a054eb33817b7ff972a1cec5
 vendor/lib64/libwqe.so|e9a74c2bff7d1324caad4ed159f58abedae9358b
 vendor/lib64/libxml.so|58d86be40a2b655b304e6935c3dbeaea0bfa5cd5
 vendor/lib64/vendor.qti.data.factory@2.0.so|a850f86c5ea05d30c29665aab1e1fced6659e850
+vendor/lib64/vendor.qti.hardware.cacert@1.0.so|2b0585f3771e4908f8f414dad304b8d7e565a072
 vendor/lib64/vendor.qti.hardware.data.cne.internal.api@1.0.so|d5adb784fddbad63074fd8a50c9098962349a89e
 vendor/lib64/vendor.qti.hardware.data.cne.internal.constants@1.0.so|6b2214f6d26a0519f6e0ec0785625ed9525c4a04
 vendor/lib64/vendor.qti.hardware.data.cne.internal.server@1.0.so|d8b912675c9eb76edb72f2275bfb4dfc374e6e66
