@@ -622,9 +622,9 @@ vendor/lib64/libsdm-disp-vndapis.so|0289e8fd70c5401d7486ca839c931e987b0e7e9e
 vendor/lib64/libsdmextension.so|a3e3ccd22f0d0a81e70e4e2e39dc270fc94615c9
 vendor/lib64/libtinyxml2_1.so|cb6f4fb572a28cad293f4b6c5312fcff73ad088b
 
-# Graphics - Vulkan
-vendor/lib/hw/vulkan.msm8996.so
-vendor/lib64/hw/vulkan.msm8996.so
+# Graphics - Vulkan - from LA.UM.8.6.r1-01900-89xx.0
+vendor/lib/hw/vulkan.msm8953.so:vendor/lib/hw/vulkan.msm8996.so|66f5e3d01dd93118f84b53b63fb12f60906849da
+vendor/lib64/hw/vulkan.msm8953.so:vendor/lib64/hw/vulkan.msm8996.so|af2db4bb51817d39b8d5bd79a530f82e61fba000
 
 # Keystore
 vendor/lib/hw/keystore.msm8996.so
