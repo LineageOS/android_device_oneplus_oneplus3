@@ -23,8 +23,9 @@ $(call inherit-product, device/oneplus/oneplus3/device.mk)
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Vendor security patch level
-VENDOR_SECURITY_PATCH := 2019-04-01
+# Security patch level
+PLATFORM_SECURITY_PATCH_OVERRIDE := 2019-04-01
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH_OVERRIDE)
 
 PRODUCT_NAME := lineage_oneplus3
 PRODUCT_DEVICE := oneplus3
