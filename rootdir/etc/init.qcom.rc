@@ -269,6 +269,10 @@ on post-fs-data
     mkdir /data/vendor/wifi/wpa 0770 wifi wifi
     mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
 
+    # IPACM logging directory
+    mkdir /data/vendor/ipa 0770 radio radio
+    chmod 0770 /data/vendor/ipa
+
     # Create the directories used by WiGig Sensing
     mkdir /data/vendor/sensing 0770 system wifi
 
