@@ -30,6 +30,9 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 debug.sf.recomputecrop=0
 
+# system prop for UBWC
+vendor.video.disable.ubwc=1
+
 #property to specify the number of frames to skip before setting hint
 sdm.perf_hint_window=50
 
