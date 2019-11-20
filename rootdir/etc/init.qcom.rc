@@ -65,6 +65,7 @@ on late-fs
     write /sys/block/sda/queue/nr_requests 256
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
+    write /sys/block/dm-2/queue/read_ahead_kb 2048
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -471,8 +472,10 @@ on property:sys.boot_completed=1
     # end boot time fs tune
     write /sys/block/sda/queue/read_ahead_kb 128
     write /sys/block/sda/queue/nr_requests 128
+    #Reset read ahead for dm-0, dm-1 and dm-2 to 128kb
     write /sys/block/dm-0/queue/read_ahead_kb 128
     write /sys/block/dm-1/queue/read_ahead_kb 128
+    write /sys/block/dm-2/queue/read_ahead_kb 128
     write /sys/block/sda/queue/iostats 1
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
