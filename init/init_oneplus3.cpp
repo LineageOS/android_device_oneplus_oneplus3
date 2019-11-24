@@ -1,6 +1,6 @@
 /*
    Copyright (c) 2016, The CyanogenMod Project
-             (c) 2017-2019, The LineageOS Project
+             (c) 2017-2020, The LineageOS Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -45,13 +45,13 @@ constexpr const char* RO_PROP_SOURCES[] = {
 };
 
 constexpr const char* BUILD_DESCRIPTION[] = {
-        "OnePlus3-user 9 PKQ1.181203.001 1907311932 release-keys",
-        "OnePlus3-user 9 PKQ1.181203.001 1907311932 release-keys",
+        "OnePlus3-user 9 PKQ1.181203.001 1911042107 release-keys",
+        "OnePlus3-user 9 PKQ1.181203.001 1911042108 release-keys",
 };
 
 constexpr const char* BUILD_FINGERPRINT[] = {
-        "OnePlus/OnePlus3/OnePlus3:9/PKQ1.181203.001/1907311932:user/release-keys",
-        "OnePlus/OnePlus3/OnePlus3T:9/PKQ1.181203.001/1907311932:user/release-keys",
+        "OnePlus/OnePlus3/OnePlus3:9/PKQ1.181203.001/1911042107:user/release-keys",
+        "OnePlus/OnePlus3/OnePlus3T:9/PKQ1.181203.001/1911042108:user/release-keys",
 };
 
 void property_override(char const prop[], char const value[]) {
