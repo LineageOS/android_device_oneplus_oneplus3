@@ -1,18 +1,21 @@
-# ADSP
-vendor/bin/adsprpcd
-vendor/lib/libadsp_default_listener.so
+# ADSP - from LA.UM.8.6.r1-01900-89xx.0
+vendor/bin/adsprpcd|17dc89427000e8145bd7cb3eb1ae1b45a7b0f8d4
+vendor/lib/libadsp_default_listener.so|48741bb1effb38b9bcbf6392e90779d75de98b57
+vendor/lib/libadsprpc.so|8d5463f75395bd571aee5a55baca3a10efbb3dc0
+vendor/lib/libfastcvadsp_stub.so|0382c53e0882ae5463e1a04522b5de7e506b0c59
+vendor/lib/libfastcvopt.so|057708e620ffe928a834ac230d89cd2ce65ea5da
+vendor/lib/libmdsprpc.so|812b190cce2acad81bef60f1ce691fda9607ddf0
+vendor/lib64/libadsp_default_listener.so|69e44430215ce66ca071cfcf2af6dbf9b1adce11
+vendor/lib64/libadsprpc.so|b7e5f267422508f13fd3068e84e2051fb0770253
+vendor/lib64/libfastcvadsp_stub.so|66c2df03439982e85e3c678ecbc4ec65afda054e
+vendor/lib64/libfastcvopt.so|7adca688648f0e6fb6875aabdb56ef933c0c69c8
+vendor/lib64/libmdsprpc.so|45011dd515c41129063e091abd253861673d7a42
+
 vendor/lib/libadsp_hvx_callback_skel.so
 vendor/lib/libadsp_hvx_stub.so
-vendor/lib/libadsprpc.so
 vendor/lib/libcdsprpc.so
-vendor/lib/libfastcvadsp_stub.so
-vendor/lib/libfastcvopt.so
 vendor/lib/libsdsprpc.so
-vendor/lib64/libadsp_default_listener.so
-vendor/lib64/libadsprpc.so
 vendor/lib64/libcdsprpc.so
-vendor/lib64/libfastcvadsp_stub.so
-vendor/lib64/libfastcvopt.so
 vendor/lib64/libsdsprpc.so
 
 # ADSP modules
