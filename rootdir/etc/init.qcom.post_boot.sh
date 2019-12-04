@@ -3377,6 +3377,7 @@ case "$target" in
     echo 1 > /proc/sys/kernel/sched_walt_rotate_big_tasks
 
     # disable unfiltering
+    echo 20000000 > /proc/sys/kernel/sched_task_unfilter_period
     echo 1 > /proc/sys/kernel/sched_task_unfilter_nr_windows
 
     # configure governor settings for silver cluster
