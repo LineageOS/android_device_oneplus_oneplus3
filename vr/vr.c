@@ -16,7 +16,7 @@
 
 #define LOG_TAG "VrHALImpl"
 
-#include <cutils/log.h>
+#include <log/log.h>
 #include <cutils/properties.h>
 
 #include <hardware/vr.h>
