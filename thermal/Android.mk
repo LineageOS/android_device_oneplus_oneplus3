@@ -25,4 +25,5 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := qcom
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE := thermal.msm8996
+LOCAL_HEADER_LIBRARIES := libutils_headers libhardware_headers
 include $(BUILD_SHARED_LIBRARY)
