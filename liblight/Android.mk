@@ -24,5 +24,6 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_MODULE := lights.msm8996
 LOCAL_MODULE_TAGS := optional
 LOCAL_VENDOR_MODULE := true
+LOCAL_HEADER_LIBRARIES := libutils_headers libhardware_headers
 
 include $(BUILD_SHARED_LIBRARY)
