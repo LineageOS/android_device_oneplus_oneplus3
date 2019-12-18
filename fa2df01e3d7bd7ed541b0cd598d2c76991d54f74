@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76f4055c_8c52045c",
+        "filename": "liblight/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2019-12-18T03:46:05Z",
+      "side": 1,
+      "message": "Replace cutils/log.h with log/log.h and drop this.",
+      "range": {
+        "startLine": 27,
+        "startChar": 26,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "fa2df01e3d7bd7ed541b0cd598d2c76991d54f74",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
