@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93a34c85_23258b1d",
+        "filename": "vr/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2019-12-19T06:07:03Z",
+      "side": 1,
+      "message": "why do we need this?",
+      "range": {
+        "startLine": 27,
+        "startChar": 26,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "4a56a671e2ab9ee7b186c7192a223a6992658c39",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
