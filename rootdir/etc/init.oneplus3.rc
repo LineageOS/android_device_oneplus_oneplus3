@@ -121,7 +121,7 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
 
     # DASH
-    chmod 0666 /dev/dash
+    chmod 0660 /dev/dash
 
     # RGB light
     chown system system /sys/class/leds/red/pause_lo
@@ -155,7 +155,7 @@ on charger
     write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 1
     write /sys/devices/soc/${ro.boot.bootdevice}/clkgate_enable 1
     write /sys/devices/soc/${ro.boot.bootdevice}/${ro.boot.bootdevice}:ufs_variant/pm_qos_enable 1
-    start dashd
+    start vendor.dashd
 
 on property:sys.boot_completed=1
     # Enable UFS powersaving
@@ -172,11 +172,10 @@ on property:sys.boot_completed=1
     write /dev/cpuset/system-background/cpus 0-2
     write /dev/cpuset/restricted/cpus 0-1
 
-service dashd /sbin/dashd
+service vendor.dashd /vendor/bin/dashd
     class core
-    critical
-    seclabel u:r:dashd:s0
-    group root system
+    user root
+    group system
     writepid /dev/cpuset/system-background/tasks
 
 service remosaic_daemon /vendor/bin/remosaic_daemon

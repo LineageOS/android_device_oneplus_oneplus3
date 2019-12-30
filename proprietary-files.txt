@@ -480,7 +480,7 @@ vendor/lib64/vendor.qti.hardware.data.qmi@1.0.so|603e4ba092494a0443888d6234c923d
 vendor/lib64/vendor.qti.latency@2.0.so|5382bc6cab521556bfc2abccb088a34b1dbeb65a
 
 # DASH
--sbin/dashd;rootfs
+sbin/dashd:vendor/bin/dashd
 
 # DPM - from LA.UM.8.6.r1-01900-89xx.0
 product/bin/dpmd|7503d40ddb06e41333aafe4613d0dba6aed9b896

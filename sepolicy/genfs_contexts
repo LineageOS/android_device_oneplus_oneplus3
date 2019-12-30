@@ -2,8 +2,11 @@
 genfscon sysfs /devices/soc/soc:fpc_fpc1020         u:object_r:sysfs_fpc:s0
 
 # Healthd
-genfscon sysfs /devices/soc/soc:qcom,bcl/power_supply/bcl/type          u:object_r:sysfs_batteryinfo:s0
 genfscon sysfs /devices/soc/msm-bcl-14/power_supply/fg_adc/type         u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/soc/qpnp-fg-17/power_supply/bms                 u:object_r:sysfs_battery_supply:s0
+genfscon sysfs /devices/soc/qpnp-smbcharger-16/power_supply/battery     u:object_r:sysfs_battery_supply:s0
+genfscon sysfs /devices/soc/qpnp-smbcharger-16/power_supply/dc          u:object_r:sysfs_battery_supply:s0
+genfscon sysfs /devices/soc/soc:qcom,bcl/power_supply/bcl/type          u:object_r:sysfs_batteryinfo:s0
 
 # LEDs
 genfscon sysfs /devices/soc/leds-qpnp-18/leds       u:object_r:sysfs_leds:s0
@@ -16,6 +19,10 @@ genfscon sysfs /devices/virtual/graphics/fb0/srgb   u:object_r:sysfs_livedisplay
 
 # Ril
 genfscon debugfs /rmt_storage                       u:object_r:debugfs_rmt_storage:s0
+
+# Thermal engine
+genfscon sysfs /devices/soc/70000.qcom,msm-core/uio/uio1           u:object_r:sysfs_uio_file:s0
+genfscon sysfs /devices/soc/70000.qcom,msm-thermal/uio/uio2        u:object_r:sysfs_uio_file:s0
 
 # Touchscreen
 genfscon proc /touchpanel                           u:object_r:proc_touchpanel:s0

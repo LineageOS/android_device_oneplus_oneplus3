@@ -1,11 +1,8 @@
 # dash daemon
 
-# dashd seclabel is specified in init.rc since
-# it lives in the rootfs and has no unique file type.
 type dashd, domain;
-type dashd_exec, exec_type, file_type;
+type dashd_exec, exec_type, vendor_file_type, file_type;
 
-typeattribute dashd coredomain;
 init_daemon_domain(dashd)
 
 # Write to /dev/kmsg
@@ -19,15 +16,4 @@ allow dashd {
     sysfs_usb_supply
 }:file rw_file_perms;
 
-allow dashd self:capability sys_resource;
-
-###
-### dashd: charger mode
-###
-#allow dashd sysfs:file { open read write ioctl };
 allow dashd dash_device:chr_file { open read write ioctl };
-allow dashd rootfs:file { entrypoint read execute getattr };
-
-#allow ueventd sysfs:chr_file {create setattr};
-allow sysfs tmpfs:filesystem associate;
-#allow init sysfs:chr_file getattr;
