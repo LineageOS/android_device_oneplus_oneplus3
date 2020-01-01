@@ -56,6 +56,7 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/ipa_odl_ctl          0660   radio      radio
 /dev/ipa_adpl             0660   system     oem_2905
 /dev/synx_device          0660   root       camera
+/dev/hab                  0666   system     system
 
 #permissions for CSVT
 /dev/smd11                0660   radio      radio

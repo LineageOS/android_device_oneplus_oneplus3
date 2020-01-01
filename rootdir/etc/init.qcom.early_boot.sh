@@ -398,6 +398,23 @@ case "$product" in
         *)
         ;;
 esac
+case "$product" in
+        "sdmshrike_au")
+         setprop vendor.display.lcd_density 160
+         echo 940800000 > /sys/class/devfreq/soc:qcom,cpu0-cpu-l3-lat/min_freq
+         echo 940800000 > /sys/class/devfreq/soc:qcom,cpu4-cpu-l3-lat/min_freq
+         ;;
+        *)
+        ;;
+esac
+
+case "$product" in
+        "msmnile_gvmq")
+         setprop vendor.display.lcd_density 160
+         ;;
+        *)
+        ;;
+esac
 # Setup display nodes & permissions
 # HDMI can be fb1 or fb2
 # Loop through the sysfs nodes and determine

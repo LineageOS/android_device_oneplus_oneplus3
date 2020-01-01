@@ -41,6 +41,10 @@ on early-init
     chown system graphics /sys/kernel/debug/dri/0/debug/recovery_dbgbus
     chown system graphics /sys/kernel/debug/dri/0/debug/recovery_vbif_dbgbus
 
+    # Change ownership of sw_sync node
+    chown system graphics /sys/kernel/debug/sync/sw_sync
+    chmod 0666 /sys/kernel/debug/sync/sw_sync
+
     chown root system /dev/kmsg
     chmod 0620 /dev/kmsg
     # Load WIGIG platform driver
@@ -324,10 +328,6 @@ on post-fs-data
     mkdir /dev/socket/wifihal 0770 wifi wifi
     chmod 2770 /dev/socket/wifihal
 
-    #Create directory from IMS services
-    mkdir /data/shared 0755
-    chown system system /data/shared
-
     #Create directory for FOTA
     mkdir /data/fota 0771
     chown system system /data/fota
@@ -519,6 +519,7 @@ service qcom-c_core-sh  /vendor/bin/init.qcom.class_core.sh
 service qcom-c_main-sh /vendor/bin/init.class_main.sh
     class main
     user root
+    group root system
     oneshot
 
 on property:vold.decrypt=trigger_restart_framework
@@ -634,25 +635,6 @@ service vendor.move_wifi_data /system/bin/move_wifi_data.sh
     class main
     user  wifi
     group wifi
-    disabled
-    oneshot
-
-# FST Manager with hostapd (softap) - all settings inside ini file
-service fstman /vendor/bin/fstman -B -ddd -c /data/vendor/wifi/fstman.ini -a 1
-    user wifi
-    group wifi
-    capabilities NET_ADMIN NET_RAW
-    class main
-    disabled
-    oneshot
-
-# FST Manager with supplicant - connect to supplicant socket
-service fstman_wlan0 /vendor/bin/fstman -B -ddd -c /data/vendor/wifi/fstman.ini \
-    -a 0 @android:vendor_wpa_wlan0
-    user wifi
-    group wifi
-    capabilities NET_ADMIN NET_RAW
-    class main
     disabled
     oneshot
 
@@ -867,6 +849,7 @@ service charger /system/bin/charger
     class charger
     user system
     group system graphics input
+    capabilities SYS_BOOT
     seclabel u:r:charger:s0
 
 service vendor.ssr_diag /system/vendor/bin/ssr_diag
