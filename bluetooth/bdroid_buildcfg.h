@@ -53,6 +53,8 @@ static inline const char* BtmGetDefaultName()
 // skips conn update at conn completion
 #define BT_CLEAN_TURN_ON_DISABLED 1
 
+#define BTIF_HF_WBS_PREFERRED true
+
 /* Increasing SEPs to 12 from 6 to support SHO/MCast i.e. two streams per codec */
 #define AVDT_NUM_SEPS 12
 #endif
