@@ -1,0 +1,28 @@
+android_app {
+    name: "OneplusDoze",
+
+    srcs: ["src/**/*.java"],
+
+    certificate: "platform",
+    platform_apis: true,
+    privileged: true,
+
+    static_libs: [
+        "android-support-v4",
+        "android-support-v13",
+        "android-support-v7-recyclerview",
+        "android-support-v7-preference",
+        "android-support-v7-appcompat",
+        "android-support-v14-preference",
+    ],
+
+    resource_dirs: [
+        "res",
+        "../../../packages/resources/devicesettings/res",
+    ],
+
+    optimize: {
+        proguard_flags_files: ["proguard.flags"],
+    },
+
+}
