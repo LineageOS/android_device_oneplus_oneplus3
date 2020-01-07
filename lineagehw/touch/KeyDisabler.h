@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,13 @@ namespace implementation {
 using ::android::hardware::Return;
 
 class KeyDisabler : public IKeyDisabler {
-   public:
+  public:
     KeyDisabler();
     // Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
     Return<bool> isEnabled() override;
     Return<bool> setEnabled(bool enabled) override;
 
-   private:
+  private:
     bool mHasKeyDisabler;
 };
 

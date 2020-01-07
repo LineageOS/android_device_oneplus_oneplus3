@@ -16,5 +16,5 @@
 package com.android.internal.app;
 
 interface IIFAAService {
-   byte[] processCmdV2(in byte[] dataIn);
+    byte[] processCmdV2(in byte[] dataIn);
 }
