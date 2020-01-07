@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,8 +75,8 @@ int main() {
 
     ab = new AdaptiveBacklight();
     if (ab == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
@@ -88,15 +88,15 @@ int main() {
 
     pa = new PictureAdjustment(controller, cookie);
     if (pa == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL PictureAdjustment Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL PictureAdjustment Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
     se = new SunlightEnhancement();
     if (se == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
