@@ -3,7 +3,6 @@ package org.ifaa.android.manager;
 import android.content.Context;
 
 public abstract class IFAAManager {
-
     /**
      * 返回手机系统上支持的校验方式，目前IFAF协议1.0版本指纹为0x01、虹膜为0x02
      */
