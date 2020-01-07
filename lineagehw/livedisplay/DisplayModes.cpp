@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-#include <unordered_map>
+#include "DisplayModes.h"
 
 #include <android-base/file.h>
 
-#include "DisplayModes.h"
+#include <unordered_map>
+
 #include "PictureAdjustment.h"
 #include "Utils.h"
 
@@ -34,8 +35,8 @@ struct sdm_disp_mode {
 
 const std::string kSysfsModeBasePath = "/sys/class/graphics/fb0/";
 const std::unordered_map<int32_t, std::string> kSysfsModeMap = {
-    {601, "srgb"},
-    {602, "dci_p3"},
+        {601, "srgb"},
+        {602, "dci_p3"},
 };
 
 inline bool isSysfsMode(int32_t modeId) {

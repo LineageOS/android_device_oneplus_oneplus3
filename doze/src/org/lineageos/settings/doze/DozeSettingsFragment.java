@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ import android.os.Handler;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
+import android.support.v7.preference.PreferenceCategory;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,9 +40,8 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
-public class DozeSettingsFragment extends PreferenceFragment implements OnPreferenceChangeListener,
-        CompoundButton.OnCheckedChangeListener {
-
+public class DozeSettingsFragment extends PreferenceFragment
+        implements OnPreferenceChangeListener, CompoundButton.OnCheckedChangeListener {
     private TextView mTextView;
     private View mSwitchBar;
 
@@ -60,8 +59,8 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         final ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences("doze_settings",
-                Activity.MODE_PRIVATE);
+        SharedPreferences prefs =
+                getActivity().getSharedPreferences("doze_settings", Activity.MODE_PRIVATE);
         if (savedInstanceState == null && !prefs.getBoolean("first_help_shown", false)) {
             showHelp();
         }
@@ -74,7 +73,8 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         mAlwaysOnDisplayPreference.setOnPreferenceChangeListener(this);
 
         PreferenceCategory pickupSensorCategory =
-                (PreferenceCategory) getPreferenceScreen().findPreference(Utils.CATEG_PICKUP_SENSOR);
+                (PreferenceCategory) getPreferenceScreen().findPreference(
+                        Utils.CATEG_PICKUP_SENSOR);
         PreferenceCategory proximitySensorCategory =
                 (PreferenceCategory) getPreferenceScreen().findPreference(Utils.CATEG_PROX_SENSOR);
 
@@ -100,9 +100,10 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = LayoutInflater.from(getContext()).inflate(R.layout.doze, container, false);
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view =
+                LayoutInflater.from(getContext()).inflate(R.layout.doze, container, false);
         ((ViewGroup) view).addView(super.onCreateView(inflater, container, savedInstanceState));
         return view;
     }
@@ -114,8 +115,8 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         boolean dozeEnabled = Utils.isDozeEnabled(getActivity());
 
         mTextView = view.findViewById(R.id.switch_text);
-        mTextView.setText(getString(dozeEnabled ?
-                R.string.switch_bar_on : R.string.switch_bar_off));
+        mTextView.setText(
+                getString(dozeEnabled ? R.string.switch_bar_on : R.string.switch_bar_off));
 
         mSwitchBar = view.findViewById(R.id.switch_bar);
         Switch switchWidget = mSwitchBar.findViewById(android.R.id.switch_widget);
@@ -179,7 +180,8 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
 
         @Override
         public void onCancel(DialogInterface dialog) {
-            getActivity().getSharedPreferences("doze_settings", Activity.MODE_PRIVATE)
+            getActivity()
+                    .getSharedPreferences("doze_settings", Activity.MODE_PRIVATE)
                     .edit()
                     .putBoolean("first_help_shown", true)
                     .commit();
