@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 The LineageOS Project
+ * Copyright (C) 2018-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 #ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDMCONTROLLER_H
 #define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDMCONTROLLER_H
 
-#include <memory>
-
 #include <stdint.h>
+
+#include <memory>
 
 namespace vendor {
 namespace lineage {
@@ -28,7 +28,7 @@ namespace V2_0 {
 namespace sdm {
 
 class SDMController {
-   public:
+  public:
     SDMController();
 
     int32_t init(uint64_t* hctx, uint32_t flags);
@@ -55,7 +55,7 @@ class SDMController {
     int32_t set_global_pa_config(uint64_t hctx, uint32_t disp_id, uint32_t enable, void* cfg);
     int32_t get_feature_version(uint64_t hctx, uint32_t feature_id, void* ver, uint32_t* flags);
 
-   private:
+  private:
     typedef int32_t (*disp_api_init)(uint64_t*, uint32_t);
     typedef int32_t (*disp_api_deinit)(uint64_t, uint32_t);
     typedef int32_t (*disp_api_get_global_color_balance_range)(uint64_t, uint32_t, void*);

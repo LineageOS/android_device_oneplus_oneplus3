@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2018 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,9 @@ public class DozeService extends Service {
 
     @Override
     public void onCreate() {
-        if (DEBUG) Log.d(TAG, "Creating service");
+        if (DEBUG) {
+            Log.d(TAG, "Creating service");
+        }
         mPickupSensor = new PickupSensor(this);
         mPocketSensor = new PocketSensor(this);
 
@@ -45,13 +47,17 @@ public class DozeService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (DEBUG) Log.d(TAG, "Starting service");
+        if (DEBUG) {
+            Log.d(TAG, "Starting service");
+        }
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        if (DEBUG) Log.d(TAG, "Destroying service");
+        if (DEBUG) {
+            Log.d(TAG, "Destroying service");
+        }
         super.onDestroy();
         this.unregisterReceiver(mScreenStateReceiver);
         mPickupSensor.disable();
@@ -64,23 +70,25 @@ public class DozeService extends Service {
     }
 
     private void onDisplayOn() {
-        if (DEBUG) Log.d(TAG, "Display on");
+        if (DEBUG) {
+            Log.d(TAG, "Display on");
+        }
         if (Utils.isPickUpEnabled(this)) {
             mPickupSensor.disable();
         }
-        if (Utils.isHandwaveGestureEnabled(this) ||
-                Utils.isPocketGestureEnabled(this)) {
+        if (Utils.isHandwaveGestureEnabled(this) || Utils.isPocketGestureEnabled(this)) {
             mPocketSensor.disable();
         }
     }
 
     private void onDisplayOff() {
-        if (DEBUG) Log.d(TAG, "Display off");
+        if (DEBUG) {
+            Log.d(TAG, "Display off");
+        }
         if (Utils.isPickUpEnabled(this)) {
             mPickupSensor.enable();
         }
-        if (Utils.isHandwaveGestureEnabled(this) ||
-                Utils.isPocketGestureEnabled(this)) {
+        if (Utils.isHandwaveGestureEnabled(this) || Utils.isPocketGestureEnabled(this)) {
             mPocketSensor.enable();
         }
     }
