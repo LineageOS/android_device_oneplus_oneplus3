@@ -15,14 +15,13 @@
  * limitations under the License.
  */
 
-#include <poll.h>
-#include <unistd.h>
+#include "Utils.h"
 
 #include <android-base/file.h>
 #include <android-base/strings.h>
 #include <cutils/sockets.h>
-
-#include "Utils.h"
+#include <poll.h>
+#include <unistd.h>
 
 namespace {
 struct sdm_feature_version {

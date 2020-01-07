@@ -28,13 +28,13 @@ namespace implementation {
 using ::android::hardware::Return;
 
 class KeyDisabler : public IKeyDisabler {
-   public:
+  public:
     KeyDisabler();
     // Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
     Return<bool> isEnabled() override;
     Return<bool> setEnabled(bool enabled) override;
 
-   private:
+  private:
     bool mHasKeyDisabler;
 };
 

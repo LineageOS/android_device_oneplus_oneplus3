@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+#include "SunlightEnhancement.h"
+
 #include <android-base/file.h>
 #include <android-base/strings.h>
-
-#include "SunlightEnhancement.h"
 
 using android::base::ReadFileToString;
 using android::base::Trim;

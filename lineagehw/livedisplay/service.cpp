@@ -75,8 +75,8 @@ int main() {
 
     ab = new AdaptiveBacklight();
     if (ab == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
@@ -88,15 +88,15 @@ int main() {
 
     pa = new PictureAdjustment(controller, cookie);
     if (pa == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL PictureAdjustment Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL PictureAdjustment Iface, "
+                      "exiting.";
         goto shutdown;
     }
 
     se = new SunlightEnhancement();
     if (se == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, exiting.";
+        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, "
+                      "exiting.";
         goto shutdown;
     }
 

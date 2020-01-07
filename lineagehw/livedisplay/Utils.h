@@ -28,7 +28,7 @@ namespace V2_0 {
 namespace sdm {
 
 class Utils {
-   public:
+  public:
     static int32_t readLocalModeId();
     static bool writeLocalModeId(int32_t id);
     static int32_t readInitialModeId();

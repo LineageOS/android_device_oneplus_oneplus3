@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.util.Log;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
-
     private static final String TAG = "OneplusPocketMode";
 
     @Override
