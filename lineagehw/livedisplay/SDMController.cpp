@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 The LineageOS Project
+ * Copyright (C) 2018-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+#include "SDMController.h"
+
 #include <android-base/logging.h>
 #include <dlfcn.h>
-
-#include "SDMController.h"
 
 #define LOAD_SDM_FUNCTION(name) \
     mFn_##name = loadFunction<disp_api_##name>(mHandle, "disp_api_" #name);

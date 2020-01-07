@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2015 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,13 +23,11 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class PocketSensor implements SensorEventListener {
-
     private static final boolean DEBUG = false;
     private static final String TAG = "PocketSensor";
 
@@ -54,9 +52,7 @@ public class PocketSensor implements SensorEventListener {
         mExecutorService = Executors.newSingleThreadExecutor();
     }
 
-    private Future<?> submit(Runnable runnable) {
-        return mExecutorService.submit(runnable);
-    }
+    private Future<?> submit(Runnable runnable) { return mExecutorService.submit(runnable); }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -90,17 +86,16 @@ public class PocketSensor implements SensorEventListener {
     }
 
     protected void enable() {
-        if (DEBUG) Log.d(TAG, "Enabling");
+        if (DEBUG)
+            Log.d(TAG, "Enabling");
         submit(() -> {
-            mSensorManager.registerListener(this, mSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL);
+            mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
         });
     }
 
     protected void disable() {
-        if (DEBUG) Log.d(TAG, "Disabling");
-        submit(() -> {
-            mSensorManager.unregisterListener(this, mSensor);
-        });
+        if (DEBUG)
+            Log.d(TAG, "Disabling");
+        submit(() -> { mSensorManager.unregisterListener(this, mSensor); });
     }
 }

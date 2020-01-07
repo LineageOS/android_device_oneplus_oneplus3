@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ namespace V2_0 {
 namespace sdm {
 
 class Utils {
-   public:
+  public:
     static int32_t readLocalModeId();
     static bool writeLocalModeId(int32_t id);
     static int32_t readInitialModeId();
