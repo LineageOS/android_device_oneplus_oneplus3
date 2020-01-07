@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
+#include "AdaptiveBacklight.h"
+
 #include <android-base/properties.h>
 
-#include "AdaptiveBacklight.h"
 #include "Utils.h"
 
 namespace {

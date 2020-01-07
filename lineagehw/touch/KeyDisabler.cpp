@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
+#include "KeyDisabler.h"
+
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/strings.h>
-
-#include "KeyDisabler.h"
 
 namespace vendor {
 namespace lineage {

@@ -31,7 +31,7 @@ using ::android::hardware::Return;
 using ::android::hardware::Void;
 
 class DisplayModes : public IDisplayModes {
-   public:
+  public:
     DisplayModes(std::shared_ptr<SDMController> controller, uint64_t cookie);
 
     bool isSupported();
@@ -42,7 +42,7 @@ class DisplayModes : public IDisplayModes {
     Return<void> getDefaultDisplayMode(getDefaultDisplayMode_cb _hidl_cb) override;
     Return<bool> setDisplayMode(int32_t modeID, bool makeDefault) override;
 
-   private:
+  private:
     std::shared_ptr<SDMController> mController;
     uint64_t mCookie;
     int32_t mActiveModeId;

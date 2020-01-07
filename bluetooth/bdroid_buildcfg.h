@@ -28,24 +28,23 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-int32_t property_get_int32(const char *key, int32_t default_value);
+int32_t property_get_int32(const char* key, int32_t default_value);
 #ifdef __cplusplus
 }
 #endif
 
-static inline const char* BtmGetDefaultName()
-{
+static inline const char* BtmGetDefaultName() {
     int32_t rf_version = property_get_int32("ro.boot.rf_version", 0);
 
     switch (rf_version) {
-    case 11:
-    case 21:
-    case 31:
-        return "OnePlus 3";
-    case 12:
-    case 22:
-    case 32:
-        return "OnePlus 3T";
+        case 11:
+        case 21:
+        case 31:
+            return "OnePlus 3";
+        case 12:
+        case 22:
+        case 32:
+            return "OnePlus 3T";
     }
 
     return "";
@@ -54,9 +53,9 @@ static inline const char* BtmGetDefaultName()
 #define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
 #define BLUETOOTH_QTI_SW TRUE
 // Disables read remote device feature
-#define MAX_ACL_CONNECTIONS   16
-#define MAX_L2CAP_CHANNELS    16
-#define BLE_VND_INCLUDED   TRUE
+#define MAX_ACL_CONNECTIONS 16
+#define MAX_L2CAP_CHANNELS 16
+#define BLE_VND_INCLUDED TRUE
 // skips conn update at conn completion
 #define BT_CLEAN_TURN_ON_DISABLED 1
 

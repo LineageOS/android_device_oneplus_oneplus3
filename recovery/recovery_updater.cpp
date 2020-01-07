@@ -15,15 +15,15 @@
  * limitations under the License.
  */
 
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -49,10 +49,10 @@
 /* Boyer-Moore string search implementation from Wikipedia */
 
 /* Return longest suffix length of suffix ending at str[p] */
-static int max_suffix_len(const char *str, size_t str_len, size_t p) {
+static int max_suffix_len(const char* str, size_t str_len, size_t p) {
     uint32_t i;
 
-    for (i = 0; (str[p - i] == str[str_len - 1 - i]) && (i < p); ) {
+    for (i = 0; (str[p - i] == str[str_len - 1 - i]) && (i < p);) {
         i++;
     }
 
@@ -62,19 +62,19 @@ static int max_suffix_len(const char *str, size_t str_len, size_t p) {
 /* Generate table of distance between last character of pat and rightmost
  * occurrence of character c in pat
  */
-static void bm_make_delta1(int *delta1, const char *pat, size_t pat_len) {
+static void bm_make_delta1(int* delta1, const char* pat, size_t pat_len) {
     uint32_t i;
     for (i = 0; i < ALPHABET_LEN; i++) {
         delta1[i] = pat_len;
     }
     for (i = 0; i < pat_len - 1; i++) {
-        uint8_t idx = (uint8_t) pat[i];
+        uint8_t idx = (uint8_t)pat[i];
         delta1[idx] = pat_len - 1 - i;
     }
 }
 
 /* Generate table of next possible full match from mismatch at pat[p] */
-static void bm_make_delta2(int *delta2, const char *pat, size_t pat_len) {
+static void bm_make_delta2(int* delta2, const char* pat, size_t pat_len) {
     int p;
     uint32_t last_prefix = pat_len - 1;
 
@@ -86,7 +86,7 @@ static void bm_make_delta2(int *delta2, const char *pat, size_t pat_len) {
         delta2[p] = last_prefix + (pat_len - 1 - p);
     }
 
-    for (p = 0; p < (int) pat_len - 1; p++) {
+    for (p = 0; p < (int)pat_len - 1; p++) {
         /* Get longest suffix of pattern ending on character pat[p] */
         int suf_len = max_suffix_len(pat, pat_len, p);
         if (pat[p - suf_len] != pat[pat_len - 1 - suf_len]) {
@@ -95,8 +95,7 @@ static void bm_make_delta2(int *delta2, const char *pat, size_t pat_len) {
     }
 }
 
-static char * bm_search(const char *str, size_t str_len, const char *pat,
-        size_t pat_len) {
+static char* bm_search(const char* str, size_t str_len, const char* pat, size_t pat_len) {
     int delta1[ALPHABET_LEN];
     int delta2[pat_len];
     int i;
@@ -105,31 +104,31 @@ static char * bm_search(const char *str, size_t str_len, const char *pat,
     bm_make_delta2(delta2, pat, pat_len);
 
     if (pat_len == 0) {
-        return (char *) str;
+        return (char*)str;
     }
 
     i = pat_len - 1;
-    while (i < (int) str_len) {
+    while (i < (int)str_len) {
         int j = pat_len - 1;
         while (j >= 0 && (str[i] == pat[j])) {
             i--;
             j--;
         }
         if (j < 0) {
-            return (char *) (str + i + 1);
+            return (char*)(str + i + 1);
         }
-        i += MAX(delta1[(uint8_t) str[i]], delta2[j]);
+        i += MAX(delta1[(uint8_t)str[i]], delta2[j]);
     }
 
     return NULL;
 }
 
-static int get_modem_version(char *ver_str, size_t len) {
+static int get_modem_version(char* ver_str, size_t len) {
     int ret = 0;
     int fd;
     int modem_size;
-    char *modem_data = NULL;
-    char *offset = NULL;
+    char* modem_data = NULL;
+    char* offset = NULL;
 
     fd = open(MODEM_PART_PATH, O_RDONLY);
     if (fd < 0) {
@@ -143,8 +142,8 @@ static int get_modem_version(char *ver_str, size_t len) {
         goto err_fd_close;
     }
 
-    modem_data = (char *) mmap(NULL, modem_size, PROT_READ, MAP_PRIVATE, fd, 0);
-    if (modem_data == (char *)-1) {
+    modem_data = (char*)mmap(NULL, modem_size, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (modem_data == (char*)-1) {
         ret = errno;
         goto err_fd_close;
     }
@@ -165,7 +164,8 @@ err_ret:
 }
 
 /* verify_modem("MODEM_VERSION") */
-Value* VerifyModemFn(const char *name, State *state, const std::vector<std::unique_ptr<Expr>>& argv) {
+Value* VerifyModemFn(const char* name, State* state,
+                     const std::vector<std::unique_ptr<Expr>>& argv) {
     char current_modem_version[MODEM_VER_BUF_LEN];
     int ret;
     struct tm tm1, tm2;
@@ -173,7 +173,7 @@ Value* VerifyModemFn(const char *name, State *state, const std::vector<std::uniq
     ret = get_modem_version(current_modem_version, MODEM_VER_BUF_LEN);
     if (ret) {
         return ErrorAbort(state, kVendorFailure,
-                "%s() failed to read current MODEM build time-stamp: %d", name, ret);
+                          "%s() failed to read current MODEM build time-stamp: %d", name, ret);
     }
 
     std::string modem_version;
