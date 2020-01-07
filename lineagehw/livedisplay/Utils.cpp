@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,13 @@
  * limitations under the License.
  */
 
-#include <poll.h>
-#include <unistd.h>
+#include "Utils.h"
 
 #include <android-base/file.h>
 #include <android-base/strings.h>
 #include <cutils/sockets.h>
-
-#include "Utils.h"
+#include <poll.h>
+#include <unistd.h>
 
 namespace {
 struct sdm_feature_version {
