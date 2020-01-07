@@ -18,7 +18,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.lineageos.settings.doze"
     android:versionCode="1"
-    android:versionName="1.0"
+    android:versionName="1.1"
     android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
@@ -27,8 +27,8 @@
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
 
     <uses-sdk
-        android:minSdkVersion="24"
-        android:targetSdkVersion="24"/>
+        android:minSdkVersion="29"
+        android:targetSdkVersion="29"/>
 
     <application
         android:label="@string/device_settings_app_name"
