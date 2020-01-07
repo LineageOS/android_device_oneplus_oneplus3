@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  */
 
 #include "PictureAdjustment.h"
+
 #include "Utils.h"
 
 namespace {
@@ -170,7 +171,7 @@ Return<void> PictureAdjustment::getContrastRange(getContrastRange_cb _hidl_cb) {
 }
 
 Return<void> PictureAdjustment::getSaturationThresholdRange(
-    getSaturationThresholdRange_cb _hidl_cb) {
+        getSaturationThresholdRange_cb _hidl_cb) {
     FloatRange range;
     hsic_ranges r;
 
@@ -190,13 +191,13 @@ Return<void> PictureAdjustment::getPictureAdjustment(getPictureAdjustment_cb _hi
 }
 
 Return<void> PictureAdjustment::getDefaultPictureAdjustment(
-    getDefaultPictureAdjustment_cb _hidl_cb) {
+        getDefaultPictureAdjustment_cb _hidl_cb) {
     _hidl_cb(mDefaultPictureAdjustment);
     return Void();
 }
 
 Return<bool> PictureAdjustment::setPictureAdjustment(
-    const ::vendor::lineage::livedisplay::V2_0::HSIC& hsic) {
+        const ::vendor::lineage::livedisplay::V2_0::HSIC& hsic) {
     hsic_config config = {0,
                           {static_cast<int32_t>(hsic.hue), hsic.saturation, hsic.intensity,
                            hsic.contrast, hsic.saturationThreshold}};

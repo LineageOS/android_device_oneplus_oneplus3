@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ using ::android::hardware::Return;
 using ::android::hardware::Void;
 
 class DisplayModes : public IDisplayModes {
-   public:
+  public:
     DisplayModes(std::shared_ptr<SDMController> controller, uint64_t cookie);
 
     bool isSupported();
@@ -42,7 +42,7 @@ class DisplayModes : public IDisplayModes {
     Return<void> getDefaultDisplayMode(getDefaultDisplayMode_cb _hidl_cb) override;
     Return<bool> setDisplayMode(int32_t modeID, bool makeDefault) override;
 
-   private:
+  private:
     std::shared_ptr<SDMController> mController;
     uint64_t mCookie;
     int32_t mActiveModeId;
