@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,24 +17,22 @@
 
 package org.lineageos.settings.doze;
 
-import android.content.Context;
-import android.content.Intent;
-import android.hardware.display.AmbientDisplayConfiguration;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.os.UserHandle;
-import android.support.v7.preference.PreferenceManager;
-import android.provider.Settings;
-import android.text.TextUtils;
-import android.util.Log;
-
-import java.util.List;
-
 import static android.provider.Settings.Secure.DOZE_ALWAYS_ON;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 
-public final class Utils {
+import android.content.Context;
+import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.hardware.display.AmbientDisplayConfiguration;
+import android.os.UserHandle;
+import android.provider.Settings;
+import android.support.v7.preference.PreferenceManager;
+import android.text.TextUtils;
+import android.util.Log;
+import java.util.List;
 
+public final class Utils {
     private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
 
@@ -50,15 +48,17 @@ public final class Utils {
     protected static final String GESTURE_POCKET_KEY = "gesture_pocket";
 
     protected static void startService(Context context) {
-        if (DEBUG) Log.d(TAG, "Starting service");
-        context.startServiceAsUser(new Intent(context, DozeService.class),
-                UserHandle.CURRENT);
+        if (DEBUG) {
+            Log.d(TAG, "Starting service");
+        }
+        context.startServiceAsUser(new Intent(context, DozeService.class), UserHandle.CURRENT);
     }
 
     protected static void stopService(Context context) {
-        if (DEBUG) Log.d(TAG, "Stopping service");
-        context.stopServiceAsUser(new Intent(context, DozeService.class),
-                UserHandle.CURRENT);
+        if (DEBUG) {
+            Log.d(TAG, "Stopping service");
+        }
+        context.stopServiceAsUser(new Intent(context, DozeService.class), UserHandle.CURRENT);
     }
 
     protected static void checkDozeService(Context context) {
@@ -70,33 +70,34 @@ public final class Utils {
     }
 
     protected static boolean isDozeEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(),
-                DOZE_ENABLED, 1) != 0;
+        return Settings.Secure.getInt(context.getContentResolver(), DOZE_ENABLED, 1) != 0;
     }
 
     protected static boolean enableDoze(Context context, boolean enable) {
-        return Settings.Secure.putInt(context.getContentResolver(),
-                DOZE_ENABLED, enable ? 1 : 0);
+        return Settings.Secure.putInt(context.getContentResolver(), DOZE_ENABLED, enable ? 1 : 0);
     }
 
     protected static void launchDozePulse(Context context) {
-        if (DEBUG) Log.d(TAG, "Launch doze pulse");
-        context.sendBroadcastAsUser(new Intent(DOZE_INTENT),
-                new UserHandle(UserHandle.USER_CURRENT));
+        if (DEBUG) {
+            Log.d(TAG, "Launch doze pulse");
+        }
+        context.sendBroadcastAsUser(
+                new Intent(DOZE_INTENT), new UserHandle(UserHandle.USER_CURRENT));
     }
 
     protected static boolean enableAlwaysOn(Context context, boolean enable) {
-        return Settings.Secure.putIntForUser(context.getContentResolver(),
-                DOZE_ALWAYS_ON, enable ? 1 : 0, UserHandle.USER_CURRENT);
+        return Settings.Secure.putIntForUser(context.getContentResolver(), DOZE_ALWAYS_ON,
+                enable ? 1 : 0, UserHandle.USER_CURRENT);
     }
 
     protected static boolean isAlwaysOnEnabled(Context context) {
-        final boolean enabledByDefault = context.getResources()
-                .getBoolean(com.android.internal.R.bool.config_dozeAlwaysOnEnabled);
+        final boolean enabledByDefault = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_dozeAlwaysOnEnabled);
 
-        return Settings.Secure.getIntForUser(context.getContentResolver(),
-                DOZE_ALWAYS_ON, alwaysOnDisplayAvailable(context) && enabledByDefault ? 1 : 0,
-                UserHandle.USER_CURRENT) != 0;
+        return Settings.Secure.getIntForUser(context.getContentResolver(), DOZE_ALWAYS_ON,
+                       alwaysOnDisplayAvailable(context) && enabledByDefault ? 1 : 0,
+                       UserHandle.USER_CURRENT)
+                != 0;
     }
 
     protected static boolean alwaysOnDisplayAvailable(Context context) {
@@ -104,8 +105,7 @@ public final class Utils {
     }
 
     protected static boolean isGestureEnabled(Context context, String gesture) {
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getBoolean(gesture, false);
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(gesture, false);
     }
 
     protected static boolean isPickUpEnabled(Context context) {

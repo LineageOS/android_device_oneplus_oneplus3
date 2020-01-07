@@ -9,26 +9,24 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
-
 import com.android.internal.app.IIFAAService;
 
-public class IFAAManagerFactory  extends IFAAManagerV3 {
+public class IFAAManagerFactory extends IFAAManagerV3 {
     public static IFAAManagerFactory mIFAAManagerFactory = null;
     private static final int BIOTypeFingerprint = 0x01;
     private static final int BIOTypeIris = 0x02;
 
     private static final int ACTIVITY_START_SUCCESS = 0;
-	private static final int ACTIVITY_START_FAILED = -1;
+    private static final int ACTIVITY_START_FAILED = -1;
 
-	private static final String TAG = "IFAAManagerFactory";
+    private static final String TAG = "IFAAManagerFactory";
 
     private static final String FP_SENSOR_LOCATION_PARAM =
             "{'type': 0, 'fullView': {'startX': 452, 'startY': 1970,'width': 174, 'height': 174, 'navConflict': true}}";
     static final String IFAA_SERVICE_PACKAGE = "com.oneplus.ifaaservice";
     static final String IFAA_SERVICE_CLASS = "com.oneplus.ifaaservice.IFAAService";
-    static final ComponentName IFAA_SERVICE_COMPONENT = new ComponentName(
-            IFAA_SERVICE_PACKAGE,
-            IFAA_SERVICE_CLASS);
+    static final ComponentName IFAA_SERVICE_COMPONENT =
+            new ComponentName(IFAA_SERVICE_PACKAGE, IFAA_SERVICE_CLASS);
     private IIFAAService mIFAAService = null;
     private static final int BIND_IFAASER_SERVICE_TIMEOUT = 3000;
 
@@ -42,8 +40,7 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
         return BIOTypeFingerprint;
     }
 
-    public void setExtInfo(int authType, String keyExtInfo, String valExtInfo) {
-    }
+    public void setExtInfo(int authType, String keyExtInfo, String valExtInfo) {}
 
     public String getExtInfo(int authType, String keyExtInfo) {
         if (IFAAManagerV3.KEY_GET_SENSOR_LOCATION.equals(keyExtInfo)) {
@@ -58,30 +55,29 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
             Slog.e(TAG, "startBIOManager" + context);
             Intent intent = new Intent();
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$SecuritySettingsActivity"));
+            intent.setComponent(new ComponentName("com.android.settings",
+                    "com.android.settings.Settings$SecuritySettingsActivity"));
             Slog.e(TAG, "OOS context" + context);
             context.startActivity(intent);
-         } catch (ActivityNotFoundException e) {
+        } catch (ActivityNotFoundException e) {
             e.printStackTrace();
             return ACTIVITY_START_FAILED;
-         } finally {
+        } finally {
             return ACTIVITY_START_SUCCESS;
-         }
+        }
     }
 
     public String getDeviceModel() {
-        //return Build.MODEL;
+        // return Build.MODEL;
         Slog.e(TAG, "device model");
         return "ONEPLUS-A3000";
     }
 
-    public int getVersion() {
-        return 3;
-    }
+    public int getVersion() { return 3; }
 
     public static IFAAManagerV3 getIFAAManager(Context context, int authType) {
-         Slog.e(TAG, "getIFAAManager");
-        if(mIFAAManagerFactory == null) {
+        Slog.e(TAG, "getIFAAManager");
+        if (mIFAAManagerFactory == null) {
             mIFAAManagerFactory = new IFAAManagerFactory(context);
             return mIFAAManagerFactory;
         } else {
@@ -89,8 +85,9 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
         }
     }
 
-    public byte[] processCmdV2(Context context, byte[] data){
-        //if(Build.DEBUG_ONEPLUS) Slog.i(TAG, "processCmdV2", new RuntimeException("IFAAManagerFactory").fillInStackTrace());
+    public byte[] processCmdV2(Context context, byte[] data) {
+        // if(Build.DEBUG_ONEPLUS) Slog.i(TAG, "processCmdV2", new
+        // RuntimeException("IFAAManagerFactory").fillInStackTrace());
 
         // set default return as null
         byte[] result = null;
@@ -109,7 +106,7 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
     }
 
     private void ensureIfaaService(Context context, int timeout) {
-        if(mIFAAService == null) {
+        if (mIFAAService == null) {
             Intent service = new Intent().setComponent(IFAA_SERVICE_COMPONENT);
             context.bindService(service, mConnection, Context.BIND_AUTO_CREATE);
             if (timeout > 0) {
@@ -129,7 +126,8 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mIFAAService = IIFAAService.Stub.asInterface(service);
-           // if(Build.DEBUG_ONEPLUS) Slog.i(TAG, "IFAAService was bound successfully: " + mIFAAService);
+            // if(Build.DEBUG_ONEPLUS) Slog.i(TAG, "IFAAService was bound successfully: " +
+            // mIFAAService);
             synchronized (mConnection) {
                 notifyAll();
             }
@@ -137,7 +135,7 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
 
         public void onServiceDisconnected(ComponentName name) {
             mIFAAService = null;
-           // if(Build.DEBUG_ONEPLUS) Slog.i(TAG, "IFAAService was unbound");
+            // if(Build.DEBUG_ONEPLUS) Slog.i(TAG, "IFAAService was unbound");
         }
     };
 }
