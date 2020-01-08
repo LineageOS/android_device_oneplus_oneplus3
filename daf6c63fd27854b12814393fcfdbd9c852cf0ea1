@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2b5b3cf_6f579bed",
+        "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 1,
+      "message": "Strange edit.",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 93
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d81935b2_96290f84",
+        "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 76
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db354b2f_0caa155f",
+        "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 1,
+      "message": "Strange edit.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 93
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0c5d4c8_5023b66c",
+        "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 101,
+        "startChar": 8,
+        "endLine": 101,
+        "endChar": 76
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1a9540e_1c8e0d07",
+        "filename": "doze/src/org/lineageos/settings/doze/Utils.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 1,
+      "message": "Empty line before java.util.List import missing.",
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9b298f8_0c9d33f0",
+        "filename": "doze/src/org/lineageos/settings/doze/Utils.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 1,
+      "message": "16 spaces?!?",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 23
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}

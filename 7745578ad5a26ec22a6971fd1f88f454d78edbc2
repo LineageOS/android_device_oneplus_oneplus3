@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98bed7a6_46bbf2a9",
+        "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 0,
+      "message": "This line removal is improper.",
+      "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07302919_a531487f",
+        "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 0,
+      "message": "Also improper removal.",
+      "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4d63e59_a7beeff5",
+        "filename": "pocketmode/src/org/lineageos/pocketmode/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-01-08T13:57:08Z",
+      "side": 0,
+      "message": "Improper line removal.",
+      "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
