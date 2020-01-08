@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3dc94411_121b1ae4",
+        "filename": "org.ifaa.android.manager/src/org/ifaa/android/manager/IFAAManagerFactory.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T13:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85dd6e46_2e3d9d63",
+      "range": {
+        "startLine": 131,
+        "startChar": 12,
+        "endLine": 131,
+        "endChar": 55
+      },
+      "revId": "4126cffa2380c75567af484709a4b289d15340b3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f26b1e6a_6ed0827c",
         "filename": "pocketmode/src/org/lineageos/pocketmode/PocketModeService.java",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "4126cffa2380c75567af484709a4b289d15340b3",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8537715_781f5cee",
+        "filename": "pocketmode/src/org/lineageos/pocketmode/PocketModeService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T13:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f26b1e6a_6ed0827c",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "4126cffa2380c75567af484709a4b289d15340b3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
