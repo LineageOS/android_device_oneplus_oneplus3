@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5fd0e42e_2a41207a",
+        "filename": "lineagehw/livedisplay/Types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T11:22:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d197147b_ae3061c7",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "e02adcba90f0b1c03412a1d21669a076089b18eb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "518a5d4d_e492f22c",
         "filename": "lineagehw/touch/service.cpp",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "e02adcba90f0b1c03412a1d21669a076089b18eb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6df2487_8693bd24",
+        "filename": "lineagehw/touch/service.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T11:22:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "518a5d4d_e492f22c",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "e02adcba90f0b1c03412a1d21669a076089b18eb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
