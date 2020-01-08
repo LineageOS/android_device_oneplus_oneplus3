@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "178cb4e4_78f113a8",
+        "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2b5b3cf_6f579bed",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 93
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d81935b2_96290f84",
         "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce11d8c4_0602f02f",
+        "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d81935b2_96290f84",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 76
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9214ca8a_5dc386fd",
+        "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db354b2f_0caa155f",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 93
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a0c5d4c8_5023b66c",
         "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "dba4198c_d8f45128",
+        "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c5d4c8_5023b66c",
+      "range": {
+        "startLine": 101,
+        "startChar": 8,
+        "endLine": 101,
+        "endChar": 76
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1a9540e_1c8e0d07",
         "filename": "doze/src/org/lineageos/settings/doze/Utils.java",
         "patchSetId": 8
@@ -108,6 +204,24 @@
       "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2caf0d3f_6e75c2cf",
+        "filename": "doze/src/org/lineageos/settings/doze/Utils.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1a9540e_1c8e0d07",
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     },
     {
       "key": {
@@ -131,6 +245,30 @@
       "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c29516b_9af9e6e6",
+        "filename": "doze/src/org/lineageos/settings/doze/Utils.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9b298f8_0c9d33f0",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 23
+      },
+      "revId": "daf6c63fd27854b12814393fcfdbd9c852cf0ea1",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }

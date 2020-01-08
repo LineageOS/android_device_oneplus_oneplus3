@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3b16eb4f_8e0e83d2",
+        "filename": "doze/src/org/lineageos/settings/doze/PickupSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "98bed7a6_46bbf2a9",
+      "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "07302919_a531487f",
         "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
         "patchSetId": 8
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "36b402f1_75087f48",
+        "filename": "doze/src/org/lineageos/settings/doze/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "07302919_a531487f",
+      "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4d63e59_a7beeff5",
         "filename": "pocketmode/src/org/lineageos/pocketmode/PocketSensor.java",
         "patchSetId": 8
@@ -50,6 +86,24 @@
       "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "389439ee_7c92914e",
+        "filename": "pocketmode/src/org/lineageos/pocketmode/PocketSensor.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 23798
+      },
+      "writtenOn": "2020-01-08T16:00:37Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "f4d63e59_a7beeff5",
+      "revId": "7745578ad5a26ec22a6971fd1f88f454d78edbc2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
