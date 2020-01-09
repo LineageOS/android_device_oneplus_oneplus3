@@ -1,5 +1,6 @@
 package org.ifaa.android.manager;
 
+import android.annotation.UnsupportedAppUsage;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
@@ -79,6 +80,7 @@ public class IFAAManagerFactory  extends IFAAManagerV3 {
         return 3;
     }
 
+    @UnsupportedAppUsage
     public static IFAAManagerV3 getIFAAManager(Context context, int authType) {
          Slog.e(TAG, "getIFAAManager");
         if(mIFAAManagerFactory == null) {
