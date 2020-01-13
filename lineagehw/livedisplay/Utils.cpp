@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,13 @@
  * limitations under the License.
  */
 
-#include <poll.h>
-#include <unistd.h>
+#include "Utils.h"
 
 #include <android-base/file.h>
 #include <android-base/strings.h>
 #include <cutils/sockets.h>
-
-#include "Utils.h"
+#include <poll.h>
+#include <unistd.h>
 
 namespace {
 struct sdm_feature_version {
@@ -33,7 +32,6 @@ struct sdm_feature_version {
 const std::string kLocalStoragePath = "/data/vendor/display/";
 const std::string kLocalModeId = "livedisplay_mode";
 const std::string kLocalInitialModeId = "livedisplay_initial_mode";
-
 }  // anonymous namespace
 
 namespace vendor {
@@ -41,12 +39,13 @@ namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
+namespace utils {
 
 using ::android::base::ReadFileToString;
 using ::android::base::Trim;
 using ::android::base::WriteStringToFile;
 
-int32_t Utils::readLocalModeId() {
+int32_t ReadLocalModeId() {
     std::string buf;
     if (ReadFileToString(kLocalStoragePath + kLocalModeId, &buf)) {
         return std::stoi(Trim(buf));
@@ -54,11 +53,11 @@ int32_t Utils::readLocalModeId() {
     return -1;
 }
 
-bool Utils::writeLocalModeId(int32_t id) {
+bool WriteLocalModeId(int32_t id) {
     return WriteStringToFile(std::to_string(id), kLocalStoragePath + kLocalModeId);
 }
 
-int32_t Utils::readInitialModeId() {
+int32_t ReadInitialModeId() {
     std::string buf;
     if (ReadFileToString(kLocalStoragePath + kLocalInitialModeId, &buf)) {
         return std::stoi(Trim(buf));
@@ -66,11 +65,11 @@ int32_t Utils::readInitialModeId() {
     return -1;
 }
 
-bool Utils::writeInitialModeId(int32_t id) {
+bool WriteInitialModeId(int32_t id) {
     return WriteStringToFile(std::to_string(id), kLocalStoragePath + kLocalInitialModeId);
 }
 
-int Utils::sendDPPSCommand(char* buf, size_t len) {
+int SendDPPSCommand(char* buf, size_t len) {
     int rc = 0;
     int sock = socket_local_client("pps", ANDROID_SOCKET_NAMESPACE_RESERVED, SOCK_STREAM);
     if (sock < 0) {
@@ -102,12 +101,11 @@ int Utils::sendDPPSCommand(char* buf, size_t len) {
     return rc;
 }
 
-bool Utils::checkFeatureVersion(const std::shared_ptr<SDMController>& controller, uint64_t cookie,
-                                feature_ver_sw feature) {
+bool CheckFeatureVersion(const std::shared_ptr<SDMController>& controller, FeatureVerSw feature) {
     sdm_feature_version version;
     uint32_t flags = 0;
 
-    if (controller->get_feature_version(cookie, feature, &version, &flags) != 0) {
+    if (controller->getFeatureVersion(feature, &version, &flags) != 0) {
         return false;
     }
 
@@ -118,6 +116,7 @@ bool Utils::checkFeatureVersion(const std::shared_ptr<SDMController>& controller
     return true;
 }
 
+}  // namespace utils
 }  // namespace sdm
 }  // namespace V2_0
 }  // namespace livedisplay

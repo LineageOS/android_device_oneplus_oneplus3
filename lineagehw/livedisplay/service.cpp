@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <dlfcn.h>
 
 #define LOG_TAG "vendor.lineage.livedisplay@2.0-service.oneplus3"
 
@@ -22,134 +21,67 @@
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
 
+#include <functional>
+
 #include "AdaptiveBacklight.h"
 #include "DisplayModes.h"
 #include "PictureAdjustment.h"
 #include "SDMController.h"
 #include "SunlightEnhancement.h"
 
-using android::OK;
-using android::sp;
-using android::status_t;
-using android::hardware::configureRpcThreadpool;
-using android::hardware::joinRpcThreadpool;
+using ::android::OK;
+using ::android::sp;
+using ::android::hardware::configureRpcThreadpool;
+using ::android::hardware::joinRpcThreadpool;
 
-using ::vendor::lineage::livedisplay::V2_0::IAdaptiveBacklight;
-using ::vendor::lineage::livedisplay::V2_0::IDisplayModes;
-using ::vendor::lineage::livedisplay::V2_0::IPictureAdjustment;
-using ::vendor::lineage::livedisplay::V2_0::ISunlightEnhancement;
 using ::vendor::lineage::livedisplay::V2_0::sdm::AdaptiveBacklight;
 using ::vendor::lineage::livedisplay::V2_0::sdm::DisplayModes;
 using ::vendor::lineage::livedisplay::V2_0::sdm::PictureAdjustment;
 using ::vendor::lineage::livedisplay::V2_0::sdm::SDMController;
 using ::vendor::lineage::livedisplay::V2_0::sysfs::SunlightEnhancement;
 
+bool RegisterSdmServices() {
+    std::shared_ptr<SDMController> controller = std::make_shared<SDMController>();
+    sp<DisplayModes> dm = new DisplayModes(controller);
+    sp<PictureAdjustment> pa = new PictureAdjustment(controller);
+
+    // Update default PA on setDisplayMode
+    dm->registerCb(std::bind(&PictureAdjustment::updateDefaultPictureAdjustment, pa));
+
+    return dm->registerAsService() == OK && pa->registerAsService() == OK;
+}
+
+bool RegisterSysfsServices() {
+    if (AdaptiveBacklight::isSupported()) {
+        sp<AdaptiveBacklight> ab = new AdaptiveBacklight();
+        if (ab->registerAsService() != OK) {
+            return false;
+        }
+    }
+
+    if (SunlightEnhancement::isSupported()) {
+        sp<SunlightEnhancement> se = new SunlightEnhancement();
+        if (se->registerAsService() != OK) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 int main() {
-    // Vendor backend
-    std::shared_ptr<SDMController> controller;
-    uint64_t cookie = 0;
-
-    // HIDL frontend
-    sp<AdaptiveBacklight> ab;
-    sp<DisplayModes> dm;
-    sp<PictureAdjustment> pa;
-    sp<SunlightEnhancement> se;
-
-    status_t status = OK;
-
     android::ProcessState::initWithDriver("/dev/vndbinder");
 
-    LOG(INFO) << "LiveDisplay HAL service is starting.";
-
-    controller = std::make_shared<SDMController>();
-    if (controller == nullptr) {
-        LOG(ERROR) << "Failed to create SDMController";
-        goto shutdown;
-    }
-
-    status = controller->init(&cookie, 0);
-    if (status != OK) {
-        LOG(ERROR) << "Failed to initialize SDMController";
-        goto shutdown;
-    }
-
-    ab = new AdaptiveBacklight();
-    if (ab == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL AdaptiveBacklight Iface, exiting.";
-        goto shutdown;
-    }
-
-    dm = new DisplayModes(controller, cookie);
-    if (dm == nullptr) {
-        LOG(ERROR) << "Can not create an instance of LiveDisplay HAL DisplayModes Iface, exiting.";
-        goto shutdown;
-    }
-
-    pa = new PictureAdjustment(controller, cookie);
-    if (pa == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL PictureAdjustment Iface, exiting.";
-        goto shutdown;
-    }
-
-    se = new SunlightEnhancement();
-    if (se == nullptr) {
-        LOG(ERROR)
-            << "Can not create an instance of LiveDisplay HAL SunlightEnhancement Iface, exiting.";
-        goto shutdown;
-    }
-
-    if (!dm->isSupported() && !pa->isSupported()) {
-        // Backend isn't ready yet, so restart and try again
-        goto shutdown;
-    }
+    LOG(DEBUG) << "LiveDisplay HAL service is starting.";
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
-    if (ab->isSupported()) {
-        status = ab->registerAsService();
-        if (status != OK) {
-            LOG(ERROR) << "Could not register service for LiveDisplay HAL AdaptiveBacklight Iface ("
-                       << status << ")";
-            goto shutdown;
-        }
+    if (RegisterSdmServices() && RegisterSysfsServices()) {
+        LOG(DEBUG) << "LiveDisplay HAL service is ready.";
+        joinRpcThreadpool();
+    } else {
+        LOG(ERROR) << "Could not register service for LiveDisplay HAL";
     }
-
-    if (dm->isSupported()) {
-        status = dm->registerAsService();
-        if (status != OK) {
-            LOG(ERROR) << "Could not register service for LiveDisplay HAL DisplayModes Iface ("
-                       << status << ")";
-            goto shutdown;
-        }
-    }
-
-    if (pa->isSupported()) {
-        status = pa->registerAsService();
-        if (status != OK) {
-            LOG(ERROR) << "Could not register service for LiveDisplay HAL PictureAdjustment Iface ("
-                       << status << ")";
-            goto shutdown;
-        }
-    }
-
-    if (se->isSupported()) {
-        status = se->registerAsService();
-        if (status != OK) {
-            LOG(ERROR) << "Could not register service for LiveDisplay HAL SunlightEnhancement Iface"
-                       << " (" << status << ")";
-            goto shutdown;
-        }
-    }
-
-    LOG(INFO) << "LiveDisplay HAL service is ready.";
-    joinRpcThreadpool();
-    // Should not pass this line
-
-shutdown:
-    // Cleanup what we started
-    controller->deinit(cookie, 0);
 
     // In normal operation, we don't expect the thread pool to shutdown
     LOG(ERROR) << "LiveDisplay HAL service is shutting down.";
