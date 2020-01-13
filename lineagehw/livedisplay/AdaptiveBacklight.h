@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_ADAPTIVEBACKLIGHT_H
-#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_ADAPTIVEBACKLIGHT_H
+#pragma once
 
 #include <vendor/lineage/livedisplay/2.0/IAdaptiveBacklight.h>
 
@@ -28,15 +27,15 @@ namespace sdm {
 using ::android::hardware::Return;
 
 class AdaptiveBacklight : public IAdaptiveBacklight {
-   public:
-    bool isSupported();
+  public:
+    static bool isSupported();
 
     // Methods from ::vendor::lineage::livedisplay::V2_0::IAdaptiveBacklight follow.
     Return<bool> isEnabled() override;
     Return<bool> setEnabled(bool enabled) override;
 
-   private:
-    bool mEnabled = false;
+  private:
+    bool enabled_ = false;
 };
 
 }  // namespace sdm
@@ -44,5 +43,3 @@ class AdaptiveBacklight : public IAdaptiveBacklight {
 }  // namespace livedisplay
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_ADAPTIVEBACKLIGHT_H

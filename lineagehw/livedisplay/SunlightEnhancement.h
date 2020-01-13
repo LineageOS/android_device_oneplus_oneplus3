@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SUNLIGHTENHANCEMENT_H
-#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SUNLIGHTENHANCEMENT_H
+#pragma once
 
 #include <vendor/lineage/livedisplay/2.0/ISunlightEnhancement.h>
 
@@ -29,8 +28,8 @@ using ::android::hardware::Return;
 using ::android::hardware::Void;
 
 class SunlightEnhancement : public ISunlightEnhancement {
-   public:
-    bool isSupported();
+  public:
+    static bool isSupported();
 
     // Methods from ::vendor::lineage::livedisplay::V2_0::ISunlightEnhancement follow.
     Return<bool> isEnabled() override;
@@ -42,5 +41,3 @@ class SunlightEnhancement : public ISunlightEnhancement {
 }  // namespace livedisplay
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SUNLIGHTENHANCEMENT_H

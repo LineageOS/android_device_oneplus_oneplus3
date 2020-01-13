@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDM_TYPES_H
-#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDM_TYPES_H
+#pragma once
 
 namespace vendor {
 namespace lineage {
@@ -23,7 +22,7 @@ namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
 
-enum feature_ver_sw {
+enum FeatureVerSw {
     FEATURE_VER_SW_API,
     FEATURE_VER_SW_PA_API,
     FEATURE_VER_SW_MEMCOLOR_API,
@@ -39,5 +38,3 @@ enum feature_ver_sw {
 }  // namespace livedisplay
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDM_TYPES_H

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDM_UTILS_H
-#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDM_UTILS_H
+#pragma once
 
 #include "SDMController.h"
 #include "Types.h"
@@ -26,22 +25,18 @@ namespace lineage {
 namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
+namespace utils {
 
-class Utils {
-   public:
-    static int32_t readLocalModeId();
-    static bool writeLocalModeId(int32_t id);
-    static int32_t readInitialModeId();
-    static bool writeInitialModeId(int32_t id);
-    static int sendDPPSCommand(char* buf, size_t len);
-    static bool checkFeatureVersion(const std::shared_ptr<SDMController>& controller,
-                                    uint64_t cookie, feature_ver_sw feature);
-};
+int32_t ReadLocalModeId();
+bool WriteLocalModeId(int32_t id);
+int32_t ReadInitialModeId();
+bool WriteInitialModeId(int32_t id);
+int SendDPPSCommand(char* buf, size_t len);
+bool CheckFeatureVersion(const std::shared_ptr<SDMController>& controller, FeatureVerSw feature);
 
+}  // namespace utils
 }  // namespace sdm
 }  // namespace V2_0
 }  // namespace livedisplay
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_SDM_UTILS_H
