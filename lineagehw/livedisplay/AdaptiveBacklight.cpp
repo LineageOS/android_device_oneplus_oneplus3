@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-#include <android-base/properties.h>
+#define LOG_TAG "vendor.lineage.livedisplay@2.0-impl.oneplus3"
 
 #include "AdaptiveBacklight.h"
+
+#include <android-base/logging.h>
+#include <android-base/properties.h>
+
 #include "Utils.h"
 
 namespace {
@@ -24,6 +28,16 @@ constexpr size_t kDppsBufSize = 64;
 constexpr char kFossOn[] = "foss:on";
 constexpr char kFossOff[] = "foss:off";
 constexpr char kFossProperty[] = "ro.vendor.display.foss";
+
+using ::android::base::GetBoolProperty;
+
+bool IsSupported() {
+    bool supported = GetBoolProperty(kFossProperty, false);
+    if (!supported) {
+        LOG(ERROR) << "AdaptiveBacklight not supported!";
+    }
+    return supported;
+}
 }  // anonymous namespace
 
 namespace vendor {
@@ -32,27 +46,28 @@ namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
 
-using ::android::base::GetBoolProperty;
-
-bool AdaptiveBacklight::isSupported() {
-    return GetBoolProperty(kFossProperty, false);
-}
-
 // Methods from ::vendor::lineage::livedisplay::V2_0::IAdaptiveBacklight follow.
 Return<bool> AdaptiveBacklight::isEnabled() {
-    return mEnabled;
+    if (!IsSupported()) {
+        return false;
+    }
+    return enabled_;
 }
 
 Return<bool> AdaptiveBacklight::setEnabled(bool enabled) {
-    if (mEnabled == enabled) {
+    if (!IsSupported()) {
+        return false;
+    }
+
+    if (enabled_ == enabled) {
         return true;
     }
 
     char buf[kDppsBufSize];
     sprintf(buf, "%s", enabled ? kFossOn : kFossOff);
-    if (Utils::sendDPPSCommand(buf, kDppsBufSize) == 0) {
+    if (utils::SendDPPSCommand(buf, kDppsBufSize) == 0) {
         if (strncmp(buf, "Success", 7) == 0) {
-            mEnabled = enabled;
+            enabled_ = enabled;
             return true;
         }
     }

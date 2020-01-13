@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018-2019 The LineageOS Project
+ * Copyright (C) 2018-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-#include <android-base/logging.h>
-#include <dlfcn.h>
+#define LOG_TAG "vendor.lineage.livedisplay@2.0-impl.oneplus3"
 
 #include "SDMController.h"
 
+#include <android-base/logging.h>
+#include <dlfcn.h>
+
 #define LOAD_SDM_FUNCTION(name) \
-    mFn_##name = loadFunction<disp_api_##name>(mHandle, "disp_api_" #name);
+    mFn_##name = loadFunction<disp_api_##name>(handle_, "disp_api_" #name);
 
 #define CLOSE_SDM_FUNCTION(name) mFn_##name = nullptr;
 
@@ -89,9 +91,21 @@ SDMController::SDMController() {
         LOG(ERROR) << "DLOPEN failed for " << kFilename << " (" << dlerror() << ")";
         return;
     }
-    mHandle = handle;
+    handle_ = handle;
 
     FOR_EACH_FUNCTION(LOAD_SDM_FUNCTION)
+
+    // Initialize SDM backend
+    uint64_t hctx = 0;
+    if (init(&hctx, 0) == 0) {
+        hctx_ = hctx;
+    } else {
+        LOG(FATAL) << "Failed to initialize SDM backend";
+    }
+}
+
+SDMController::~SDMController() {
+    deinit(hctx_, 0);
 }
 
 int32_t SDMController::init(uint64_t* hctx, uint32_t flags) {
@@ -102,68 +116,62 @@ int32_t SDMController::deinit(uint64_t hctx, uint32_t flags) {
     CONTROLLER_CHECK(deinit, hctx, flags);
 }
 
-int32_t SDMController::get_global_color_balance_range(uint64_t hctx, uint32_t disp_id,
-                                                      void* range) {
-    CONTROLLER_CHECK(get_global_color_balance_range, hctx, disp_id, range);
+int32_t SDMController::get_global_color_balance_range(uint32_t disp_id, void* range) {
+    CONTROLLER_CHECK(get_global_color_balance_range, hctx_, disp_id, range);
 }
 
-int32_t SDMController::set_global_color_balance(uint64_t hctx, uint32_t disp_id, int32_t warmness,
+int32_t SDMController::set_global_color_balance(uint32_t disp_id, int32_t warmness,
                                                 uint32_t flags) {
-    CONTROLLER_CHECK(set_global_color_balance, hctx, disp_id, warmness, flags);
+    CONTROLLER_CHECK(set_global_color_balance, hctx_, disp_id, warmness, flags);
 }
 
-int32_t SDMController::get_global_color_balance(uint64_t hctx, uint32_t disp_id, int32_t* warmness,
+int32_t SDMController::get_global_color_balance(uint32_t disp_id, int32_t* warmness,
                                                 uint32_t* flags) {
-    CONTROLLER_CHECK(get_global_color_balance, hctx, disp_id, warmness, flags);
+    CONTROLLER_CHECK(get_global_color_balance, hctx_, disp_id, warmness, flags);
 }
 
-int32_t SDMController::get_num_display_modes(uint64_t hctx, uint32_t disp_id, uint32_t mode_type,
+int32_t SDMController::get_num_display_modes(uint32_t disp_id, uint32_t mode_type,
                                              int32_t* mode_cnt, uint32_t* flags) {
-    CONTROLLER_CHECK(get_num_display_modes, hctx, disp_id, mode_type, mode_cnt, flags);
+    CONTROLLER_CHECK(get_num_display_modes, hctx_, disp_id, mode_type, mode_cnt, flags);
 }
 
-int32_t SDMController::get_display_modes(uint64_t hctx, uint32_t disp_id, uint32_t mode_type,
-                                         void* modes, int32_t mode_cnt, uint32_t* flags) {
-    CONTROLLER_CHECK(get_display_modes, hctx, disp_id, mode_type, modes, mode_cnt, flags);
+int32_t SDMController::get_display_modes(uint32_t disp_id, uint32_t mode_type, void* modes,
+                                         int32_t mode_cnt, uint32_t* flags) {
+    CONTROLLER_CHECK(get_display_modes, hctx_, disp_id, mode_type, modes, mode_cnt, flags);
 }
 
-int32_t SDMController::get_active_display_mode(uint64_t hctx, uint32_t disp_id, int32_t* mode_id,
-                                               uint32_t* mask, uint32_t* flags) {
-    CONTROLLER_CHECK(get_active_display_mode, hctx, disp_id, mode_id, mask, flags);
+int32_t SDMController::get_active_display_mode(uint32_t disp_id, int32_t* mode_id, uint32_t* mask,
+                                               uint32_t* flags) {
+    CONTROLLER_CHECK(get_active_display_mode, hctx_, disp_id, mode_id, mask, flags);
 }
 
-int32_t SDMController::set_active_display_mode(uint64_t hctx, uint32_t disp_id, int32_t mode_id,
-                                               uint32_t flags) {
-    CONTROLLER_CHECK(set_active_display_mode, hctx, disp_id, mode_id, flags);
+int32_t SDMController::set_active_display_mode(uint32_t disp_id, int32_t mode_id, uint32_t flags) {
+    CONTROLLER_CHECK(set_active_display_mode, hctx_, disp_id, mode_id, flags);
 }
 
-int32_t SDMController::set_default_display_mode(uint64_t hctx, uint32_t disp_id, int32_t mode_id,
-                                                uint32_t flags) {
-    CONTROLLER_CHECK(set_default_display_mode, hctx, disp_id, mode_id, flags);
+int32_t SDMController::set_default_display_mode(uint32_t disp_id, int32_t mode_id, uint32_t flags) {
+    CONTROLLER_CHECK(set_default_display_mode, hctx_, disp_id, mode_id, flags);
 }
 
-int32_t SDMController::get_default_display_mode(uint64_t hctx, uint32_t disp_id, int32_t* mode_id,
+int32_t SDMController::get_default_display_mode(uint32_t disp_id, int32_t* mode_id,
                                                 uint32_t* flags) {
-    CONTROLLER_CHECK(get_default_display_mode, hctx, disp_id, mode_id, flags);
+    CONTROLLER_CHECK(get_default_display_mode, hctx_, disp_id, mode_id, flags);
 }
 
-int32_t SDMController::get_global_pa_range(uint64_t hctx, uint32_t disp_id, void* range) {
-    CONTROLLER_CHECK(get_global_pa_range, hctx, disp_id, range);
+int32_t SDMController::get_global_pa_range(uint32_t disp_id, void* range) {
+    CONTROLLER_CHECK(get_global_pa_range, hctx_, disp_id, range);
 }
 
-int32_t SDMController::get_global_pa_config(uint64_t hctx, uint32_t disp_id, uint32_t* enable,
-                                            void* cfg) {
-    CONTROLLER_CHECK(get_global_pa_config, hctx, disp_id, enable, cfg);
+int32_t SDMController::get_global_pa_config(uint32_t disp_id, uint32_t* enable, void* cfg) {
+    CONTROLLER_CHECK(get_global_pa_config, hctx_, disp_id, enable, cfg);
 }
 
-int32_t SDMController::set_global_pa_config(uint64_t hctx, uint32_t disp_id, uint32_t enable,
-                                            void* cfg) {
-    CONTROLLER_CHECK(set_global_pa_config, hctx, disp_id, enable, cfg);
+int32_t SDMController::set_global_pa_config(uint32_t disp_id, uint32_t enable, void* cfg) {
+    CONTROLLER_CHECK(set_global_pa_config, hctx_, disp_id, enable, cfg);
 }
 
-int32_t SDMController::get_feature_version(uint64_t hctx, uint32_t feature_id, void* ver,
-                                           uint32_t* flags) {
-    CONTROLLER_CHECK(get_feature_version, hctx, feature_id, ver, flags);
+int32_t SDMController::get_feature_version(uint32_t feature_id, void* ver, uint32_t* flags) {
+    CONTROLLER_CHECK(get_feature_version, hctx_, feature_id, ver, flags);
 }
 
 }  // namespace sdm
