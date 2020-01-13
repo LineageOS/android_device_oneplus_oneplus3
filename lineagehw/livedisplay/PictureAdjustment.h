@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The LineageOS Project
+ * Copyright (C) 2019-2020 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#ifndef VENDOR_LINEAGE_LIVEDISPLAY_V2_0_PICTUREADJUSTMENT_H
-#define VENDOR_LINEAGE_LIVEDISPLAY_V2_0_PICTUREADJUSTMENT_H
+#pragma once
 
+#include <android-base/macros.h>
 #include <vendor/lineage/livedisplay/2.0/IPictureAdjustment.h>
 
 #include "SDMController.h"
@@ -31,10 +31,10 @@ using ::android::hardware::Return;
 using ::android::hardware::Void;
 
 class PictureAdjustment : public IPictureAdjustment {
-   public:
-    PictureAdjustment(std::shared_ptr<SDMController> controller, uint64_t cookie);
+  public:
+    explicit PictureAdjustment(std::shared_ptr<SDMController> controller);
 
-    bool isSupported();
+    void updateDefaultPictureAdjustment();
 
     // Methods from ::vendor::lineage::livedisplay::V2_0::IPictureAdjustment follow.
     Return<void> getHueRange(getHueRange_cb _hidl_cb) override;
@@ -45,16 +45,16 @@ class PictureAdjustment : public IPictureAdjustment {
     Return<void> getPictureAdjustment(getPictureAdjustment_cb _hidl_cb) override;
     Return<void> getDefaultPictureAdjustment(getDefaultPictureAdjustment_cb _hidl_cb) override;
     Return<bool> setPictureAdjustment(
-        const ::vendor::lineage::livedisplay::V2_0::HSIC& hsic) override;
+            const ::vendor::lineage::livedisplay::V2_0::HSIC& hsic) override;
 
-    static void updateDefaultPictureAdjustment();
+  private:
+    std::shared_ptr<SDMController> controller_;
+    HSIC default_pa_;
 
-   private:
-    std::shared_ptr<SDMController> mController;
-    uint64_t mCookie;
-    HSIC mDefaultPictureAdjustment;
-
+    bool isSupported();
     HSIC getPictureAdjustmentInternal();
+
+    DISALLOW_IMPLICIT_CONSTRUCTORS(PictureAdjustment);
 };
 
 }  // namespace sdm
@@ -62,5 +62,3 @@ class PictureAdjustment : public IPictureAdjustment {
 }  // namespace livedisplay
 }  // namespace lineage
 }  // namespace vendor
-
-#endif  // VENDOR_LINEAGE_LIVEDISPLAY_V2_0_PICTUREADJUSTMENT_H
