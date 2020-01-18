@@ -44,7 +44,11 @@
         <item name="android:layout">@layout/preference_material_settings</item>
     </style>
 
-    <style name="Theme.Main.PreferenceTheme" />
+    <style name="Theme.Main.PreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
+        <item name="preferenceCategoryTitleTextAppearance">
+            @style/Theme.Main.TextAppearance.CategoryTitle
+        </item>
+    </style>
 
     <style name="Theme.Main.SwitchPreferenceStyle" parent="@style/Theme.Main.PreferenceStyle">
         <item name="widgetLayout">@*android:layout/preference_widget_switch</item>
@@ -56,5 +60,13 @@
     <style name="Theme.Main.SwitchBar.Switch">
         <item name="android:trackTint">@color/switchbar_switch_track_tint</item>
         <item name="android:thumbTint">@color/switchbar_switch_thumb_tint</item>
+    </style>
+
+    <style name="Theme.Main.TextAppearance.CategoryTitle"
+           parent="@*android:style/TextAppearance.DeviceDefault.Body2">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">11sp</item>
+        <!-- 0.8 Spacing, 0.8/11 = 0.072727273 -->
+        <item name="android:letterSpacing">0.072727273</item>
     </style>
 </resources>
