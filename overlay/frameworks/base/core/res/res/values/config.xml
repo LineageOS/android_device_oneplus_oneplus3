@@ -437,4 +437,8 @@
     <!-- Does the device supports fast charging -->
     <bool name="config_FastChargingLedSupported">true</bool>
 
+    <!-- Smart replies in notifications: Whether we disable the feature unless the app targets P -->
+    <bool name="config_smart_replies_in_notifications_requires_targeting_p">false</bool>
+
+
 </resources>
