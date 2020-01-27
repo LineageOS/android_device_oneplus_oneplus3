@@ -245,7 +245,8 @@ PRODUCT_PACKAGES += \
     android.hardware.configstore@1.0-service \
     android.hardware.broadcastradio@1.0-impl \
     vendor.display.color@1.0-service \
-    vendor.display.color@1.0-impl
+    vendor.display.color@1.0-impl \
+    vendor.display.config@1.11
 
 PRODUCT_PROPERTY_OVERRIDES  += \
     ro.opengles.version=196610 \
