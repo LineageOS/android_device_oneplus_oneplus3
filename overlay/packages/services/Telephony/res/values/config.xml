@@ -42,4 +42,10 @@
 
     <!-- Show Preferred Network Type options in No SIM case -->
     <bool name="config_no_sim_display_network_modes">true</bool>
+
+    <!-- String indicating the package name of the device ImsService implementation for MMTEL -->
+    <string name="config_ims_mmtel_package">org.codeaurora.ims</string>
+
+    <!-- String indicating the package name of the device ImsService implementation for RCS -->
+    <string name="config_ims_rcs_package">org.codeaurora.ims</string>
 </resources>
