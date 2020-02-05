@@ -260,12 +260,17 @@ public:
     virtual LocationError setBlacklistSvSync(const GnssSvIdConfig& config);
     virtual void setBlacklistSv(const GnssSvIdConfig& config);
     virtual void getBlacklistSv();
-    virtual void setConstellationControl(const GnssSvTypeConfig& config);
+    virtual void setConstellationControl(const GnssSvTypeConfig& config,
+                                         LocApiResponse *adapterResponse=nullptr);
     virtual void getConstellationControl();
-    virtual void resetConstellationControl();
-    virtual LocationError setConstrainedTuncMode(bool enabled, float tuncConstraint,
-            uint32_t energyBudget);
-    virtual LocationError setPositionAssistedClockEstimatorMode(bool enabled);
+    virtual void resetConstellationControl(LocApiResponse *adapterResponse=nullptr);
+
+    virtual void setConstrainedTuncMode(bool enabled,
+                                        float tuncConstraint,
+                                        uint32_t energyBudget,
+                                        LocApiResponse* adapterResponse=nullptr);
+    virtual void setPositionAssistedClockEstimatorMode(bool enabled,
+                                                       LocApiResponse* adapterResponse=nullptr);
     virtual LocationError getGnssEnergyConsumed();
 
     virtual void addGeofence(uint32_t clientId, const GeofenceOption& options,
@@ -312,6 +317,7 @@ public:
     void updateEvtMask();
     void updateNmeaMask(uint32_t mask);
 
+    virtual void updateSystemPowerState(PowerStateType systemPowerState);
 };
 
 typedef LocApiBase* (getLocApi_t)(LOC_API_ADAPTER_EVENT_MASK_T exMask,

@@ -176,6 +176,7 @@ extern char* get_timestamp(char* str, unsigned long buf_size);
 #define LOG_I(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGI, ID, WHAT, SPEC, VAL)
 #define LOG_V(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGV, ID, WHAT, SPEC, VAL)
 #define LOG_E(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGE, ID, WHAT, SPEC, VAL)
+#define LOG_D(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGD, ID, WHAT, SPEC, VAL)
 
 #define ENTRY_LOG() LOG_V(ENTRY_TAG, __FUNCTION__, %s, "")
 #define EXIT_LOG(SPEC, VAL) LOG_V(EXIT_TAG, __FUNCTION__, SPEC, VAL)
@@ -193,6 +194,8 @@ extern char* get_timestamp(char* str, unsigned long buf_size);
 #define EXIT_LOG_CALLFLOW(SPEC, VAL) LOG_I(TO_MODEM, __FUNCTION__, SPEC, VAL)
 // Used for logging callflow from Modem(TO_MODEM, __FUNCTION__, %s, "")
 #define MODEM_LOG_CALLFLOW(SPEC, VAL) LOG_I(FROM_MODEM, __FUNCTION__, SPEC, VAL)
+// Used for logging high frequency callflow from Modem(TO_MODEM, __FUNCTION__, %s, "")
+#define MODEM_LOG_CALLFLOW_DEBUG(SPEC, VAL) LOG_D(FROM_MODEM, __FUNCTION__, SPEC, VAL)
 // Used for logging callflow to Android Framework
 #define CALLBACK_LOG_CALLFLOW(CB, SPEC, VAL) LOG_I(TO_AFW, CB, SPEC, VAL)
 

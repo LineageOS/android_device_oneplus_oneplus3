@@ -15,8 +15,6 @@ GNSS_CFLAGS := \
     -Wno-error=switch \
     -Wno-error=date-time
 
-LOCAL_SANITIZE := signed-integer-overflow, unsigned-integer-overflow
-
 # GPS-HIDL
 GNSS_HIDL_1_0_TARGET_LIST := msm8960
 GNSS_HIDL_1_0_TARGET_LIST += msm8974
@@ -38,6 +36,7 @@ GNSS_HIDL_2_0_TARGET_LIST += qcs605
 GNSS_HIDL_2_0_TARGET_LIST += sdm845
 GNSS_HIDL_2_0_TARGET_LIST += sdm660
 GNSS_HIDL_2_0_TARGET_LIST += msmnile
+GNSS_HIDL_2_0_TARGET_LIST += sdmshrike
 GNSS_HIDL_2_0_TARGET_LIST += $(MSMSTEPPE)
 GNSS_HIDL_2_0_TARGET_LIST += $(TRINKET)
 GNSS_HIDL_2_0_TARGET_LIST += kona
@@ -67,3 +66,7 @@ GNSS_HIDL_LEGACY_MEASURMENTS_TARGET_LIST += sdm660
 ifneq (,$(filter $(GNSS_HIDL_LEGACY_MEASURMENTS_TARGET_LIST),$(TARGET_BOARD_PLATFORM)))
 GNSS_HIDL_LEGACY_MEASURMENTS = true
 endif
+
+# Activate the following two lines for regression testing
+#GNSS_SANITIZE := address cfi alignment bounds null unreachable integer
+#GNSS_SANITIZE_DIAG := address cfi alignment bounds null unreachable integer

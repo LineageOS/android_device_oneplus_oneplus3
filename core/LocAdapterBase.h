@@ -70,9 +70,11 @@ protected:
     LocApiBase* mLocApi;
     LocAdapterProxyBase* mLocAdapterProxyBase;
     const MsgTask* mMsgTask;
+    bool mAdapterAdded;
+
     inline LocAdapterBase(const MsgTask* msgTask) :
         mIsMaster(false), mEvtMask(0), mContext(NULL), mLocApi(NULL),
-        mLocAdapterProxyBase(NULL), mMsgTask(msgTask) {}
+        mLocAdapterProxyBase(NULL), mMsgTask(msgTask), mAdapterAdded(false) {}
 
     /* ==== CLIENT ========================================================================= */
     typedef std::map<LocationAPI*, LocationCallbacks> ClientDataMap;
@@ -89,9 +91,27 @@ protected:
 
 public:
     inline virtual ~LocAdapterBase() { mLocApi->removeAdapter(this); }
+    // When waitForDoneInit is not specified or specified as false,
+    // handleEngineUpEvent may be called on the child adapter object from
+    // a different thread before the constructor of the child
+    // object finishes.
+    //
+    // If the handleEngineUpEvent relies on member variables of the constructor
+    // of the child adapter to be initialized first, we need to specify the
+    // waitForDoneInit to *TRUE* to delay handleEngineUpEvent to get called
+    // until when the child adapter finishes its initialization and notify
+    // LocAdapterBase via doneInit method.
     LocAdapterBase(const LOC_API_ADAPTER_EVENT_MASK_T mask,
                    ContextBase* context, bool isMaster = false,
-                   LocAdapterProxyBase *adapterProxyBase = NULL);
+                   LocAdapterProxyBase *adapterProxyBase = NULL,
+                   bool waitForDoneInit = false);
+
+    inline void doneInit() {
+        if (!mAdapterAdded) {
+            mLocApi->addAdapter(this);
+            mAdapterAdded = true;
+        }
+    }
 
     inline LOC_API_ADAPTER_EVENT_MASK_T
         checkMask(LOC_API_ADAPTER_EVENT_MASK_T mask) const {

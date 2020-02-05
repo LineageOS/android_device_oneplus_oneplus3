@@ -56,6 +56,10 @@ libloc_core_la_LDFLAGS = -Wl,-z,defs -lpthread -shared -version-info 1:0:0
 libloc_core_la_CPPFLAGS = $(AM_CFLAGS) $(AM_CPPFLAGS)
 endif
 
+if USE_FEATURE_AUTOMOTIVE
+AM_CFLAGS += -DFEATURE_AUTOMOTIVE
+endif
+
 libloc_core_la_LIBADD = -ldl $(GPSUTILS_LIBS)
 
 #Create and Install libraries

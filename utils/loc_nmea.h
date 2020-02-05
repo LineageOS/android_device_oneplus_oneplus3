@@ -79,6 +79,7 @@ void loc_nmea_generate_pos(const UlpLocation &location,
                                const GpsLocationExtended &locationExtended,
                                const LocationSystemInfo &systemInfo,
                                unsigned char generate_nmea,
+                               bool custom_gga_fix_quality,
                                std::vector<std::string> &nmeaArraystr);
 
 #define DEBUG_NMEA_MINSIZE 6
