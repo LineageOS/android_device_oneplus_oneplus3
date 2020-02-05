@@ -88,6 +88,13 @@ struct GnssInterface {
     void (*getPowerStateChanges)(void* powerStateCb);
     void (*injectLocationExt)(const GnssLocationInfoNotification &locationInfo);
     void (*updateBatteryStatus)(bool charging);
+    void (*updateSystemPowerState)(PowerStateType systemPowerState);
+    uint32_t (*setConstrainedTunc) (bool enable, float tuncConstraint, uint32_t energyBudget);
+    uint32_t (*setPositionAssistedClockEstimator) (bool enable);
+    uint32_t (*gnssUpdateSvConfig)(const GnssSvTypeConfig& svTypeConfig,
+                                   const GnssSvIdConfig& svIdConfig);
+    uint32_t (*gnssResetSvConfig)();
+    uint32_t (*configLeverArm)(const LeverArmConfigInfo& configInfo);
 };
 
 struct BatchingInterface {

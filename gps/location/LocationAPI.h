@@ -261,6 +261,119 @@ public:
                 LOCATION_ERROR_INVALID_PARAMETER if any parameters are invalid
                 LOCATION_ERROR_NOT_SUPPORTED if build is not userdebug */
     virtual uint32_t gnssDeleteAidingData(GnssAidingData& data) override;
+
+    /** @brief
+        Reset the constellation settings to modem default.
+
+        @param
+        None
+
+        @return
+        A session id that will be returned in responseCallback to
+        match command with response. This effect is global for all
+        clients of LocationAPI responseCallback returns:
+                LOCATION_ERROR_SUCCESS if successful
+                LOCATION_ERROR_INVALID_PARAMETER if any parameters are invalid
+    */
+    virtual uint32_t resetConstellationConfig() override;
+
+    /** @brief
+        Configure the constellation to be used by the GNSS engine on
+        modem.
+
+        @param
+        constellationConfig: specify the constellation configuration
+        used by GNSS engine.
+
+        @return
+        A session id that will be returned in responseCallback to
+        match command with response. This effect is global for all
+        clients of LocationAPI responseCallback returns:
+                LOCATION_ERROR_SUCCESS if successful
+                LOCATION_ERROR_INVALID_PARAMETER if any parameters are invalid
+    */
+    virtual uint32_t configConstellations(
+            const GnssSvTypeConfig& svTypeConfig,
+            const GnssSvIdConfig&   svIdConfig) override;
+
+    /** @brief
+        Enable or disable the constrained time uncertainty feature.
+
+        @param
+        enable: true to enable the constrained time uncertainty
+        feature and false to disable the constrainted time
+        uncertainty feature.
+
+        @param
+        tuncThreshold: this specifies the time uncertainty threshold
+        that gps engine need to maintain, in units of milli-seconds.
+        Default is 0.0 meaning that modem default value of time
+        uncertainty threshold will be used. This parameter is
+        ignored when requesting to disable this feature.
+
+        @param
+        energyBudget: this specifies the power budget that gps
+        engine is allowed to spend to maintain the time uncertainty.
+        Default is 0 meaning that GPS engine is not constained by
+        power budget and can spend as much power as needed. The
+        parameter need to be specified in units of 0.1 milli watt
+        second. This parameter is ignored requesting to disable this
+        feature.
+
+        @return
+        A session id that will be returned in responseCallback to
+        match command with response. This effect is global for all
+        clients of LocationAPI responseCallback returns:
+                LOCATION_ERROR_SUCCESS if successful
+                LOCATION_ERROR_INVALID_PARAMETER if any parameters
+                are invalid
+    */
+    virtual uint32_t configConstrainedTimeUncertainty(
+            bool enable, float tuncThreshold = 0.0,
+            uint32_t energyBudget = 0) override;
+
+    /** @brief
+        Enable or disable position assisted clock estimator feature.
+
+        @param
+        enable: true to enable position assisted clock estimator and
+        false to disable the position assisted clock estimator
+        feature.
+
+        @return
+        A session id that will be returned in responseCallback to
+        match command with response. This effect is global for all
+        clients of LocationAPI responseCallback returns:
+                LOCATION_ERROR_SUCCESS if successful
+                LOCATION_ERROR_INVALID_PARAMETER if any parameters are invalid
+    */
+    virtual uint32_t configPositionAssistedClockEstimator(bool enable) override;
+
+        /** @brief
+        Sets the lever arm parameters for the vehicle.
+
+        @param
+        configInfo: lever arm configuration info regarding below two
+        types of lever arm info:
+        a: GNSS Antenna w.r.t the origin at the IMU e.g.: inertial
+        measurement unit.
+        b: lever arm parameters regarding the OPF (output frame)
+        w.r.t the origin (at the GPS Antenna). Vehicle manufacturers
+        prefer the position output to be tied to a specific point in
+        the vehicle rather than where the antenna is placed
+        (midpoint of the rear axle is typical).
+
+        Caller can choose types of lever arm info to configure via the
+        leverMarkTypeMask.
+
+        @return
+        A session id that will be returned in responseCallback to
+        match command with response. This effect is global for all
+        clients of LocationAPI responseCallback returns:
+                LOCATION_ERROR_SUCCESS if successful
+                LOCATION_ERROR_INVALID_PARAMETER if any parameters are invalid
+    */
+    virtual uint32_t configLeverArm(const LeverArmConfigInfo& configInfo) override;
 };
 
 #endif /* LOCATIONAPI_H */

@@ -80,6 +80,11 @@ static int read_a_line(const char * file_path, char * line, int line_size)
         int len;
         fgets(line, line_size, fp);
         len = strlen(line);
+        while ('\n' == line[len-1]) {
+            // If there is a new line at end of string, replace it with NULL
+            line[len-1] = '\0';
+            len--;
+        }
         len = len < line_size - 1? len : line_size - 1;
         line[len] = '\0';
         LOC_LOGD("cat %s: %s", file_path, line);
@@ -130,16 +135,53 @@ void loc_get_auto_platform_name(char *platform_name, int array_length)
     }
 }
 
+/*Reads the property ro.config.low_ram to identify if this is a low ram target
+  Returns:
+  0 if not a low ram target
+  1 if this is a low ram target
+*/
+int loc_identify_low_ram_target()
+{
+    int ret = 0;
+    char low_ram_target[PROPERTY_VALUE_MAX];
+    property_get("ro.config.low_ram", low_ram_target, "");
+    LOC_LOGd("low ram target: %s\n", low_ram_target);
+    return !(strncmp(low_ram_target, "true", PROPERTY_VALUE_MAX));
+}
+
+/*The character array passed to this function should have length
+  of atleast PROPERTY_VALUE_MAX*/
+/* Reads the soc_id node and return the soc_id value */
+void loc_get_device_soc_id(char *soc_id_value, int array_length)
+{
+    static const char soc_id[]     = "/sys/devices/soc0/soc_id";
+    static const char soc_id_dep[] = "/sys/devices/system/soc/soc0/id";
+    int return_val = 0;
+
+    if (soc_id_value && (array_length >= PROPERTY_VALUE_MAX)) {
+        if (!access(soc_id, F_OK)) {
+            return_val = read_a_line(soc_id, soc_id_value, array_length);
+        } else {
+            return_val = read_a_line(soc_id_dep, soc_id_value, array_length);
+        }
+        if (0 == return_val) {
+            LOC_LOGd("SOC Id value: %s\n", soc_id_value);
+        } else {
+            LOC_LOGe("Unable to read the soc_id value\n");
+        }
+    } else {
+        LOC_LOGe("Null parameter or array length less than PROPERTY_VALUE_MAX\n");
+    }
+}
+
 unsigned int loc_get_target(void)
 {
     if (gTarget != (unsigned int)-1)
         return gTarget;
 
     static const char hw_platform[]      = "/sys/devices/soc0/hw_platform";
-    static const char id[]               = "/sys/devices/soc0/soc_id";
     static const char hw_platform_dep[]  =
         "/sys/devices/system/soc/soc0/hw_platform";
-    static const char id_dep[]           = "/sys/devices/system/soc/soc0/id";
     static const char mdm[]              = "/target"; // mdm target we are using
 
     char rd_hw_platform[LINE_LEN];
@@ -155,11 +197,8 @@ unsigned int loc_get_target(void)
     } else {
         read_a_line(hw_platform_dep, rd_hw_platform, LINE_LEN);
     }
-    if (!access(id, F_OK)) {
-        read_a_line(id, rd_id, LINE_LEN);
-    } else {
-        read_a_line(id_dep, rd_id, LINE_LEN);
-    }
+    // Get the soc-id for this device.
+    loc_get_device_soc_id(rd_id, sizeof(rd_id));
 
     /*check automotive platform*/
     loc_get_auto_platform_name(rd_auto_platform, sizeof(rd_auto_platform));

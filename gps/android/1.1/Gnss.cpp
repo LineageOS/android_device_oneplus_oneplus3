@@ -97,6 +97,8 @@ void location_on_battery_status_changed(bool charging) {
 Gnss::Gnss() {
     ENTRY_LOG_CALLFLOW();
     sGnss = this;
+    // initilize gnss interface at first in case needing notify battery status
+    sGnss->getGnssInterface()->initialize();
     // register health client to listen on battery change
     loc_extn_battery_properties_listener_init(location_on_battery_status_changed);
     // clear pending GnssConfig

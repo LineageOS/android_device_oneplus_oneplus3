@@ -174,7 +174,6 @@ bool GnssAPIClient::gnssSetPositionMode(IGnss::GnssPositionMode mode,
         // For MSA, we always treat it as SINGLE mode.
         mTrackingOptions.minInterval = SINGLE_SHOT_MIN_TRACKING_INTERVAL_MSEC;
     }
-    mTrackingOptions.minDistance = preferredAccuracyMeters;
     if (mode == IGnss::GnssPositionMode::STANDALONE)
         mTrackingOptions.mode = GNSS_SUPL_MODE_STANDALONE;
     else if (mode == IGnss::GnssPositionMode::MS_BASED)
@@ -231,6 +230,7 @@ void GnssAPIClient::gnssDeleteAidingData(IGnss::GnssAidingData aidingDataFlags)
         GNSS_AIDING_DATA_SV_TYPE_QZSS_BIT |
         GNSS_AIDING_DATA_SV_TYPE_BEIDOU_BIT |
         GNSS_AIDING_DATA_SV_TYPE_GALILEO_BIT;
+    data.posEngineMask = STANDARD_POSITIONING_ENGINE;
 
     if (aidingDataFlags == IGnss::GnssAidingData::DELETE_ALL)
         data.deleteAll = true;
