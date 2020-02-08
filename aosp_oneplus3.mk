@@ -21,18 +21,18 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/oneplus/oneplus3/device.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 # Vendor security patch level
 VENDOR_SECURITY_PATCH := 2019-10-01
 
-PRODUCT_NAME := lineage_oneplus3
+PRODUCT_NAME := aosp_oneplus3
 PRODUCT_DEVICE := oneplus3
 PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_BRAND := OnePlus
-
+CUSTOM_BUILD_TYPE := OFFICIAL
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
-
+TARGET_GAPPS_ARCH := arm64
 BUILD_FINGERPRINT := "OnePlus/OnePlus3/OnePlus3:9/PKQ1.181203.001/1907311932:user/release-keys"
 
 TARGET_VENDOR := oneplus
