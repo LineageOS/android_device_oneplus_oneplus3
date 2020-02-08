@@ -1,5 +1,0 @@
-# Grant access over LiveDisplay tuneables
-allow hal_lineage_livedisplay_qti sysfs_livedisplay_tuneable:file rw_file_perms;
-
-# Allow LiveDisplay to access pps socket
-unix_socket_connect(hal_lineage_livedisplay_qti, pps, mm-pp-daemon)
