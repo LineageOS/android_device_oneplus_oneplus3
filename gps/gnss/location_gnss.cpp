@@ -79,14 +79,6 @@ static void odcpiInject(const Location& location);
 static void blockCPI(double latitude, double longitude, float accuracy,
                      int blockDurationMsec, double latLonDiffThreshold);
 static void updateBatteryStatus(bool charging);
-static void updateSystemPowerState(PowerStateType systemPowerState);
-static uint32_t setConstrainedTunc (bool enable, float tuncConstraint,
-                                    uint32_t energyBudget);
-static uint32_t setPositionAssistedClockEstimator(bool enable);
-static uint32_t gnssUpdateSvConfig(const GnssSvTypeConfig& svTypeConfig,
-                                   const GnssSvIdConfig& svIdConfig);
-static uint32_t gnssResetSvConfig();
-static uint32_t configLeverArm(const LeverArmConfigInfo& configInfo);
 
 static const GnssInterface gGnssInterface = {
     sizeof(GnssInterface),
@@ -125,13 +117,7 @@ static const GnssInterface gGnssInterface = {
     nfwInit,
     getPowerStateChanges,
     injectLocationExt,
-    updateBatteryStatus,
-    updateSystemPowerState,
-    setConstrainedTunc,
-    setPositionAssistedClockEstimator,
-    gnssUpdateSvConfig,
-    gnssResetSvConfig,
-    configLeverArm,
+    updateBatteryStatus
 };
 
 #ifndef DEBUG_X86
@@ -402,54 +388,5 @@ static void injectLocationExt(const GnssLocationInfoNotification &locationInfo)
 static void updateBatteryStatus(bool charging) {
     if (NULL != gGnssAdapter) {
         gGnssAdapter->getSystemStatus()->updatePowerConnectState(charging);
-    }
-}
-
-static void updateSystemPowerState(PowerStateType systemPowerState) {
-   if (NULL != gGnssAdapter) {
-       gGnssAdapter->updateSystemPowerStateCommand(systemPowerState);
-   }
-}
-
-static uint32_t setConstrainedTunc (bool enable, float tuncConstraint, uint32_t energyBudget) {
-    if (NULL != gGnssAdapter) {
-        return gGnssAdapter->setConstrainedTuncCommand(enable, tuncConstraint, energyBudget);
-    } else {
-        return 0;
-    }
-}
-
-static uint32_t setPositionAssistedClockEstimator(bool enable) {
-    if (NULL != gGnssAdapter) {
-        return gGnssAdapter->setPositionAssistedClockEstimatorCommand(enable);
-    } else {
-        return 0;
-    }
-}
-
-static uint32_t gnssUpdateSvConfig(
-        const GnssSvTypeConfig& svTypeConfig,
-        const GnssSvIdConfig& svIdConfig) {
-    if (NULL != gGnssAdapter) {
-        return gGnssAdapter->gnssUpdateSvConfigCommand(
-                svTypeConfig, svIdConfig);
-    } else {
-        return 0;
-    }
-}
-
-static uint32_t gnssResetSvConfig() {
-    if (NULL != gGnssAdapter) {
-        return gGnssAdapter->gnssResetSvConfigCommand();
-    } else {
-        return 0;
-    }
-}
-
-static uint32_t configLeverArm(const LeverArmConfigInfo& configInfo){
-    if (NULL != gGnssAdapter) {
-        return gGnssAdapter->configLeverArmCommand(configInfo);
-    } else {
-        return 0;
     }
 }
