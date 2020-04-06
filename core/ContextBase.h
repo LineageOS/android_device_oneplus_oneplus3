@@ -75,7 +75,6 @@ typedef struct loc_gps_cfg_s
     uint32_t       CP_MTLR_ES;
     uint32_t       GNSS_DEPLOYMENT;
     uint32_t       CUSTOM_NMEA_GGA_FIX_QUALITY_ENABLED;
-    uint32_t       NI_SUPL_DENY_ON_NFW_LOCKED;
 } loc_gps_cfg_s_type;
 
 /* NOTE: the implementaiton of the parser casts number

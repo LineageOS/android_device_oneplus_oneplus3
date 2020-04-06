@@ -26,9 +26,6 @@ LOCAL_SHARED_LIBRARIES := \
     android.hardware.power@1.2 \
     libbase
 
-LOCAL_HEADER_LIBRARIES := \
-    libgps.utils_headers \
-
 LOCAL_STATIC_LIBRARIES := libhealthhalutils
 LOCAL_CFLAGS += -DBATTERY_LISTENER_ENABLED
 
