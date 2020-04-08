@@ -447,5 +447,8 @@
 
     <!-- Whether device ignores the RSSNR signal implementation -->
     <bool name="config_ignoreRssnrSignalLevel">true</bool>
-
+    <!-- Smart charge sysfs node and value for suspend/resume charging-->
+     <string name="config_SmartChargingSysfsNode" translatable="false">/sys/class/power_supply/battery/input_suspend</string>
+     <string name="config_SmartChargingSupspendValue" translatable="false">1</string>
+     <string name="config_SmartChargingResumeValue" translatable="false">0</string>
 </resources>

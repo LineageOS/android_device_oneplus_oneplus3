@@ -19,13 +19,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Default action ids for a device's touchscreen gestures
          The array should be sorted in the same order as the
-         touchscreen gestures advertised by the device's CMHW impl. -->
-    <integer-array name="config_defaultTouchscreenGestureActions">
-        <item>4</item>
-        <item>2</item>
-        <item>8</item>
-        <item>9</item>
-        <item>7</item>
-        <item>1</item>
-    </integer-array>
+	 touchscreen gestures advertised by the device's CMHW impl. -->
 </resources>
