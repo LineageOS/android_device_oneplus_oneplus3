@@ -174,6 +174,7 @@ bool GnssAPIClient::gnssSetPositionMode(IGnss::GnssPositionMode mode,
         // For MSA, we always treat it as SINGLE mode.
         mTrackingOptions.minInterval = SINGLE_SHOT_MIN_TRACKING_INTERVAL_MSEC;
     }
+    mTrackingOptions.minDistance = preferredAccuracyMeters;
     if (mode == IGnss::GnssPositionMode::STANDALONE)
         mTrackingOptions.mode = GNSS_SUPL_MODE_STANDALONE;
     else if (mode == IGnss::GnssPositionMode::MS_BASED)

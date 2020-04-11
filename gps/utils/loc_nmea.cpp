@@ -1195,8 +1195,7 @@ void loc_nmea_generate_pos(const UlpLocation &location,
                     (location, locationExtended, systemInfo, utcPosTimestamp);
 
     time_t utcTime(utcPosTimestamp/1000);
-    struct tm result;
-    tm * pTm = gmtime_r(&utcTime, &result);
+    tm * pTm = gmtime(&utcTime);
     if (NULL == pTm) {
         LOC_LOGE("gmtime failed");
         return;
@@ -1328,14 +1327,6 @@ void loc_nmea_generate_pos(const UlpLocation &location,
             talker[1] = sv_meta.talker[1];
         }
 
-        // if svUsedCount is 0, it means we do not generate any GSA sentence yet.
-        // in this case, generate an empty GSA sentence
-        if (svUsedCount == 0) {
-            strlcpy(sentence, "$GPGSA,A,1,,,,,,,,,,,,,,,,", sizeof(sentence));
-            length = loc_nmea_put_checksum(sentence, sizeof(sentence));
-            nmeaArraystr.push_back(sentence);
-        }
-
         char ggaGpsQuality[3] = {'0', '\0', '\0'};
         char rmcModeIndicator = 'N';
         char vtgModeIndicator = 'N';
@@ -1448,19 +1439,8 @@ void loc_nmea_generate_pos(const UlpLocation &location,
         pMarker = sentence_RMC;
         lengthRemaining = sizeof(sentence_RMC);
 
-        bool validFix = ((0 != sv_cache_info.gps_used_mask) ||
-                (0 != sv_cache_info.glo_used_mask) ||
-                (0 != sv_cache_info.gal_used_mask) ||
-                (0 != sv_cache_info.qzss_used_mask) ||
-                (0 != sv_cache_info.bds_used_mask));
-
-        if (validFix) {
-            length = snprintf(pMarker, lengthRemaining, "$%sRMC,%02d%02d%02d.%02d,A,",
-                              talker, utcHours, utcMinutes, utcSeconds, utcMSeconds/10);
-        } else {
-            length = snprintf(pMarker, lengthRemaining, "$%sRMC,%02d%02d%02d.%02d,V,",
-                              talker, utcHours, utcMinutes, utcSeconds, utcMSeconds/10);
-        }
+        length = snprintf(pMarker, lengthRemaining, "$%sRMC,%02d%02d%02d.%02d,A," ,
+                          talker, utcHours, utcMinutes, utcSeconds,utcMSeconds/10);
 
         if (length < 0 || length >= lengthRemaining)
         {
@@ -1601,6 +1581,8 @@ void loc_nmea_generate_pos(const UlpLocation &location,
 
         // hardcode Navigation Status field to 'V'
         length = snprintf(pMarker, lengthRemaining, ",%c", 'V');
+        pMarker += length;
+        lengthRemaining -= length;
 
         length = loc_nmea_put_checksum(sentence_RMC, sizeof(sentence_RMC));
 
@@ -2057,8 +2039,7 @@ void loc_nmea_generate_sv(const GnssSvNotification &svNotify,
             {
                 sv_cache_info.bds_used_mask |= (1ULL << (svNotify.gnssSvs[svNumber - 1].svId - 1));
             }
-            if ((GNSS_SIGNAL_BEIDOU_B2AI == svNotify.gnssSvs[svNumber - 1].gnssSignalTypeMask) ||
-                   (GNSS_SIGNAL_BEIDOU_B2AQ == svNotify.gnssSvs[svNumber - 1].gnssSignalTypeMask)) {
+            if(GNSS_SIGNAL_BEIDOU_B2AI == svNotify.gnssSvs[svNumber - 1].gnssSignalTypeMask){
                 sv_cache_info.bds_b2_count++;
             } else {
                 // GNSS_SIGNAL_BEIDOU_B1I or default

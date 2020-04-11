@@ -1346,9 +1346,6 @@ SystemStatus::SystemStatus(const MsgTask* msgTask) :
 template <typename TYPE_REPORT, typename TYPE_ITEM>
 bool SystemStatus::setIteminReport(TYPE_REPORT& report, TYPE_ITEM&& s)
 {
-    if (s.ignore()) {
-        return false;
-    }
     if (!report.empty() && report.back().equals(static_cast<TYPE_ITEM&>(s.collate(report.back())))) {
         // there is no change - just update reported timestamp
         report.back().mUtcReported = s.mUtcReported;
