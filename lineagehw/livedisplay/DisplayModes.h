@@ -17,9 +17,8 @@
 #pragma once
 
 #include <android-base/macros.h>
+#include <livedisplay/sdm/SDMController.h>
 #include <vendor/lineage/livedisplay/2.0/IDisplayModes.h>
-
-#include "SDMController.h"
 
 namespace vendor {
 namespace lineage {
@@ -28,14 +27,13 @@ namespace V2_0 {
 namespace sdm {
 
 using ::android::hardware::Return;
-using ::android::hardware::Void;
 
 class DisplayModes : public IDisplayModes {
   public:
     explicit DisplayModes(std::shared_ptr<SDMController> controller);
 
-    using on_set_cb_function = std::function<void()>;
-    void registerCb(on_set_cb_function cb_function);
+    using on_set_cb = std::function<void()>;
+    void registerCb(on_set_cb cb);
 
     // Methods from ::vendor::lineage::livedisplay::V2_0::IDisplayModes follow.
     Return<void> getDisplayModes(getDisplayModes_cb _hidl_cb) override;
@@ -46,7 +44,7 @@ class DisplayModes : public IDisplayModes {
   private:
     std::shared_ptr<SDMController> controller_;
     int32_t active_mode_id_;
-    on_set_cb_function cb_function_;
+    on_set_cb onSetDisplayMode;
 
     bool isSupported();
 

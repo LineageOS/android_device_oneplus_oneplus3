@@ -20,20 +20,15 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android-base/strings.h>
+#include <livedisplay/sdm/Utils.h>
 
 #include <unordered_map>
 
-#include "Utils.h"
-
 namespace {
-struct sdm_disp_mode {
-    int32_t id;
-    int32_t type;
-    int32_t len;
-    char* name;
-    sdm_disp_mode() : id(-1), type(0), len(128) { name = new char[128]; }
-    ~sdm_disp_mode() { delete[] name; }
-};
+using ::android::base::ReadFileToString;
+using ::android::base::Trim;
+using ::android::base::WriteStringToFile;
 
 const std::string kSysfsModeBasePath = "/sys/class/graphics/fb0/";
 const std::unordered_map<int32_t, std::string> kSysfsModeMap = {
@@ -44,6 +39,33 @@ const std::unordered_map<int32_t, std::string> kSysfsModeMap = {
 inline bool IsSysfsMode(int32_t modeId) {
     return modeId > 600;
 }
+
+constexpr const char* kLocalModeId = "/data/vendor/display/livedisplay_mode";
+constexpr const char* kLocalInitialModeId = "/data/vendor/display/livedisplay_initial_mode";
+
+int32_t ReadLocalModeId() {
+    std::string buf;
+    if (ReadFileToString(kLocalModeId, &buf)) {
+        return std::stoi(Trim(buf));
+    }
+    return -1;
+}
+
+bool WriteLocalModeId(int32_t id) {
+    return WriteStringToFile(std::to_string(id), kLocalModeId);
+}
+
+int32_t ReadInitialModeId() {
+    std::string buf;
+    if (ReadFileToString(kLocalInitialModeId, &buf)) {
+        return std::stoi(Trim(buf));
+    }
+    return -1;
+}
+
+bool WriteInitialModeId(int32_t id) {
+    return WriteStringToFile(std::to_string(id), kLocalInitialModeId);
+}
 }  // anonymous namespace
 
 namespace vendor {
@@ -52,7 +74,8 @@ namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
 
-using ::android::base::WriteStringToFile;
+using ::android::OK;
+using ::android::hardware::Void;
 
 DisplayModes::DisplayModes(std::shared_ptr<SDMController> controller)
     : controller_(std::move(controller)) {
@@ -67,14 +90,24 @@ DisplayModes::DisplayModes(std::shared_ptr<SDMController> controller)
 }
 
 bool DisplayModes::isSupported() {
-    int32_t count = 0;
-    uint32_t flags = 0;
+    static int supported = -1;
 
-    if (!utils::CheckFeatureVersion(controller_, FEATURE_VER_SW_SAVEMODES_API) ||
-        controller_->getNumDisplayModes(0, 0, &count, &flags) != 0) {
-        return 0;
+    if (supported >= 0) {
+        return supported;
     }
-    return count > 0;
+
+    if (utils::CheckFeatureVersion(controller_, utils::FEATURE_VER_SW_SAVEMODES_API) != OK) {
+        supported = 0;
+        return false;
+    }
+
+    int32_t count = 0;
+    if (controller_->getNumDisplayModes(&count) != OK) {
+        count = 0;
+    }
+    supported = (count > 0);
+
+    return supported;
 }
 
 std::vector<DisplayMode> DisplayModes::getDisplayModesInternal() {
@@ -89,17 +122,15 @@ std::vector<DisplayMode> DisplayModes::getDisplayModesInternal() {
 std::vector<DisplayMode> DisplayModes::getDisplayModesQDCM() {
     std::vector<DisplayMode> modes;
     int32_t count = 0;
-    uint32_t flags = 0;
 
-    if (controller_->getNumDisplayModes(0, 0, &count, &flags) != 0 || count == 0) {
+    if (controller_->getNumDisplayModes(&count) != OK || count == 0) {
         return modes;
     }
 
-    sdm_disp_mode tmp[count];
-
-    if (controller_->getDisplayModes(0, 0, tmp, count, &flags) == 0) {
-        for (int i = 0; i < count; i++) {
-            modes.push_back({tmp[i].id, std::string(tmp[i].name)});
+    std::vector<SdmDispMode> tmp_modes(count);
+    if (controller_->getDisplayModes(tmp_modes.data(), count) == OK) {
+        for (auto&& mode : tmp_modes) {
+            modes.push_back({mode.id, mode.name});
         }
     }
 
@@ -109,9 +140,9 @@ std::vector<DisplayMode> DisplayModes::getDisplayModesQDCM() {
 std::vector<DisplayMode> DisplayModes::getDisplayModesSysfs() {
     std::vector<DisplayMode> modes;
 
-    for (auto&& entry : kSysfsModeMap) {
-        if (!access((kSysfsModeBasePath + entry.second).c_str(), R_OK | W_OK)) {
-            modes.push_back({entry.first, entry.second});
+    for (auto&& [id, name] : kSysfsModeMap) {
+        if (!access((kSysfsModeBasePath + name).c_str(), R_OK | W_OK)) {
+            modes.push_back({id, name});
         }
     }
 
@@ -145,15 +176,14 @@ DisplayMode DisplayModes::getDefaultDisplayModeInternal() {
 }
 
 int32_t DisplayModes::getDefaultDisplayModeId() {
-    int32_t id = utils::ReadLocalModeId();
+    int32_t id = ReadLocalModeId();
     return (id >= 0 ? id : getDefaultDisplayModeIdQDCM());
 }
 
 int32_t DisplayModes::getDefaultDisplayModeIdQDCM() {
     int32_t id = 0;
-    uint32_t flags = 0;
 
-    if (controller_->getDefaultDisplayMode(0, &id, &flags) != 0) {
+    if (controller_->getDefaultDisplayMode(&id) != OK) {
         id = -1;
     }
 
@@ -176,7 +206,7 @@ bool DisplayModes::setModeState(int32_t mode_id, bool on) {
         id = mode_id;
     } else {
         // To turn off QDCM mode, turn on the initial QDCM mode instead
-        id = utils::ReadInitialModeId();
+        id = ReadInitialModeId();
         if (id < 0) {
             return false;
         }
@@ -185,13 +215,13 @@ bool DisplayModes::setModeState(int32_t mode_id, bool on) {
             return true;
         }
     }
-    return controller_->setActiveDisplayMode(0, id, 0) == 0;
+    return controller_->setActiveDisplayMode(id) == OK;
 }
 
 bool DisplayModes::saveInitialDisplayMode() {
-    int32_t id = utils::ReadInitialModeId();
+    int32_t id = ReadInitialModeId();
     if (id < 0) {
-        return utils::WriteInitialModeId(std::max(0, getDefaultDisplayModeIdQDCM()));
+        return WriteInitialModeId(std::max(0, getDefaultDisplayModeIdQDCM()));
     }
     return true;
 }
@@ -241,30 +271,30 @@ Return<bool> DisplayModes::setDisplayMode(int32_t mode_id, bool make_default) {
     active_mode_id_ = mode_id;
 
     if (make_default) {
-        if (!utils::WriteLocalModeId(mode_id)) {
+        if (!WriteLocalModeId(mode_id)) {
             return false;
         }
 
         if (IsSysfsMode(mode_id)) {
-            mode_id = utils::ReadInitialModeId();
+            mode_id = ReadInitialModeId();
             if (mode_id < 0) {
                 return false;
             }
         }
-        if (controller_->setDefaultDisplayMode(0, mode_id, 0) != 0) {
+        if (controller_->setDefaultDisplayMode(mode_id) != OK) {
             return false;
         }
     }
 
-    if (cb_function_) {
-        cb_function_();
+    if (onSetDisplayMode) {
+        onSetDisplayMode();
     }
 
     return true;
 }
 
-void DisplayModes::registerCb(on_set_cb_function cb_function) {
-    cb_function_ = cb_function;
+void DisplayModes::registerCb(on_set_cb cb) {
+    onSetDisplayMode = cb;
 }
 
 }  // namespace sdm

@@ -20,14 +20,14 @@
 #include <android-base/logging.h>
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
+#include <livedisplay/sdm/AdaptiveBacklight.h>
+#include <livedisplay/sdm/PictureAdjustment.h>
+#include <livedisplay/sdm/SDMController.h>
+#include <livedisplay/sysfs/SunlightEnhancement.h>
 
 #include <functional>
 
-#include "AdaptiveBacklight.h"
 #include "DisplayModes.h"
-#include "PictureAdjustment.h"
-#include "SDMController.h"
-#include "SunlightEnhancement.h"
 
 using ::android::OK;
 using ::android::sp;
@@ -52,15 +52,15 @@ bool RegisterSdmServices() {
 }
 
 bool RegisterSysfsServices() {
-    if (AdaptiveBacklight::isSupported()) {
-        sp<AdaptiveBacklight> ab = new AdaptiveBacklight();
+    sp<AdaptiveBacklight> ab = new AdaptiveBacklight();
+    if (ab->isSupported()) {
         if (ab->registerAsService() != OK) {
             return false;
         }
     }
 
-    if (SunlightEnhancement::isSupported()) {
-        sp<SunlightEnhancement> se = new SunlightEnhancement();
+    sp<SunlightEnhancement> se = new SunlightEnhancement();
+    if (se->isSupported()) {
         if (se->registerAsService() != OK) {
             return false;
         }
