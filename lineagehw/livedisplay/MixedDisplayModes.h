@@ -16,10 +16,7 @@
 
 #pragma once
 
-#include <android-base/macros.h>
-#include <vendor/lineage/livedisplay/2.0/IDisplayModes.h>
-
-#include "SDMController.h"
+#include <livedisplay/sdm/DisplayModes.h>
 
 namespace vendor {
 namespace lineage {
@@ -27,42 +24,30 @@ namespace livedisplay {
 namespace V2_0 {
 namespace sdm {
 
-using ::android::hardware::Return;
-using ::android::hardware::Void;
-
-class DisplayModes : public IDisplayModes {
+class MixedDisplayModes : public DisplayModes {
   public:
-    explicit DisplayModes(std::shared_ptr<SDMController> controller);
-
-    using on_set_cb_function = std::function<void()>;
-    void registerCb(on_set_cb_function cb_function);
+    explicit MixedDisplayModes(std::shared_ptr<SDMController> controller);
 
     // Methods from ::vendor::lineage::livedisplay::V2_0::IDisplayModes follow.
-    Return<void> getDisplayModes(getDisplayModes_cb _hidl_cb) override;
-    Return<void> getCurrentDisplayMode(getCurrentDisplayMode_cb _hidl_cb) override;
-    Return<void> getDefaultDisplayMode(getDefaultDisplayMode_cb _hidl_cb) override;
     Return<bool> setDisplayMode(int32_t modeID, bool makeDefault) override;
 
   private:
-    std::shared_ptr<SDMController> controller_;
     int32_t active_mode_id_;
-    on_set_cb_function cb_function_;
 
-    bool isSupported();
-
-    std::vector<DisplayMode> getDisplayModesInternal();
     std::vector<DisplayMode> getDisplayModesQDCM();
     std::vector<DisplayMode> getDisplayModesSysfs();
-    DisplayMode getDisplayModeById(int32_t id);
-    DisplayMode getCurrentDisplayModeInternal();
     int32_t getCurrentDisplayModeId();
-    DisplayMode getDefaultDisplayModeInternal();
     int32_t getDefaultDisplayModeId();
     int32_t getDefaultDisplayModeIdQDCM();
     bool setModeState(int32_t modeId, bool on);
     bool saveInitialDisplayMode();
 
-    DISALLOW_IMPLICIT_CONSTRUCTORS(DisplayModes);
+    // Methods from ::vendor::lineage::livedisplay::V2_0::sdm::DisplayModes follow.
+    std::vector<DisplayMode> getDisplayModesInternal() override;
+    DisplayMode getCurrentDisplayModeInternal() override;
+    DisplayMode getDefaultDisplayModeInternal() override;
+
+    DISALLOW_IMPLICIT_CONSTRUCTORS(MixedDisplayModes);
 };
 
 }  // namespace sdm
