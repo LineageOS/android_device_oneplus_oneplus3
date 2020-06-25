@@ -1,4 +1,4 @@
-// Copyright (C) 2019 The LineageOS Project
+// Copyright (C) 2019-2020 The LineageOS Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@ cc_defaults {
     defaults: ["hidl_defaults"],
     relative_install_path: "hw",
     srcs: [
-        "AdaptiveBacklight.cpp",
-        "DisplayModes.cpp",
-        "PictureAdjustment.cpp",
-        "SDMController.cpp",
-        "SunlightEnhancement.cpp",
-        "Utils.cpp",
+        ":vendor.lineage.livedisplay@2.0-sdm-ab",
+        ":vendor.lineage.livedisplay@2.0-sdm-dm",
+        ":vendor.lineage.livedisplay@2.0-sdm-pa",
+        ":vendor.lineage.livedisplay@2.0-sdm-utils",
+        ":vendor.lineage.livedisplay@2.0-sysfs-sre",
+        "MixedDisplayModes.cpp",
         "service.cpp",
     ],
     shared_libs: [
@@ -34,6 +34,10 @@ cc_defaults {
         "libhidltransport",
         "libutils",
         "vendor.lineage.livedisplay@2.0",
+    ],
+    header_libs: [
+        "vendor.lineage.livedisplay@2.0-sdm-headers",
+        "vendor.lineage.livedisplay@2.0-sysfs-headers",
     ],
 }
 
