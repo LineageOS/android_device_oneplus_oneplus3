@@ -99,6 +99,11 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="allow_holding_video_call" value="true"/>
         <!-- Config to allow accept one way for video calls -->
         <boolean name="allow_one_way_accept_video_call" value="true"/>
+
+        <!-- GPS config -->
+        <string name="gps.xtra_server_1">https://xtrapath1.izatcloud.net/xtra3grc.bin</string>
+        <string name="gps.xtra_server_2">https://xtrapath2.izatcloud.net/xtra3grc.bin</string>
+        <string name="gps.xtra_server_3">https://xtrapath3.izatcloud.net/xtra3grc.bin</string>
     </carrier_config>
 
     <carrier_config mcc="001" mnc="01">
