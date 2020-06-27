@@ -40,8 +40,8 @@ private:
     LocAdapterBase *mLocAdapterBase;
 protected:
     inline LocAdapterProxyBase(const LOC_API_ADAPTER_EVENT_MASK_T mask,
-                               ContextBase* context, bool isMaster = false):
-            mLocAdapterBase(new LocAdapterBase(mask, context, isMaster, this)) {
+                   ContextBase* context):
+                   mLocAdapterBase(new LocAdapterBase(mask, context, this)) {
     }
     inline virtual ~LocAdapterProxyBase() {
         delete mLocAdapterBase;
@@ -65,6 +65,7 @@ public:
                                             GpsLocationExtended &locationExtended,
                                             enum loc_sess_status status,
                                             LocPosTechMask loc_technology_mask) {
+
         (void)location;
         (void)locationExtended;
         (void)status;

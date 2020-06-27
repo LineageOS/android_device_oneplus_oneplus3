@@ -7,7 +7,7 @@ AC_PREREQ(2.61)
 # Initialize the gps gps-utils package version 1.0.0
 AC_INIT([gps-utils],1.0.0)
 # Does not strictly follow GNU Coding standards
-AM_INIT_AUTOMAKE([foreign subdir-objects])
+AM_INIT_AUTOMAKE([foreign])
 # Disables auto rebuilding of configure, Makefile.ins
 AM_MAINTAINER_MODE
 # Verifies the --srcdir is correct by checking for the path
@@ -28,20 +28,10 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 PKG_PROG_PKG_CONFIG
 
-AC_ARG_WITH([external_ap],
-    AC_HELP_STRING([--with-external_ap=@<:@dir@:>@],
-        [Using External Application Processor]),
-    [],
-    with_external_ap=no)
-
-if test "x$with_external_ap" != "xno"; then
-    CPPFLAGS="${CPPFLAGS} -DFEATURE_EXTERNAL_AP"
-else
-    # Checks for libraries.
-    PKG_CHECK_MODULES([CUTILS], [libcutils])
-    AC_SUBST([CUTILS_CFLAGS])
-    AC_SUBST([CUTILS_LIBS])
-fi
+# Checks for libraries.
+PKG_CHECK_MODULES([CUTILS], [libcutils])
+AC_SUBST([CUTILS_CFLAGS])
+AC_SUBST([CUTILS_LIBS])
 
 AC_ARG_WITH([core_includes],
       AC_HELP_STRING([--with-core-includes=@<:@dir@:>@],
