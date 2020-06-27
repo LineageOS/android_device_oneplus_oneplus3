@@ -18,7 +18,8 @@ LOCAL_SHARED_LIBRARIES := \
     liblog \
     libloc_core \
     libgps.utils \
-    libdl
+    libdl \
+    liblbs_core
 
 LOCAL_SRC_FILES += \
     location_batching.cpp \
