@@ -39,17 +39,14 @@ void LocPosMode::logv() const
 {
     LOC_LOGV ("Position mode: %s\n  Position recurrence: %s\n  "
               "min interval: %d\n  preferred accuracy: %d\n  "
-              "preferred time: %d\n  credentials: %s  provider: %s \n  "
-              "power mode: %d\n  tbm %d",
+              "preferred time: %d\n  credentials: %s  provider: %s",
               loc_get_position_mode_name(mode),
               loc_get_position_recurrence_name(recurrence),
               min_interval,
               preferred_accuracy,
               preferred_time,
               credentials,
-              provider,
-              powerMode,
-              timeBetweenMeasurements);
+              provider);
 }
 
 /* GPS status names */

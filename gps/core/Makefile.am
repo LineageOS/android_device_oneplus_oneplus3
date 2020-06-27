@@ -15,11 +15,11 @@ libloc_core_la_h_sources = \
            LocApiBase.h \
            LocAdapterBase.h \
            ContextBase.h \
-           LocContext.h \
+           LocDualContext.h \
            LBSProxyBase.h \
+           UlpProxyBase.h \
            loc_core_log.h \
            LocAdapterProxyBase.h \
-           EngineHubProxyBase.h \
            data-items/DataItemId.h \
            data-items/IDataItemCore.h \
            data-items/DataItemConcreteTypesBase.h \
@@ -34,7 +34,7 @@ libloc_core_la_c_sources = \
            LocApiBase.cpp \
            LocAdapterBase.cpp \
            ContextBase.cpp \
-           LocContext.cpp \
+           LocDualContext.cpp \
            loc_core_log.cpp \
            data-items/DataItemsFactoryProxy.cpp \
            SystemStatusOsObserver.cpp \
@@ -54,10 +54,6 @@ else
 libloc_core_la_CFLAGS = $(AM_CFLAGS)
 libloc_core_la_LDFLAGS = -Wl,-z,defs -lpthread -shared -version-info 1:0:0
 libloc_core_la_CPPFLAGS = $(AM_CFLAGS) $(AM_CPPFLAGS)
-endif
-
-if USE_FEATURE_AUTOMOTIVE
-AM_CFLAGS += -DFEATURE_AUTOMOTIVE
 endif
 
 libloc_core_la_LIBADD = -ldl $(GPSUTILS_LIBS)

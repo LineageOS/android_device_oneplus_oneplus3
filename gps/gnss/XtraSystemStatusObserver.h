@@ -1,4 +1,4 @@
-/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -35,56 +35,63 @@
 #include <LocTimer.h>
 
 using namespace std;
-using namespace loc_util;
 using loc_core::IOsObserver;
 using loc_core::IDataItemObserver;
 using loc_core::IDataItemCore;
+using loc_util::LocIpc;
 
-class XtraSystemStatusObserver : public IDataItemObserver {
+class XtraSystemStatusObserver : public IDataItemObserver, public LocIpc{
 public :
     // constructor & destructor
-    XtraSystemStatusObserver(IOsObserver* sysStatObs, const MsgTask* msgTask);
+    inline XtraSystemStatusObserver(IOsObserver* sysStatObs, const MsgTask* msgTask):
+            mSystemStatusObsrvr(sysStatObs), mMsgTask(msgTask),
+            mGpsLock(-1), mConnections(0), mXtraThrottle(true), mReqStatusReceived(false),
+            mDelayLocTimer(*this), mIsConnectivityStatusKnown (false) {
+        subscribe(true);
+        startListeningNonBlocking(LOC_IPC_HAL);
+        mDelayLocTimer.start(100 /*.1 sec*/,  false);
+    }
     inline virtual ~XtraSystemStatusObserver() {
         subscribe(false);
-        mIpc.stopNonBlockingListening();
+        stopListening();
     }
 
     // IDataItemObserver overrides
     inline virtual void getName(string& name);
     virtual void notify(const list<IDataItemCore*>& dlist);
 
-    bool updateLockStatus(GnssConfigGpsLock lock);
-    bool updateConnections(uint64_t allConnections,
-            loc_core::NetworkInfoType* networkHandleInfo);
+    bool updateLockStatus(uint32_t lock);
+    bool updateConnections(uint64_t allConnections);
     bool updateTac(const string& tac);
     bool updateMccMnc(const string& mccmnc);
     bool updateXtraThrottle(const bool enabled);
     inline const MsgTask* getMsgTask() { return mMsgTask; }
     void subscribe(bool yes);
-    bool onStatusRequested(int32_t xtraStatusUpdated);
+
+protected:
+    void onReceive(const std::string& data) override;
 
 private:
     IOsObserver*    mSystemStatusObsrvr;
     const MsgTask* mMsgTask;
-    GnssConfigGpsLock mGpsLock;
-    LocIpc mIpc;
+    int32_t mGpsLock;
     uint64_t mConnections;
-    loc_core::NetworkInfoType mNetworkHandle[MAX_NETWORK_HANDLES];
     string mTac;
     string mMccmnc;
     bool mXtraThrottle;
     bool mReqStatusReceived;
     bool mIsConnectivityStatusKnown;
-    shared_ptr<LocIpcSender> mSender;
 
     class DelayLocTimer : public LocTimer {
-        LocIpcSender& mSender;
+        XtraSystemStatusObserver& mXSSO;
     public:
-        DelayLocTimer(LocIpcSender& sender) : mSender(sender) {}
+        DelayLocTimer(XtraSystemStatusObserver& xsso) : mXSSO(xsso) {}
         void timeOutCallback() override {
-            LocIpc::send(mSender, (const uint8_t*)"halinit", sizeof("halinit"));
+            mXSSO.send(LOC_IPC_XTRA, "halinit");
         }
     } mDelayLocTimer;
+
+    bool onStatusRequested(int32_t xtraStatusUpdated);
 };
 
 #endif

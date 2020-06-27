@@ -158,29 +158,6 @@ SIDE EFFECTS
 msq_q_err_type msg_q_rcv(void* msg_q_data, void** msg_obj);
 
 /*===========================================================================
-FUNCTION    msg_q_rmv
-
-DESCRIPTION
-   Remove data from the message queue. msg_obj is the oldest message received
-   and pointer is simply removed from message queue.
-
-   msg_q_data: Message Queue to copy data from into msgp.
-   msg_obj:    Pointer to space to copy msg_q contents to.
-
-DEPENDENCIES
-   N/A
-
-RETURN VALUE
-   Look at error codes above.
-
-SIDE EFFECTS
-   N/A
-
-===========================================================================*/
-msq_q_err_type msg_q_rmv(void* msg_q_data, void** msg_obj);
-
-
-/*===========================================================================
 FUNCTION    msg_q_flush
 
 DESCRIPTION

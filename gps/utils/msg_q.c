@@ -267,51 +267,6 @@ msq_q_err_type msg_q_rcv(void* msg_q_data, void** msg_obj)
 
 /*===========================================================================
 
-  FUNCTION:   msg_q_rmv
-
-  ===========================================================================*/
-msq_q_err_type msg_q_rmv(void* msg_q_data, void** msg_obj)
-{
-   msq_q_err_type rv;
-   if (msg_q_data == NULL) {
-      LOC_LOGE("%s: Invalid msg_q_data parameter!\n", __FUNCTION__);
-      return eMSG_Q_INVALID_HANDLE;
-   }
-
-   if (msg_obj == NULL) {
-      LOC_LOGE("%s: Invalid msg_obj parameter!\n", __FUNCTION__);
-      return eMSG_Q_INVALID_PARAMETER;
-   }
-
-   msg_q* p_msg_q = (msg_q*)msg_q_data;
-
-   pthread_mutex_lock(&p_msg_q->list_mutex);
-
-   if (p_msg_q->unblocked) {
-      LOC_LOGE("%s: Message queue has been unblocked.\n", __FUNCTION__);
-      pthread_mutex_unlock(&p_msg_q->list_mutex);
-      return eMSG_Q_UNAVAILABLE_RESOURCE;
-   }
-
-   if (linked_list_empty(p_msg_q->msg_list)) {
-      LOC_LOGW("%s: list is empty !!\n", __FUNCTION__);
-      pthread_mutex_unlock(&p_msg_q->list_mutex);
-      return eLINKED_LIST_EMPTY;
-   }
-
-   rv = convert_linked_list_err_type(linked_list_remove(p_msg_q->msg_list, msg_obj));
-
-   pthread_mutex_unlock(&p_msg_q->list_mutex);
-
-   LOC_LOGV("%s: Removed message %p rv = %d\n", __FUNCTION__, *msg_obj, rv);
-
-   return rv;
-}
-
-
-
-/*===========================================================================
-
   FUNCTION:   msg_q_flush
 
   ===========================================================================*/

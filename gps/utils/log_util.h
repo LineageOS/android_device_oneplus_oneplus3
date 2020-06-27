@@ -39,40 +39,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/time.h>
 #include <unistd.h>
+#include <cutils/log.h>
 
 #ifndef LOG_TAG
 #define LOG_TAG "GPS_UTILS"
 #endif /* LOG_TAG */
-
-// LE targets with no logcat support
-#ifdef FEATURE_EXTERNAL_AP
-#include <syslog.h>
-#define ALOGE(...) syslog(LOG_ERR,     "LOC_LOGE: " __VA_ARGS__);
-#define ALOGW(...) syslog(LOG_WARNING, "LOC_LOGW: " __VA_ARGS__);
-#define ALOGI(...) syslog(LOG_NOTICE,  "LOC_LOGI: " __VA_ARGS__);
-#define ALOGD(...) syslog(LOG_DEBUG,   "LOC_LOGD: " __VA_ARGS__);
-#define ALOGV(...) syslog(LOG_NOTICE,  "LOC_LOGV: " __VA_ARGS__);
-#else /* FEATURE_EXTERNAL_AP */
-#define TS_PRINTF(format, x...)                                  \
-{                                                                \
-    struct timeval tv;                                           \
-    struct timezone tz;                                          \
-    int hh, mm, ss;                                              \
-    gettimeofday(&tv, &tz);                                      \
-    hh = tv.tv_sec/3600%24;                                      \
-    mm = (tv.tv_sec%3600)/60;                                    \
-    ss = tv.tv_sec%60;                                           \
-    fprintf(stdout,"%02d:%02d:%02d.%06ld]" format "\n", hh, mm, ss, tv.tv_usec, ##x);    \
-}
-
-#define ALOGE(format, x...) TS_PRINTF("E/%s (%d): " format , LOG_TAG, getpid(), ##x)
-#define ALOGW(format, x...) TS_PRINTF("W/%s (%d): " format , LOG_TAG, getpid(), ##x)
-#define ALOGI(format, x...) TS_PRINTF("I/%s (%d): " format , LOG_TAG, getpid(), ##x)
-#define ALOGD(format, x...) TS_PRINTF("D/%s (%d): " format , LOG_TAG, getpid(), ##x)
-#define ALOGV(format, x...) TS_PRINTF("V/%s (%d): " format , LOG_TAG, getpid(), ##x)
-#endif /* FEATURE_EXTERNAL_AP */
 
 #endif /* #if defined (USE_ANDROID_LOGGING) || defined (ANDROID) */
 
@@ -176,7 +148,6 @@ extern char* get_timestamp(char* str, unsigned long buf_size);
 #define LOG_I(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGI, ID, WHAT, SPEC, VAL)
 #define LOG_V(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGV, ID, WHAT, SPEC, VAL)
 #define LOG_E(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGE, ID, WHAT, SPEC, VAL)
-#define LOG_D(ID, WHAT, SPEC, VAL) LOG_(LOC_LOGD, ID, WHAT, SPEC, VAL)
 
 #define ENTRY_LOG() LOG_V(ENTRY_TAG, __FUNCTION__, %s, "")
 #define EXIT_LOG(SPEC, VAL) LOG_V(EXIT_TAG, __FUNCTION__, SPEC, VAL)
@@ -194,8 +165,6 @@ extern char* get_timestamp(char* str, unsigned long buf_size);
 #define EXIT_LOG_CALLFLOW(SPEC, VAL) LOG_I(TO_MODEM, __FUNCTION__, SPEC, VAL)
 // Used for logging callflow from Modem(TO_MODEM, __FUNCTION__, %s, "")
 #define MODEM_LOG_CALLFLOW(SPEC, VAL) LOG_I(FROM_MODEM, __FUNCTION__, SPEC, VAL)
-// Used for logging high frequency callflow from Modem(TO_MODEM, __FUNCTION__, %s, "")
-#define MODEM_LOG_CALLFLOW_DEBUG(SPEC, VAL) LOG_D(FROM_MODEM, __FUNCTION__, SPEC, VAL)
 // Used for logging callflow to Android Framework
 #define CALLBACK_LOG_CALLFLOW(CB, SPEC, VAL) LOG_I(TO_AFW, CB, SPEC, VAL)
 
