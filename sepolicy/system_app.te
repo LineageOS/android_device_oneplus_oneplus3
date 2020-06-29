@@ -1,5 +1,6 @@
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file rw_file_perms;
-
+allow system_app sysfs:file write;
+allow system_app sysfs_switch:dir search;
 allow system_app sysfs_fpc:dir search;
 allow system_app sysfs_fpc:file rw_file_perms;
