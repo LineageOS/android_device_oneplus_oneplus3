@@ -1,6 +1,6 @@
 package org.ifaa.android.manager;
 
-import android.annotation.UnsupportedAppUsage;
+import android.compat.annotation.UnsupportedAppUsage;
 import android.content.Context;
 
 public abstract class IFAAManagerV2 extends IFAAManager{
