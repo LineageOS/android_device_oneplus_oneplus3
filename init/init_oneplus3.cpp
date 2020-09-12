@@ -35,10 +35,9 @@
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
-#include "property_service.h"
 #include "vendor_init.h"
 
-using ::android::init::property_set;
+using ::android::base::SetProperty;
 
 constexpr const char* RO_PROP_SOURCES[] = {
         nullptr, "product.", "product_services.", "odm.", "vendor.", "system.", "bootimage.",
@@ -86,10 +85,10 @@ void load_props(const char* model, bool is_3t = false) {
 
     // ro.build.fingerprint property has not been set
     if (is_3t) {
-        property_set("ro.build.fingerprint", BUILD_FINGERPRINT[1]);
-        property_set("ro.power_profile.override", "power_profile_3t");
+        SetProperty("ro.build.fingerprint", BUILD_FINGERPRINT[1]);
+        SetProperty("ro.power_profile.override", "power_profile_3t");
     } else {
-        property_set("ro.build.fingerprint", BUILD_FINGERPRINT[0]);
+        SetProperty("ro.build.fingerprint", BUILD_FINGERPRINT[0]);
     }
 }
 
