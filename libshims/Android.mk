@@ -26,3 +26,15 @@ LOCAL_MODULE := libui_shim
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := \
+	strdup16to8.cpp \
+	strdup8to16.cpp
+
+LOCAL_SHARED_LIBRARIES := libcutils
+LOCAL_MODULE := libcutils_shim
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)

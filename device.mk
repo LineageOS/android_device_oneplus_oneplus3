@@ -474,6 +474,7 @@ PRODUCT_PACKAGES += \
 
 # Shims
 PRODUCT_PACKAGES += \
+    libcutils_shim \
     libui_shim
 
 # Telephony
