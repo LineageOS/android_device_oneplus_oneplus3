@@ -948,7 +948,7 @@ vendor/lib64/libthermalioctl.so
 
 # Time services - from miui_DAISYGlobal_V11.0.2.0.QDLMIXM_d59f395371_10.0
 bin/move_time_data.sh|56f1f79a88db709a0c7ed5c507b14c55976d6f32
--vendor/app/TimeService/TimeService.apk;:timeservice_app_cert-legacy-um|27f9b81621c446baa8c37581d9bfbca2fd67b496
+-vendor/app/TimeService/TimeService.apk|27f9b81621c446baa8c37581d9bfbca2fd67b496
 vendor/bin/time_daemon|75b8a6a14cfb4424499ccb2bf1cad011df295d0e
 vendor/lib64/libtime_genoff.so|06df52867790cdbbcc674a3a28d7ad7c8cc161ac
 
