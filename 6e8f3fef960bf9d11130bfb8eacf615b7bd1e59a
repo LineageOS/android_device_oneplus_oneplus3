@@ -51,6 +51,24 @@
       "revId": "6e8f3fef960bf9d11130bfb8eacf615b7bd1e59a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae219389_755445db",
+        "filename": "vndk/vndk-sp-libs.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2020-09-21T10:52:43Z",
+      "side": 0,
+      "message": "no longer exist iirc",
+      "parentUuid": "f1f4cec1_236c451c",
+      "revId": "6e8f3fef960bf9d11130bfb8eacf615b7bd1e59a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
