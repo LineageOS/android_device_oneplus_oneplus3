@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f087615d_e75d8a3d",
+        "filename": "rootdir/etc/init.qcom.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-09-21T10:32:02Z",
+      "side": 0,
+      "message": "Is it no longer possible to override a service?",
+      "revId": "6e8f3fef960bf9d11130bfb8eacf615b7bd1e59a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1f4cec1_236c451c",
+        "filename": "vndk/vndk-sp-libs.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2020-09-21T10:32:02Z",
+      "side": 0,
+      "message": "What\u0027s up with this one?",
+      "revId": "6e8f3fef960bf9d11130bfb8eacf615b7bd1e59a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
