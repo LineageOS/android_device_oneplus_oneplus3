@@ -22,6 +22,30 @@
       "revId": "edab0f603e6c200071a1c388d5afdb4d78a90993",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be833fb4_d7730bab",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2020-09-22T09:02:38Z",
+      "side": 1,
+      "message": "no it doesn\u0027t, this is just a temp build fix. should propably call InitPropertySet instead https://github.com/LineageOS/android_system_core/blob/d0a0614fa295da3b47e3f802b51eaf7cbf811d1f/init/property_service.cpp#L606",
+      "parentUuid": "f6761036_724b3ee3",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 19
+      },
+      "revId": "edab0f603e6c200071a1c388d5afdb4d78a90993",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
     }
   ]
 }
