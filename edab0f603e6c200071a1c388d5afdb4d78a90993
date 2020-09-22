@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6761036_724b3ee3",
+        "filename": "init/init_oneplus3.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 10067
+      },
+      "writtenOn": "2020-09-22T08:37:11Z",
+      "side": 1,
+      "message": "Sure calling SetProperty from here does anything? It doesn\u0027t seem to work here.",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 19
+      },
+      "revId": "edab0f603e6c200071a1c388d5afdb4d78a90993",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": true
+    }
+  ]
+}
