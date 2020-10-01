@@ -19,14 +19,21 @@ OnePlus 3T was announced in November 2016. Release date was November 2016.
 | CPU          | Dual-core 2.15GHz Kryo & dual-core 1.6GHz Kryo  | Dual-core 2.35GHz Kryo & dual-core 1.6GHz Kryo  |
 | GPU          | 624MHz Adreno 530                               | 652MHz Adreno 530                               |
 | Memory       | 6 GB RAM (LPDDR4 1866MHz dual-channel)          | 6 GB RAM (LPDDR4 1866MHz dual-channel)          |
-| Shipped Android version | 6.0                                             | 6.0                                             |
+| Shipped Android version | 6.0                                  | 6.0                                             |
 | Storage      | 64 GB (UFS 2.0 Flash)                           | 64 GB / 128GB (UFS 2.0 Flash)                   |
 | Battery      | Non-removable Li-Po 3000 mAh                    | Non-removable Li-Po 3400 mAh                    |
 | Dimensions   | 152.7 x 74.7 x 7.35 mm                          | 152.7 x 74.7 x 7.35 mm                          |
 | Display      | 1920 x 1080 px, 5.5 inches (401 PPI)            | 1920 x 1080 px, 5.5 inches (401 PPI)            |
-| Rear camera  | 16 MPx, f/2.0, PDAF autofocus, LED flash                  | 16 MPx, f/2.0, PDAF autofocus, LED flash                  |
+| Rear camera  | 16 MPx, f/2.0, PDAF autofocus, LED flash        | 16 MPx, f/2.0, PDAF autofocus, LED flash        |
 | Front camera | 8 MPx, f/2.0                                    | 16 MPx, f/2.0                                   |
-
+| Material     | Anodized aluminum                               | Anodized aluminum                               |                
+| Weight       | 158 g                                           | 158 g                                           |
 ## Device picture
 
+### OnePlus 3
+
 ![OnePlus 3](https://content.oneplus.net/skin/frontend/oneplus2015/default/images/oneplus3/oxygenos/parameter.png "OnePlus 3 in grey")
+
+### OnePlus 3T
+
+![OnePlus 3T](https://cdn.opstatics.com/store/20170907/assets/images/support/support-list/model-specs-list/details/3t-gold.png "OnePlus 3T")
