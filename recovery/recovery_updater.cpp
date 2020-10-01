@@ -52,9 +52,8 @@
 static int max_suffix_len(const char *str, size_t str_len, size_t p) {
     uint32_t i;
 
-    for (i = 0; (str[p - i] == str[str_len - 1 - i]) && (i < p); ) {
+    for (i = 0; (str[p - i] == str[str_len - 1 - i]) && (i < p); )
         i++;
-    }
 
     return i;
 }
@@ -64,9 +63,13 @@ static int max_suffix_len(const char *str, size_t str_len, size_t p) {
  */
 static void bm_make_delta1(int *delta1, const char *pat, size_t pat_len) {
     uint32_t i;
-    for (i = 0; i < ALPHABET_LEN; i++) {
+    
+    
+    for (i = 0; i < ALPHABET_LEN; i++)
         delta1[i] = pat_len;
-    }
+    
+    
+    
     for (i = 0; i < pat_len - 1; i++) {
         uint8_t idx = (uint8_t) pat[i];
         delta1[idx] = pat_len - 1 - i;
@@ -80,18 +83,20 @@ static void bm_make_delta2(int *delta2, const char *pat, size_t pat_len) {
 
     for (p = pat_len - 1; p >= 0; p--) {
         /* Compare whether pat[p-pat_len] is suffix of pat */
-        if (strncmp(pat + p, pat, pat_len - p) == 0) {
+        if (strncmp(pat + p, pat, pat_len - p) == 0)
             last_prefix = p + 1;
-        }
+    
         delta2[p] = last_prefix + (pat_len - 1 - p);
     }
 
+    
     for (p = 0; p < (int) pat_len - 1; p++) {
         /* Get longest suffix of pattern ending on character pat[p] */
         int suf_len = max_suffix_len(pat, pat_len, p);
-        if (pat[p - suf_len] != pat[pat_len - 1 - suf_len]) {
+        
+        if (pat[p - suf_len] != pat[pat_len - 1 - suf_len]) 
             delta2[pat_len - 1 - suf_len] = pat_len - 1 - p + suf_len;
-        }
+        
     }
 }
 
@@ -104,9 +109,9 @@ static char * bm_search(const char *str, size_t str_len, const char *pat,
     bm_make_delta1(delta1, pat, pat_len);
     bm_make_delta2(delta2, pat, pat_len);
 
-    if (pat_len == 0) {
+    if (pat_len == 0) 
         return (char *) str;
-    }
+    
 
     i = pat_len - 1;
     while (i < (int) str_len) {
@@ -115,10 +120,10 @@ static char * bm_search(const char *str, size_t str_len, const char *pat,
             i--;
             j--;
         }
-        if (j < 0) {
-            return (char *) (str + i + 1);
-        }
-        i += MAX(delta1[(uint8_t) str[i]], delta2[j]);
+        if (j < 0) 
+          return (char *) (str + i + 1);
+        
+      i += MAX(delta1[(uint8_t) str[i]], delta2[j]);
     }
 
     return NULL;
@@ -151,11 +156,12 @@ static int get_modem_version(char *ver_str, size_t len) {
 
     /* Do Boyer-Moore search across MODEM data */
     offset = bm_search(modem_data, modem_size, MODEM_VER_STR, MODEM_VER_STR_LEN);
-    if (offset != NULL) {
+    
+    if (offset != NULL) 
         snprintf(ver_str, len, "%s", offset + MODEM_VER_STR_LEN);
-    } else {
-        ret = -ENOENT;
-    }
+    
+    else    ret = -ENOENT;
+   
 
     munmap(modem_data, modem_size);
 err_fd_close:
@@ -177,9 +183,9 @@ Value* VerifyModemFn(const char *name, State *state, const std::vector<std::uniq
     }
 
     std::string modem_version;
-    if (argv.empty() || !Evaluate(state, argv[0], &modem_version)) {
+    if (argv.empty() || !Evaluate(state, argv[0], &modem_version)) 
         return ErrorAbort(state, kArgsParsingFailure, "%s() error parsing arguments", name);
-    }
+    
 
     memset(&tm1, 0, sizeof(tm));
     strptime(current_modem_version, "%Y-%m-%d %H:%M:%S", &tm1);
@@ -187,9 +193,9 @@ Value* VerifyModemFn(const char *name, State *state, const std::vector<std::uniq
     memset(&tm2, 0, sizeof(tm));
     strptime(modem_version.c_str(), "%Y-%m-%d %H:%M:%S", &tm2);
 
-    if (mktime(&tm1) >= mktime(&tm2)) {
+    if (mktime(&tm1) >= mktime(&tm2))
         ret = 1;
-    }
+    
 
     return StringValue(std::to_string(ret));
 }
