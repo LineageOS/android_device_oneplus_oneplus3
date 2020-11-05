@@ -3,6 +3,8 @@ on boot
     chmod 0660 /sys/class/graphics/fb0/srgb
     chown system system /sys/class/graphics/fb0/dci_p3
     chmod 0660 /sys/class/graphics/fb0/dci_p3
+    chown system system /sys/devices/virtual/graphics/fb0/hbm
+    chmod 0660 /sys/devices/virtual/graphics/fb0/hbm
 
 service vendor.livedisplay-oneplus3-hal-2-0 /vendor/bin/hw/vendor.lineage.livedisplay@2.0-service.oneplus3
     class late_start
