@@ -196,9 +196,6 @@ service thermal-engine /system/vendor/bin/thermal-engine -c ${sys.qcom.thermalcf
    socket thermal-recv-passive-client stream 0666 system system
    socket thermal-send-rule stream 0660 system system
    group root system diag
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
    writepid /dev/cpuset/system-background/tasks
 
 # reset thermal-engine when framework dies in VR mode
