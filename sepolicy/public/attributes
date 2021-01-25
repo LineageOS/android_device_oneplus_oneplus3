@@ -1,3 +1,8 @@
 # HALs
-hal_attribute(ifaa)
-hal_attribute(param)
+attribute hal_ifaa;
+attribute hal_ifaa_client;
+attribute hal_ifaa_server;
+
+attribute hal_param;
+attribute hal_param_client;
+attribute hal_param_server;
