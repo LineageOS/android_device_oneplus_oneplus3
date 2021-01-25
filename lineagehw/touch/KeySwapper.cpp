@@ -18,10 +18,10 @@
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
-#include "KeyDisabler.h"
+#include "KeySwapper.h"
 
 namespace {
-constexpr const char kControlPath[] = "/proc/s1302/virtual_key";
+constexpr const char kControlPath[] = "/proc/s1302/key_rep";
 };  // anonymous namespace
 
 namespace vendor {
@@ -30,11 +30,11 @@ namespace touch {
 namespace V1_0 {
 namespace implementation {
 
-KeyDisabler::KeyDisabler() : has_key_disabler_(!access(kControlPath, R_OK | W_OK)) {}
+KeySwapper::KeySwapper() : has_key_swapper_(!access(kControlPath, R_OK | W_OK)) {}
 
-// Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
-Return<bool> KeyDisabler::isEnabled() {
-    if (!has_key_disabler_) return false;
+// Methods from ::vendor::lineage::touch::V1_0::IKeySwapper follow.
+Return<bool> KeySwapper::isEnabled() {
+    if (!has_key_swapper_) return false;
 
     std::string buf;
     if (!android::base::ReadFileToString(kControlPath, &buf)) {
@@ -45,8 +45,8 @@ Return<bool> KeyDisabler::isEnabled() {
     return std::stoi(android::base::Trim(buf)) == 1;
 }
 
-Return<bool> KeyDisabler::setEnabled(bool enabled) {
-    if (!has_key_disabler_) return false;
+Return<bool> KeySwapper::setEnabled(bool enabled) {
+    if (!has_key_swapper_) return false;
 
     if (!android::base::WriteStringToFile(std::to_string(enabled), kControlPath)) {
         LOG(ERROR) << "Failed to write " << kControlPath;

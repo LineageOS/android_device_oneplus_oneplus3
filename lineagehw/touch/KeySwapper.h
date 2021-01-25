@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 The LineageOS Project
+ * Copyright (C) 2019,2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <vendor/lineage/touch/1.0/IKeyDisabler.h>
+#include <vendor/lineage/touch/1.0/IKeySwapper.h>
 
 namespace vendor {
 namespace lineage {
@@ -26,15 +26,15 @@ namespace implementation {
 
 using ::android::hardware::Return;
 
-class KeyDisabler : public IKeyDisabler {
+class KeySwapper : public IKeySwapper {
   public:
-    KeyDisabler();
-    // Methods from ::vendor::lineage::touch::V1_0::IKeyDisabler follow.
+    KeySwapper();
+    // Methods from ::vendor::lineage::touch::V1_0::IKeySwapper follow.
     Return<bool> isEnabled() override;
     Return<bool> setEnabled(bool enabled) override;
 
   private:
-    const bool has_key_disabler_;
+    const bool has_key_swapper_;
 };
 
 }  // namespace implementation
