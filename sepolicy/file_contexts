@@ -20,9 +20,6 @@
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.livedisplay@2\.0-service\.oneplus3              u:object_r:hal_lineage_livedisplay_qti_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.lineage\.touch@1\.0-service\.oneplus3                    u:object_r:hal_lineage_touch_default_exec:s0
 
-# OTA
-/system/bin/move_time_data\.sh                                  u:object_r:move-time-data-sh_exec:s0
-
 # Ril
 /data/vendor/oemnvitems(/.*)?                                   u:object_r:vendor_radio_data_file:s0
 /dev/block/platform/soc/624000.ufshc/by-name/oem_dycnvbk        u:object_r:modem_efs_partition_device:s0
