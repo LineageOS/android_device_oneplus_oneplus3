@@ -661,10 +661,26 @@ vendor/lib/libvqzip.so|24e5eb30e5a2cdb544c8688d81d7cc75a1d85eaf
 # NFC firmware
 vendor/lib/libpn548ad_fw.so
 
+# Perf HAL - from oneplus8 qssi-user-11-RP1A.201005.001-2011190109-release-keys
+vendor/bin/hw/vendor.qti.hardware.perf@2.0-service|f8458b331a3e85ff1c6a967d092c1ec0d2e62333
+vendor/etc/init/vendor.qti.hardware.perf@2.0-service.rc|cc8658db5e19f8e5e575fb986e7d38147e675f8d
+vendor/lib/libperfconfig.so|2cf80e8998ce486a2861ea935be8590381c8828c
+vendor/lib/libperfgluelayer.so|a08ef9ec5208fb706fb5198e7186cd51632aec60
+vendor/lib/libperfioctl.so|be81fa335c222d1b8d9d6c19d7b3dfbb57da689c
+vendor/lib/libqti-perfd-client.so|defdcb441cffa690d47b821d7308c901fc8e3d0b
+vendor/lib/libqti-perfd.so|af3735d057356a2d6561cb297d92af6b6f194cbb
+vendor/lib/libqti-util.so|604998bc846309223c41ac9f2738dde335c67e66
+vendor/lib/vendor.qti.hardware.perf@2.0.so|1194d8fe35e249f1c2a3032d3c671cd052e46f8f
+vendor/lib64/libperfconfig.so|e1686181a174632684c07d5cf4a2ac719ef32319
+vendor/lib64/libperfgluelayer.so|5f90df598c81de3bf6064a0a1b1d13eb27a3d1ae
+vendor/lib64/libperfioctl.so|e23d2abfb5838bac78fe1c61b16fdd8650d31099
+vendor/lib64/libqti-perfd-client.so|809b271ed2578a0ac99711d3a63edce83fe1ed92
+vendor/lib64/libqti-perfd.so|11d095a48022c9d8ab1446583368d55692262b44
+vendor/lib64/libqti-util.so|491c5f48b88b3588c9da4b6dbcc26e89c81f099e
+vendor/lib64/vendor.qti.hardware.perf@2.0.so|2ff41ffd01b087bcec7be66443731390b2564f18
+
 # Perf
 vendor/bin/energy-awareness
-vendor/bin/hw/vendor.qti.hardware.perf@1.0-service
-vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc
 vendor/etc/perf/commonresourceconfigs.xml
 vendor/etc/perf/perf-profile0.conf
 vendor/etc/perf/perf-profile1.conf
@@ -676,16 +692,6 @@ vendor/etc/perf/perf-profile6.conf
 vendor/etc/perf/perfboostsconfig.xml
 vendor/etc/perf/targetconfig.xml
 vendor/etc/perf/targetresourceconfigs.xml
-vendor/lib/libperfgluelayer.so
-vendor/lib/libqti-perfd-client.so
-vendor/lib/libqti-perfd.so
-vendor/lib/libqti-util.so
-vendor/lib/vendor.qti.hardware.perf@1.0.so
-vendor/lib64/libperfgluelayer.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib64/libqti-perfd.so
-vendor/lib64/libqti-util.so
-vendor/lib64/vendor.qti.hardware.perf@1.0.so
 
 # Peripheral manager
 vendor/bin/pm-proxy
