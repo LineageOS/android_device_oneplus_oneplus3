@@ -117,12 +117,6 @@
     <!-- Boolean indicating if current platform supports BLE peripheral mode -->
     <bool name="config_bluetooth_le_peripheral_mode_supported">true</bool>
 
-   <!-- Enable ACS (auto channel selection) for Wifi hotspot (SAP) -->
-   <bool translatable="false" name="config_wifi_softap_acs_supported">true</bool>
-
-   <!-- Enable 802.11ac for Wifi hotspot (SAP) -->
-   <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">true</bool>
-
     <!-- If this is true, the screen will come on when you plug/unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
