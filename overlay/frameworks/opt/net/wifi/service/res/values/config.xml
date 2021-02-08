@@ -37,7 +37,7 @@
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
    <!-- Enable ACS (auto channel selection) for Wifi hotspot (SAP) -->
-   <bool translatable="false" name="config_wifi_softap_acs_supported">true</bool>
+   <bool translatable="false" name="config_wifi_softap_acs_supported">false</bool>
 
    <!-- Enable 802.11ac for Wifi hotspot (SAP) -->
    <bool translatable="false" name="config_wifi_softap_ieee80211ac_supported">true</bool>
@@ -51,10 +51,10 @@
     <string translateble="false" name="config_wifiSoftap5gChannelList"></string>
 
     <!-- Wifi driver supports WPA3 Simultaneous Authentication of Equals (WPA3-SAE) for softap -->
-    <bool name="config_wifi_softap_sae_supported">true</bool>
+    <bool name="config_wifi_softap_sae_supported">false</bool>
 
     <!-- Wifi driver Automatic channel selection (ACS) for softap to include DFS channels -->
-    <bool translatable="false" name="config_wifiSoftapAcsIncludeDfs">true</bool>
+    <bool translatable="false" name="config_wifiSoftapAcsIncludeDfs">false</bool>
 
     <!-- Integer indicating maximum hardware supported client number of soft ap -->
     <integer translatable="false" name="config_wifiHardwareSoftapMaxClientCount">32</integer>
