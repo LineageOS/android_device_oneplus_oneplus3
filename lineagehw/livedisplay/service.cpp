@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 The LineageOS Project
+ * Copyright (C) 2019-2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@
 #include <android-base/logging.h>
 #include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
-#include <livedisplay/sdm/AdaptiveBacklight.h>
 #include <livedisplay/sdm/PictureAdjustment.h>
 #include <livedisplay/sysfs/SunlightEnhancement.h>
 
 #include <functional>
 
+#include "AdaptiveBacklight.h"
 #include "MixedDisplayModes.h"
 
 using ::android::OK;
