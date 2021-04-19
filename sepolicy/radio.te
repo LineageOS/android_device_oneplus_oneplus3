@@ -1,3 +1,3 @@
 allow radio hal_datafactory_hwservice:hwservice_manager find;
 
-get_prop(radio, qcom_ims_prop)
+get_prop(radio, vendor_qcom_ims_prop)
