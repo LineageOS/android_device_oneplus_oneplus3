@@ -129,7 +129,7 @@ persist.fuse_sdcard=true
 
 
 #property to enable user to access Google WFD settings
-persist.debug.wfd.enable=0
+persist.debug.wfd.enable=1
 ##property to choose between virtual/external wfd display
 persist.sys.wfd.virtual=0
 
