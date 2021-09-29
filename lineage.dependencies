@@ -1,9 +1,5 @@
 [
   {
-    "repository": "android_device_oppo_common",
-    "target_path": "device/oppo/common"
-  },
-  {
     "repository": "android_hardware_oneplus",
     "target_path": "hardware/oneplus"
   },
