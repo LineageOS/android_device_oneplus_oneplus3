@@ -524,6 +524,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf \
     $(LOCAL_PATH)/configs/thermal-engine-vr.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine-vr.conf
 
+# Tri-state-key
+PRODUCT_PACKAGES += \
+    KeyHandler
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
