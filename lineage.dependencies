@@ -6,5 +6,9 @@
   {
     "repository": "android_kernel_oneplus_msm8996",
     "target_path": "kernel/oneplus/msm8996"
+  },
+  {
+    "repository": "android_hardware_oneplus",
+    "target_path": "hardware/oneplus"
   }
 ]
