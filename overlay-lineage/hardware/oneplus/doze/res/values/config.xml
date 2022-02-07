@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2020 The LineageOS Project
-
-     Licensed under the Apache License, Version 2.0 (the "License");
+     Licensed under the Apache License, Version 2.0 (the "License"
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
 
@@ -13,8 +12,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <resources>
-    <color name="switchbar_switch_track_tint">#82000000</color>
-    <color name="switchbar_switch_thumb_tint">@android:color/black</color>
+    <!-- Sensor types -->
+    <string name="pickup_sensor_type">com.oneplus.sensor.pickup</string>
+    <string name="pocket_sensor_type">com.oneplus.sensor.pocket</string>
 </resources>
