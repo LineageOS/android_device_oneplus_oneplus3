@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b625f0_2ba69072",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15734
+      },
+      "writtenOn": "2023-05-27T14:33:23Z",
+      "side": 1,
+      "message": "This (in combination with the two other changes; 327518 and 327520) actually seems to make the slider inoperable for me. Given the fact that it doesn\u0027t properly migrate settings, I don\u0027t think it\u0027s worth pulling it into 18.1, and might as well just stay on 19.1 (which this is presumably in preparation for).",
+      "revId": "37cae0bc2e120025e7047e890f64fe12db28d2a6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
