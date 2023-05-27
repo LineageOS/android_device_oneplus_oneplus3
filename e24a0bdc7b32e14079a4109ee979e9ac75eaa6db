@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a34e6b5_40359d08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2023-05-27T13:57:42Z",
+      "side": 1,
+      "message": "I don\u0027t feel good about touching a frozen branch unless it\u0027s a bugfix.",
+      "revId": "e24a0bdc7b32e14079a4109ee979e9ac75eaa6db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
