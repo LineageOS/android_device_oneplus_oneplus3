@@ -41,6 +41,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc13bc52_1a9acb44",
+        "filename": "device.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 18745
+      },
+      "writtenOn": "2023-05-27T13:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4018e982_eaf525a9",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 5
+      },
+      "revId": "bd52bfeac9fd791221435ed43a3925f0cc77818c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2988f57c_712b5172",
@@ -64,6 +88,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df980ea2_e7c54a73",
+        "filename": "lineage.dependencies",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 18745
+      },
+      "writtenOn": "2023-05-27T13:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2988f57c_712b5172",
+      "range": {
+        "startLine": 11,
+        "startChar": 27,
+        "endLine": 11,
+        "endChar": 28
+      },
+      "revId": "bd52bfeac9fd791221435ed43a3925f0cc77818c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbef709c_c725e585",
@@ -77,6 +125,24 @@
       "writtenOn": "2023-05-27T12:18:28Z",
       "side": 1,
       "message": "You messed up copyright header.",
+      "revId": "bd52bfeac9fd791221435ed43a3925f0cc77818c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a989c74_0a69e96d",
+        "filename": "overlay-lineage/hardware/oneplus/doze/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18745
+      },
+      "writtenOn": "2023-05-27T13:50:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbef709c_c725e585",
       "revId": "bd52bfeac9fd791221435ed43a3925f0cc77818c",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
